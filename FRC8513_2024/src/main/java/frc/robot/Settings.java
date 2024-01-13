@@ -16,7 +16,7 @@ public class Settings {
 
     public static int backRightDriveMotorCANID = 0;
     public static int backRightTurnMotorCANID = 0;
-    public static int backTurnrightEncoderPort = 0;
+    public static int backRightTurnEncoderPort = 0;
 
     public static double wheelRadius = 0.0508;
     public static double turnEncoderVoltagToDegreesRatio = 360.0/5.0;
@@ -38,6 +38,9 @@ public class Settings {
 
     public static double turnKV = 0;
     public static double turnKS = 0;
+
+    public static double kMaxSpeed = 0;
+    public static double kMaxAngularSpeed = 0;
 
 
     
