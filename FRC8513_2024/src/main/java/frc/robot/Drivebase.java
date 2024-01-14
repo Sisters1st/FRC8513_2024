@@ -9,26 +9,27 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 public class Drivebase {
-    public static final double kMaxSpeed = 0.0; // 3 meters per second
-  public static final double kMaxAngularSpeed = Math.PI; // 1/2 rotation per second
 
-  private final Translation2d m_frontLeftLocation = new Translation2d(0.381, 0.381);
-  private final Translation2d m_frontRightLocation = new Translation2d(0.381, -0.381);
-  private final Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
-  private final Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
+  public static final double kMaxSpeed = Settings.maxDBSpeed;
+  public static final double kMaxAngularSpeed = Settings.maxDBAngularSpeed;
 
-  private final SwerveModule m_frontLeft = new SwerveModule(Settings.frontLeftDriveMotorCANID, Settings.frontLeftTurnMotorCANID, Settings.frontLeftTurnEncoderPort);
-  private final SwerveModule m_frontRight = new SwerveModule(Settings.frontRightDriveMotorCANID, Settings.frontRightTurnMotorCANID, Settings.frontRightTurnEncoderPort);
-  private final SwerveModule m_backLeft = new SwerveModule(Settings.backLeftDriveMotorCANID, Settings.backLeftTurnMotorCANID, Settings.backLeftTurnEncoderPort);
-  private final SwerveModule m_backRight = new SwerveModule(Settings.backRightDriveMotorCANID, Settings.backRightTurnMotorCANID, Settings.backRightTurnEncoderPort);
+  private final Translation2d m_frontLeftLocation = new Translation2d(Settings.frontLeftDriveXOffset, Settings.frontLeftDriveYOffset);
+  private final Translation2d m_frontRightLocation = new Translation2d(Settings.frontRightDriveXOffset, Settings.frontRightDriveYOffset);
+  private final Translation2d m_backLeftLocation = new Translation2d(Settings.backLeftDriveXOffset, Settings.backLeftDriveYOffset);
+  private final Translation2d m_backRightLocation = new Translation2d(Settings.backRightDriveXOffset, Settings.backRightDriveYOffset);
 
-  private final AHRS m_gyro = new AHRS();
+  public final SwerveModule m_frontLeft = new SwerveModule(Settings.frontLeftDriveMotorCANID, Settings.frontLeftTurnMotorCANID, Settings.frontLeftTurnEncoderPort);
+  public final SwerveModule m_frontRight = new SwerveModule(Settings.frontRightDriveMotorCANID, Settings.frontRightTurnMotorCANID, Settings.frontRightTurnEncoderPort);
+  public final SwerveModule m_backLeft = new SwerveModule(Settings.backLeftDriveMotorCANID, Settings.backLeftTurnMotorCANID, Settings.backLeftTurnEncoderPort);
+  public final SwerveModule m_backRight = new SwerveModule(Settings.backRightDriveMotorCANID, Settings.backRightTurnMotorCANID, Settings.backRightTurnEncoderPort);
 
-  private final SwerveDriveKinematics m_kinematics =
+  public final AHRS m_gyro = new AHRS();
+
+  public final SwerveDriveKinematics m_kinematics =
       new SwerveDriveKinematics(
           m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
 
-  private final SwerveDriveOdometry m_odometry =
+  public final SwerveDriveOdometry m_odometry =
       new SwerveDriveOdometry(
           m_kinematics,
           m_gyro.getRotation2d(),

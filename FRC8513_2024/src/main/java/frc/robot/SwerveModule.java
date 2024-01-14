@@ -24,19 +24,18 @@ public class SwerveModule {
 
   private final AnalogEncoder m_turnEncoder;
 
-  // Gains are for example purposes only - must be determined for your own robot!
-  private final PIDController m_drivePIDController = new PIDController(Settings.drivePID_P, Settings.drivePID_I, Settings.drivePID_D);
+  public final PIDController m_drivePIDController = new PIDController(Settings.drivePID_P, Settings.drivePID_I, Settings.drivePID_D);
 
-  // Gains are for example purposes only - must be determined for your own robot!
-  private final ProfiledPIDController m_turningPIDController =
+  public SwerveModuleState goalSwerveState = new SwerveModuleState();
+
+  public final ProfiledPIDController m_turningPIDController =
       new ProfiledPIDController(
           Settings.turnPID_P,
           Settings.turnPID_I,
           Settings.turnPID_D,
           new TrapezoidProfile.Constraints(
-              Settings.moduleMaxAngularVelocity, Settings.kModuleMaxAngularAcceleration));
+              Settings.moduleMaxAngularVelocity, Settings.moduleMaxAngularAcceleration));
 
-  // Gains are for example purposes only - must be determined for your own robot!
   private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(Settings.driveKS, Settings.driveKV);
   private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(Settings.turnKS,Settings.driveKV);
 
@@ -95,7 +94,7 @@ public class SwerveModule {
 
     // Optimize the reference state to avoid spinning further than 90 degrees
     SwerveModuleState state = SwerveModuleState.optimize(desiredState, encoderRotation);
-
+    goalSwerveState = state;
     // Scale speed by cosine of angle error. This scales down movement perpendicular to the desired
     // direction of travel that can occur when modules change directions. This results in smoother
     // driving.
