@@ -23,6 +23,11 @@ public class Dashboard {
             SmartDashboard.putNumber("OdomX", thisRobot.drivebase.m_odometry.getEstimatedPosition().getX());
             SmartDashboard.putNumber("OdomY", thisRobot.drivebase.m_odometry.getEstimatedPosition().getY());
             SmartDashboard.putNumber("OdomTheta", thisRobot.drivebase.m_odometry.getEstimatedPosition().getRotation().getDegrees());
+
+            SmartDashboard.putNumber("GoalSpeedX", thisRobot.drivebase.xSpeedGoal);
+            SmartDashboard.putNumber("GoalSpeedY", thisRobot.drivebase.ySpeedGoal);
+            SmartDashboard.putNumber("GoalSpeedRot", thisRobot.drivebase.rotSpeedGoal);
+
         }
 
         if(dashbordNumber >= 2){
@@ -54,9 +59,29 @@ public class Dashboard {
 
             SmartDashboard.putNumber("backRightGoalSpeed", thisRobot.drivebase.m_backRight.goalSwerveState.speedMetersPerSecond);
             SmartDashboard.putNumber("backRightGoalAng", thisRobot.drivebase.m_backRight.goalSwerveState.angle.getDegrees());
+
         
         }
-    
+        
+        if(dashbordNumber >= 3){
+            //all possible values
+            SmartDashboard.putNumber("rawFrontLeftTurnEncoder", thisRobot.drivebase.m_frontLeft.m_turnEncoder.getAbsolutePosition());
+            SmartDashboard.putNumber("rawFrontRightTurnEncoder", thisRobot.drivebase.m_frontRight.m_turnEncoder.getAbsolutePosition());
+            SmartDashboard.putNumber("rawBackRightTurnEncoder", thisRobot.drivebase.m_backRight.m_turnEncoder.getAbsolutePosition());
+            SmartDashboard.putNumber("rawBackLeftTurnEncoder", thisRobot.drivebase.m_backLeft.m_turnEncoder.getAbsolutePosition());
+            
+            SmartDashboard.putNumber("rawFrontLeftDriveEncoder", thisRobot.drivebase.m_frontLeft.m_driveMotor.getPosition().getValueAsDouble());
+            SmartDashboard.putNumber("rawFrontRightDriveEncoder", thisRobot.drivebase.m_frontRight.m_driveMotor.getPosition().getValueAsDouble());
+            SmartDashboard.putNumber("rawBackRightDriveEncoder", thisRobot.drivebase.m_backRight.m_driveMotor.getPosition().getValueAsDouble());
+            SmartDashboard.putNumber("rawBackLeftDriveEncoder", thisRobot.drivebase.m_backLeft.m_driveMotor.getPosition().getValueAsDouble());
 
+            SmartDashboard.putNumber("rawFrontLeftDriveVelocity", thisRobot.drivebase.m_frontLeft.m_driveMotor.getVelocity().getValueAsDouble());
+            SmartDashboard.putNumber("rawFrontRightDriveVelocity", thisRobot.drivebase.m_frontRight.m_driveMotor.getVelocity().getValueAsDouble());
+            SmartDashboard.putNumber("rawBackRightDriveVelocity", thisRobot.drivebase.m_backRight.m_driveMotor.getVelocity().getValueAsDouble());
+            SmartDashboard.putNumber("rawBackLeftDriveVelocity", thisRobot.drivebase.m_backLeft.m_driveMotor.getVelocity().getValueAsDouble());
+
+            //see what power is applied to the motors
+        }
+            
     }
 }
