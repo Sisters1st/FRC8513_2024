@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Drivebase {
 
@@ -82,7 +83,11 @@ public class Drivebase {
         });
     
     if(Settings.useLimelight){
-      m_odometry.addVisionMeasurement(LimelightHelpers.getBotPose2d(Settings.limelightName),LimelightHelpers.getLatency_Pipeline(Settings.limelightName));
+      double tl = LimelightHelpers.getLatency_Pipeline(Settings.limelightName);
+      double cl = LimelightHelpers.getLatency_Capture(Settings.limelightName);
+      double visionTime = Timer.getFPGATimestamp() - (tl/1000.0) - (cl/1000.0);
+      //see https://docs.limelightvision.io/docs/docs-limelight/pipeline-apriltag/apriltag-robot-localization#using-wpilibs-pose-estimator
+      m_odometry.addVisionMeasurement(LimelightHelpers.getBotPose2d(Settings.limelightName),visionTime);
     }
     
   }
