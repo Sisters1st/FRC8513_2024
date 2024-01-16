@@ -57,5 +57,9 @@ public class Settings {
     //dashbord and logging settings
     public static int dashboardNumber = 0;
 
+    //vision settings
+    public static boolean useLimelight = false;
+    public static String limelightName = "limelight";
+
     
 }

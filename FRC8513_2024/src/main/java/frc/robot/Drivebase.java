@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class Drivebase {
 
+  public Robot thisRobot;
+
   public static final double kMaxSpeed = Settings.maxDBSpeed;
   public static final double kMaxAngularSpeed = Settings.maxDBAngularSpeed;
 
@@ -42,8 +44,9 @@ public class Drivebase {
             m_backRight.getPosition()
           }, new Pose2d());
 
-  public Drivebase() {
+  public Drivebase(Robot thisRobot_) {
     m_gyro.reset();
+    thisRobot = thisRobot_;
   }
 
   /**
