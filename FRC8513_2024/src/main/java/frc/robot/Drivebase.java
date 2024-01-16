@@ -2,10 +2,11 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 public class Drivebase {
@@ -29,8 +30,8 @@ public class Drivebase {
       new SwerveDriveKinematics(
           m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
 
-  public final SwerveDriveOdometry m_odometry =
-      new SwerveDriveOdometry(
+  public final SwerveDrivePoseEstimator m_odometry =
+      new SwerveDrivePoseEstimator(
           m_kinematics,
           m_gyro.getRotation2d(),
           new SwerveModulePosition[] {
@@ -38,7 +39,7 @@ public class Drivebase {
             m_frontRight.getPosition(),
             m_backLeft.getPosition(),
             m_backRight.getPosition()
-          });
+          }, new Pose2d());
 
   public Drivebase() {
     m_gyro.reset();
@@ -79,6 +80,11 @@ public class Drivebase {
           m_backLeft.getPosition(),
           m_backRight.getPosition()
         });
+    
+    if(Settings.useLimelight){
+      m_odometry.addVisionMeasurement(LimelightHelpers.getBotPose2d(Settings.limelightName),LimelightHelpers.getLatency_Pipeline(Settings.limelightName));
+    }
+    
   }
 }
 

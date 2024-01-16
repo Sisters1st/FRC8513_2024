@@ -20,9 +20,9 @@ public class Dashboard {
         }
         
         if(dashbordNumber >= 1){
-            SmartDashboard.putNumber("OdomX", thisRobot.drivebase.m_odometry.getPoseMeters().getX());
-            SmartDashboard.putNumber("OdomY", thisRobot.drivebase.m_odometry.getPoseMeters().getY());
-            SmartDashboard.putNumber("OdomTheta", thisRobot.drivebase.m_odometry.getPoseMeters().getRotation().getDegrees());
+            SmartDashboard.putNumber("OdomX", thisRobot.drivebase.m_odometry.getEstimatedPosition().getX());
+            SmartDashboard.putNumber("OdomY", thisRobot.drivebase.m_odometry.getEstimatedPosition().getY());
+            SmartDashboard.putNumber("OdomTheta", thisRobot.drivebase.m_odometry.getEstimatedPosition().getRotation().getDegrees());
         }
 
         if(dashbordNumber >= 2){
