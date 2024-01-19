@@ -1,11 +1,16 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 
 public class Robot extends TimedRobot {
 
   public Drivebase drivebase = new Drivebase(this);
   public Dashboard dashboard = new Dashboard(this, Settings.dashboardNumber);
+  public TeleopController teleopController = new TeleopController(this);
+
+  public PowerDistribution pdh = new PowerDistribution(Settings.pdhCANID, ModuleType.kRev);
 
   @Override
   public void robotInit() {}
@@ -23,10 +28,14 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {}
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    teleopController.init();
+  }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    teleopController.periodic();
+  }
 
   @Override
   public void disabledInit() {}

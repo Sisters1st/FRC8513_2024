@@ -48,11 +48,9 @@ public class Settings {
     public static double turnKV = 0;
     public static double turnKS = 0;
 
-
     //drivebase settings
     public static double maxDBSpeed = 0.0;
     public static double maxDBAngularSpeed = Math.PI;
-
 
     //dashbord and logging settings
     public static int dashboardNumber = 3;
@@ -61,5 +59,13 @@ public class Settings {
     public static boolean useLimelight = false;
     public static String limelightName = "limelight";
 
-    
+    //joystick settings
+    public static int driverJoystickPort = 0;
+    public static int driver_fieldCentricButton = 20;
+
+    //teleop default settings
+    public static boolean teleopFieldCentricDefault = true;
+
+    //pdh settings
+    public static int pdhCANID = 1;
 }
