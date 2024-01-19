@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.AnalogEncoder;
 
 public class SwerveModule {
 
-  private final TalonFX m_driveMotor;
-  private final CANSparkMax m_turningMotor;
+  public final TalonFX m_driveMotor;
+  public final CANSparkMax m_turningMotor;
 
-  private final AnalogEncoder m_turnEncoder;
+  public final AnalogEncoder m_turnEncoder;
 
   public final PIDController m_drivePIDController = new PIDController(Settings.drivePID_P, Settings.drivePID_I, Settings.drivePID_D);
 

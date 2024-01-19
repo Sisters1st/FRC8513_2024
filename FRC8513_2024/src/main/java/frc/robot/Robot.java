@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 
 public class Robot extends TimedRobot {
 
-  public Drivebase drivebase = new Drivebase();
+  public Drivebase drivebase = new Drivebase(this);
   public Dashboard dashboard = new Dashboard(this, Settings.dashboardNumber);
 
   @Override
@@ -13,6 +13,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     dashboard.updateDashboard();
+    drivebase.updateOdometry();
   }
 
   @Override

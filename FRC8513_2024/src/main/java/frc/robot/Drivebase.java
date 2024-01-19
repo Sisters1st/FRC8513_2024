@@ -44,6 +44,11 @@ public class Drivebase {
             m_backRight.getPosition()
           }, new Pose2d());
 
+  public double xSpeedGoal = 0;
+  public double ySpeedGoal = 0;
+  public double rotSpeedGoal = 0;
+
+
   public Drivebase(Robot thisRobot_) {
     m_gyro.reset();
     thisRobot = thisRobot_;
@@ -59,6 +64,11 @@ public class Drivebase {
    */
   public void drive(
       double xSpeed, double ySpeed, double rot, boolean fieldRelative, double periodSeconds) {
+
+    xSpeedGoal = xSpeed;
+    ySpeedGoal = ySpeed;
+    rotSpeedGoal = rot;
+
     var swerveModuleStates =
         m_kinematics.toSwerveModuleStates(
             ChassisSpeeds.discretize(

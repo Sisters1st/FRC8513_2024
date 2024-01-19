@@ -81,6 +81,17 @@ public class Dashboard {
             SmartDashboard.putNumber("rawBackLeftDriveVelocity", thisRobot.drivebase.m_backLeft.m_driveMotor.getVelocity().getValueAsDouble());
 
             //see what power is applied to the motors
+            SmartDashboard.putNumber("frontRightDriveAppliedMotorVoltage",thisRobot.drivebase.m_frontRight.m_driveMotor.getMotorVoltage().getValueAsDouble());
+            SmartDashboard.putNumber("frontLeftDriveAppliedMotorVoltage",thisRobot.drivebase.m_frontLeft.m_driveMotor.getMotorVoltage().getValueAsDouble());
+            SmartDashboard.putNumber("backRightDriveAppliedMotorVoltage",thisRobot.drivebase.m_backRight.m_driveMotor.getMotorVoltage().getValueAsDouble());
+            SmartDashboard.putNumber("backLeftDriveAppliedMotorVoltage",thisRobot.drivebase.m_backLeft.m_driveMotor.getMotorVoltage().getValueAsDouble());
+            
+            SmartDashboard.putNumber("frontRightTurnAppliedMotorVoltage",thisRobot.drivebase.m_frontRight.m_turningMotor.getAppliedOutput());
+            SmartDashboard.putNumber("frontLeftTurnAppliedMotorVoltage",thisRobot.drivebase.m_frontLeft.m_turningMotor.getAppliedOutput());
+            SmartDashboard.putNumber("backRightTurnAppliedMotorVoltage",thisRobot.drivebase.m_backRight.m_turningMotor.getAppliedOutput());
+            SmartDashboard.putNumber("backLeftTurnAppliedMotorVoltage",thisRobot.drivebase.m_backLeft.m_turningMotor.getAppliedOutput());
+
+            
         }
             
     }
