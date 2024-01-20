@@ -4,8 +4,11 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.TalonFXSimCollection;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.sim.TalonFXSimState;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVPhysicsSim;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -14,6 +17,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.AnalogEncoder;
 
@@ -21,6 +25,7 @@ public class SwerveModule {
 
   public final TalonFX m_driveMotor;
   public final CANSparkMax m_turningMotor;
+  public TalonFXSimState driveSim;
 
   public final AnalogEncoder m_turnEncoder;
 
@@ -39,6 +44,8 @@ public class SwerveModule {
   private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(Settings.driveKS, Settings.driveKV);
   private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(Settings.turnKS,Settings.driveKV);
 
+  public Robot thisRobot;
+
   /**
    * Constructs a SwerveModule with a drive motor, turning motor, drive encoder and turning encoder.
    *
@@ -49,13 +56,16 @@ public class SwerveModule {
   public SwerveModule(
       int driveMotorID,
       int turningMotorID,
-      int turningEncoderPort) {
+      int turningEncoderPort,
+      Robot thisRobot_) {
 
     m_driveMotor = new TalonFX(driveMotorID);
     m_turningMotor = new CANSparkMax(turningMotorID, MotorType.kBrushless);
 
     m_turnEncoder = new AnalogEncoder(turningEncoderPort);
     m_turnEncoder.setDistancePerRotation(Settings.turnEncoderVoltagToDegreesRatio);
+
+    thisRobot = thisRobot_;
 
     // Reminder to setup drive encoder ticks per revolution
 
@@ -115,5 +125,14 @@ public class SwerveModule {
 
     m_driveMotor.setVoltage(driveOutput + driveFeedforward);
     m_turningMotor.setVoltage(turnOutput + turnFeedforward);
+  }
+
+  public void simulateModuleInit(){
+    REVPhysicsSim.getInstance().addSparkMax(m_turningMotor, DCMotor.getNEO(1));
+    driveSim = m_driveMotor.getSimState();
+  }
+
+  public void simulateModule(){
+    driveSim.setSupplyVoltage()
   }
 }

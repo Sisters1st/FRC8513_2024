@@ -1,6 +1,8 @@
 package frc.robot;
 
+import com.ctre.phoenix6.sim.TalonFXSimState;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.REVPhysicsSim;
 
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -8,6 +10,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.Timer;
 
 public class Drivebase {
@@ -103,6 +106,20 @@ public class Drivebase {
       m_odometry.addVisionMeasurement(LimelightHelpers.getBotPose2d(Settings.limelightName),visionTime);
     }
     
+  }
+
+  public void simulateDrivebaseInit(){
+    m_frontLeft.simulateModuleInit();
+    m_backLeft.simulateModuleInit();
+    m_frontRight.simulateModuleInit();
+    m_backRight.simulateModuleInit();
+  }
+
+  public void simulateDrivebase(){
+    m_frontLeft.simulateModule();
+    m_backLeft.simulateModule();
+    m_frontRight.simulateModule();
+    m_backRight.simulateModule();
   }
 }
 
