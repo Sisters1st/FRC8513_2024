@@ -23,10 +23,11 @@ public class TeleopController {
         double xSpeed = driverXboxController.getLeftY() * Settings.maxDBSpeed;
         double ySpeed = driverXboxController.getLeftX() * Settings.maxDBSpeed;
 
-        double rotSpeed = driverXboxController.getRightX() * Settings.maxDBAngularSpeed;
+        double rotSpeed = -driverXboxController.getRightX() * Settings.maxDBAngularSpeed;
 
         if(driverXboxController.getRawButtonPressed(Settings.driver_fieldCentricButton)){
             fieldCentric = !fieldCentric;
+            thisRobot.drivebase.m_gyro.reset();
         }
 
         thisRobot.drivebase.drive(xSpeed, ySpeed, rotSpeed, fieldCentric, thisRobot.getPeriod());

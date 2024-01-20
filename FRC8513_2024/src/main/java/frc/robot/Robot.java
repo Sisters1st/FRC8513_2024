@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 
@@ -13,7 +14,18 @@ public class Robot extends TimedRobot {
   public PowerDistribution pdh = new PowerDistribution(Settings.pdhCANID, ModuleType.kRev);
 
   @Override
-  public void robotInit() {}
+  public void robotInit() {
+
+    Settings.turnPID_P = Preferences.getDouble("turnP",Settings.turnPID_P);
+    Settings.turnPID_I = Preferences.getDouble("turnI",Settings.turnPID_I);
+    Settings.turnPID_D = Preferences.getDouble("turnD",Settings.turnPID_D);
+
+    
+    Settings.drivePID_P = Preferences.getDouble("driveP",Settings.drivePID_P);
+    Settings.drivePID_I = Preferences.getDouble("driveI",Settings.drivePID_I);
+    Settings.drivePID_D = Preferences.getDouble("driveD",Settings.drivePID_D);
+
+  }
 
   @Override
   public void robotPeriodic() {
@@ -25,7 +37,9 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {}
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    drivebase.m_frontRight.m_driveMotor.set(1);
+  }
 
   @Override
   public void teleopInit() {
