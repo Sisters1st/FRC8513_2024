@@ -4,6 +4,9 @@ import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 
 public class Settings {
 
+    //drivebase settings
+    public static double drivebaseMaxVelocity = 15.1;
+
     //dashbord and logging settings
     public static int dashboardNumber = 3;
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.HIGH;

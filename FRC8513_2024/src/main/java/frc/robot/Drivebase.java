@@ -17,7 +17,7 @@ public class Drivebase {
   public SwerveDrive swerveDrive;
 
   public Drivebase(Robot thisRobot_) {
-    double maximumSpeed = Units.feetToMeters(4.5);
+    double maximumSpeed = Units.feetToMeters(Settings.drivebaseMaxVelocity);
     File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
     try {
       swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(maximumSpeed);

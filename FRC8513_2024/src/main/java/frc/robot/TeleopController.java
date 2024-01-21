@@ -1,12 +1,13 @@
 package frc.robot;
 
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class TeleopController {
 
     Robot thisRobot;
-    XboxController driverXboxController = new XboxController(Settings.driverJoystickPort);
+    Joystick driverXboxController = new Joystick(Settings.driverJoystickPort);
     public boolean fieldCentric = true;
 
     public TeleopController(Robot thisRobot_){
@@ -18,9 +19,9 @@ public class TeleopController {
     }
 
     public void periodic(){
-        double xSpeedJoystick = driverXboxController.getLeftY(); //forward back
-        double ySpeedJoystick = driverXboxController.getLeftX(); //left right
-        double rSpeedJoystick = driverXboxController.getRightX(); //left right
+        double xSpeedJoystick = driverXboxController.getRawAxis(1); //forward back
+        double ySpeedJoystick = driverXboxController.getRawAxis(0); //left right
+        double rSpeedJoystick = -driverXboxController.getRawAxis(2); //left right
 
         double xInput = Math.pow(xSpeedJoystick, 3); // Smooth controll out
         double yInput = Math.pow(ySpeedJoystick, 3); // Smooth controll out

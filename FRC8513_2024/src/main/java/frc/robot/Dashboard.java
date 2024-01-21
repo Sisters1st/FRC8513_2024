@@ -16,7 +16,9 @@ public class Dashboard {
         if(dashbordNumber >= 0){
             //general robot updates
             SmartDashboard.putNumber("Uptime", Timer.getFPGATimestamp());
-
+            SmartDashboard.putNumber("maxAng", thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity());
+            SmartDashboard.putNumber("currentRotV", thisRobot.drivebase.swerveDrive.getRobotVelocity().omegaRadiansPerSecond);
+            
         }
             
     }
