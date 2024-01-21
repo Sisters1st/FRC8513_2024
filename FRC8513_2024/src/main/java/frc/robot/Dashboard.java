@@ -65,26 +65,31 @@ public class Dashboard {
         
         if(dashbordNumber >= 3){
             //all possible values
-            SmartDashboard.putNumber("rawFrontLeftTurnEncoder", thisRobot.drivebase.m_frontLeft.m_turnEncoder.getAbsolutePosition());
-            SmartDashboard.putNumber("rawFrontRightTurnEncoder", thisRobot.drivebase.m_frontRight.m_turnEncoder.getAbsolutePosition());
-            SmartDashboard.putNumber("rawBackRightTurnEncoder", thisRobot.drivebase.m_backRight.m_turnEncoder.getAbsolutePosition());
-            SmartDashboard.putNumber("rawBackLeftTurnEncoder", thisRobot.drivebase.m_backLeft.m_turnEncoder.getAbsolutePosition());
-            
-            SmartDashboard.putNumber("rawFrontLeftDriveEncoder", thisRobot.drivebase.m_frontLeft.m_driveMotor.getPosition().getValueAsDouble());
-            SmartDashboard.putNumber("rawFrontRightDriveEncoder", thisRobot.drivebase.m_frontRight.m_driveMotor.getPosition().getValueAsDouble());
-            SmartDashboard.putNumber("rawBackRightDriveEncoder", thisRobot.drivebase.m_backRight.m_driveMotor.getPosition().getValueAsDouble());
-            SmartDashboard.putNumber("rawBackLeftDriveEncoder", thisRobot.drivebase.m_backLeft.m_driveMotor.getPosition().getValueAsDouble());
+            SmartDashboard.putNumber("rawFrontLeftTurnEncoder", thisRobot.drivebase.m_frontLeft.getTurnDegrees());
+            SmartDashboard.putNumber("rawFrontRightTurnEncoder", thisRobot.drivebase.m_frontRight.getTurnDegrees());
+            SmartDashboard.putNumber("rawBackRightTurnEncoder", thisRobot.drivebase.m_backRight.getTurnDegrees());
+            SmartDashboard.putNumber("rawBackLeftTurnEncoder", thisRobot.drivebase.m_backLeft.getTurnDegrees());
 
-            SmartDashboard.putNumber("rawFrontLeftDriveVelocity", thisRobot.drivebase.m_frontLeft.m_driveMotor.getVelocity().getValueAsDouble());
-            SmartDashboard.putNumber("rawFrontRightDriveVelocity", thisRobot.drivebase.m_frontRight.m_driveMotor.getVelocity().getValueAsDouble());
-            SmartDashboard.putNumber("rawBackRightDriveVelocity", thisRobot.drivebase.m_backRight.m_driveMotor.getVelocity().getValueAsDouble());
-            SmartDashboard.putNumber("rawBackLeftDriveVelocity", thisRobot.drivebase.m_backLeft.m_driveMotor.getVelocity().getValueAsDouble());
+            SmartDashboard.putNumber("rawFrontLeftTurnVel", thisRobot.drivebase.m_frontLeft.getTurnDegrees());
+            SmartDashboard.putNumber("rawFrontRightTurnVel", thisRobot.drivebase.m_frontRight.getTurnDegrees());
+            SmartDashboard.putNumber("rawBackRightTurnVel", thisRobot.drivebase.m_backRight.getTurnDegrees());
+            SmartDashboard.putNumber("rawBackLeftTurnVel", thisRobot.drivebase.m_backLeft.getTurnDegrees());
+            
+            SmartDashboard.putNumber("rawFrontLeftDriveEncoder", thisRobot.drivebase.m_frontLeft.m_driveMotor.getEncoder().getPosition());
+            SmartDashboard.putNumber("rawFrontRightDriveEncoder", thisRobot.drivebase.m_frontRight.m_driveMotor.getEncoder().getPosition());
+            SmartDashboard.putNumber("rawBackRightDriveEncoder", thisRobot.drivebase.m_backRight.m_driveMotor.getEncoder().getPosition());
+            SmartDashboard.putNumber("rawBackLeftDriveEncoder", thisRobot.drivebase.m_backLeft.m_driveMotor.getEncoder().getPosition());
+
+            SmartDashboard.putNumber("frontLeftDriveDist", thisRobot.drivebase.m_frontLeft.getPosition().distanceMeters);
+            SmartDashboard.putNumber("frontRightDriveDist", thisRobot.drivebase.m_frontRight.getPosition().distanceMeters);
+            SmartDashboard.putNumber("backLeftDriveDist", thisRobot.drivebase.m_backRight.getPosition().distanceMeters);
+            SmartDashboard.putNumber("backRightDriveDist", thisRobot.drivebase.m_backLeft.getPosition().distanceMeters);
 
             //see what power is applied to the motors
-            SmartDashboard.putNumber("frontRightDriveAppliedMotorVoltage",thisRobot.drivebase.m_frontRight.m_driveMotor.getMotorVoltage().getValueAsDouble());
-            SmartDashboard.putNumber("frontLeftDriveAppliedMotorVoltage",thisRobot.drivebase.m_frontLeft.m_driveMotor.getMotorVoltage().getValueAsDouble());
-            SmartDashboard.putNumber("backRightDriveAppliedMotorVoltage",thisRobot.drivebase.m_backRight.m_driveMotor.getMotorVoltage().getValueAsDouble());
-            SmartDashboard.putNumber("backLeftDriveAppliedMotorVoltage",thisRobot.drivebase.m_backLeft.m_driveMotor.getMotorVoltage().getValueAsDouble());
+            SmartDashboard.putNumber("frontRightDriveAppliedMotorVoltage",thisRobot.drivebase.m_frontRight.m_driveMotor.getAppliedOutput());
+            SmartDashboard.putNumber("frontLeftDriveAppliedMotorVoltage",thisRobot.drivebase.m_frontLeft.m_driveMotor.getAppliedOutput());
+            SmartDashboard.putNumber("backRightDriveAppliedMotorVoltage",thisRobot.drivebase.m_backRight.m_driveMotor.getAppliedOutput());
+            SmartDashboard.putNumber("backLeftDriveAppliedMotorVoltage",thisRobot.drivebase.m_backLeft.m_driveMotor.getAppliedOutput());
             
             SmartDashboard.putNumber("frontRightTurnAppliedMotorVoltage",thisRobot.drivebase.m_frontRight.m_turningMotor.getAppliedOutput());
             SmartDashboard.putNumber("frontLeftTurnAppliedMotorVoltage",thisRobot.drivebase.m_frontLeft.m_turningMotor.getAppliedOutput());

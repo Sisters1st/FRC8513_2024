@@ -52,6 +52,14 @@ public class Drivebase {
   public Drivebase(Robot thisRobot_) {
     m_gyro.reset();
     thisRobot = thisRobot_;
+
+    m_frontLeft.setDegOffset(Settings.frontLeftTurnOffset);
+    m_frontRight.setDegOffset(Settings.frontRightTurnOffset);
+    m_backLeft.setDegOffset(Settings.backLeftTurnOffset);
+    m_backRight.setDegOffset(Settings.backRightTurnOffset);
+    m_frontRight.m_driveMotor.setInverted(true);
+    m_backRight.m_driveMotor.setInverted(true);
+
   }
 
   /**
