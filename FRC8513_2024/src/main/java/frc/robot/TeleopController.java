@@ -1,14 +1,13 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class TeleopController {
 
     Robot thisRobot;
-
     XboxController driverXboxController = new XboxController(Settings.driverJoystickPort);
-
-    boolean fieldCentric = Settings.teleopFieldCentricDefault;
+    public boolean fieldCentric = true;
 
     public TeleopController(Robot thisRobot_){
         thisRobot = thisRobot_;
@@ -19,18 +18,24 @@ public class TeleopController {
     }
 
     public void periodic(){
+        double xSpeedJoystick = driverXboxController.getLeftY(); //forward back
+        double ySpeedJoystick = driverXboxController.getLeftX(); //left right
+        double rSpeedJoystick = driverXboxController.getRightX(); //left right
 
-        double xSpeed = driverXboxController.getLeftY() * Settings.maxDBSpeed;
-        double ySpeed = driverXboxController.getLeftX() * Settings.maxDBSpeed;
+        double xInput = Math.pow(xSpeedJoystick, 3); // Smooth controll out
+        double yInput = Math.pow(ySpeedJoystick, 3); // Smooth controll out
 
-        double rotSpeed = -driverXboxController.getRightX() * Settings.maxDBAngularSpeed;
+        double xV = xInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
+        double yV = yInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
+        double rV = rSpeedJoystick * thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity();
 
-        if(driverXboxController.getRawButtonPressed(Settings.driver_fieldCentricButton)){
-            fieldCentric = !fieldCentric;
-            thisRobot.drivebase.m_gyro.reset();
-        }
-
-        thisRobot.drivebase.drive(xSpeed, ySpeed, rotSpeed, fieldCentric, thisRobot.getPeriod());
+        thisRobot.drivebase.swerveDrive.drive(
+            new Translation2d(xV, yV),
+            rV,
+            fieldCentric,
+            true
+        );
     }
+
     
 }
