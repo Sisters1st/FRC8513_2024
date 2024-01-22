@@ -9,22 +9,22 @@
     "id": 3,
     "canbus": null
   },
-  "inverted": {
-    "drive": true,
-    "angle": false
-  },
   "angle": {
     "type": "sparkmax",
     "id": 4,
     "canbus": null
   },
   "conversionFactor": {
-    "angle": 0,
-    "drive": 0
+    "angle": 360,
+    "drive": 6.75
   },
   "encoder": {
-    "type": "analog",
+    "type": "thrifty",
     "id": 3,
     "canbus": null
+  },
+  "inverted": {
+    "drive": false,
+    "angle": false
   }
 }

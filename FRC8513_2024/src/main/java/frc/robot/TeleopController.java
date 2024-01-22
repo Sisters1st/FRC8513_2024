@@ -21,7 +21,7 @@ public class TeleopController {
     public void periodic(){
         double xSpeedJoystick = driverXboxController.getRawAxis(1); //forward back
         double ySpeedJoystick = driverXboxController.getRawAxis(0); //left right
-        double rSpeedJoystick = -driverXboxController.getRawAxis(2); //left right
+        double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right
 
         double xInput = Math.pow(xSpeedJoystick, 3); // Smooth controll out
         double yInput = Math.pow(ySpeedJoystick, 3); // Smooth controll out

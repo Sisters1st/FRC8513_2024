@@ -15,11 +15,11 @@
     "canbus": null
   },
   "conversionFactor": {
-    "angle": 0,
-    "drive": 0
+    "angle": 360,
+    "drive": 6.75
   },
   "encoder": {
-    "type": "analog",
+    "type": "thrifty",
     "id": 2,
     "canbus": null
   },
