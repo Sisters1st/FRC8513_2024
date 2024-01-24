@@ -9,11 +9,13 @@ public class Robot extends TimedRobot {
   public Drivebase drivebase = new Drivebase(this);
   public Dashboard dashboard = new Dashboard(this, Settings.dashboardNumber);
   public TeleopController teleopController = new TeleopController(this);
+  public AutoController autoController = new AutoController(this);
 
   public PowerDistribution pdh = new PowerDistribution(Settings.pdhCANID, ModuleType.kRev);
 
   @Override
-  public void robotInit() {}
+  public void robotInit() {
+  }
 
   @Override
   public void robotPeriodic() {
@@ -22,10 +24,14 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+    autoController.autoInit();
+  }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    autoController.autoPeriodic();
+  }
 
   @Override
   public void teleopInit() {
