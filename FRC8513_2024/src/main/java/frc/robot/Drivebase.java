@@ -45,17 +45,9 @@ public class Drivebase {
   }
 
   public void simulateDrivebaseInit(){
-    m_frontLeft.simulateModuleInit();
-    m_backLeft.simulateModuleInit();
-    m_frontRight.simulateModuleInit();
-    m_backRight.simulateModuleInit();
   }
 
   public void simulateDrivebase(){
-    m_frontLeft.simulateModule();
-    m_backLeft.simulateModule();
-    m_frontRight.simulateModule();
-    m_backRight.simulateModule();
   }
 }
 

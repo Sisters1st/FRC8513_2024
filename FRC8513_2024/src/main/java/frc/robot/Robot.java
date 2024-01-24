@@ -60,6 +60,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void simulationPeriodic() {
-    drivebase.simulate();
+    drivebase.simulateDrivebase();
   }
 }

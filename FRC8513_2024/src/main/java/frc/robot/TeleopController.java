@@ -2,7 +2,6 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 
 public class TeleopController {
 
@@ -21,7 +20,7 @@ public class TeleopController {
     public void periodic(){
         double xSpeedJoystick = driverXboxController.getRawAxis(1); //forward back
         double ySpeedJoystick = driverXboxController.getRawAxis(0); //left right
-        double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right
+        double rSpeedJoystick = -driverXboxController.getRawAxis(2); //left right - 2 at home, 4 on xbox
 
         double xInput = Math.pow(xSpeedJoystick, 3); // Smooth controll out
         double yInput = Math.pow(ySpeedJoystick, 3); // Smooth controll out
