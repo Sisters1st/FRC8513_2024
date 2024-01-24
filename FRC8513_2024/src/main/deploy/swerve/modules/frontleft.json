@@ -19,7 +19,7 @@
     "drive": null
   },
   "encoder": {
-    "type": "analog",
+    "type": "thrifty",
     "id": 0,
     "canbus": null
   },
