@@ -21,4 +21,6 @@ public class Settings {
 
     //pdh settings
     public static int pdhCANID = 1;
+
+    public static double joyBand = 0.1;
 }

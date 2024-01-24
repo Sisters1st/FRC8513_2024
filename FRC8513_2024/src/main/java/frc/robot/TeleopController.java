@@ -2,7 +2,6 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 
 public class TeleopController {
 
@@ -18,10 +17,21 @@ public class TeleopController {
 
     }
 
+    
+
     public void periodic(){
-        double xSpeedJoystick = driverXboxController.getRawAxis(1); //forward back
-        double ySpeedJoystick = driverXboxController.getRawAxis(0); //left right
+        double xSpeedJoystick = -driverXboxController.getRawAxis(1); //forward back
+        if(xSpeedJoystick < Settings.joyBand && xSpeedJoystick > -Settings.joyBand){
+            xSpeedJoystick = 0;
+        }
+        double ySpeedJoystick = -driverXboxController.getRawAxis(0); //left right
+         if(ySpeedJoystick < Settings.joyBand && ySpeedJoystick > -Settings.joyBand){
+            ySpeedJoystick = 0;
+        }
         double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right
+         if(rSpeedJoystick < Settings.joyBand && rSpeedJoystick > -Settings.joyBand){
+            rSpeedJoystick = 0;
+        }
 
         double xInput = Math.pow(xSpeedJoystick, 3); // Smooth controll out
         double yInput = Math.pow(ySpeedJoystick, 3); // Smooth controll out
@@ -31,10 +41,10 @@ public class TeleopController {
         double rV = rSpeedJoystick * thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity();
 
         thisRobot.drivebase.swerveDrive.drive(
-            new Translation2d(0, 0),
-            1.6,
+            new Translation2d(xV, yV),
+            rV,
             fieldCentric,
-            true
+            false
         );
     }
 
