@@ -31,10 +31,10 @@ public class TeleopController {
         double rV = rSpeedJoystick * thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity();
 
         thisRobot.drivebase.swerveDrive.drive(
-            new Translation2d(0, 0),
-            1.6,
+            new Translation2d(xV, yV),
+            rV,
             fieldCentric,
-            true
+            false
         );
     }
 
