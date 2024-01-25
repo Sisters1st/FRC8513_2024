@@ -28,7 +28,7 @@ public class AutoController {
     }
 
     public void autoPeriodic(){
-        boolean runpath = true;
+        boolean runpath = false;
         if(runpath){
             //runs a path
             PathPlannerTrajectory autoTraj =  path.getTrajectory(thisRobot.drivebase.swerveDrive.getFieldVelocity(), thisRobot.drivebase.swerveDrive.getOdometryHeading());
@@ -42,7 +42,7 @@ public class AutoController {
         } else {
             //drive manually
             thisRobot.drivebase.swerveDrive.drive(
-            new Translation2d(0, 0),
+            new Translation2d(0.3, 0.3),
             0,
             true,
             false
