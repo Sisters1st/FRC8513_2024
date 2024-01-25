@@ -31,10 +31,9 @@ public class Drivebase {
 
   /** Updates the field relative position of the robot. */
   public void updateOdometry() {
-
-    swerveDrive.updateOdometry();
     
     if(Settings.useLimelight){
+      
       double tl = LimelightHelpers.getLatency_Pipeline(Settings.limelightName);
       double cl = LimelightHelpers.getLatency_Capture(Settings.limelightName);
       double visionTime = Timer.getFPGATimestamp() - (tl/1000.0) - (cl/1000.0);
