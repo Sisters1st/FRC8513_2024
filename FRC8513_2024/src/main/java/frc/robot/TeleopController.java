@@ -20,6 +20,7 @@ public class TeleopController {
     
 
     public void periodic(){
+
         double xSpeedJoystick = -driverXboxController.getRawAxis(1); //forward back
         if(xSpeedJoystick < Settings.joyBand && xSpeedJoystick > -Settings.joyBand){
             xSpeedJoystick = 0;
@@ -32,6 +33,7 @@ public class TeleopController {
          if(rSpeedJoystick < Settings.joyBand && rSpeedJoystick > -Settings.joyBand){
             rSpeedJoystick = 0;
         }
+
 
         double xInput = Math.pow(xSpeedJoystick, 3); // Smooth controll out
         double yInput = Math.pow(ySpeedJoystick, 3); // Smooth controll out

@@ -43,6 +43,12 @@ public class Drivebase {
     }
     
   }
+
+  public void simulateDrivebaseInit(){
+  }
+
+  public void simulateDrivebase(){
+  }
 }
 
 
