@@ -7,7 +7,6 @@ public class TeleopController {
 
     Robot thisRobot;
     Joystick driverXboxController = new Joystick(Settings.driverJoystickPort);
-    public boolean fieldCentric = true;
 
     public TeleopController(Robot thisRobot_){
         thisRobot = thisRobot_;
@@ -16,8 +15,6 @@ public class TeleopController {
     public void init(){
 
     }
-
-    
 
     public void periodic(){
 
@@ -34,7 +31,6 @@ public class TeleopController {
             rSpeedJoystick = 0;
         }
 
-
         double xInput = Math.pow(xSpeedJoystick, 3); // Smooth controll out
         double yInput = Math.pow(ySpeedJoystick, 3); // Smooth controll out
 
@@ -45,7 +41,7 @@ public class TeleopController {
         thisRobot.drivebase.swerveDrive.drive(
             new Translation2d(xV, yV),
             rV,
-            fieldCentric,
+            true,
             false
         );
     }
