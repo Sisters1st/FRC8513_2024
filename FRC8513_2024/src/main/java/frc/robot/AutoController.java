@@ -15,7 +15,7 @@ public class AutoController {
     }
 
     public void autoPeriodic(){
-        PathPlannerPath path = PathPlannerPath.fromPathFile("StraightPath.path");
+        PathPlannerPath path = PathPlannerPath.fromPathFile("StraightPath");
         path.getPoint(0);
     }
 }

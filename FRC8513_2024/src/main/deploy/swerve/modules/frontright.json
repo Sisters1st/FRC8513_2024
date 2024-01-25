@@ -14,10 +14,6 @@
     "id": 8,
     "canbus": null
   },
-  "conversionFactor": {
-    "angle": null,
-    "drive": null
-  },
   "encoder": {
     "type": "thrifty",
     "id": 1,
