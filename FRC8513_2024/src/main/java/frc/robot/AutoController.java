@@ -23,7 +23,7 @@ public class AutoController {
     }
 
     public void autoInit(){
-        path = PathPlannerPath.fromPathFile("TestPath");
+        path = PathPlannerPath.fromPathFile("SubwooferToFirstNote");
         Pose2d initPose = path.getPreviewStartingHolonomicPose();
         thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
         headingPidController  = new PIDController(Settings.hc_P, Settings.hc_I, Settings.hc_D);
@@ -47,7 +47,7 @@ public class AutoController {
             SmartDashboard.putNumber("goalHeading", goalHeading.getDegrees());
             thisRobot.drivebase.swerveDrive.drive(
                 new Translation2d(goalState.velocityMps, goalState.heading), 
-                0.5,
+                rotCorrectionOutput,
                 true, 
                 false);
         } else {

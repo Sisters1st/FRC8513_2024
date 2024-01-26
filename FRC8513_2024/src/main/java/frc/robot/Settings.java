@@ -24,7 +24,7 @@ public class Settings {
 
     //heading settings
     public static boolean headingCorrection = true;
-    public static double hc_P = 0.01;
+    public static double hc_P = 0.1;
     public static double hc_I = 0;
     public static double hc_D = 0;
 
