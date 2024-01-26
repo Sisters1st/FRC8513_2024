@@ -1,5 +1,80 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="navX-Sensor[4]" type="Gyro" class="edu.wpi.first.smartdashboard.gui.elements.Compass">
+		<location x="450" y="420"/>
+	</widget>
+	<widget field="Module[backright] Absolute Encoder Read Issue" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="740"/>
+	</widget>
+	<widget field="Module[backright] Adjusted Absolute Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="720"/>
+	</widget>
+	<widget field="Module[backright] Raw Drive Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="700"/>
+	</widget>
+	<widget field="Module[backright] Raw Angle Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="680"/>
+	</widget>
+	<widget field="Module[backright] Raw Absolute Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="660"/>
+	</widget>
+	<widget field="Module[backleft] Absolute Encoder Read Issue" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="640"/>
+	</widget>
+	<widget field="Module[backleft] Adjusted Absolute Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="620"/>
+	</widget>
+	<widget field="Module[backleft] Raw Drive Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="600"/>
+	</widget>
+	<widget field="Module[backleft] Raw Angle Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="580"/>
+	</widget>
+	<widget field="Module[backleft] Raw Absolute Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="560"/>
+	</widget>
+	<widget field="Module[frontright] Absolute Encoder Read Issue" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="540"/>
+	</widget>
+	<widget field="Module[frontright] Adjusted Absolute Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="520"/>
+	</widget>
+	<widget field="Module[frontright] Raw Drive Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="500"/>
+	</widget>
+	<widget field="Module[frontright] Raw Angle Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="480"/>
+	</widget>
+	<widget field="Module[frontright] Raw Absolute Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="460"/>
+	</widget>
+	<widget field="Adjusted IMU Yaw" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="440"/>
+	</widget>
+	<widget field="Raw IMU Yaw" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="420"/>
+	</widget>
+	<widget field="Module[frontleft] Absolute Encoder Read Issue" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="400"/>
+	</widget>
+	<widget field="Module[frontleft] Adjusted Absolute Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="380"/>
+	</widget>
+	<widget field="Module[frontleft] Raw Drive Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="360"/>
+	</widget>
+	<widget field="Module[frontleft] Raw Angle Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="340"/>
+	</widget>
+	<widget field="Module[frontleft] Raw Absolute Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="227"/>
+	</widget>
+	<widget field="currentRotV" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="103"/>
+	</widget>
+	<widget field="maxAng" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="83"/>
+	</widget>
 	<widget field="backLeftTurnAppliedMotorVoltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="529" y="381"/>
 	</widget>
@@ -136,4 +211,10 @@
 </dashboard>
 <live-window>
 </live-window>
+	<hidden field="IMU"/>
+	<hidden field="Field"/>
+	<hidden field="Swerve Drive"/>
+	<hidden field="Motors"/>
+	<hidden field="JSON"/>
+	<hidden field="Encoders"/>
 </xml>

@@ -22,5 +22,13 @@ public class Settings {
     //pdh settings
     public static int pdhCANID = 1;
 
+    //heading settings
+    public static boolean headingCorrection = true;
+    public static double hc_P = 0.01;
+    public static double hc_I = 0;
+    public static double hc_D = 0;
+
+    
+
     public static double joyBand = 0.1;
 }
