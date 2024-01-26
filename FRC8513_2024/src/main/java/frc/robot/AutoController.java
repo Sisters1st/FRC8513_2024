@@ -23,7 +23,7 @@ public class AutoController {
     }
 
     public void autoInit(){
-        path = PathPlannerPath.fromPathFile("SubwooferToFirstNote");
+        path = PathPlannerPath.fromPathFile("TestPath");
         Pose2d initPose = path.getPreviewStartingHolonomicPose();
         thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
         headingPidController  = new PIDController(Settings.hc_P, Settings.hc_I, Settings.hc_D);
