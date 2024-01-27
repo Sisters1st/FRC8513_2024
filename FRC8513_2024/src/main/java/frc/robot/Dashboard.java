@@ -17,7 +17,13 @@ public class Dashboard {
             //general robot updates
             SmartDashboard.putNumber("Uptime", Timer.getFPGATimestamp());
             SmartDashboard.putNumber("maxAng", thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity());
-            SmartDashboard.putNumber("currentRotV", thisRobot.drivebase.swerveDrive.getRobotVelocity().omegaRadiansPerSecond);
+            SmartDashboard.putNumber("currentWheelV", thisRobot.drivebase.swerveDrive.getStates()[3].speedMetersPerSecond);
+            //SmartDashboard.putNumber("desiredWheelV", thisRobot.drivebase.swerveDrive..getState().speedMetersPerSecond);
+            SmartDashboard.putNumber("V", thisRobot.drivebase.swerveDrive.getRobotVelocity().vxMetersPerSecond);
+            
+
+
+          
             
         }
             
