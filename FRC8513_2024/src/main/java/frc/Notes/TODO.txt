@@ -1,0 +1,6 @@
+1 - Arm wrist shooter intake climber control
+2 - state machine
+3 - what autos do we want
+    - break up autos into paths
+4 - how do we write/define autos and how do we follow multiple paths
+5 - tuning PID on real robot

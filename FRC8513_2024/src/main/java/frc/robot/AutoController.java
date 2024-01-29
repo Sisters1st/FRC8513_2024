@@ -41,7 +41,7 @@ public class AutoController {
         new ProfiledPIDController(5, 0, 0,
             new TrapezoidProfile.Constraints(thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity(), 6.28)));
 
-        path = PathPlannerPath.fromPathFile("SillyPath");
+        path = PathPlannerPath.fromPathFile("SubWooferToFarNote");
         Pose2d initPose = path.getPreviewStartingHolonomicPose();
         thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
         trajStartTime = Timer.getFPGATimestamp();
@@ -71,10 +71,9 @@ public class AutoController {
             ChassisSpeeds adjustedSpeeds = holonomicDriveController.calculate(
             thisRobot.drivebase.swerveDrive.getPose(), trajState, goalHeading);
             
-            double rotCorrectionOutput = headingPidController.calculate(currentHeading.getDegrees(), goalHeading.getDegrees());
             //thisRobot.drivebase.swerveDrive.drive( new Translation2d(goalState.velocityMps, goalState.heading), rotCorrectionOutput,true,  false);
             thisRobot.drivebase.swerveDrive.drive(adjustedSpeeds);
-            if(trajElapsedTime > autoTraj.getTotalTimeSeconds() && pathNum < 0){
+            if(trajElapsedTime > autoTraj.getTotalTimeSeconds() && pathNum <= 0){
                 path = PathPlannerPath.fromPathFile("FarNoteToFirstNoteAndBack");
                 autoTraj =  path.getTrajectory(thisRobot.drivebase.swerveDrive.getFieldVelocity(), thisRobot.drivebase.swerveDrive.getOdometryHeading());
                 pathNum++;
