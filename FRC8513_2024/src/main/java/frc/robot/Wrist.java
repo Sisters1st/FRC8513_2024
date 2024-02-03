@@ -49,8 +49,7 @@ public class Wrist {
     public void updateWristPositions(){
         rawWristPosition = wristMotor1.getEncoder().getPosition();
         wristAngleToArm = rawWristPosition * Settings.wristEncoderToDegreeRatio;
-
-        wristAngleToGround = wristAngleToArm + ( thisRobot.arm).getArmPosition();
+        wristAngleToGround = calculateThetaAW();
 
     }
 

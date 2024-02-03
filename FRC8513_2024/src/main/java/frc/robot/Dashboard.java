@@ -16,13 +16,20 @@ public class Dashboard {
         if(dashbordNumber >= 0){
             //general robot updates
             SmartDashboard.putNumber("Uptime", Timer.getFPGATimestamp());
-            SmartDashboard.putNumber("maxAng", thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity());
-            SmartDashboard.putNumber("currentWheelV", thisRobot.drivebase.swerveDrive.getStates()[3].speedMetersPerSecond);
-            //SmartDashboard.putNumber("desiredWheelV", thisRobot.drivebase.swerveDrive..getState().speedMetersPerSecond);
-            SmartDashboard.putNumber("V", thisRobot.drivebase.swerveDrive.getRobotVelocity().vxMetersPerSecond);
             
+            //armInfo
+            SmartDashboard.putNumber("ArmRawEncoder", thisRobot.arm.armMotor1.getEncoder().getPosition());
+            SmartDashboard.putNumber("ArmPosition", thisRobot.arm.armAngle);
 
+            //wristInfo
+            SmartDashboard.putNumber("WristRawPosition", thisRobot.wrist.wristMotor1.getEncoder().getPosition());
+            SmartDashboard.putNumber("WristToArmAngel", thisRobot.wrist.wristAngleToArm);
+            SmartDashboard.putNumber("WristToGroundAngel", thisRobot.wrist.wristAngleToGround);
 
+            //shooter infor
+            
+            SmartDashboard.putNumber("ShooterSpeed", thisRobot.shooter.leftShooter.getEncoder().getVelocity());
+            SmartDashboard.putNumber("ShooterGoalSpeed", thisRobot.shooter.leftShooterGoalSpeed);
           
             
         }

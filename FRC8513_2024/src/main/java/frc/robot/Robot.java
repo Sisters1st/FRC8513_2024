@@ -14,6 +14,7 @@ public class Robot extends TimedRobot {
   public PowerDistribution pdh = new PowerDistribution(Settings.pdhCANID, ModuleType.kRev);
   public Arm arm = new Arm(this);
   public Wrist wrist = new Wrist(this);
+  public Shooter shooter = new Shooter(this);
 
   @Override
   public void robotInit() {
@@ -23,6 +24,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     dashboard.updateDashboard();
     drivebase.updateOdometry();
+    arm.updateArmAngle();
+    wrist.updateWristPositions();
   }
 
   @Override

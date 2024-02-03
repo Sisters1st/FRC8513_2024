@@ -1,7 +1,5 @@
 package frc.robot;
 
-import javax.swing.text.StyleContext.SmallAttributeSet;
-
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.PathPlannerTrajectory;
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
@@ -55,7 +53,6 @@ public class AutoController {
             //runs a path
             double trajElapsedTime = Timer.getFPGATimestamp()  - trajStartTime;
             State goalState = autoTraj.sample(trajElapsedTime);
-            Rotation2d currentHeading = thisRobot.drivebase.swerveDrive.field.getRobotPose().getRotation();
             Rotation2d goalHeading = goalState.targetHolonomicRotation;
 
             SmartDashboard.putNumber("goalX", goalState.positionMeters.getX());

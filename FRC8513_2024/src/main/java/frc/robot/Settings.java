@@ -18,6 +18,7 @@ public class Settings {
     //joystick settings
     public static int driverJoystickPort = 0;
     public static int driver_fieldCentricButton = 5;
+    public static double joyBand = 0.1;
 
     //pdh settings
     public static int pdhCANID = 1;
@@ -54,6 +55,11 @@ public class Settings {
     public static double wristPID_I = 0;
     public static double wristPID_D = 0;
 
+    //Shooter settings
+    public static int leftShooterCANID = 51;
+    public static int rightShooterCANID = 52;
 
-    public static double joyBand = 0.1;
+    public static double shooter_P = 0;
+    public static double shooter_I = 0;
+    public static double shooter_D = 0;
 }
