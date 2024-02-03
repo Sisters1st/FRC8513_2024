@@ -20,11 +20,14 @@ public class Dashboard {
             //armInfo
             SmartDashboard.putNumber("ArmRawEncoder", thisRobot.arm.armMotor1.getEncoder().getPosition());
             SmartDashboard.putNumber("ArmPosition", thisRobot.arm.armAngle);
+            SmartDashboard.putNumber("ArmGoalSpeed", thisRobot.arm.armGoalAngle);
+
 
             //wristInfo
             SmartDashboard.putNumber("WristRawPosition", thisRobot.wrist.wristMotor1.getEncoder().getPosition());
             SmartDashboard.putNumber("WristToArmAngel", thisRobot.wrist.wristAngleToArm);
             SmartDashboard.putNumber("WristToGroundAngel", thisRobot.wrist.wristAngleToGround);
+            SmartDashboard.putNumber("WristGoalSpeed", thisRobot.wrist.wristGoalAngleToGround);
 
             //shooter infor
             

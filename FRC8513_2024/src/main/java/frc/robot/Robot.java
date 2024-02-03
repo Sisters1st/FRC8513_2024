@@ -22,10 +22,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    dashboard.updateDashboard();
     drivebase.updateOdometry();
     arm.updateArmAngle();
     wrist.updateWristPositions();
+    
+    dashboard.updateDashboard();
   }
 
   @Override
