@@ -12,6 +12,8 @@ public class Robot extends TimedRobot {
   public AutoController autoController = new AutoController(this);
 
   public PowerDistribution pdh = new PowerDistribution(Settings.pdhCANID, ModuleType.kRev);
+  public Arm arm = new Arm(this);
+  public Wrist wrist = new Wrist(this);
 
   @Override
   public void robotInit() {

@@ -34,13 +34,26 @@ public class Settings {
     public static double armInitRawEncoderValue = 0;
     public static double armEncoderToDegreeRatio = 90000;
 
+    public static double armReductin = 0;
     public static double armFF = 0;
 
     public static double armPID_P = 0;
     public static double armPID_I = 0;
     public static double armPID_D = 0;
 
-    
+    //Wrist settings
+    public static int wristMotor1CANID = 0;
+    public static int wristMotor2CANID = 0;
+    public static double wristInitRawEncoderValue = 0;
+    public static double wristEncoderToDegreeRatio = 0;
+
+    public static double wristReduction = 0;
+    public static double wristFF = 0;
+
+    public static double wristPID_P = 0;
+    public static double wristPID_I = 0;
+    public static double wristPID_D = 0;
+
 
     public static double joyBand = 0.1;
 }
