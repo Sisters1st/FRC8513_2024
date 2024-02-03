@@ -28,6 +28,8 @@ public class Settings {
     public static double hc_I = 0;
     public static double hc_D = 0;
 
+    //Arm settings
+    
     
 
     public static double joyBand = 0.1;
