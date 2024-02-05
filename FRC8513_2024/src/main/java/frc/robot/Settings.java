@@ -20,6 +20,8 @@ public class Settings {
     public static int driver_fieldCentricButton = 5;
     public static double joyBand = 0.1;
 
+    public static int opperatingArmJoystickPort = 0;
+
     //pdh settings
     public static int pdhCANID = 1;
 
