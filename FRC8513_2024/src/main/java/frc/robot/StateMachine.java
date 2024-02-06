@@ -18,17 +18,8 @@ public class StateMachine {
                 if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(1)){
                     robotState = RobotState.INTAKING;
                 }
-                if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(2)){
-                    robotState = RobotState.SPEEDING_UP_SHOOTER_AMP;
-                }
                  if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(4)){
                     robotState = RobotState.SPEEDING_UP_SHOOTER_SPEAKER;
-                }
-                 if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(3)){
-                    robotState = RobotState.SPEEDING_UP_SHOOTER_TRAP;
-                }
-                 if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(6)){
-                    robotState = RobotState.CLIMB;
                 }
                 break;
 
@@ -36,29 +27,23 @@ public class StateMachine {
                 
                 break;
 
-            case OUTAKING:
-
-                break;
-
             case SPEEDING_UP_SHOOTER_SPEAKER:
                     robotState = RobotState.SHOOTING;
                 
                 break;
 
-            case SPEEDING_UP_SHOOTER_AMP:
-                 robotState = RobotState.SHOOTING;
+            case CLIMB_PREP:
 
                 break;
 
-            case SPEEDING_UP_SHOOTER_TRAP:
-                 robotState = RobotState.SHOOTING;
-                 
-                break;
-
-            case CLIMB:
+            case CLIMBING:
 
                 break;
-        
+
+            case CLIMB_TRAP:
+
+                break;
+
             default:
                 break;
         }
@@ -67,11 +52,12 @@ public class StateMachine {
     enum RobotState {
         DRIVING,
         INTAKING,
-        OUTAKING,
         SHOOTING,
-        SPEEDING_UP_SHOOTER_AMP,
         SPEEDING_UP_SHOOTER_SPEAKER,
-        SPEEDING_UP_SHOOTER_TRAP,
-        CLIMB
+        AMP_PREP,
+        SCORE_AMP,
+        CLIMB_PREP,
+        CLIMBING,
+        CLIMB_TRAP
       }
 }
