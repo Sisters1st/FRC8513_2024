@@ -26,6 +26,9 @@ public class Arm {
 
         armMotor1.getEncoder().setPosition(Settings.armInitRawEncoderValue);
 
+        armMotor1.setSmartCurrentLimit(Settings.arm1CurrentLimit);
+        armMotor2.setSmartCurrentLimit(Settings.arm2CurentLimit);
+
     }
 
     public void setArmPosition(double degrees){

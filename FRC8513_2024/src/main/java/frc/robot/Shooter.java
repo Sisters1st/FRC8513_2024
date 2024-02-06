@@ -20,6 +20,10 @@ public class Shooter {
 
     public Shooter(Robot robotIn){
         thisRobot = robotIn;
+
+        leftShooter.setSmartCurrentLimit(Settings.shooter1CurrentLimit);
+        rightShooter.setSmartCurrentLimit(Settings.shooter2CurrentLimit);
+
     }
 
     public void setShooterSpeeds(double lss, double rss){
@@ -42,4 +46,15 @@ public class Shooter {
         }
     }
 
-}
+    public boolean leftShooterInThreshold(){
+        if (Math.abs(leftShooter.getEncoder().getVelocity() - leftShooterGoalSpeed) < Settings.thresholdValue);
+            return true;
+        }
+
+    public boolean rightShooterInThreshold(){
+        if (Math.abs(rightShooter.getEncoder().getVelocity() - rightShooterGoalSpeed) < Settings.thresholdValue);
+            return true;
+        }
+    }
+
+

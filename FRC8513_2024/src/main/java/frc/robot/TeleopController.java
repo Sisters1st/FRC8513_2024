@@ -8,6 +8,7 @@ public class TeleopController {
     Robot thisRobot;
     Joystick driverXboxController = new Joystick(Settings.driverJoystickPort);
     Joystick operatingArmXboxController = new Joystick(Settings.opperatingArmJoystickPort);
+    Joystick climberXboxController = new Joystick(Settings.climberJoystickPort);
 
     public TeleopController(Robot thisRobot_){
         thisRobot = thisRobot_;
@@ -18,6 +19,11 @@ public class TeleopController {
     }
 
     public void periodic(){
+
+        double climberJoystick = -climberXboxController.getRawAxis(0); //Up Down????
+        if(climberJoystick < Settings.joyBand && climberJoystick > -Settings.joyBand){
+            climberJoystick = 0;
+        }
 
         double armJoystick = -operatingArmXboxController.getRawAxis(1); //forward back
         if(armJoystick < Settings.joyBand && armJoystick > -Settings.joyBand){

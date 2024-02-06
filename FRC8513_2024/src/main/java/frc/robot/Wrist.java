@@ -27,6 +27,8 @@ public class Wrist {
 
         wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
 
+        wristMotor1.setSmartCurrentLimit(Settings.wrist1CurrentLimit);
+        wristMotor2.setSmartCurrentLimit(Settings.arm2CurentLimit);
     }
 
     public void setWristPositionToGround(double degrees){

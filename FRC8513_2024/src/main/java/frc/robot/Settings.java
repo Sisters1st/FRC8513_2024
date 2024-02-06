@@ -22,6 +22,17 @@ public class Settings {
 
     public static int opperatingArmJoystickPort = 0;
 
+    public static int climberJoystickPort = 0;
+
+     //Button settings
+    public static int shootInSpeakerButton = 5;
+    public static int shootInAMPWarmUpButton = 3;
+    public static int shootInAMPButton = 4;
+    public static int climberButton = 7;
+    public static int intakeButton = 1;
+    public static int drivingStateReturnButton = 2;
+    public static int shootingInTrap = 8;
+
     //pdh settings
     public static int pdhCANID = 1;
 
@@ -40,6 +51,9 @@ public class Settings {
     public static double armReductin = 0;
     public static double armFF = 0;
 
+    public static int arm1CurrentLimit = 10;
+    public static int arm2CurentLimit = 10;
+
     public static double armPID_P = 0;
     public static double armPID_I = 0;
     public static double armPID_D = 0;
@@ -53,6 +67,9 @@ public class Settings {
     public static double wristReduction = 0;
     public static double wristFF = 0;
 
+    public static int wrist1CurrentLimit = 10;
+    public static int wrist2CurrentLimit = 10;
+
     public static double wristPID_P = 0;
     public static double wristPID_I = 0;
     public static double wristPID_D = 0;
@@ -64,4 +81,10 @@ public class Settings {
     public static double shooter_P = 0;
     public static double shooter_I = 0;
     public static double shooter_D = 0;
+
+    public static double thresholdValue = 10;
+
+    public static int shooter1CurrentLimit = 10;
+    public static int shooter2CurrentLimit = 10;
+
 }
