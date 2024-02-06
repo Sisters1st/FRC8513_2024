@@ -24,11 +24,11 @@ public class StateMachine {
                 break;
 
             case INTAKING:
-                
+                // thisRobot.arm.setArmPosition(Settings.intakingArmPosition);
                 if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){
                     robotState = RobotState.DRIVING;
                 }
-                
+
                 break;
 
             case SPEEDING_UP_SHOOTER_SPEAKER:

@@ -20,9 +20,9 @@ public class Settings {
     public static int driver_fieldCentricButton = 5;
     public static double joyBand = 0.1;
 
-    public static int opperatingArmJoystickPort = 0;
+    public static int opperatingArmJoystickPort = 1;
 
-    public static int climberJoystickPort = 0;
+    public static int climberJoystickPort = 2;
 
      //Button settings
     public static int shootInSpeakerButton = 5;
@@ -42,25 +42,29 @@ public class Settings {
     public static double hc_I = 0;
     public static double hc_D = 0;
 
+    //intake settings
+    public static int leftIntakeMotorCANID = 51;
+    public static int rightIntakeMotorCANID = 52;
+
     //Arm settings
-    public static int armMotor1CANID = 0;
-    public static int armMotor2CANID = 0;
+    public static int armMotor1CANID = 14;
+    public static int armMotor2CANID = 15;
     public static double armInitRawEncoderValue = 0;
     public static double armEncoderToDegreeRatio = 90000;
 
     public static double armReductin = 0;
     public static double armFF = 0;
 
-    public static int arm1CurrentLimit = 10;
-    public static int arm2CurentLimit = 10;
+    public static int arm1CurrentLimit = 30;
+    public static int arm2CurentLimit = 30;
 
     public static double armPID_P = 0;
     public static double armPID_I = 0;
     public static double armPID_D = 0;
 
     //Wrist settings
-    public static int wristMotor1CANID = 0;
-    public static int wristMotor2CANID = 0;
+    public static int wristMotor1CANID = 60;
+    public static int wristMotor2CANID = 61;
     public static double wristInitRawEncoderValue = 0;
     public static double wristEncoderToDegreeRatio = 0;
 
@@ -73,6 +77,9 @@ public class Settings {
     public static double wristPID_P = 0;
     public static double wristPID_I = 0;
     public static double wristPID_D = 0;
+
+    //feeder settings
+    public static int feederMotorCANID = 58;
 
     //Shooter settings
     public static int leftShooterCANID = 51;

@@ -35,7 +35,9 @@ public class TeleopController {
          }
 
         thisRobot.arm.armMotor1.set(armJoystick);
+        thisRobot.arm.armMotor2.set(-armJoystick);
         thisRobot.wrist.wristMotor1.set(wristJoystick);
+        thisRobot.wrist.wristMotor2.set(-wristJoystick);
 
 
         double xSpeedJoystick = -driverXboxController.getRawAxis(1); //forward back

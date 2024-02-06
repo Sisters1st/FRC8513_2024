@@ -21,8 +21,9 @@ public class Arm {
     public Arm(Robot robotParam){
         thisRobot = robotParam;
 
-        armMotor2.follow(armMotor1);
-        armMotor2.setInverted(true);
+      
+        armMotor2.setInverted(false);
+        armMotor1.setInverted(false);
 
         armMotor1.getEncoder().setPosition(Settings.armInitRawEncoderValue);
 

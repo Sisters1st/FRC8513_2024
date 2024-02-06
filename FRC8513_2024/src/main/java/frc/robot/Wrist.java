@@ -22,8 +22,10 @@ public class Wrist {
     public Wrist(Robot robotParam){
         thisRobot = robotParam;
 
-        wristMotor2.follow(wristMotor1);
-        wristMotor2.setInverted(true);
+        wristMotor2.setInverted(false);
+        wristMotor1.setInverted(false);
+
+        //set brake and coast odes
 
         wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
 
