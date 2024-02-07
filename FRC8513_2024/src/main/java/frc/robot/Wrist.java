@@ -70,6 +70,10 @@ public class Wrist {
 
         return ffPower;
     }
+
+    public boolean wristWithinThold(){
+        return Math.abs(wristAngleToGround-wristGoalAngleToGround) < Settings.wristTHold;
+    }
     
 }
 

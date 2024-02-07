@@ -59,6 +59,10 @@ public class Arm {
 
         return ffPower;
     }
+
+    public boolean armWithinThold(){
+        return Math.abs(armAngle-armGoalAngle) < Settings.armThold;
+    }
     
 }
 

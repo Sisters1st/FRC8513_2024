@@ -44,7 +44,8 @@ public class StateMachine {
                 break;
 
             case SPEEDING_UP_SHOOTER_SPEAKER:
-                if((thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()) == true ){
+                if((thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()) == true &&
+                    thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold() ){
                     robotState = RobotState.SHOOTING;
                 }
                 if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){

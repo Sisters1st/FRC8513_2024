@@ -42,8 +42,8 @@ public class Settings {
     public static double hc_D = 0;
 
     //intake settings
-    public static int leftIntakeMotorCANID = 61;
-    public static int rightIntakeMotorCANID = 62;
+    public static int leftIntakeMotorCANID = 51;
+    public static int rightIntakeMotorCANID = 52;
 
     public static int intakeMotorCurrnetLimit = 20;
     public static double intakingVoltage = 8;
@@ -68,9 +68,11 @@ public class Settings {
     public static double trapArmPos = 0;
     public static double ampArmPos = 0;
 
+    public static double armThold = 2;
+
     //Wrist settings
-    public static int wristMotor1CANID = 64;
-    public static int wristMotor2CANID = 63;
+    public static int wristMotor1CANID = 60;
+    public static int wristMotor2CANID = 61;
     public static double wristInitRawEncoderValue = 0;
     public static double wristEncoderToDegreeRatio = 0;
 
@@ -88,13 +90,12 @@ public class Settings {
     public static double trapWristPos = 0;
     public static double ampWristPos = 0;
 
-    //feeder settings
-    public static int feederMotorCANID = 58;
+    public static double wristTHold = 2;
 
     //Shooter settings
-    public static int leftShooterCANID = 51;
-    public static int rightShooterCANID = 52;
-    public static int feederCANID = 53;
+    public static int leftShooterCANID = 41;
+    public static int rightShooterCANID = 42;
+    public static int feederCANID = 58;
 
     public static double shooter_P = 0;
     public static double shooter_I = 0;
