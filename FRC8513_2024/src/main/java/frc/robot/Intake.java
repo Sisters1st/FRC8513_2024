@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 public class Intake {
@@ -15,6 +16,9 @@ public class Intake {
 
         leftIntake.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
         rightIntake.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
+
+        leftIntake.setIdleMode(IdleMode.kBrake);
+        rightIntake.setIdleMode(IdleMode.kBrake);
 
     }
 

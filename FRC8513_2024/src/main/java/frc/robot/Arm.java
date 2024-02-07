@@ -1,6 +1,7 @@
 package frc.robot;
     
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -21,14 +22,13 @@ public class Arm {
     public Arm(Robot robotParam){
         thisRobot = robotParam;
 
-      
-        armMotor2.setInverted(false);
-        armMotor1.setInverted(false);
-
         armMotor1.getEncoder().setPosition(Settings.armInitRawEncoderValue);
 
         armMotor1.setSmartCurrentLimit(Settings.arm1CurrentLimit);
         armMotor2.setSmartCurrentLimit(Settings.arm2CurentLimit);
+
+        armMotor1.setIdleMode(IdleMode.kBrake);
+        armMotor2.setIdleMode(IdleMode.kBrake);
 
     }
 

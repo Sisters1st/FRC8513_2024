@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -28,6 +29,9 @@ public class Shooter {
         rightShooter.setSmartCurrentLimit(Settings.shooter2CurrentLimit);
         feederMotor.setSmartCurrentLimit(Settings.feederCurrentLimit);
 
+        rightShooter.setIdleMode(IdleMode.kCoast);
+        rightShooter.setIdleMode(IdleMode.kCoast);
+        feederMotor.setIdleMode(IdleMode.kBrake);
     }
 
     public void setShooterSpeeds(double lss, double rss){

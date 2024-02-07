@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -22,15 +23,13 @@ public class Wrist {
     public Wrist(Robot robotParam){
         thisRobot = robotParam;
 
-        wristMotor2.setInverted(false);
-        wristMotor1.setInverted(false);
-
-        //set brake and coast odes
-
         wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
 
         wristMotor1.setSmartCurrentLimit(Settings.wrist1CurrentLimit);
         wristMotor2.setSmartCurrentLimit(Settings.arm2CurentLimit);
+
+        wristMotor1.setIdleMode(IdleMode.kBrake);
+        wristMotor2.setIdleMode(IdleMode.kBrake);
     }
 
     public void setWristPositionToGround(double degrees){
