@@ -33,7 +33,15 @@ public class Dashboard {
             
             SmartDashboard.putNumber("ShooterSpeed", thisRobot.shooter.leftShooter.getEncoder().getVelocity());
             SmartDashboard.putNumber("ShooterGoalSpeed", thisRobot.shooter.leftShooterGoalSpeed);
+            SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
+
+            //intake info
+
+            SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntake.getAppliedOutput());
+
+            //climber info
           
+            SmartDashboard.putNumber("climberPoewr", thisRobot.climber.climberMotor1.getAppliedOutput());
             
         }
             

@@ -15,6 +15,8 @@ public class Robot extends TimedRobot {
   public Arm arm = new Arm(this);
   public Wrist wrist = new Wrist(this);
   public Shooter shooter = new Shooter(this);
+  public Climber climber = new Climber(this);
+  public Intake intake = new Intake(this);
 
   @Override
   public void robotInit() {
@@ -26,7 +28,6 @@ public class Robot extends TimedRobot {
     drivebase.updateOdometry();
     arm.updateArmAngle();
     wrist.updateWristPositions();
-    
     dashboard.updateDashboard();
   }
 
@@ -63,7 +64,9 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {}
 
   @Override
-  public void simulationInit() {}
+  public void simulationInit() {
+    drivebase.simulateDrivebaseInit();
+  }
 
   @Override
   public void simulationPeriodic() {

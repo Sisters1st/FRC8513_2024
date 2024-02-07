@@ -12,19 +12,31 @@ public class StateMachine {
     public void updateRobotState(){
         switch (robotState) {
             case DRIVING:
+
+                thisRobot.arm.setArmPosition(Settings.intakingArmPos);
+                thisRobot.wrist.setWristPositionToGround(Settings.intakingWristPos);
+                thisRobot.intake.setIntakeVoltage(0);
+                thisRobot.shooter.setShooterSpeeds(0, 0);
+                thisRobot.shooter.feederMotor.setVoltage(0);
+                
                 if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.shootInSpeakerButton)){
                     robotState = RobotState.SPEEDING_UP_SHOOTER_SPEAKER;
                 }
                 if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.intakeButton)){
                     robotState = RobotState.INTAKING;
                 }
-                 if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.shootInAMPWarmUpButton)){
-                    robotState = RobotState.SPEEDING_UP_SHOOTER_SPEAKER;
+                if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.climberPrepButton)){
+                    robotState = RobotState.CLIMBING;
                 }
                 break;
 
             case INTAKING:
-                // thisRobot.arm.setArmPosition(Settings.intakingArmPosition);
+                thisRobot.arm.setArmPosition(Settings.intakingArmPos);
+                thisRobot.wrist.setWristPositionToGround(Settings.intakingWristPos);
+                thisRobot.intake.setIntakeVoltage(Settings.intakingVoltage);
+                thisRobot.shooter.setShooterSpeeds(0, 0);
+                thisRobot.shooter.feederMotor.setVoltage(Settings.feederIntakeVoltage);
+
                 if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){
                     robotState = RobotState.DRIVING;
                 }
@@ -41,26 +53,51 @@ public class StateMachine {
                 
                 break;
 
-            case CLIMB_PREP:
-                if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.climberButton)){
-                    robotState = RobotState.CLIMBING;
-                }
-                if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){
+            case CLIMBING:
+
+                thisRobot.arm.setArmPosition(Settings.trapArmPos);
+                thisRobot.wrist.setWristPositionToGround(Settings.trapWristPos);
+                thisRobot.intake.setIntakeVoltage(0);
+                thisRobot.shooter.setShooterSpeeds(0, 0);
+
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){
                     robotState = RobotState.DRIVING;
                 }
 
+                if(thisRobot.teleopController.driverXboxController.getRawButton(Settings.climbButton)){
+                    thisRobot.climber.climberMotor1.setVoltage(Settings.climberVoltage);
+                    thisRobot.climber.climberMotor2.setVoltage(Settings.climberVoltage);
+                } else {
+                    thisRobot.climber.climberMotor1.setVoltage(0);
+                    thisRobot.climber.climberMotor2.setVoltage(0);
+                }
+
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.runFeederButton)){
+                    thisRobot.shooter.feederMotor.setVoltage(Settings.feederScoreTrapVoltage);
+                } else {
+                    thisRobot.shooter.feederMotor.setVoltage(0);
+                }
+
                 break;
 
-            case CLIMBING:
+            case SCORE_AMP:
 
-                robotState = RobotState.CLIMB_TRAP;
+                thisRobot.arm.setArmPosition(Settings.ampArmPos);
+                thisRobot.wrist.setWristPositionToGround(Settings.ampWristPos);
+                thisRobot.intake.setIntakeVoltage(0);
+                thisRobot.shooter.setShooterSpeeds(0, 0);
+
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){
+                    robotState = RobotState.DRIVING;
+                }
+
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.runFeederButton)){
+                    thisRobot.shooter.feederMotor.setVoltage(Settings.feederScoreTrapVoltage);
+                } else {
+                    thisRobot.shooter.feederMotor.setVoltage(0);
+                }
 
                 break;
-
-            case CLIMB_TRAP:
-
-                break;
-
             default:
                 break;
         }
@@ -71,10 +108,7 @@ public class StateMachine {
         INTAKING,
         SHOOTING,
         SPEEDING_UP_SHOOTER_SPEAKER,
-        AMP_PREP,
         SCORE_AMP,
-        CLIMB_PREP,
-        CLIMBING,
-        CLIMB_TRAP
+        CLIMBING
       }
 }
