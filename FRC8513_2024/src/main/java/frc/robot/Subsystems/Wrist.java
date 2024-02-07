@@ -47,7 +47,6 @@ public class Wrist {
         double thetaW = wristAngleToGround;
         
         double thetaAW = (180-thetaA) + thetaW;
-
         return thetaAW;
     }
 

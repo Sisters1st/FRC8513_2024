@@ -1,6 +1,9 @@
-1 - Arm wrist shooter intake climber control
-2 - state machine
-3 - what autos do we want
-    - break up autos into paths
-4 - how do we write/define autos and how do we follow multiple paths
-5 - tuning PID on real robot
+Fix rot to arm degrees ratio and set zero
+set rot to wrist degrees ratio and set zero
+
+
+what autos do we want
+    break up autos into paths
+how do we write/define autos and how do we follow multiple paths
+tuning PID on real robot
+motion profiling on arm and wrist
