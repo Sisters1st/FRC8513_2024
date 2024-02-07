@@ -1,22 +1,24 @@
-package frc.robot;
+package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import frc.robot.Robot;
+import frc.robot.Settings;
 
 public class Wrist {
 
     Robot thisRobot;
 
-    double rawWristPosition;
-    double wristAngleToArm;
-    double wristAngleToGround;
-    double wristGoalAngleToGround;
+    public double rawWristPosition;
+    public double wristAngleToArm;
+    public double wristAngleToGround;
+    public double wristGoalAngleToGround;
 
-    CANSparkMax wristMotor1 = new CANSparkMax(Settings.wristMotor1CANID, MotorType.kBrushless);
-    CANSparkMax wristMotor2 = new CANSparkMax(Settings.wristMotor2CANID, MotorType.kBrushless);
+    public CANSparkMax wristMotor1 = new CANSparkMax(Settings.wristMotor1CANID, MotorType.kBrushless);
+    public CANSparkMax wristMotor2 = new CANSparkMax(Settings.wristMotor2CANID, MotorType.kBrushless);
 
     PIDController wristPidController = new PIDController(Settings.wristPID_P, Settings.wristPID_I, Settings.wristPID_D);
 

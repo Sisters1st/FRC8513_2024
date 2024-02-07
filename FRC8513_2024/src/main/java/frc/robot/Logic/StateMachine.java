@@ -1,4 +1,7 @@
-package frc.robot;
+package frc.robot.Logic;
+
+import frc.robot.Robot;
+import frc.robot.Settings;
 
 public class StateMachine {
 

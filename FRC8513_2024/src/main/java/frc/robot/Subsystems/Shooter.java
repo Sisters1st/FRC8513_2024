@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkMax;
@@ -6,21 +6,23 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import frc.robot.Robot;
+import frc.robot.Settings;
 
 public class Shooter {
 
     Robot thisRobot;
 
-    CANSparkFlex leftShooter = new CANSparkFlex(Settings.leftShooterCANID, MotorType.kBrushless);
-    CANSparkFlex rightShooter = new CANSparkFlex(Settings.rightShooterCANID, MotorType.kBrushless);
+    public CANSparkFlex leftShooter = new CANSparkFlex(Settings.leftShooterCANID, MotorType.kBrushless);
+    public CANSparkFlex rightShooter = new CANSparkFlex(Settings.rightShooterCANID, MotorType.kBrushless);
 
-    CANSparkMax feederMotor = new CANSparkMax(Settings.feederCANID, MotorType.kBrushless);
+    public CANSparkMax feederMotor = new CANSparkMax(Settings.feederCANID, MotorType.kBrushless);
 
     PIDController leftShooterPIDController = new PIDController(Settings.shooter_P, Settings.shooter_I, Settings.shooter_D);
     PIDController rightShooterPIDController = new PIDController(Settings.shooter_P, Settings.shooter_I, Settings.shooter_D);
     
-    double leftShooterGoalSpeed;
-    double rightShooterGoalSpeed;
+    public double leftShooterGoalSpeed;
+    public double rightShooterGoalSpeed;
 
     public Shooter(Robot robotIn){
         thisRobot = robotIn;

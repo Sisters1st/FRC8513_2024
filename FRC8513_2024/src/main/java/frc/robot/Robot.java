@@ -3,6 +3,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import frc.robot.Logic.AutoController;
+import frc.robot.Logic.Dashboard;
+import frc.robot.Logic.TeleopController;
+import frc.robot.Subsystems.Arm;
+import frc.robot.Subsystems.Climber;
+import frc.robot.Subsystems.Drivebase;
+import frc.robot.Subsystems.Intake;
+import frc.robot.Subsystems.Shooter;
+import frc.robot.Subsystems.Wrist;
 
 public class Robot extends TimedRobot {
 

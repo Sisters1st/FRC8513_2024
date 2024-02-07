@@ -1,7 +1,7 @@
-package frc.robot;
-
+package frc.robot.Logic;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 
 public class Dashboard {
     int dashbordNumber = 0;

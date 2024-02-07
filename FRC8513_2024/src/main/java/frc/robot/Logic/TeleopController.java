@@ -1,7 +1,9 @@
-package frc.robot;
+package frc.robot.Logic;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.Robot;
+import frc.robot.Settings;
 
 public class TeleopController {
 
