@@ -58,10 +58,11 @@ public class Wrist {
     }
 
     public void updateWristMotorPower(){
-        double pidPower = wristPidController.calculate(getWristToGroundPosition(), wristGoalAngleToGround);
+        double pidPower = wristPidController.calculate(wristMotor1.getEncoder().getPosition(), wristGoalAngleToGround);
         double ffPower = calculateFFTerm();
 
         wristMotor1.setVoltage((pidPower + ffPower) * 12);
+        wristMotor2.setVoltage(-(pidPower + ffPower) * 12);
     }
 
     public double calculateFFTerm(){

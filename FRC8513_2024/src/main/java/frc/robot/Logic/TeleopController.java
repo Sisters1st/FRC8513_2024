@@ -21,12 +21,14 @@ public class TeleopController {
     }
 
     public void periodic(){
-        boolean manualTestingControl = true;
+        boolean manualTestingControl = false;
         if(manualTestingControl){
             manualControl();
 
         } else {
             thisRobot.stateMachine.updateRobotState();
+            thisRobot.arm.updateArmMotorPower();
+            thisRobot.wrist.updateWristMotorPower();
         }
         
         driveTele();
@@ -62,6 +64,13 @@ public class TeleopController {
     }
 
     public void manualControl(){
+
+        if(operatingArmXboxController.getRawButton(5)){
+            thisRobot.arm.armMotor1.getEncoder().setPosition(0);
+            
+            thisRobot.wrist.wristMotor1.getEncoder().setPosition(0);
+        }
+
         double climberJoystick = -climberXboxController.getRawAxis(0); //Up Down????
         if(climberJoystick < Settings.joyBand && climberJoystick > -Settings.joyBand){
             climberJoystick = 0;

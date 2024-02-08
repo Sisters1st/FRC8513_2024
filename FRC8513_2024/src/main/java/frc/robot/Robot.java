@@ -1,6 +1,9 @@
 package frc.robot;
 
+import com.revrobotics.CANSparkBase.IdleMode;
+
 import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import frc.robot.Logic.AutoController;
@@ -28,6 +31,8 @@ public class Robot extends TimedRobot {
   public Shooter shooter = new Shooter(this);
   public Climber climber = new Climber(this);
   public Intake intake = new Intake(this);
+  
+  public boolean lastUserButton = false;
 
   @Override
   public void robotInit() {
@@ -40,6 +45,26 @@ public class Robot extends TimedRobot {
     arm.updateArmAngle();
     wrist.updateWristPositions();
     dashboard.updateDashboard();
+
+    if(RobotController.getUserButton() != lastUserButton){
+      lastUserButton = RobotController.getUserButton();
+
+      if(RobotController.getUserButton()){
+        arm.armMotor1.setIdleMode(IdleMode.kCoast);
+        arm.armMotor2.setIdleMode(IdleMode.kCoast);
+
+        wrist.wristMotor1.setIdleMode(IdleMode.kCoast);
+        wrist.wristMotor1.setIdleMode(IdleMode.kCoast);
+      } else {
+        arm.armMotor1.setIdleMode(IdleMode.kBrake);
+        arm.armMotor2.setIdleMode(IdleMode.kBrake);
+
+        wrist.wristMotor1.setIdleMode(IdleMode.kBrake);
+        wrist.wristMotor1.setIdleMode(IdleMode.kBrake);
+
+      }
+
+    }
   }
 
   @Override

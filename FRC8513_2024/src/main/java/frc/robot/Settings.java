@@ -46,13 +46,13 @@ public class Settings {
     public static int rightIntakeMotorCANID = 52;
 
     public static int intakeMotorCurrnetLimit = 20;
-    public static double intakingVoltage = 8;
+    public static double intakingVoltage = 12;
 
     //Arm settings
     public static int armMotor1CANID = 14;
     public static int armMotor2CANID = 15;
-    public static double armInitRawEncoderValue = 0;
-    public static double armEncoderToDegreeRatio = 90000;
+    public static double armInitRawEncoderValue = 9.6;
+    public static double armEncoderToDegreeRatio = 90000; //360 x 250
 
     public static double armReductin = 0;
     public static double armFF = 0;
@@ -60,35 +60,35 @@ public class Settings {
     public static int arm1CurrentLimit = 30;
     public static int arm2CurentLimit = 30;
 
-    public static double armPID_P = 0;
+    public static double armPID_P = 0.1;
     public static double armPID_I = 0;
     public static double armPID_D = 0;
 
-    public static double intakingArmPos = 0;
-    public static double trapArmPos = 0;
-    public static double ampArmPos = 0;
+    public static double intakingArmPos = 2;
+    public static double trapArmPos = -30;
+    public static double ampArmPos = -50;
 
     public static double armThold = 2;
 
     //Wrist settings
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
-    public static double wristInitRawEncoderValue = 0;
+    public static double wristInitRawEncoderValue = 34;
     public static double wristEncoderToDegreeRatio = 0;
 
-    public static double wristReduction = 0;
+    public static double wristReduction = 170;
     public static double wristFF = 0;
 
     public static int wrist1CurrentLimit = 10;
     public static int wrist2CurrentLimit = 10;
 
-    public static double wristPID_P = 0;
+    public static double wristPID_P = 0.1;
     public static double wristPID_I = 0;
     public static double wristPID_D = 0;
 
-    public static double intakingWristPos = 0;
-    public static double trapWristPos = 0;
-    public static double ampWristPos = 0;
+    public static double intakingWristPos = 32;
+    public static double trapWristPos = 25;
+    public static double ampWristPos = 10;
 
     public static double wristTHold = 2;
 
@@ -103,13 +103,13 @@ public class Settings {
 
     public static double shooterThresholdValue = 10;
 
-    public static int shooter1CurrentLimit = 10;
-    public static int shooter2CurrentLimit = 10;
+    public static int shooter1CurrentLimit = 30;
+    public static int shooter2CurrentLimit = 30;
     public static int feederCurrentLimit = 10;
 
-    public static double feederScoreTrapVoltage = 8;
-    public static double feederScoreAmpVoltage = 8;
-    public static double feederIntakeVoltage = -8;
+    public static double feederScoreTrapVoltage = -8;
+    public static double feederScoreAmpVoltage = -8;
+    public static double feederIntakeVoltage = 8;
 
     //climber settings
 
