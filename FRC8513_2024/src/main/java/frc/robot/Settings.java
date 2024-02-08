@@ -27,7 +27,7 @@ public class Settings {
     public static int shootInSpeakerButton = 5;
     public static int ampPrepButton = 4;
     public static int climberPrepButton = 7;
-    public static int climbButton = 7;
+    public static int climbButton = 9;
     public static int intakeButton = 1;
     public static int drivingStateReturnButton = 2;
     public static int runFeederButton= 8;

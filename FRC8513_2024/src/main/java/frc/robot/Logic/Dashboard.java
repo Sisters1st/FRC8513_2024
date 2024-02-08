@@ -16,6 +16,7 @@ public class Dashboard {
         if(dashbordNumber >= 0){
             //general robot updates
             SmartDashboard.putNumber("Uptime", Timer.getFPGATimestamp());
+            SmartDashboard.putString("State", thisRobot.stateMachine.robotState.toString());
             
             //armInfo
             SmartDashboard.putNumber("ArmRawEncoder", thisRobot.arm.armMotor1.getEncoder().getPosition());

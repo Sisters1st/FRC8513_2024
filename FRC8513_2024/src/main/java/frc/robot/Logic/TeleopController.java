@@ -17,10 +17,12 @@ public class TeleopController {
     }
 
     public void init(){
-
+        thisRobot.stateMachine.robotState = thisRobot.stateMachine.robotState.DRIVING;
     }
 
     public void periodic(){
+
+        thisRobot.stateMachine.updateRobotState();
 
         double climberJoystick = -climberXboxController.getRawAxis(0); //Up Down????
         if(climberJoystick < Settings.joyBand && climberJoystick > -Settings.joyBand){

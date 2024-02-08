@@ -22,13 +22,13 @@ public class StateMachine {
                 thisRobot.shooter.setShooterSpeeds(0, 0);
                 thisRobot.shooter.feederMotor.setVoltage(0);
                 
-                if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.shootInSpeakerButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.shootInSpeakerButton)){
                     robotState = RobotState.SPEEDING_UP_SHOOTER_SPEAKER;
                 }
-                if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.intakeButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.intakeButton)){
                     robotState = RobotState.INTAKING;
                 }
-                if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.climberPrepButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.climberPrepButton)){
                     robotState = RobotState.CLIMBING;
                 }
                 break;
@@ -40,7 +40,7 @@ public class StateMachine {
                 thisRobot.shooter.setShooterSpeeds(0, 0);
                 thisRobot.shooter.feederMotor.setVoltage(Settings.feederIntakeVoltage);
 
-                if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.drivingStateReturnButton)){
                     robotState = RobotState.DRIVING;
                 }
 
@@ -51,7 +51,7 @@ public class StateMachine {
                     thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold() ){
                     robotState = RobotState.SHOOTING;
                 }
-                if(thisRobot.teleopController.driverXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.drivingStateReturnButton)){
                     robotState = RobotState.DRIVING;
                 }
                 
@@ -64,11 +64,11 @@ public class StateMachine {
                 thisRobot.intake.setIntakeVoltage(0);
                 thisRobot.shooter.setShooterSpeeds(0, 0);
 
-                if(thisRobot.teleopController.operatingArmXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.drivingStateReturnButton)){
                     robotState = RobotState.DRIVING;
                 }
 
-                if(thisRobot.teleopController.driverXboxController.getRawButton(Settings.climbButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.climbButton)){
                     thisRobot.climber.climberMotor1.setVoltage(Settings.climberVoltage);
                     thisRobot.climber.climberMotor2.setVoltage(Settings.climberVoltage);
                 } else {
@@ -91,7 +91,7 @@ public class StateMachine {
                 thisRobot.intake.setIntakeVoltage(0);
                 thisRobot.shooter.setShooterSpeeds(0, 0);
 
-                if(thisRobot.teleopController.operatingArmXboxController.getRawButtonPressed(Settings.drivingStateReturnButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.drivingStateReturnButton)){
                     robotState = RobotState.DRIVING;
                 }
 
@@ -107,7 +107,7 @@ public class StateMachine {
         }
     }
 
-    enum RobotState {
+    public enum RobotState {
         DRIVING,
         INTAKING,
         SHOOTING,

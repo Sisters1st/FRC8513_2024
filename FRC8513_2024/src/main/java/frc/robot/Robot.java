@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import frc.robot.Logic.AutoController;
 import frc.robot.Logic.Dashboard;
+import frc.robot.Logic.StateMachine;
 import frc.robot.Logic.TeleopController;
 import frc.robot.Subsystems.Arm;
 import frc.robot.Subsystems.Climber;
@@ -15,12 +16,13 @@ import frc.robot.Subsystems.Wrist;
 
 public class Robot extends TimedRobot {
 
-  public Drivebase drivebase = new Drivebase(this);
   public Dashboard dashboard = new Dashboard(this, Settings.dashboardNumber);
   public TeleopController teleopController = new TeleopController(this);
   public AutoController autoController = new AutoController(this);
+  public StateMachine stateMachine = new StateMachine(this);
 
   public PowerDistribution pdh = new PowerDistribution(Settings.pdhCANID, ModuleType.kRev);
+  public Drivebase drivebase = new Drivebase(this);
   public Arm arm = new Arm(this);
   public Wrist wrist = new Wrist(this);
   public Shooter shooter = new Shooter(this);
