@@ -21,29 +21,18 @@ public class TeleopController {
     }
 
     public void periodic(){
+        boolean manualTestingControl = true;
+        if(manualTestingControl){
+            manualControl();
 
-        thisRobot.stateMachine.updateRobotState();
-
-        double climberJoystick = -climberXboxController.getRawAxis(0); //Up Down????
-        if(climberJoystick < Settings.joyBand && climberJoystick > -Settings.joyBand){
-            climberJoystick = 0;
+        } else {
+            thisRobot.stateMachine.updateRobotState();
         }
+        
+        driveTele();
+    }
 
-        double armJoystick = -operatingArmXboxController.getRawAxis(1); //forward back
-        if(armJoystick < Settings.joyBand && armJoystick > -Settings.joyBand){
-            armJoystick = 0;
-        }
-        double wristJoystick = -operatingArmXboxController.getRawAxis(5); //left right
-         if(wristJoystick < Settings.joyBand && wristJoystick > -Settings.joyBand){
-            wristJoystick = 0;
-         }
-
-        thisRobot.arm.armMotor1.set(armJoystick);
-        thisRobot.arm.armMotor2.set(-armJoystick);
-        thisRobot.wrist.wristMotor1.set(wristJoystick);
-        thisRobot.wrist.wristMotor2.set(-wristJoystick);
-
-
+    public void driveTele(){
         double xSpeedJoystick = -driverXboxController.getRawAxis(1); //forward back
         if(xSpeedJoystick < Settings.joyBand && xSpeedJoystick > -Settings.joyBand){
             xSpeedJoystick = 0;
@@ -72,5 +61,25 @@ public class TeleopController {
         );
     }
 
+    public void manualControl(){
+        double climberJoystick = -climberXboxController.getRawAxis(0); //Up Down????
+        if(climberJoystick < Settings.joyBand && climberJoystick > -Settings.joyBand){
+            climberJoystick = 0;
+        }
+
+        double armJoystick = -operatingArmXboxController.getRawAxis(1); //forward back
+        if(armJoystick < Settings.joyBand && armJoystick > -Settings.joyBand){
+            armJoystick = 0;
+        }
+        double wristJoystick = -operatingArmXboxController.getRawAxis(5); //left right
+        if(wristJoystick < Settings.joyBand && wristJoystick > -Settings.joyBand){
+            wristJoystick = 0;
+        }
+
+        thisRobot.arm.armMotor1.set(armJoystick);
+        thisRobot.arm.armMotor2.set(-armJoystick);
+        thisRobot.wrist.wristMotor1.set(wristJoystick);
+        thisRobot.wrist.wristMotor2.set(-wristJoystick);
+    }
     
 }
