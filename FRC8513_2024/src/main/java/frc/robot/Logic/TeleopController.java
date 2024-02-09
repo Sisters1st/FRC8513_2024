@@ -4,7 +4,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Robot;
 import frc.robot.Settings;
-import frc.robot.Logic.StateMachine.RobotState;
+import frc.robot.Logic.StateMachine.robotStates;
 
 public class TeleopController {
 
@@ -18,7 +18,7 @@ public class TeleopController {
     }
 
     public void init(){
-        thisRobot.stateMachine.robotState = RobotState.DRIVING;
+        thisRobot.stateMachine.robotState = robotStates.DRIVING;
         thisRobot.arm.setArmPosition(thisRobot.arm.getArmPosition());
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());
     }

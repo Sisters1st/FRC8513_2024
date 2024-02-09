@@ -36,7 +36,7 @@ public class Drivebase {
   public State goalState;
 
   public Drivebase(Robot thisRobot_) {
-
+    thisRobot = thisRobot_;
     //yagsl init
     double maximumSpeed = Units.feetToMeters(Settings.drivebaseMaxVelocity);    
     File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
@@ -66,14 +66,16 @@ public class Drivebase {
     
   }
 
-  public void initPath(String pathName){
+  public void initPath(String pathName, boolean flipToRed){
       holonomicDriveController = new HolonomicDriveController(
         new PIDController(20, 0.5, 0), new PIDController(20, 0.1, 0),
         new ProfiledPIDController(5, 0, 0,
             new TrapezoidProfile.Constraints(thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity(), 6.28)));
 
       path = PathPlannerPath.fromPathFile(pathName);
-      path = path.flipPath();
+      if(flipToRed){
+        path = path.flipPath();
+      }
 
       Pose2d initPose = path.getPreviewStartingHolonomicPose();
       thisRobot.drivebase.swerveDrive.resetOdometry(initPose);

@@ -106,4 +106,11 @@ public class Robot extends TimedRobot {
   public void simulationPeriodic() {
     drivebase.simulateDrivebase();
   }
+
+  public void updateAllSubsystemMotorPower(){
+    arm.applyArmPower();
+    wrist.applyWristPower();
+    shooter.applyShooterPower();
+    intake.applyIntakeVoltage();
+  }
 }
