@@ -57,15 +57,22 @@ public class StateMachine {
                 break;
 
             case SPEEDING_UP_SHOOTER_SPEAKER:
+                    
+                thisRobot.arm.setArmPosition(Settings.shootingArmPos);
+                thisRobot.wrist.setWristPos(Settings.shootingWristPos);
+                thisRobot.intake.setIntakeVoltage(0);
+
                 if(thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()  &&
                     thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold()){
-                    thisRobot.shooter.feederMotor.setVoltage(Settings.feederIntakeVoltage);
+                    thisRobot.shooter.setShooterSpeeds(Settings.basicShooterSpeed, Settings.basicShooterSpeed, Settings.feederIntakeVoltage);
+                } else {
+                    thisRobot.shooter.setShooterSpeeds(Settings.basicShooterSpeed, Settings.basicShooterSpeed, 0);
                 }
                 if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.drivingStateReturnButton)){
                     robotState = robotStates.DRIVING;
                     lastStateChangeTime = Timer.getFPGATimestamp();
                 }
-                //set shooter speeds here
+                
                 break;
 
 

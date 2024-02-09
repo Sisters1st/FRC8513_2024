@@ -7,14 +7,12 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.PathPlannerTrajectory;
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 
-import edu.wpi.first.math.controller.HolonomicDriveController;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
@@ -31,9 +29,17 @@ public class Drivebase {
 
   PathPlannerPath path;
   PathPlannerTrajectory autoTraj;
-  HolonomicDriveController holonomicDriveController;
-  double trajStartTime;
-  public State goalState;
+
+  PIDController xPosPidController = new PIDController(10, 0, 0);
+  PIDController yPosPidController = new PIDController(10, 0, 0);
+  PIDController rotPidController = new PIDController(0.5, 0, 0);
+
+  public double trajStartTime;
+  public State goalState = new State();
+  double trajElapsedTime;
+  Trajectory.State trajState;
+  public Rotation2d goalHeading = new Rotation2d();
+  ChassisSpeeds adjustedSpeeds;
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
@@ -46,6 +52,8 @@ public class Drivebase {
       e.printStackTrace();
     }
     SwerveDriveTelemetry.verbosity = Settings.telemetryVerbosity;
+    swerveDrive.setCosineCompensator(false);
+    rotPidController.enableContinuousInput(-180,180);
 
     //pathFollowingInit
     goalState = new State();
@@ -67,43 +75,51 @@ public class Drivebase {
   }
 
   public void initPath(String pathName, boolean flipToRed){
-      holonomicDriveController = new HolonomicDriveController(
-        new PIDController(20, 0.5, 0), new PIDController(20, 0.1, 0),
-        new ProfiledPIDController(5, 0, 0,
-            new TrapezoidProfile.Constraints(thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity(), 6.28)));
-
       path = PathPlannerPath.fromPathFile(pathName);
+
       if(flipToRed){
         path = path.flipPath();
       }
 
-      Pose2d initPose = path.getPreviewStartingHolonomicPose();
-      thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
+      setOdomToPathInit();
       trajStartTime = Timer.getFPGATimestamp();
-      autoTraj =  path.getTrajectory(thisRobot.drivebase.swerveDrive.getFieldVelocity(), thisRobot.drivebase.swerveDrive.getOdometryHeading());
+      autoTraj = path.getTrajectory(thisRobot.drivebase.swerveDrive.getFieldVelocity(), thisRobot.drivebase.swerveDrive.getYaw());
+      xPosPidController.reset();
+      yPosPidController.reset();
+      rotPidController.reset();
+      goalState = autoTraj.sample(0);
+      
 
   }
 
   public void followPath(){
-    double trajElapsedTime = Timer.getFPGATimestamp()  - trajStartTime;
+    trajElapsedTime = Timer.getFPGATimestamp()  - trajStartTime;
     goalState = autoTraj.sample(trajElapsedTime);
-    Rotation2d goalHeading = goalState.targetHolonomicRotation;
-    
-    Trajectory.State trajState = new Trajectory.State(goalState.timeSeconds,
-        goalState.velocityMps,
-        goalState.accelerationMpsSq,
-        new Pose2d(goalState.positionMeters,goalHeading),
-    goalState.curvatureRadPerMeter);
+    goalHeading = goalState.targetHolonomicRotation;
 
-    ChassisSpeeds adjustedSpeeds = holonomicDriveController.calculate(
-    thisRobot.drivebase.swerveDrive.getPose(), trajState, goalHeading);
+    double xCorrection = xPosPidController.calculate(swerveDrive.getPose().getX(), goalState.getTargetHolonomicPose().getX());
+    double yCorrection = yPosPidController.calculate(swerveDrive.getPose().getY(), goalState.getTargetHolonomicPose().getY());
+    double rotCorrection = rotPidController.calculate(swerveDrive.getPose().getRotation().getDegrees(), goalHeading.getDegrees());
+    Translation2d trajV = new Translation2d(goalState.velocityMps, goalHeading);
+    Translation2d ajustedV = new Translation2d(xCorrection, yCorrection);
+
+    ajustedV = ajustedV.plus(trajV);
     
-    thisRobot.drivebase.swerveDrive.drive(adjustedSpeeds);
+    thisRobot.drivebase.swerveDrive.drive(ajustedV,
+    rotCorrection, true, false);
   }
 
   public boolean isPathOver(){
     double trajElapsedTime = Timer.getFPGATimestamp()  - trajStartTime;
     return trajElapsedTime > autoTraj.getTotalTimeSeconds();
+  }
+
+  public void setOdomToPathInit(){
+    Pose2d initPose = path.getPreviewStartingHolonomicPose();
+    if(thisRobot.onRedAlliance){
+      initPose.rotateBy(new Rotation2d(180));
+    }
+    thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
   }
 
   public void simulateDrivebaseInit(){

@@ -18,9 +18,14 @@ public class Dashboard {
             SmartDashboard.putNumber("Uptime", Timer.getFPGATimestamp());
             SmartDashboard.putString("State", thisRobot.stateMachine.robotState.toString());
 
+            //auto infor
+            SmartDashboard.putString("AutoRoutine", thisRobot.autoController.autoRoutine.toString());
+            SmartDashboard.putNumber("AutoStep", thisRobot.autoController.autoStep);
+
             //drivebase info
             SmartDashboard.putNumber("trajGoalX", thisRobot.drivebase.goalState.positionMeters.getX());
             SmartDashboard.putNumber("trajGoalY", thisRobot.drivebase.goalState.positionMeters.getY());
+            SmartDashboard.putNumber("Goalheading", thisRobot.drivebase.goalHeading.getDegrees());
             
             //armInfo
             SmartDashboard.putNumber("ArmPos", thisRobot.arm.armPos);
