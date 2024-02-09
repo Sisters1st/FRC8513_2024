@@ -42,13 +42,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     drivebase.updateOdometry();
-    arm.updateArmAngle();
-    wrist.updateWristPositions();
-    dashboard.updateDashboard();
+    dashboard.updateDashboard();  
 
     if(RobotController.getUserButton() != lastUserButton){
       lastUserButton = RobotController.getUserButton();
-
+      //user button is buggy maybe get another way of doing this
       if(RobotController.getUserButton()){
         arm.armMotor1.setIdleMode(IdleMode.kCoast);
         arm.armMotor2.setIdleMode(IdleMode.kCoast);

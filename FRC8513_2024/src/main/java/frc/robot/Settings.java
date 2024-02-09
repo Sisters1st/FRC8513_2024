@@ -52,9 +52,7 @@ public class Settings {
     public static int armMotor1CANID = 14;
     public static int armMotor2CANID = 15;
     public static double armInitRawEncoderValue = 9.6;
-    public static double armEncoderToDegreeRatio = 90000; //360 x 250
 
-    public static double armReductin = 0;
     public static double armFF = 0;
 
     public static int arm1CurrentLimit = 30;
@@ -69,12 +67,12 @@ public class Settings {
     public static double ampArmPos = -50;
 
     public static double armThold = 2;
+    public static double armMaxV = 1;
 
     //Wrist settings
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
     public static double wristInitRawEncoderValue = 34;
-    public static double wristEncoderToDegreeRatio = 0;
 
     public static double wristReduction = 170;
     public static double wristFF = 0;

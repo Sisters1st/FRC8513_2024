@@ -19,15 +19,15 @@ public class Dashboard {
             SmartDashboard.putString("State", thisRobot.stateMachine.robotState.toString());
             
             //armInfo
-            SmartDashboard.putNumber("ArmRawEncoder", thisRobot.arm.armMotor1.getEncoder().getPosition());
-            SmartDashboard.putNumber("ArmPosition", thisRobot.arm.armAngle);
-            SmartDashboard.putNumber("ArmGoalAngle", thisRobot.arm.armGoalAngle);
+            SmartDashboard.putNumber("ArmPos", thisRobot.arm.armPos);
+            SmartDashboard.putNumber("ArmGoalPos", thisRobot.arm.armGoalPos);
+            SmartDashboard.putNumber("calculatedArmGoal", thisRobot.arm.calculatedArmGoal);
 
 
             //wristInfo
-            SmartDashboard.putNumber("WristRawPosition", thisRobot.wrist.wristMotor1.getEncoder().getPosition());
-            SmartDashboard.putNumber("WristToArmAngel", thisRobot.wrist.wristAngleToArm);
-            SmartDashboard.putNumber("WristGoalAgnle", thisRobot.wrist.wristGoalAngleToGround);
+            SmartDashboard.putNumber("WristPos", thisRobot.wrist.wristPos);
+            SmartDashboard.putNumber("WristGoalPos", thisRobot.wrist.wristGoalPos);
+            SmartDashboard.putNumber("calculatedWristmGoal", thisRobot.wrist.calculatedWristGoal);
 
             //shooter infor
             SmartDashboard.putNumber("ShooterSpeed", thisRobot.shooter.leftShooter.getEncoder().getVelocity());
@@ -38,7 +38,7 @@ public class Dashboard {
             SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntake.getAppliedOutput());
 
             //climber info
-            SmartDashboard.putNumber("climberPoewr", thisRobot.climber.climberMotor1.getAppliedOutput());
+            SmartDashboard.putNumber("climberPower", thisRobot.climber.climberMotor1.getAppliedOutput());
             
         }
             

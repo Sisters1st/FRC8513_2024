@@ -5,7 +5,6 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Settings;
 
@@ -13,12 +12,9 @@ public class Arm {
 
     Robot thisRobot;
 
-    public double rawArmPosition;
-    public double armAngle;
-    public double armGoalAngle;
-    double lastArmGoalAngle;
-    double maxArmV = 1;
-    double calculatedArmGoal = 0;
+    public double armPos;
+    public double armGoalPos;
+    public double calculatedArmGoal = 0;
 
     public CANSparkMax armMotor1 = new CANSparkMax(Settings.armMotor1CANID, MotorType.kBrushless);
     public CANSparkMax armMotor2 = new CANSparkMax(Settings.armMotor2CANID, MotorType.kBrushless);
@@ -41,37 +37,28 @@ public class Arm {
 
     }
 
-    public void setArmPosition(double degrees){
-        armGoalAngle = degrees;
+    public void setArmPosition(double pos){
+        armGoalPos = pos;
     }
 
     public double getArmPosition(){
-        return armAngle;
-    }
-
-    public double updateArmAngle(){
-        rawArmPosition = armMotor1.getEncoder().getPosition();
-        armAngle = rawArmPosition * Settings.armEncoderToDegreeRatio;
-        return armAngle;
+        return armMotor1.getEncoder().getPosition();
     }
 
     public void updateArmMotorPower(){
 
-        if(calculatedArmGoal < armGoalAngle){
-            calculatedArmGoal = calculatedArmGoal + maxArmV;
+        if(calculatedArmGoal < armGoalPos){
+            calculatedArmGoal = calculatedArmGoal + Settings.armMaxV;
         }
-         if(calculatedArmGoal > armGoalAngle){
-            calculatedArmGoal = calculatedArmGoal - maxArmV;
+         if(calculatedArmGoal > armGoalPos){
+            calculatedArmGoal = calculatedArmGoal - Settings.armMaxV;
         }
-
-        SmartDashboard.putNumber("trapArmPof", calculatedArmGoal);
 
         double pidPower = armPidController.calculate(armMotor1.getEncoder().getPosition(), calculatedArmGoal);
         double ffPower = calculateFFTerm();
 
         armMotor1.setVoltage((pidPower + ffPower) * 12);
         armMotor2.setVoltage(-(pidPower + ffPower) * 12);
-        lastArmGoalAngle = calculatedArmGoal;
     }
 
     public double calculateFFTerm(){
@@ -82,7 +69,7 @@ public class Arm {
     }
 
     public boolean armWithinThold(){
-        return Math.abs(armAngle-armGoalAngle) < Settings.armThold;
+        return Math.abs(armPos-armGoalPos) < Settings.armThold;
     }
     
 }

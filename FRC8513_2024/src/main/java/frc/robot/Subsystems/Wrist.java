@@ -12,10 +12,9 @@ public class Wrist {
 
     Robot thisRobot;
 
-    public double rawWristPosition;
-    public double wristAngleToArm;
-    public double wristAngleToGround;
-    public double wristGoalAngleToGround;
+    public double wristPos;
+    public double wristGoalPos;
+    public double calculatedWristGoal;
 
     public CANSparkMax wristMotor1 = new CANSparkMax(Settings.wristMotor1CANID, MotorType.kBrushless);
     public CANSparkMax wristMotor2 = new CANSparkMax(Settings.wristMotor2CANID, MotorType.kBrushless);
@@ -34,31 +33,25 @@ public class Wrist {
         wristMotor2.setIdleMode(IdleMode.kBrake);
     }
 
-    public void setWristPositionToGround(double degrees){
-        wristGoalAngleToGround = degrees;
+    public void setWristPos(double pos){
+        wristGoalPos = pos;
     }
 
-    public double getWristToGroundPosition(){
-        return wristAngleToGround;
-    }
-
-    public double calculateThetaAW(){
-        double thetaA = thisRobot.arm.getArmPosition();
-        double thetaW = wristAngleToGround;
-        
-        double thetaAW = (180-thetaA) + thetaW;
-        return thetaAW;
-    }
-
-    public void updateWristPositions(){
-        rawWristPosition = wristMotor1.getEncoder().getPosition();
-        wristAngleToArm = rawWristPosition * Settings.wristEncoderToDegreeRatio;
-        wristAngleToGround = calculateThetaAW();
-
+    public double getWristPos(){
+        return wristMotor1.getEncoder().getPosition();
     }
 
     public void updateWristMotorPower(){
-        double pidPower = wristPidController.calculate(wristMotor1.getEncoder().getPosition(), wristGoalAngleToGround);
+
+        if(calculatedWristGoal < wristGoalPos){
+            calculatedWristGoal = calculatedWristGoal + Settings.armMaxV;
+        }
+         if(calculatedWristGoal > wristGoalPos){
+            calculatedWristGoal = calculatedWristGoal - Settings.armMaxV;
+        }
+
+
+        double pidPower = wristPidController.calculate(wristMotor1.getEncoder().getPosition(), wristGoalPos);
         double ffPower = calculateFFTerm();
 
         wristMotor1.setVoltage((pidPower + ffPower) * 12);
@@ -66,14 +59,14 @@ public class Wrist {
     }
 
     public double calculateFFTerm(){
-        double cosOfAng = Math.cos(getWristToGroundPosition());
+        double cosOfAng = Math.cos(getWristPos());
         double ffPower = cosOfAng * Settings.wristFF;
 
         return ffPower;
     }
 
     public boolean wristWithinThold(){
-        return Math.abs(wristAngleToGround-wristGoalAngleToGround) < Settings.wristTHold;
+        return Math.abs(wristPos-wristGoalPos) < Settings.wristTHold;
     }
     
 }
