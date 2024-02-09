@@ -76,6 +76,7 @@ public class Settings {
 
     public static double wristReduction = 170;
     public static double wristFF = 0;
+    public static double wristMaxV = 1;
 
     public static int wrist1CurrentLimit = 10;
     public static int wrist2CurrentLimit = 10;

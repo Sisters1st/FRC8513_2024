@@ -37,6 +37,10 @@ public class StateMachine {
                     robotState = RobotState.CLIMBING;
                     lastStateChangeTime = Timer.getFPGATimestamp();
                 }
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.ampPrepButton)){
+                    robotState = RobotState.SCORE_AMP;
+                    lastStateChangeTime = Timer.getFPGATimestamp();
+                }
                 break;
 
             case INTAKING:
