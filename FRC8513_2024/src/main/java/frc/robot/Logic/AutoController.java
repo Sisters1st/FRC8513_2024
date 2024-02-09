@@ -42,6 +42,7 @@ public class AutoController {
             new TrapezoidProfile.Constraints(thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity(), 6.28)));
 
         path = PathPlannerPath.fromPathFile("SubWooferToFarNote");
+        path = path.flipPath();
         Pose2d initPose = path.getPreviewStartingHolonomicPose();
         thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
         trajStartTime = Timer.getFPGATimestamp();
@@ -74,6 +75,7 @@ public class AutoController {
             thisRobot.drivebase.swerveDrive.drive(adjustedSpeeds);
             if(trajElapsedTime > autoTraj.getTotalTimeSeconds() && pathNum <= 0){
                 path = PathPlannerPath.fromPathFile("FarNoteToFirstNoteAndBack");
+                path = path.flipPath();
                 autoTraj =  path.getTrajectory(thisRobot.drivebase.swerveDrive.getFieldVelocity(), thisRobot.drivebase.swerveDrive.getOdometryHeading());
                 pathNum++;
                 trajStartTime = Timer.getFPGATimestamp();
