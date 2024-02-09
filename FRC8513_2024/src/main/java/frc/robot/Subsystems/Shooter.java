@@ -41,7 +41,7 @@ public class Shooter {
         rightShooterGoalSpeed = rss;
     }
 
-    public void updateMotorPower(){
+    public void applyShooterPower(){
         if(leftShooterGoalSpeed == 0){
             leftShooter.setVoltage(0);
         }else{

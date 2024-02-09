@@ -30,8 +30,9 @@ public class TeleopController {
 
         } else {
             thisRobot.stateMachine.updateRobotState();
-            thisRobot.arm.updateArmMotorPower();
-            thisRobot.wrist.updateWristMotorPower();
+            thisRobot.arm.applyArmPower();
+            thisRobot.wrist.applyWristPower();
+            thisRobot.shooter.applyShooterPower();
         }
         
         driveTele();

@@ -45,7 +45,7 @@ public class Arm {
         return armMotor1.getEncoder().getPosition();
     }
 
-    public void updateArmMotorPower(){
+    public void applyArmPower(){
 
         if(calculatedArmGoal < armGoalPos){
             calculatedArmGoal = calculatedArmGoal + Settings.armMaxV;

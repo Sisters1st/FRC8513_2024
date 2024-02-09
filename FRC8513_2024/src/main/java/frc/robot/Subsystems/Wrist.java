@@ -41,7 +41,7 @@ public class Wrist {
         return wristMotor1.getEncoder().getPosition();
     }
 
-    public void updateWristMotorPower(){
+    public void applyWristPower(){
 
         if(calculatedWristGoal < wristGoalPos){
             calculatedWristGoal = calculatedWristGoal + Settings.armMaxV;
