@@ -61,8 +61,22 @@ public class AutoController {
                         break;
 
                     case 10:
-                        //follow path here
-                
+                        thisRobot.drivebase.initPath("SourceSideToOpenSpace", thisRobot.onBlueAlliance);
+                        autoStep = 15;
+                        
+                        break;
+
+                    case 15:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 20;
+                        }
+
+                    case 20:
+                        thisRobot.drivebase.swerveDrive.lockPose();
+                    
+                        break;
+
                     default:
                         break;
                 }

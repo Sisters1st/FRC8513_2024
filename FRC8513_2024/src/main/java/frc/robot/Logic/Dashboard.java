@@ -39,7 +39,7 @@ public class Dashboard {
             SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
 
             //intake info
-            SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntake.getAppliedOutput());
+            SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.getAppliedOutput());
 
             //climber info
             SmartDashboard.putNumber("climberPower", thisRobot.climber.climberMotor1.getAppliedOutput());
