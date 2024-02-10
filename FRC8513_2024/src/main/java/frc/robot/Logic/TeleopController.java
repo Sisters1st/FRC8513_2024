@@ -21,6 +21,8 @@ public class TeleopController {
         thisRobot.stateMachine.robotState = RobotState.DRIVING;
         thisRobot.arm.setArmPosition(thisRobot.arm.getArmPosition());
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());
+        thisRobot.arm.calculatedArmGoal = thisRobot.arm.getArmPosition();
+        thisRobot.wrist.calculatedWristGoal = thisRobot.wrist.getWristPos();
     }
 
     public void periodic(){

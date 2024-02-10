@@ -12,7 +12,6 @@ public class Dashboard {
     }
 
     public void updateDashboard(){
-
         if(dashbordNumber >= 0){
             //general robot updates
             SmartDashboard.putNumber("Uptime", Timer.getFPGATimestamp());

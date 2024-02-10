@@ -1,5 +1,4 @@
-Fix rot to arm degrees ratio and set zero
-set rot to wrist degrees ratio and set zero
+Set setpoints. 
 
 
 what autos do we want
