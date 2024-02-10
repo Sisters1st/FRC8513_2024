@@ -117,7 +117,7 @@ public class Drivebase {
   public void setOdomToPathInit(){
     Pose2d initPose = path.getPreviewStartingHolonomicPose();
     if(thisRobot.onRedAlliance){
-      initPose.rotateBy(new Rotation2d(180));
+      //initPose.rotateBy(new Rotation2d(180));
     }
     thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
   }

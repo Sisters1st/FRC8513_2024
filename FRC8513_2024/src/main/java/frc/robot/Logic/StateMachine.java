@@ -49,6 +49,7 @@ public class StateMachine {
                 thisRobot.intake.setIntakeVoltage(Settings.intakingVoltage);
                 thisRobot.shooter.setShooterSpeeds(0,0, Settings.feederIntakeVoltage);
 
+                //evetually add sensor stop to go abck to driving
                 if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.drivingStateReturnButton)){
                     robotState = robotStates.DRIVING;
                     lastStateChangeTime = Timer.getFPGATimestamp();
@@ -68,8 +69,15 @@ public class StateMachine {
                 } else {
                     thisRobot.shooter.setShooterSpeeds(Settings.basicShooterSpeed, Settings.basicShooterSpeed, 0);
                 }
+
+                //after some time, go back to driving
                 if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.drivingStateReturnButton)){
                     robotState = robotStates.DRIVING;
+                    lastStateChangeTime = Timer.getFPGATimestamp();
+                }
+                
+                 if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.intakeButton)){
+                    robotState = robotStates.INTAKING;
                     lastStateChangeTime = Timer.getFPGATimestamp();
                 }
                 
@@ -122,6 +130,11 @@ public class StateMachine {
                 }
 
                 thisRobot.shooter.setShooterSpeeds(0, 0, feederV);
+
+                 if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.intakeButton)){
+                    robotState = robotStates.INTAKING;
+                    lastStateChangeTime = Timer.getFPGATimestamp();
+                }
 
                 break;
             default:

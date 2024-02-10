@@ -19,11 +19,13 @@ import frc.robot.Subsystems.Wrist;
 
 public class Robot extends TimedRobot {
 
+  //logic
   public Dashboard dashboard = new Dashboard(this, Settings.dashboardNumber);
   public TeleopController teleopController = new TeleopController(this);
   public AutoController autoController = new AutoController(this);
   public StateMachine stateMachine = new StateMachine(this);
 
+  //subsystems
   public PowerDistribution pdh = new PowerDistribution(Settings.pdhCANID, ModuleType.kRev);
   public Drivebase drivebase = new Drivebase(this);
   public Arm arm = new Arm(this);
@@ -62,7 +64,6 @@ public class Robot extends TimedRobot {
         wrist.wristMotor1.setIdleMode(IdleMode.kBrake);
 
       }
-
     }
   }
 

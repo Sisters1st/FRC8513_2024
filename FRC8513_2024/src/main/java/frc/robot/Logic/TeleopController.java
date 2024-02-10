@@ -21,8 +21,6 @@ public class TeleopController {
         thisRobot.stateMachine.robotState = robotStates.DRIVING;
         thisRobot.arm.setArmPosition(thisRobot.arm.getArmPosition());
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());
-        thisRobot.arm.calculatedArmGoal = thisRobot.arm.getArmPosition();
-        thisRobot.wrist.calculatedWristGoal = thisRobot.wrist.getWristPos();
     }
 
     public void periodic(){
@@ -32,9 +30,7 @@ public class TeleopController {
 
         } else {
             thisRobot.stateMachine.updateRobotState();
-            thisRobot.arm.applyArmPower();
-            thisRobot.wrist.applyWristPower();
-            thisRobot.shooter.applyShooterPower();
+            thisRobot.updateAllSubsystemMotorPower();
         }
         
         driveTele();
@@ -49,7 +45,7 @@ public class TeleopController {
          if(ySpeedJoystick < Settings.joyBand && ySpeedJoystick > -Settings.joyBand){
             ySpeedJoystick = 0;
         }
-        double rSpeedJoystick = -driverXboxController.getRawAxis(2); //left right 2 at home, 4 on xbox
+        double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right 2 at home, 4 on xbox
          if(rSpeedJoystick < Settings.joyBand && rSpeedJoystick > -Settings.joyBand){
             rSpeedJoystick = 0;
         }

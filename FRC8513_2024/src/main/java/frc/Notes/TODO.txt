@@ -1,7 +1,7 @@
 Set setpoints. 
-
 Fix rot to arm degrees ratio and set zero
 set rot to wrist degrees ratio and set zero
+
 map buttons to driver pannel
 discuss how to lay out autos
     multiple paths 
