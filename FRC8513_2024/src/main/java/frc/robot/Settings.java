@@ -65,6 +65,7 @@ public class Settings {
     public static double intakingArmPos = 2;
     public static double trapArmPos = -30;
     public static double ampArmPos = -50;
+    public static double shootingArmPos = -1;
 
     public static double armThold = 2;
     public static double armMaxV = 1;
@@ -76,6 +77,7 @@ public class Settings {
 
     public static double wristReduction = 170;
     public static double wristFF = 0;
+    public static double wristMaxV = 1;
 
     public static int wrist1CurrentLimit = 10;
     public static int wrist2CurrentLimit = 10;
@@ -87,6 +89,7 @@ public class Settings {
     public static double intakingWristPos = 32;
     public static double trapWristPos = 25;
     public static double ampWristPos = 10;
+    public static double shootingWristPos = 30;
 
     public static double wristTHold = 2;
 
@@ -104,6 +107,8 @@ public class Settings {
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
     public static int feederCurrentLimit = 10;
+
+    public static int basicShooterSpeed = 1000;
 
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;

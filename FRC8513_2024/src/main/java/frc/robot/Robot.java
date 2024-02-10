@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
   public Intake intake = new Intake(this);
   
   public boolean lastUserButton = false;
+  public boolean onRedAlliance = false;
 
   @Override
   public void robotInit() {
@@ -105,5 +106,12 @@ public class Robot extends TimedRobot {
   @Override
   public void simulationPeriodic() {
     drivebase.simulateDrivebase();
+  }
+
+  public void updateAllSubsystemMotorPower(){
+    arm.applyArmPower();
+    wrist.applyWristPower();
+    shooter.applyShooterPower();
+    intake.applyIntakeVoltage();
   }
 }

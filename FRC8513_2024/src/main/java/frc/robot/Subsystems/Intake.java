@@ -11,23 +11,32 @@ public class Intake {
     
     Robot thisRobot;
     
-    public CANSparkMax leftIntake = new CANSparkMax(Settings.leftIntakeMotorCANID, MotorType.kBrushless);
-    public CANSparkMax rightIntake = new CANSparkMax(Settings.rightIntakeMotorCANID, MotorType.kBrushless);
+    public CANSparkMax leftIntakeMotor = new CANSparkMax(Settings.leftIntakeMotorCANID, MotorType.kBrushless);
+    public CANSparkMax rightIntakeMotor = new CANSparkMax(Settings.rightIntakeMotorCANID, MotorType.kBrushless);
+
+    double leftIntakeVoltage = 0;
+    double rightIntakeVoltage = 0;
 
     public Intake(Robot robotIn){
         thisRobot = robotIn;
 
-        leftIntake.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
-        rightIntake.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
+        leftIntakeMotor.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
+        rightIntakeMotor.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
 
-        leftIntake.setIdleMode(IdleMode.kBrake);
-        rightIntake.setIdleMode(IdleMode.kBrake);
+        leftIntakeMotor.setIdleMode(IdleMode.kBrake);
+        rightIntakeMotor.setIdleMode(IdleMode.kBrake);
 
     }
 
     public void setIntakeVoltage(double voltage){
-        leftIntake.setVoltage(-voltage);
-        rightIntake.setVoltage(-voltage);
+        leftIntakeVoltage = voltage;
+        rightIntakeVoltage = voltage;
     }
+
+    public void applyIntakeVoltage(){
+        leftIntakeMotor.setVoltage(leftIntakeVoltage);
+        rightIntakeMotor.setVoltage(rightIntakeVoltage);
+    }
+
 
 }

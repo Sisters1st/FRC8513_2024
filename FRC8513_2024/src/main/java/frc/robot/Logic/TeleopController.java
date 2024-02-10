@@ -4,7 +4,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Robot;
 import frc.robot.Settings;
-import frc.robot.Logic.StateMachine.RobotState;
+import frc.robot.Logic.StateMachine.robotStates;
 
 public class TeleopController {
 
@@ -18,7 +18,7 @@ public class TeleopController {
     }
 
     public void init(){
-        thisRobot.stateMachine.robotState = RobotState.DRIVING;
+        thisRobot.stateMachine.robotState = robotStates.DRIVING;
         thisRobot.arm.setArmPosition(thisRobot.arm.getArmPosition());
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());
         thisRobot.arm.calculatedArmGoal = thisRobot.arm.getArmPosition();
@@ -49,7 +49,7 @@ public class TeleopController {
          if(ySpeedJoystick < Settings.joyBand && ySpeedJoystick > -Settings.joyBand){
             ySpeedJoystick = 0;
         }
-        double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right 2 at home, 4 on xbox
+        double rSpeedJoystick = -driverXboxController.getRawAxis(2); //left right 2 at home, 4 on xbox
          if(rSpeedJoystick < Settings.joyBand && rSpeedJoystick > -Settings.joyBand){
             rSpeedJoystick = 0;
         }

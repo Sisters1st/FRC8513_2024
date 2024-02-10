@@ -44,10 +44,10 @@ public class Wrist {
     public void applyWristPower(){
 
         if(calculatedWristGoal < wristGoalPos){
-            calculatedWristGoal = calculatedWristGoal + Settings.armMaxV;
+            calculatedWristGoal = calculatedWristGoal + Settings.wristMaxV;
         }
          if(calculatedWristGoal > wristGoalPos){
-            calculatedWristGoal = calculatedWristGoal - Settings.armMaxV;
+            calculatedWristGoal = calculatedWristGoal - Settings.wristMaxV;
         }
 
 

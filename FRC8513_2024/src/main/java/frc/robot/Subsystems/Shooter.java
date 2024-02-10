@@ -21,8 +21,9 @@ public class Shooter {
     PIDController leftShooterPIDController = new PIDController(Settings.shooter_P, Settings.shooter_I, Settings.shooter_D);
     PIDController rightShooterPIDController = new PIDController(Settings.shooter_P, Settings.shooter_I, Settings.shooter_D);
     
-    public double leftShooterGoalSpeed;
-    public double rightShooterGoalSpeed;
+    public double leftShooterGoalSpeed = 0;
+    public double rightShooterGoalSpeed = 0;
+    double feederVoltage = 0;
 
     public Shooter(Robot robotIn){
         thisRobot = robotIn;
@@ -36,9 +37,11 @@ public class Shooter {
         feederMotor.setIdleMode(IdleMode.kBrake);
     }
 
-    public void setShooterSpeeds(double lss, double rss){
+    public void setShooterSpeeds(double lss, double rss, double feeder){
         leftShooterGoalSpeed = lss;
         rightShooterGoalSpeed = rss;
+        feederVoltage = feeder;
+
     }
 
     public void applyShooterPower(){
@@ -54,6 +57,8 @@ public class Shooter {
             double rightShooterPower = rightShooterPIDController.calculate(rightShooter.getEncoder().getVelocity(), rightShooterGoalSpeed);
             rightShooter.setVoltage(rightShooterPower);
         }
+
+        feederMotor.setVoltage(feederVoltage);
     }
 
     public boolean leftShooterInThreshold(){
