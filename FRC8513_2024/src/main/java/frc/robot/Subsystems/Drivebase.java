@@ -16,6 +16,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Settings;
 import swervelib.parser.SwerveParser;
@@ -65,12 +66,16 @@ public class Drivebase {
   public void updateOdometry() {
     
     if(Settings.useLimelight){
-      
-      double tl = LimelightHelpers.getLatency_Pipeline(Settings.limelightName);
-      double cl = LimelightHelpers.getLatency_Capture(Settings.limelightName);
-      double visionTime = Timer.getFPGATimestamp() - (tl/1000.0) - (cl/1000.0);
-      //see https://docs.limelightvision.io/docs/docs-limelight/pipeline-apriltag/apriltag-robot-localization#using-wpilibs-pose-estimator
-      swerveDrive.addVisionMeasurement(LimelightHelpers.getBotPose2d(Settings.limelightName),visionTime);
+      if(LimelightHelpers.getTV(Settings.limelightName)){
+        double tl = LimelightHelpers.getLatency_Pipeline(Settings.limelightName);
+        double cl = LimelightHelpers.getLatency_Capture(Settings.limelightName);
+        double visionTime = Timer.getFPGATimestamp() - (tl/1000.0) - (cl/1000.0);
+        
+        Pose2d llPose = LimelightHelpers.getBotPose2d_wpiBlue(Settings.limelightName);
+        //see https://docs.limelightvision.io/docs/docs-limelight/pipeline-apriltag/apriltag-robot-localization#using-wpilibs-pose-estimator
+        swerveDrive.addVisionMeasurement(llPose,visionTime);
+    
+      }
     }
     
   }

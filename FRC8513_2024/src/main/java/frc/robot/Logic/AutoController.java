@@ -13,7 +13,7 @@ public class AutoController {
 
     Robot thisRobot;
     int autoStep;
-    public autoRoutines autoRoutine = autoRoutines.SHOOT_PRELOAD_FROM_SOURCE_SIDE_AND_DRIVE_AWAY;
+    public autoRoutines autoRoutine = autoRoutines.SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_SCORE_MIDDLE;
     public double autoStartTime;
 
 

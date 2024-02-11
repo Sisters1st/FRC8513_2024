@@ -13,3 +13,7 @@ what autos do we want
 tuning PID on real robot
 motion profiling on arm and wrist
     do we need this or is velocity limit enough? 
+
+auto selector
+
+heading PID - gradual on the big changes so no overhsoot
