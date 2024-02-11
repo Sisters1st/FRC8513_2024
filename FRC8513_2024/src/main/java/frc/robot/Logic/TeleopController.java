@@ -1,5 +1,6 @@
 package frc.robot.Logic;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Robot;
@@ -21,6 +22,8 @@ public class TeleopController {
         thisRobot.stateMachine.robotState = robotStates.DRIVING;
         thisRobot.arm.setArmPosition(thisRobot.arm.getArmPosition());
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());
+        
+        thisRobot.drivebase.rotPidController.reset();
     }
 
     public void periodic(){
@@ -45,7 +48,7 @@ public class TeleopController {
          if(ySpeedJoystick < Settings.joyBand && ySpeedJoystick > -Settings.joyBand){
             ySpeedJoystick = 0;
         }
-        double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right 2 at home, 4 on xbox
+        double rSpeedJoystick = -driverXboxController.getRawAxis(2); //left right 2 at home, 4 on xbox
          if(rSpeedJoystick < Settings.joyBand && rSpeedJoystick > -Settings.joyBand){
             rSpeedJoystick = 0;
         }
@@ -55,14 +58,17 @@ public class TeleopController {
 
         double xV = xInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double yV = yInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
-        double rV = rSpeedJoystick * thisRobot.drivebase.swerveDrive.getMaximumAngularVelocity();
+        double rV = rSpeedJoystick;
+        thisRobot.drivebase.goalHeading = thisRobot.drivebase.goalHeading.plus(new Rotation2d(rV * Settings.rotJoyRate));
+        
+        if(driverXboxController.getRawButton(13)){
+            thisRobot.drivebase.setGoalHeadingDeg(0);
+        }
+        if(driverXboxController.getRawButton(14)){
+            thisRobot.drivebase.setGoalHeadingDeg(180);
+        }
 
-        thisRobot.drivebase.swerveDrive.drive(
-            new Translation2d(xV, yV),
-            rV,
-            true,
-            false
-        );
+        thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
     }
 
     public void manualControl(){

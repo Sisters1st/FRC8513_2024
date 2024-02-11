@@ -27,24 +27,25 @@ public class Drivebase {
   public Robot thisRobot;
   public SwerveDrive swerveDrive;
 
-  PathPlannerPath path;
-  PathPlannerTrajectory autoTraj;
+  public PathPlannerPath path;
+  public PathPlannerTrajectory autoTraj;
   public Translation2d ajustedV = new Translation2d();
   public double rotCorrection = 0;
 
   PIDController xPosPidController = new PIDController(8, 0, 0);
   PIDController yPosPidController = new PIDController(8, 0, 0);
-  PIDController rotPidController = new PIDController(20, 0, 0);
+  public PIDController rotPidController = new PIDController(20, 0, 0);
 
   public double trajStartTime;
   public State goalState = new State();
-  double trajElapsedTime;
-  Trajectory.State trajState;
+  public double trajElapsedTime;
+  public Trajectory.State trajState;
   public Rotation2d goalHeading = new Rotation2d();
-  ChassisSpeeds adjustedSpeeds;
+  public ChassisSpeeds adjustedSpeeds;
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
+
     //yagsl init
     double maximumSpeed = Units.feetToMeters(Settings.drivebaseMaxVelocity);    
     File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
@@ -75,9 +76,7 @@ public class Drivebase {
   }
 
   public void initPath(String pathName, boolean flipToRed){
-    
-      goalState = new State();
-      goalHeading = new Rotation2d();
+
       path = PathPlannerPath.fromPathFile(pathName);
 
       if(flipToRed){
@@ -92,8 +91,8 @@ public class Drivebase {
 
       goalState = autoTraj.sample(0);
       goalHeading = goalState.targetHolonomicRotation;
-      
-      setOdomToPathInit();    
+
+      setOdomToPathInit();
       trajStartTime = Timer.getFPGATimestamp();
 
   }
@@ -114,8 +113,7 @@ public class Drivebase {
     ajustedV = new Translation2d(xCorrection, yCorrection);
     ajustedV = ajustedV.plus(trajV);
     
-    thisRobot.drivebase.swerveDrive.drive(ajustedV,
-    rotCorrection, true, false);
+    thisRobot.drivebase.swerveDrive.drive(ajustedV,rotCorrection, true, false);
   }
 
   public boolean isPathOver(){
@@ -126,6 +124,22 @@ public class Drivebase {
   public void setOdomToPathInit(){
     Pose2d initPose = goalState.getTargetHolonomicPose();
     thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
+  }
+
+  public void driveClosedLoopHeading(Translation2d translation){
+    
+    double rot = rotPidController.calculate(swerveDrive.getOdometryHeading().getRadians(), thisRobot.drivebase.goalHeading.getRadians());
+
+    thisRobot.drivebase.swerveDrive.drive(
+            translation,
+            rot,
+            true,
+            false
+        );
+  }
+
+  public void setGoalHeadingDeg(double deg){
+    thisRobot.drivebase.goalHeading = new Rotation2d(Math.toRadians(deg));
   }
 
   public void simulateDrivebaseInit(){
