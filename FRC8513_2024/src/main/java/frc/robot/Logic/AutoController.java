@@ -13,7 +13,7 @@ public class AutoController {
 
     Robot thisRobot;
     int autoStep;
-    public autoRoutines autoRoutine = autoRoutines.SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_SCORE_MIDDLE;
+    public autoRoutines autoRoutine = autoRoutines.SHOOT_PRELOAD_FROM_SOURCE_SIDE_AND_DRIVE_AWAY;
     public double autoStartTime;
 
 
@@ -80,6 +80,7 @@ public class AutoController {
                             thisRobot.stateMachine.robotState = robotStates.DRIVING;
                             thisRobot.stateMachine.updateRobotState();
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                            thisRobot.drivebase.setOdomToPathInit();
                             thisRobot.drivebase.followPath();
                         }
                         break;

@@ -25,6 +25,10 @@ public class Dashboard {
             SmartDashboard.putNumber("trajGoalX", thisRobot.drivebase.goalState.positionMeters.getX());
             SmartDashboard.putNumber("trajGoalY", thisRobot.drivebase.goalState.positionMeters.getY());
             SmartDashboard.putNumber("Goalheading", thisRobot.drivebase.goalHeading.getDegrees());
+
+            SmartDashboard.putNumber("trajXV", thisRobot.drivebase.ajustedV.getX());
+            SmartDashboard.putNumber("trajYV", thisRobot.drivebase.ajustedV.getY());
+            SmartDashboard.putNumber("trajRotV", thisRobot.drivebase.rotCorrection);
             
             //armInfo
             SmartDashboard.putNumber("ArmPos", thisRobot.arm.armPos);
