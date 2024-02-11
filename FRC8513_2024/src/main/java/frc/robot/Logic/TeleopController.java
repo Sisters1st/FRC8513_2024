@@ -2,6 +2,7 @@ package frc.robot.Logic;
 
 import java.util.Optional;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -62,7 +63,7 @@ public class TeleopController {
          if(ySpeedJoystick < Settings.joyBand && ySpeedJoystick > -Settings.joyBand){
             ySpeedJoystick = 0;
         }
-        double rSpeedJoystick = -driverXboxController.getRawAxis(2); //left right 2 at home, 4 on xbox
+        double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right 2 at home, 4 on xbox
          if(rSpeedJoystick < Settings.joyBand && rSpeedJoystick > -Settings.joyBand){
             rSpeedJoystick = 0;
         }
@@ -75,10 +76,20 @@ public class TeleopController {
         double rV = rSpeedJoystick;
         thisRobot.drivebase.goalHeading = thisRobot.drivebase.goalHeading.plus(new Rotation2d(rV * Settings.rotJoyRate));
         
-        if(driverXboxController.getRawButton(8)){
+        if(driverXboxController.getRawButton(5)){
             thisRobot.drivebase.setGoalHeadingDeg(0);
         }
-        if(driverXboxController.getRawButton(7)){
+        if(driverXboxController.getRawButton(6)){
+            thisRobot.drivebase.setGoalHeadingDeg(180);
+        }
+        if(driverXboxController.getRawButton(1)){
+            thisRobot.drivebase.setGoalHeadingDeg(90);
+        }
+        if(driverXboxController.getRawButton(8)){
+            thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d()));
+            thisRobot.drivebase.goalHeading = new Rotation2d(0);
+        }
+        if(driverXboxController.getRawButton(16)){
             if(thisRobot.onRedAlliance){
                 thisRobot.drivebase.aimAtPoint(Settings.redGoalPos);
             }else{

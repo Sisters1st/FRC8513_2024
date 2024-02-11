@@ -34,7 +34,7 @@ public class Drivebase {
 
   PIDController xPosPidController = new PIDController(8, 0, 0);
   PIDController yPosPidController = new PIDController(8, 0, 0);
-  public PIDController rotPidController = new PIDController(20, 0, 0);
+  public PIDController rotPidController = new PIDController(5, 0, 0);
 
   public double trajStartTime;
   public State goalState = new State();
