@@ -1,7 +1,11 @@
 package frc.robot.Logic;
 
+import java.util.Optional;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Robot;
 import frc.robot.Settings;
@@ -24,6 +28,16 @@ public class TeleopController {
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());
         
         thisRobot.drivebase.rotPidController.reset();
+
+        Optional<Alliance> ally = DriverStation.getAlliance();
+        if (ally.isPresent()) {
+            if (ally.get() == Alliance.Red) {
+                thisRobot.onRedAlliance = true;
+            }
+            if (ally.get() == Alliance.Blue) {
+                thisRobot.onRedAlliance = false;
+            }
+        }
     }
 
     public void periodic(){
@@ -61,11 +75,16 @@ public class TeleopController {
         double rV = rSpeedJoystick;
         thisRobot.drivebase.goalHeading = thisRobot.drivebase.goalHeading.plus(new Rotation2d(rV * Settings.rotJoyRate));
         
-        if(driverXboxController.getRawButton(13)){
+        if(driverXboxController.getRawButton(8)){
             thisRobot.drivebase.setGoalHeadingDeg(0);
         }
-        if(driverXboxController.getRawButton(14)){
-            thisRobot.drivebase.setGoalHeadingDeg(180);
+        if(driverXboxController.getRawButton(7)){
+            if(thisRobot.onRedAlliance){
+                thisRobot.drivebase.aimAtPoint(Settings.redGoalPos);
+            }else{
+                thisRobot.drivebase.aimAtPoint(Settings.blueGoalPos);
+            }
+            
         }
 
         thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));

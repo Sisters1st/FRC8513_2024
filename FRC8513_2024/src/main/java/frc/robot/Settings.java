@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 
 public class Settings {
@@ -122,6 +123,10 @@ public class Settings {
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 40;
     public static double climberVoltage = 8.0;
+
+    //field settings
+    public static Translation2d blueGoalPos = new Translation2d(0.0381,5.54736);
+    public static Translation2d redGoalPos = new Translation2d(16.579342,5.54736);
         
 
 }

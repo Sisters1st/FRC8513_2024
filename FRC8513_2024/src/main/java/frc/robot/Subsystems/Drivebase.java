@@ -139,7 +139,13 @@ public class Drivebase {
   }
 
   public void setGoalHeadingDeg(double deg){
-    thisRobot.drivebase.goalHeading = new Rotation2d(Math.toRadians(deg));
+    goalHeading = new Rotation2d(Math.toRadians(deg));
+  }
+
+  public void aimAtPoint(Translation2d point){
+    Translation2d currentPos = swerveDrive.getPose().getTranslation();
+    Translation2d deltaPos = currentPos.minus(point);
+    goalHeading = deltaPos.getAngle();
   }
 
   public void simulateDrivebaseInit(){
