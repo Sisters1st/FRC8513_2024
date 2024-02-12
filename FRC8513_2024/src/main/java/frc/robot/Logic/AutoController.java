@@ -106,6 +106,7 @@ public class AutoController {
                 break;
 
             case SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_SCORE_MIDDLE:
+            
 
                 switch (autoStep) {
                     case 0:
@@ -153,7 +154,42 @@ public class AutoController {
                 
                 break;
         
-            default:
+            case SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_3_SPEAKER:
+
+            switch (autoStep) {
+                case 0:
+                     thisRobot.drivebase.initPath("MiddleToNote3ToSpeaker", thisRobot.onRedAlliance);
+                        autoStep = 5;
+
+                    break;
+
+                case 5:
+                    thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
+                    thisRobot.stateMachine.updateRobotState();
+                    autoStep = 10;
+                    
+                    break;
+
+                case 10:
+                     thisRobot.stateMachine.updateRobotState();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
+                            autoStep = 15;
+                            thisRobot.stateMachine.robotState = robotStates.INTAKING;
+                            thisRobot.stateMachine.updateRobotState();
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                            thisRobot.drivebase.followPath();
+
+                        break;
+            
+                default:
+                    break;
+            }
+               
+
+
+           
+                
+                default:
                 break;
         }
 
@@ -167,6 +203,7 @@ public class AutoController {
     public enum autoRoutines {
         DO_NOTHING,
         SHOOT_PRELOAD_FROM_SOURCE_SIDE_AND_DRIVE_AWAY,
-        SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_SCORE_MIDDLE
+        SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_SCORE_MIDDLE,
+        SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_3_SPEAKER
     }
 }
