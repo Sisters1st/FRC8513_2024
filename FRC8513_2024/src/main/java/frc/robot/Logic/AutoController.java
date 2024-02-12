@@ -13,7 +13,7 @@ public class AutoController {
 
     Robot thisRobot;
     int autoStep;
-    public autoRoutines autoRoutine = autoRoutines.SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_SCORE_MIDDLE;
+    public autoRoutines autoRoutine = autoRoutines.DO_NOTHING;
     public double autoStartTime;
 
 
@@ -22,6 +22,9 @@ public class AutoController {
     }
 
     public void autoInit(){
+
+        autoRoutine = autoRoutines.valueOf(thisRobot.dashboard.autoSelector.getSelected());
+
         autoStartTime = Timer.getFPGATimestamp();
         autoStep = 0;
         Optional<Alliance> ally = DriverStation.getAlliance();

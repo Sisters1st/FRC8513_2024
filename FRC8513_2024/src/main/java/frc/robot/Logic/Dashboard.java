@@ -1,14 +1,25 @@
 package frc.robot.Logic;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.Logic.AutoController.autoRoutines;
 
 public class Dashboard {
     int dashbordNumber = 0;
     Robot thisRobot;
+    public SendableChooser<String> autoSelector;
+
     public Dashboard(Robot thisRobot_, int dashbordNumber_){
         dashbordNumber = dashbordNumber_;
         thisRobot = thisRobot_;
+        autoSelector = new SendableChooser<>();
+        autoSelector.setDefaultOption(autoRoutines.values()[0].toString(), autoRoutines.values()[0].toString());
+        for(int i = 1; i < autoRoutines.values().length; i++){
+            autoSelector.addOption(autoRoutines.values()[i].toString(),autoRoutines.values()[i].toString());
+        }
+
+        SmartDashboard.putData("autoSelector", autoSelector);
     }
 
     public void updateDashboard(){
@@ -51,6 +62,8 @@ public class Dashboard {
 
             //climber info
             SmartDashboard.putNumber("climberPower", thisRobot.climber.climberMotor1.getAppliedOutput());
+
+            
             
         }
             
