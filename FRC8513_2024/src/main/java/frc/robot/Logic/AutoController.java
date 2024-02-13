@@ -178,7 +178,7 @@ public class AutoController {
                             thisRobot.stateMachine.updateRobotState();
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                             thisRobot.drivebase.followPath();
-
+                        }
                         break;
             
                 default:
