@@ -2,15 +2,26 @@ package frc.robot.Subsystems;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
+
+import org.photonvision.EstimatedRobotPose;
+import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonPoseEstimator;
+import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.PathPlannerTrajectory;
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.util.Units;
@@ -43,6 +54,11 @@ public class Drivebase {
   public Trajectory.State trajState;
   public Rotation2d goalHeading = new Rotation2d();
   public ChassisSpeeds adjustedSpeeds;
+  public PhotonCamera camera = new PhotonCamera(Settings.photonName);
+  AprilTagFieldLayout aprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
+  PhotonPoseEstimator photonPoseEstimator;
+
+  Transform3d robotToCam = new Transform3d(new Translation3d(0.5, 0.0, 0.5), new Rotation3d(0,0,0)); 
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
@@ -61,24 +77,23 @@ public class Drivebase {
 
     //pathFollowingInit
     goalState = new State();
+
+    //photon init
+    photonPoseEstimator = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, robotToCam);
   }
 
   public void updateOdometry() {
-    
-    if(Settings.useLimelight){
-      if(LimelightHelpers.getTV(Settings.limelightName)){
-        double tl = LimelightHelpers.getLatency_Pipeline(Settings.limelightName);
-        double cl = LimelightHelpers.getLatency_Capture(Settings.limelightName);
-        double visionTime = Timer.getFPGATimestamp() - (tl/1000.0) - (cl/1000.0);
-        
-        Pose2d llPose = LimelightHelpers.getBotPose2d_wpiBlue(Settings.limelightName);
-        //see https://docs.limelightvision.io/docs/docs-limelight/pipeline-apriltag/apriltag-robot-localization#using-wpilibs-pose-estimator
-        swerveDrive.addVisionMeasurement(llPose,visionTime);
-    
+    var result = camera.getLatestResult();
+    if(Settings.usePhoton && result.hasTargets()){
+      photonPoseEstimator.setReferencePose(swerveDrive.getPose());
+      Optional<EstimatedRobotPose> photonGuess = photonPoseEstimator.update();
+      if(photonGuess.isPresent()){
+        swerveDrive.addVisionMeasurement(photonGuess.get().estimatedPose.toPose2d(), photonGuess.get().timestampSeconds);
       }
+
     }
-    
   }
+    
 
   public void initPath(String pathName, boolean flipToRed){
 

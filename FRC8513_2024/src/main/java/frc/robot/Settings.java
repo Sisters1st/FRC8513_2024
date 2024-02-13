@@ -13,8 +13,8 @@ public class Settings {
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.HIGH;
 
     //vision settings
-    public static boolean useLimelight = false;
-    public static String limelightName = "limelight-at";
+    public static boolean usePhoton = false;
+    public static String photonName = "photonvision";
 
     //joystick settings
     public static int driverJoystickPort = 0;
