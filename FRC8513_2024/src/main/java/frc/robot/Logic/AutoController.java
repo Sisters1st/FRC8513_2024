@@ -13,7 +13,7 @@ public class AutoController {
 
     Robot thisRobot;
     int autoStep;
-    public autoRoutines autoRoutine = autoRoutines.SHOOT_PRELOAD_FROM_SOURCE_SIDE_AND_DRIVE_AWAY;
+    public autoRoutines autoRoutine = autoRoutines.PRELOAD_FROM_SIDE_AND_DRIVE_AWAY;
     public double autoStartTime;
 
 
@@ -58,7 +58,7 @@ public class AutoController {
                 }
                 break;
 
-            case SHOOT_PRELOAD_FROM_SOURCE_SIDE_AND_DRIVE_AWAY:
+            case PRELOAD_FROM_SIDE_AND_DRIVE_AWAY:
 
                 switch (autoStep) {
                     case 0:
@@ -102,7 +102,54 @@ public class AutoController {
                 
                 break;
 
-            case SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_SCORE_MIDDLE:
+            case PRELOAD_FROM_MIDDLE_SCORE_1:
+
+             switch (autoStep) {
+                    case 0:
+                        thisRobot.drivebase.initPath("MiddleToNote1", thisRobot.onRedAlliance);
+                        autoStep = 5;
+
+                        break;
+
+                     case 5:
+                        thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
+                        thisRobot.stateMachine.updateRobotState();
+                        autoStep = 10;
+
+                        break;
+                    
+                    case 10:
+                        thisRobot.stateMachine.updateRobotState();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
+                            thisRobot.stateMachine.robotState = robotStates.INTAKING;
+                            thisRobot.stateMachine.updateRobotState();
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                            thisRobot.drivebase.followPath();
+                            autoStep = 14;
+                        }
+                        break;
+
+                    case 13:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 15;
+                        }
+                        break;
+
+                    case 15:
+                        thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.swerveDrive.lockPose();
+
+                        break;
+
+                    default:
+                        break;
+             }
+
+             break;
+
+            case PRELOAD_FROM_MIDDLE_SCORE_2:
 
                 switch (autoStep) {
                     case 0:
@@ -147,10 +194,13 @@ public class AutoController {
                         thisRobot.stateMachine.updateRobotState();
                         break;
                 }
-                
+          
+  
+
                 break;
         
-            default:
+          
+                default:
                 break;
         }
 
@@ -163,7 +213,10 @@ public class AutoController {
 
     public enum autoRoutines {
         DO_NOTHING,
-        SHOOT_PRELOAD_FROM_SOURCE_SIDE_AND_DRIVE_AWAY,
-        SHOOT_PRELOAD_FROM_MIDDLE_PICKUP_SCORE_MIDDLE
+        PRELOAD_FROM_SIDE_AND_DRIVE_AWAY,
+        PRELOAD_FROM_MIDDLE_SCORE_2,
+        PRELOAD_FROM_MIDDLE_SCORE_3,
+        PRELOAD_FROM_MIDDLE_SCORE_1,
+
     }
 }
