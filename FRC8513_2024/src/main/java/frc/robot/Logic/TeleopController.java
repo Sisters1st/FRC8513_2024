@@ -42,7 +42,7 @@ public class TeleopController {
     }
 
     public void periodic(){
-        boolean manualTestingControl = false;
+        boolean manualTestingControl = true;
         if(manualTestingControl){
             manualControl();
 

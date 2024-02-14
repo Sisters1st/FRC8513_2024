@@ -1,0 +1,115 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="592" y="278"/>
+		<width>80</width>
+		<height>70</height>
+	</static-widget>
+	<widget field="autoSelector" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="64" y="-1"/>
+	</widget>
+	<widget field="State" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="538" y="24"/>
+		<width>330</width>
+		<height>26</height>
+	</widget>
+	<widget field="trajGoalY" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="621" y="92"/>
+	</widget>
+	<widget field="trajGoalX" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="487" y="93"/>
+	</widget>
+	<widget field="Uptime" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="567" y="255"/>
+	</widget>
+	<widget field="Adjusted IMU Yaw" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="517" y="127"/>
+		<height>20</height>
+	</widget>
+	<widget field="intakePower" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="44" y="323"/>
+	</widget>
+	<widget field="ShooterGoalSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="245" y="136"/>
+	</widget>
+	<widget field="AutoStep" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="788" y="95"/>
+	</widget>
+	<widget field="WristGoalPos" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="46" y="214"/>
+	</widget>
+	<widget field="ArmPos" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="68" y="153"/>
+		<height>20</height>
+	</widget>
+	<widget field="Goalheading" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="545" y="151"/>
+		<width>144</width>
+	</widget>
+	<widget field="climberPower" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="40" y="374"/>
+	</widget>
+	<widget field="WristPos" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="66" y="236"/>
+	</widget>
+	<widget field="FeederOutput" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="36" y="348"/>
+	</widget>
+	<widget field="AutoRoutine" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="505" y="52"/>
+		<width>443</width>
+	</widget>
+	<widget field="ShooterSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="268" y="158"/>
+	</widget>
+	<widget field="ArmGoalPos" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="45" y="131"/>
+		<width>131</width>
+		<height>20</height>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+	<hidden field="trajXV"/>
+	<hidden field="Module[backleft] Absolute Encoder Read Issue"/>
+	<hidden field="Motors"/>
+	<hidden field="Module[backright] Speed Setpoint"/>
+	<hidden field="Module[backleft] Adjusted Absolute Encoder"/>
+	<hidden field="Module[backright] Adjusted Absolute Encoder"/>
+	<hidden field="Raw IMU Yaw"/>
+	<hidden field="Module[frontright] Absolute Encoder Read Issue"/>
+	<hidden field="Module[backleft] Raw Drive Encoder"/>
+	<hidden field="Module[backright] Raw Absolute Encoder"/>
+	<hidden field="Module[frontright] Raw Drive Encoder"/>
+	<hidden field="Module[frontright] Raw Absolute Encoder"/>
+	<hidden field="Module[frontleft] Adjusted Absolute Encoder"/>
+	<hidden field="Module[frontleft] Raw Angle Encoder"/>
+	<hidden field="Encoders"/>
+	<hidden field="navX-Sensor[4]"/>
+	<hidden field="IMU"/>
+	<hidden field="RobotVelocity"/>
+	<hidden field="Module[backright] Raw Drive Encoder"/>
+	<hidden field="Module[backleft] Angle Setpoint"/>
+	<hidden field="Module[frontleft] Speed Setpoint"/>
+	<hidden field="calculatedWristmGoal"/>
+	<hidden field="trajRotV"/>
+	<hidden field="Module[backright] Absolute Encoder Read Issue"/>
+	<hidden field="JSON"/>
+	<hidden field="Module[backleft] Raw Angle Encoder"/>
+	<hidden field="Module[backright] Angle Setpoint"/>
+	<hidden field="Module[frontleft] Raw Absolute Encoder"/>
+	<hidden field="Field"/>
+	<hidden field="calculatedArmGoal"/>
+	<hidden field="Module[backleft] Raw Absolute Encoder"/>
+	<hidden field="Module[frontright] Speed Setpoint"/>
+	<hidden field="trajYV"/>
+	<hidden field="Swerve Drive"/>
+	<hidden field="Module[frontright] Adjusted Absolute Encoder"/>
+	<hidden field="Module[frontright] Angle Setpoint"/>
+	<hidden field="Module[frontleft] Absolute Encoder Read Issue"/>
+	<hidden field="Module[frontleft] Angle Setpoint"/>
+	<hidden field="Module[backright] Raw Angle Encoder"/>
+	<hidden field="Module[frontright] Raw Angle Encoder"/>
+	<hidden field="Module[frontleft] Raw Drive Encoder"/>
+	<hidden field="Module[backleft] Speed Setpoint"/>
+</xml>

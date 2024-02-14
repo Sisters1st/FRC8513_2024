@@ -2,14 +2,12 @@ Set setpoints.
 Fix rot to arm degrees ratio and set zero
 set rot to wrist degrees ratio and set zero
 
-map buttons to driver pannel
 discuss how to lay out autos
     multiple paths 
     action within path
-
-what autos do we want
+    what autos do we want
     break up autos into paths
 
 tuning PID on real robot
-motion profiling on arm and wrist
-    do we need this or is velocity limit enough? 
+
+heading PID - tune, does this need profiling?

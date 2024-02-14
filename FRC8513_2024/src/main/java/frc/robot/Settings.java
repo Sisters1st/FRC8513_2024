@@ -13,13 +13,13 @@ public class Settings {
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.HIGH;
 
     //vision settings
-    public static boolean useLimelight = false;
-    public static String limelightName = "limelight";
+    public static boolean usePhoton = false;
+    public static String photonName = "photonvision";
 
     //joystick settings
     public static int driverJoystickPort = 0;
     public static int driver_fieldCentricButton = 5;
-    public static double joyBand = 0.02;
+    public static double joyBand = 0.1;
     public static double rotJoyRate = 0.10;
 
     public static int opperatingArmJoystickPort = 1;
@@ -43,6 +43,7 @@ public class Settings {
     public static double hc_P = 0.1;
     public static double hc_I = 0;
     public static double hc_D = 0;
+    public static double maxDeltaHeadingGoal = 0.01;
 
     //intake settings
     public static int leftIntakeMotorCANID = 51;
