@@ -199,7 +199,7 @@ public class AutoController {
                 }
           
             case PRELOAD_FROM_MIDDLE_SCORE_3:
-            switch(autoStep) {
+                switch(autoStep) {
                 
             case 0:
                 thisRobot.drivebase.initPath("MiddleToNote3", thisRobot.onRedAlliance);
@@ -235,11 +235,69 @@ public class AutoController {
 
                 default:
                 break;
-        
+     
           
         }
 
+        case PRELOAD_FROM_MIDDLE_SCORE_1_2_3:
+            switch(autoStep) {
+        case 0:
+                thisRobot.drivebase.initPath("MiddleToNote1", thisRobot.onRedAlliance);
+                    autoStep = 5;
+
+                    break;
+
+            case 5:
+                thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
+                thisRobot.stateMachine.updateRobotState();
+                    autoStep = 10;
+
+                    break;
+                
+            case 10:
+                thisRobot.stateMachine.updateRobotState();
+                if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
+                        autoStep = 15;
+                        thisRobot.stateMachine.robotState = robotStates.INTAKING;
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        thisRobot.drivebase.followPath();
+            }  
+
+            case 15:
+             thisRobot.drivebase.followPath();
+                     if(thisRobot.drivebase.isPathOver()){
+                        autoStep = 20;
+                        }
+            case 20:
+                thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
+                thisRobot.stateMachine.updateRobotState();
+                autoStep = 25;
+
+            case 25:
+                if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
+                        autoStep = 30;
+                        thisRobot.stateMachine.robotState = robotStates.INTAKING;
+                        thisRobot.stateMachine.updateRobotState();
+                }
+
+            case 30:
+                 thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
+                    autoStep = 35;
+
+            case 35:
+                thisRobot.stateMachine.robotState = robotStates.INTAKING;
+                thisRobot.stateMachine.updateRobotState();
+                    autoStep = 40;
+
+            case 40:
+                 thisRobot.drivebase.followPath();
+                     if(thisRobot.drivebase.isPathOver()){
+                        autoStep = 45;
+                     }
+            }
         thisRobot.updateAllSubsystemMotorPower();
+    
     }
 }
 
@@ -253,6 +311,7 @@ public class AutoController {
         PRELOAD_FROM_MIDDLE_SCORE_2,
         PRELOAD_FROM_MIDDLE_SCORE_3,
         PRELOAD_FROM_MIDDLE_SCORE_1,
+        PRELOAD_FROM_MIDDLE_SCORE_1_2_3,
 
     }
 }
