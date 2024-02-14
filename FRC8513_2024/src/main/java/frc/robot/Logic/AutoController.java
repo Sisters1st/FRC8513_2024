@@ -143,7 +143,7 @@ public class AutoController {
                         thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.swerveDrive.lockPose();
-
+                        //maybe come back and add diff case for the lock pose if shooter keeps running
                         break;
 
                     default:
@@ -156,7 +156,7 @@ public class AutoController {
 
                 switch (autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("MiddleToMiddleNote", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
                         autoStep = 3;
 
                         break;
@@ -198,17 +198,50 @@ public class AutoController {
                         break;
                 }
           
-  
+            case PRELOAD_FROM_MIDDLE_SCORE_3:
+            switch(autoStep) {
+                
+            case 0:
+                thisRobot.drivebase.initPath("MiddleToNote3", thisRobot.onRedAlliance);
+                    autoStep = 5;
 
+                    break;
+
+            case 5:
+                thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
+                thisRobot.stateMachine.updateRobotState();
+                    autoStep = 10;
+
+                    break;
+
+            case 10:
+                 thisRobot.stateMachine.updateRobotState();
+                 if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
+                        autoStep = 15;
+                        thisRobot.stateMachine.robotState = robotStates.INTAKING;
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        thisRobot.drivebase.followPath();
+            }
+            case 15:
+                  thisRobot.drivebase.followPath();
+                     if(thisRobot.drivebase.isPathOver()){
+                        autoStep = 20;
+                        }
+            case 20:
+                  thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
+                     thisRobot.stateMachine.updateRobotState();
+                     thisRobot.drivebase.swerveDrive.lockPose();
+
+                default:
                 break;
         
           
-                default:
-                break;
         }
 
         thisRobot.updateAllSubsystemMotorPower();
     }
+}
 
     public double autoElapsedTime(){
         return Timer.getFPGATimestamp() - autoStartTime;
