@@ -83,15 +83,18 @@ public class Drivebase {
   }
 
   public void updateOdometry() {
-    var result = camera.getLatestResult();
-    if(Settings.usePhoton && result.hasTargets()){
-      photonPoseEstimator.setReferencePose(swerveDrive.getPose());
-      Optional<EstimatedRobotPose> photonGuess = photonPoseEstimator.update();
-      if(photonGuess.isPresent()){
-        swerveDrive.addVisionMeasurement(photonGuess.get().estimatedPose.toPose2d(), photonGuess.get().timestampSeconds);
+    if(Settings.usePhoton){
+      var result = camera.getLatestResult();
+      if( result.hasTargets()){
+        photonPoseEstimator.setReferencePose(swerveDrive.getPose());
+        Optional<EstimatedRobotPose> photonGuess = photonPoseEstimator.update();
+        if(photonGuess.isPresent()){
+          swerveDrive.addVisionMeasurement(photonGuess.get().estimatedPose.toPose2d(), photonGuess.get().timestampSeconds);
       }
 
     }
+    }
+    
   }
     
 

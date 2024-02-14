@@ -128,7 +128,7 @@ public class AutoController {
                             thisRobot.stateMachine.updateRobotState();
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                             thisRobot.drivebase.followPath();
-                            autoStep = 14;
+                            autoStep = 13;
                         }
                         break;
 
