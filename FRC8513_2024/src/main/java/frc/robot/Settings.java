@@ -88,7 +88,7 @@ public class Settings {
     public static double ampWristPos = 1;
     public static double shootingWristPos = -1;
 
-    public static double wristTHold = 2;
+    public static double wristTHold = 5;
     public static double wristMaxV = 0.1;
 
     //Shooter settings
@@ -99,12 +99,12 @@ public class Settings {
     public static double feederNoteThold = 45;
     public static boolean useFeederSensor = false;
 
-    public static double shooter_P = 0.001;
+    public static double shooter_P = 0.002;
     public static double shooter_I = 0;
     public static double shooter_D = 0;
     public static double shooter_FF = 0.002;
     
-    public static double shooterThresholdValue = 50;
+    public static double shooterThresholdValue = 75;
     public static double shotTime = 1;
 
     public static int shooter1CurrentLimit = 30;

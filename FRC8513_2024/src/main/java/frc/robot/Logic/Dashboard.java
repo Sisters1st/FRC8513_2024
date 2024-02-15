@@ -45,17 +45,20 @@ public class Dashboard {
             SmartDashboard.putNumber("ArmPos", thisRobot.arm.getArmPosition());
             SmartDashboard.putNumber("ArmGoalPos", thisRobot.arm.armGoalPos);
             SmartDashboard.putNumber("calculatedArmGoal", thisRobot.arm.calculatedArmGoal);
+            SmartDashboard.putBoolean("ArmInThold", thisRobot.arm.armWithinThold());
 
 
             //wristInfo
             SmartDashboard.putNumber("WristPos", thisRobot.wrist.getWristPos());
             SmartDashboard.putNumber("WristGoalPos", thisRobot.wrist.wristGoalPos);
             SmartDashboard.putNumber("calculatedWristmGoal", thisRobot.wrist.calculatedWristGoal);
+            SmartDashboard.putBoolean("WristInThold", thisRobot.wrist.wristWithinThold());
 
             //shooter infor
             SmartDashboard.putNumber("ShooterSpeed", thisRobot.shooter.leftShooter.getEncoder().getVelocity());
             SmartDashboard.putNumber("ShooterGoalSpeed", thisRobot.shooter.leftShooterGoalSpeed);
             SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
+            SmartDashboard.putBoolean("ShooterInThold", thisRobot.shooter.leftShooterInThreshold() && thisRobot.shooter.rightShooterInThreshold());
 
             //intake info
             SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.getAppliedOutput());

@@ -61,7 +61,7 @@ public class Arm {
     }
 
     public boolean armWithinThold(){
-        return Math.abs(armPos-armGoalPos) < Settings.armThold;
+        return Math.abs(getArmPosition()-calculatedArmGoal) < Settings.armThold;
     }
     
 }
