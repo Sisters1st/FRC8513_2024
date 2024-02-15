@@ -85,8 +85,8 @@ public class Settings {
 
     public static double intakingWristPos = 3.5;
     public static double trapWristPos = 1;
-    public static double ampWristPos = 1;
-    public static double shootingWristPos = -1;
+    public static double ampWristPos = -1;
+    public static double shootingWristPos = -8;
 
     public static double wristTHold = 5;
     public static double wristMaxV = 0.1;
@@ -96,26 +96,27 @@ public class Settings {
     public static int rightShooterCANID = 42;
     public static int feederCANID = 58;
     public static int feederSensorPort = 6; //on mxp
-    public static double feederNoteThold = 45;
-    public static boolean useFeederSensor = false;
+    public static double feederNoteThold = 50;
+    public static boolean useFeederSensor = true;
 
     public static double shooter_P = 0.002;
-    public static double shooter_I = 0;
+    public static double shooter_I = 0.0005;
     public static double shooter_D = 0;
     public static double shooter_FF = 0.002;
     
-    public static double shooterThresholdValue = 75;
-    public static double shotTime = 1;
+    public static double shooterThresholdValue = 300;
+    public static double shotTime = 0.5;
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
     public static int feederCurrentLimit = 10;
 
-    public static int basicShooterSpeed = 800;
+    public static int basicShooterSpeed = 5000;
 
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;
     public static double feederIntakeVoltage = 8;
+
 
     //climber settings
 

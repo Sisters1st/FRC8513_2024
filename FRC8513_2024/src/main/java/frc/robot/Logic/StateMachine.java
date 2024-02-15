@@ -64,9 +64,16 @@ public class StateMachine {
                 thisRobot.wrist.setWristPos(Settings.shootingWristPos);
                 thisRobot.intake.setIntakeVoltage(0);
 
-                if(thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()  &&
-                    thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold()){
-                    thisRobot.shooter.setShooterSpeeds(Settings.basicShooterSpeed, Settings.basicShooterSpeed, Settings.feederIntakeVoltage);
+                if((thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()  &&
+                    thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold())){
+                    double feederSpeed = 0;
+                    if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.runFeederInButton)){
+                        feederSpeed = Settings.feederIntakeVoltage;
+                    }
+                    if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.runFeederOutButton)){
+                        feederSpeed = Settings.feederScoreAmpVoltage;
+                    }
+                    thisRobot.shooter.setShooterSpeeds(Settings.basicShooterSpeed, Settings.basicShooterSpeed, feederSpeed);
                     if(shotStartedTime == -1){
                         shotStartedTime = Timer.getFPGATimestamp();
                     }

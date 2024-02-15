@@ -1,5 +1,6 @@
 1) basics
     Set setpoints and test
+    feed in button
     Tune arm PID
     Tune wrist PID
     Tune shooter PID
@@ -8,7 +9,7 @@
 
 2) autos
     discuss how to lay out autos
-        multiple paths 
+        multiple paths  
         action within path
         what autos do we want
         break up autos into paths

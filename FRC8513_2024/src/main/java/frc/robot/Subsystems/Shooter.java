@@ -79,7 +79,7 @@ public class Shooter {
 
     public boolean intakeSensorSeesNote(){
         if(Settings.useFeederSensor){
-            return feederSensorInput.getValue() < Settings.feederNoteThold;
+            return feederSensorInput.getValue() > Settings.feederNoteThold;
         } else {
             return false;
         }

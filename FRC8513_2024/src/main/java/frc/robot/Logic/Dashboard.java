@@ -59,7 +59,7 @@ public class Dashboard {
             SmartDashboard.putNumber("ShooterGoalSpeed", thisRobot.shooter.leftShooterGoalSpeed);
             SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
             SmartDashboard.putBoolean("ShooterInThold", thisRobot.shooter.leftShooterInThreshold() && thisRobot.shooter.rightShooterInThreshold());
-
+            SmartDashboard.putNumber("feederSensor", thisRobot.shooter.feederSensorInput.getValue());
             //intake info
             SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.getAppliedOutput());
 
