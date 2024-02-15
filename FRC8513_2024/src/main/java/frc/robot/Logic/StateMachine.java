@@ -66,11 +66,13 @@ public class StateMachine {
                 if(thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()  &&
                     thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold()){
                     thisRobot.shooter.setShooterSpeeds(Settings.basicShooterSpeed, Settings.basicShooterSpeed, Settings.feederIntakeVoltage);
+                          //after some time, go back to driving
+                          
                 } else {
                     thisRobot.shooter.setShooterSpeeds(Settings.basicShooterSpeed, Settings.basicShooterSpeed, 0);
                 }
 
-                //after some time, go back to driving
+              
                 if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.drivingStateReturnButton)){
                     robotState = robotStates.DRIVING;
                     lastStateChangeTime = Timer.getFPGATimestamp();
@@ -102,7 +104,7 @@ public class StateMachine {
                 }
 
                 feederV = 0;
-                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.runFeederButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.runFeederOutButton)){
                     feederV = Settings.feederScoreTrapVoltage;
                 } else {
                     feederV = 0;
@@ -123,7 +125,7 @@ public class StateMachine {
                 }
                 
                 feederV = 0;
-                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.runFeederButton)){
+                if(thisRobot.teleopController.operatingArmXboxController.getRawButton(Settings.runFeederOutButton)){
                     feederV = Settings.feederScoreTrapVoltage;
                 } else {
                     feederV = 0;

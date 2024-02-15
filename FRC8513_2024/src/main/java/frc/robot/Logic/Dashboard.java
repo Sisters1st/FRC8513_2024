@@ -42,13 +42,13 @@ public class Dashboard {
             SmartDashboard.putNumber("trajRotV", thisRobot.drivebase.rotCorrection);
             
             //armInfo
-            SmartDashboard.putNumber("ArmPos", thisRobot.arm.armPos);
+            SmartDashboard.putNumber("ArmPos", thisRobot.arm.getArmPosition());
             SmartDashboard.putNumber("ArmGoalPos", thisRobot.arm.armGoalPos);
             SmartDashboard.putNumber("calculatedArmGoal", thisRobot.arm.calculatedArmGoal);
 
 
             //wristInfo
-            SmartDashboard.putNumber("WristPos", thisRobot.wrist.wristPos);
+            SmartDashboard.putNumber("WristPos", thisRobot.wrist.getWristPos());
             SmartDashboard.putNumber("WristGoalPos", thisRobot.wrist.wristGoalPos);
             SmartDashboard.putNumber("calculatedWristmGoal", thisRobot.wrist.calculatedWristGoal);
 

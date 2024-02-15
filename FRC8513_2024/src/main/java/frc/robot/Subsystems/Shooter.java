@@ -38,9 +38,11 @@ public class Shooter {
     }
 
     public void setShooterSpeeds(double lss, double rss, double feeder){
-        leftShooterGoalSpeed = lss;
+        leftShooterGoalSpeed = -lss;
         rightShooterGoalSpeed = rss;
         feederVoltage = feeder;
+        rightShooterPIDController.reset();
+        leftShooterPIDController.reset();
 
     }
 

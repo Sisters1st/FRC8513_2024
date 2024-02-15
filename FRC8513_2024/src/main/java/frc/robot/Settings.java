@@ -32,8 +32,8 @@ public class Settings {
     public static int climbButton = 6;
     public static int intakeButton = 1;
     public static int drivingStateReturnButton = 2;
-    public static int runFeederButton= 7;
-    public static int runFeederBackwardButon = 8;
+    public static int runFeederInButton= 7;
+    public static int runFeederOutButton = 8;
 
     //pdh settings
     public static int pdhCANID = 1;
@@ -55,7 +55,7 @@ public class Settings {
     //Arm settings
     public static int armMotor1CANID = 14;
     public static int armMotor2CANID = 15;
-    public static double armInitRawEncoderValue = 9.6;
+    public static double armInitRawEncoderValue = 0;
 
     public static double armFF = 0;
 
@@ -66,10 +66,10 @@ public class Settings {
     public static double armPID_I = 0;
     public static double armPID_D = 0;
 
-    public static double intakingArmPos = 2;
-    public static double trapArmPos = -30;
-    public static double ampArmPos = -50;
-    public static double shootingArmPos = -1;
+    public static double intakingArmPos = -4;
+    public static double trapArmPos = -56;
+    public static double ampArmPos = -41;
+    public static double shootingArmPos = -19;
 
     public static double armThold = 2;
     public static double armMaxV = 1;
@@ -77,11 +77,11 @@ public class Settings {
     //Wrist settings
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
-    public static double wristInitRawEncoderValue = 34;
+    public static double wristInitRawEncoderValue = 0;
 
     public static double wristReduction = 170;
     public static double wristFF = 0;
-    public static double wristMaxV = 1;
+    public static double wristMaxV = 0.1;
 
     public static int wrist1CurrentLimit = 10;
     public static int wrist2CurrentLimit = 10;
@@ -90,10 +90,10 @@ public class Settings {
     public static double wristPID_I = 0;
     public static double wristPID_D = 0;
 
-    public static double intakingWristPos = 32;
-    public static double trapWristPos = 25;
-    public static double ampWristPos = 10;
-    public static double shootingWristPos = 30;
+    public static double intakingWristPos = 3.5;
+    public static double trapWristPos = 1;
+    public static double ampWristPos = 1;
+    public static double shootingWristPos = -1;
 
     public static double wristTHold = 2;
 
@@ -102,17 +102,17 @@ public class Settings {
     public static int rightShooterCANID = 42;
     public static int feederCANID = 58;
 
-    public static double shooter_P = 0;
+    public static double shooter_P = 0.001;
     public static double shooter_I = 0;
     public static double shooter_D = 0;
 
-    public static double shooterThresholdValue = 10;
+    public static double shooterThresholdValue = 600;
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
     public static int feederCurrentLimit = 10;
 
-    public static int basicShooterSpeed = 1000;
+    public static int basicShooterSpeed = 800;
 
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;

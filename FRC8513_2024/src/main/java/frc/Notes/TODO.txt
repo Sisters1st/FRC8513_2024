@@ -11,3 +11,9 @@ discuss how to lay out autos
 tuning PID on real robot
 
 heading PID - tune, does this need profiling?
+
+shooter FF so P can be more aggressive
+
+joystick 3 for emergency zeroing of arm wrist
+
+return to driving after 0.5 second after shot
