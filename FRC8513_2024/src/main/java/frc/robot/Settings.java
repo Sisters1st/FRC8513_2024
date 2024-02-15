@@ -95,6 +95,9 @@ public class Settings {
     public static int leftShooterCANID = 41;
     public static int rightShooterCANID = 42;
     public static int feederCANID = 58;
+    public static int feederSensorPort = 6; //on mxp
+    public static double feederNoteThold = 45;
+    public static boolean useFeederSensor = false;
 
     public static double shooter_P = 0.001;
     public static double shooter_I = 0;
@@ -102,6 +105,7 @@ public class Settings {
     public static double shooter_FF = 0.002;
     
     public static double shooterThresholdValue = 50;
+    public static double shotTime = 1;
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
