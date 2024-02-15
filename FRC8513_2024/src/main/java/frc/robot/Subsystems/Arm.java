@@ -55,17 +55,9 @@ public class Arm {
         }
 
         double pidPower = armPidController.calculate(armMotor1.getEncoder().getPosition(), calculatedArmGoal);
-        double ffPower = calculateFFTerm();
 
-        armMotor1.setVoltage((pidPower + ffPower) * 12);
-        armMotor2.setVoltage(-(pidPower + ffPower) * 12);
-    }
-
-    public double calculateFFTerm(){
-        double cosOfAng = Math.cos(getArmPosition());
-        double ffPower = cosOfAng * Settings.armFF;
-
-        return ffPower;
+        armMotor1.setVoltage((pidPower) * 12);
+        armMotor2.setVoltage(-(pidPower) * 12);
     }
 
     public boolean armWithinThold(){

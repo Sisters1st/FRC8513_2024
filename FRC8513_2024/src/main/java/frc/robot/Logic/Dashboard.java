@@ -29,7 +29,7 @@ public class Dashboard {
             SmartDashboard.putString("State", thisRobot.stateMachine.robotState.toString());
 
             //auto infor
-            SmartDashboard.putString("AutoRoutine", thisRobot.autoController.autoRoutine.toString());
+            SmartDashboard.putString("AutoRoutine", autoSelector.getSelected());
             SmartDashboard.putNumber("AutoStep", thisRobot.autoController.autoStep);
 
             //drivebase info

@@ -47,17 +47,20 @@ public class Shooter {
     }
 
     public void applyShooterPower(){
+        double leftFF = leftShooterGoalSpeed * Settings.shooter_FF;
+        double rightFF = rightShooterGoalSpeed * Settings.shooter_FF;
+
         if(leftShooterGoalSpeed == 0){
             leftShooter.setVoltage(0);
         }else{
             double leftShooterPower = leftShooterPIDController.calculate(leftShooter.getEncoder().getVelocity(), leftShooterGoalSpeed);
-            leftShooter.setVoltage(leftShooterPower);
+            leftShooter.setVoltage(leftShooterPower + leftFF);
         }
         if(rightShooterGoalSpeed == 0){
             rightShooter.setVoltage(0);
         }else{
             double rightShooterPower = rightShooterPIDController.calculate(rightShooter.getEncoder().getVelocity(), rightShooterGoalSpeed);
-            rightShooter.setVoltage(rightShooterPower);
+            rightShooter.setVoltage(rightShooterPower + rightFF);
         }
 
         feederMotor.setVoltage(feederVoltage);
