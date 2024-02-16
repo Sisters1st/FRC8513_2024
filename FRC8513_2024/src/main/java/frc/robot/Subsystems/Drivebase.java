@@ -15,8 +15,11 @@ import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -27,6 +30,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Settings;
 import swervelib.parser.SwerveParser;
@@ -57,14 +61,14 @@ public class Drivebase {
   AprilTagFieldLayout aprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
   PhotonPoseEstimator photonPoseEstimator;
 
-  Transform3d robotToCam = new Transform3d(new Translation3d(0.5, 0.0, 0.5), new Rotation3d(0,0,0)); 
+  Transform3d robotToCam = new Transform3d(new Translation3d(0, 0, 0), new Rotation3d(0, 0, Math.PI));
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
 
-    //yagsl init
-    double maximumSpeed = Units.feetToMeters(Settings.drivebaseMaxVelocity);    
-    File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
+    // yagsl init
+    double maximumSpeed = Units.feetToMeters(Settings.drivebaseMaxVelocity);
+    File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
     try {
       swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(maximumSpeed);
     } catch (IOException e) {
@@ -72,102 +76,104 @@ public class Drivebase {
     }
     SwerveDriveTelemetry.verbosity = Settings.telemetryVerbosity;
     swerveDrive.setCosineCompensator(false);
-    rotPidController.enableContinuousInput(-Math.PI,Math.PI);
+    rotPidController.enableContinuousInput(-Math.PI, Math.PI);
 
-    //pathFollowingInit
+    // pathFollowingInit
     goalState = new State();
 
-    //photon init
-    photonPoseEstimator = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, robotToCam);
+    // photon init
+    photonPoseEstimator = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR,
+        camera, robotToCam);
   }
 
   public void updateOdometry() {
     if(Settings.usePhoton){
       var result = camera.getLatestResult();
-      if( result.hasTargets()){
-        photonPoseEstimator.setReferencePose(swerveDrive.getPose());
-        Optional<EstimatedRobotPose> photonGuess = photonPoseEstimator.update();
-        if(photonGuess.isPresent()){
-          swerveDrive.addVisionMeasurement(photonGuess.get().estimatedPose.toPose2d(), Timer.getFPGATimestamp() - photonGuess.get().timestampSeconds);
+      if (result.getMultiTagResult().estimatedPose.isPresent) {
+        Optional<EstimatedRobotPose> photonPose = photonPoseEstimator.update(result);
+        //System.out.println("GotMultiTagPNP");
+        if(photonPose.isPresent()){
+          //System.out.println("posePresent");
+          swerveDrive.addVisionMeasurement(photonPose.get().estimatedPose.toPose2d(), result.getTimestampSeconds());
         }
-
       }
     }
   }
-  
-  public void initPath(String pathName, boolean flipToRed){
 
-      path = PathPlannerPath.fromPathFile(pathName);
+  public void initPath(String pathName, boolean flipToRed) {
 
-      if(flipToRed){
-        path = path.flipPath();
-      }
+    path = PathPlannerPath.fromPathFile(pathName);
 
-      autoTraj = path.getTrajectory(new ChassisSpeeds(), path.getPreviewStartingHolonomicPose().getRotation());
+    if (flipToRed) {
+      path = path.flipPath();
+    }
 
-      xPosPidController.reset();
-      yPosPidController.reset();
-      rotPidController.reset();
+    autoTraj = path.getTrajectory(new ChassisSpeeds(), path.getPreviewStartingHolonomicPose().getRotation());
 
-      goalState = autoTraj.sample(0);
-      goalHeading = goalState.targetHolonomicRotation;
+    xPosPidController.reset();
+    yPosPidController.reset();
+    rotPidController.reset();
 
-      setOdomToPathInit();
-      trajStartTime = Timer.getFPGATimestamp();
+    goalState = autoTraj.sample(0);
+    goalHeading = goalState.targetHolonomicRotation;
+
+    setOdomToPathInit();
+    trajStartTime = Timer.getFPGATimestamp();
 
   }
 
-  public void followPath(){
-    trajElapsedTime = Timer.getFPGATimestamp()  - trajStartTime;
+  public void followPath() {
+    trajElapsedTime = Timer.getFPGATimestamp() - trajStartTime;
     goalState = autoTraj.sample(trajElapsedTime);
     goalHeading = goalState.targetHolonomicRotation;
 
     double currentHeading = swerveDrive.getPose().getRotation().getRadians();
-    double xCorrection = xPosPidController.calculate(swerveDrive.getPose().getX(), goalState.getTargetHolonomicPose().getX());
-    double yCorrection = yPosPidController.calculate(swerveDrive.getPose().getY(), goalState.getTargetHolonomicPose().getY());
-    
+    double xCorrection = xPosPidController.calculate(swerveDrive.getPose().getX(),
+        goalState.getTargetHolonomicPose().getX());
+    double yCorrection = yPosPidController.calculate(swerveDrive.getPose().getY(),
+        goalState.getTargetHolonomicPose().getY());
+
     rotCorrection = rotPidController.calculate(currentHeading, goalHeading.getRadians());
-    rotCorrection = Math.min(Math.max(rotCorrection, -swerveDrive.getMaximumAngularVelocity()), swerveDrive.getMaximumAngularVelocity());
-    
+    rotCorrection = Math.min(Math.max(rotCorrection, -swerveDrive.getMaximumAngularVelocity()),
+        swerveDrive.getMaximumAngularVelocity());
+
     Translation2d trajV = new Translation2d(goalState.velocityMps, goalHeading);
     ajustedV = new Translation2d(xCorrection, yCorrection);
     ajustedV = ajustedV.plus(trajV);
-    
-    thisRobot.drivebase.swerveDrive.drive(ajustedV,rotCorrection, true, false);
+
+    thisRobot.drivebase.swerveDrive.drive(ajustedV, rotCorrection, true, false);
   }
 
-  public boolean isPathOver(){
-    double trajElapsedTime = Timer.getFPGATimestamp()  - trajStartTime;
+  public boolean isPathOver() {
+    double trajElapsedTime = Timer.getFPGATimestamp() - trajStartTime;
     return trajElapsedTime > autoTraj.getTotalTimeSeconds();
   }
 
-  public void setOdomToPathInit(){
+  public void setOdomToPathInit() {
     Pose2d initPose = goalState.getTargetHolonomicPose();
     thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
   }
 
-  public void driveClosedLoopHeading(Translation2d translation){
-    
-    double rot = rotPidController.calculate(swerveDrive.getOdometryHeading().getRadians(), thisRobot.drivebase.goalHeading.getRadians());
+  public void driveClosedLoopHeading(Translation2d translation) {
+
+    double rot = rotPidController.calculate(swerveDrive.getOdometryHeading().getRadians(),
+        thisRobot.drivebase.goalHeading.getRadians());
 
     thisRobot.drivebase.swerveDrive.drive(
-            translation,
-            rot,
-            true,
-            false
-        );
+        translation,
+        rot,
+        true,
+        false);
   }
 
-  public void setGoalHeadingDeg(double deg){
+  public void setGoalHeadingDeg(double deg) {
     goalHeading = new Rotation2d(Math.toRadians(deg));
   }
 
-  public void aimAtPoint(Translation2d point){
+  public void aimAtPoint(Translation2d point) {
     Translation2d currentPos = swerveDrive.getPose().getTranslation();
     Translation2d deltaPos = currentPos.minus(point);
     goalHeading = deltaPos.getAngle();
   }
-  
+
 }
-
-

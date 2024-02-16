@@ -12,8 +12,9 @@ public class Settings {
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
 
     //vision settings
-    public static boolean usePhoton = false;
-    public static String photonName = "photonvision";
+    public static boolean usePhoton = true;
+    public static String photonName = "LLCamera";
+    //ip for photon: http://10.85.13.26:5800/#/dashboard
 
     //driver joystick settings
     public static int driverJoystickPort = 0;
@@ -23,7 +24,7 @@ public class Settings {
 
     public static int leftRightAxis = 0;
     public static int forwardBackwardsAxis = 1;
-    public static int rotAxis = 2;
+    public static int rotAxis = 4; //2 at home, 4 on xbox
     public static int resetFieldCentricButton = 8;
     public static int snapToSpeakerButton = 5;
     public static int snapToAmpButton = 1;
@@ -37,11 +38,11 @@ public class Settings {
     public static int shootInSpeakerButton = 3;
     public static int climberPrepButton = 4;
     public static int ampPrepButton = 5;
-    public static int climbUpButton = 6;
-    public static int climbDownButton = 9;
-    public static int runFeederInButton= 7;
-    public static int runFeederOutButton = 8;
-    public static int intakeOutButton = 10;
+    public static int climbUpButton = 7;
+    public static int runFeederInButton= 9;
+    public static int runFeederOutButton = 10;
+    public static int climbDownButton = 8;
+    public static int intakeOutButton = 6;
 
     //manual overide joystick settings
     public static int manualControlPort = 2;

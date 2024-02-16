@@ -3,6 +3,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.Settings;
 import frc.robot.Logic.AutoController.autoRoutines;
 
 public class Dashboard {
@@ -27,6 +28,7 @@ public class Dashboard {
         //general robot updates
         SmartDashboard.putNumber("Uptime", Timer.getFPGATimestamp());
         SmartDashboard.putString("State", thisRobot.stateMachine.robotState.toString());
+        SmartDashboard.putBoolean("Photon Vision Enabled",Settings.usePhoton);
 
         //auto infor
         SmartDashboard.putString("AutoRoutine", autoSelector.getSelected());
