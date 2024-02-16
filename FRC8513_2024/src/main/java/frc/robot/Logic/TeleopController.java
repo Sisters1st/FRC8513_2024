@@ -42,8 +42,7 @@ public class TeleopController {
     }
 
     public void periodic(){
-        boolean manualTestingControl = false;
-        if(manualTestingControl){
+        if(Settings.manualTestingControl){
             manualControl();
 
         } else {
@@ -56,15 +55,15 @@ public class TeleopController {
 
     public void driveTele(){
         double xSpeedJoystick = -driverXboxController.getRawAxis(1); //forward back
-        if(xSpeedJoystick < Settings.joyBand && xSpeedJoystick > -Settings.joyBand){
+        if(xSpeedJoystick < Settings.joystickDeadband && xSpeedJoystick > -Settings.joystickDeadband){
             xSpeedJoystick = 0;
         }
         double ySpeedJoystick = -driverXboxController.getRawAxis(0); //left right
-         if(ySpeedJoystick < Settings.joyBand && ySpeedJoystick > -Settings.joyBand){
+         if(ySpeedJoystick < Settings.joystickDeadband && ySpeedJoystick > -Settings.joystickDeadband){
             ySpeedJoystick = 0;
         }
-        double rSpeedJoystick = -driverXboxController.getRawAxis(2); //left right 2 at home, 4 on xbox
-         if(rSpeedJoystick < Settings.joyBand && rSpeedJoystick > -Settings.joyBand){
+        double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right 2 at home, 4 on xbox
+         if(rSpeedJoystick < Settings.joystickDeadband && rSpeedJoystick > -Settings.joystickDeadband){
             rSpeedJoystick = 0;
         }
 
@@ -106,31 +105,24 @@ public class TeleopController {
             }else{
                 thisRobot.drivebase.aimAtPoint(Settings.blueGoalPos);
             }
-            
         }
-
         thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
     }
 
     public void manualControl(){
 
-        if(manualControlJoystick.getRawButton(5)){
-            thisRobot.arm.armMotor1.getEncoder().setPosition(0);
-            
-            thisRobot.wrist.wristMotor1.getEncoder().setPosition(0);
+        if(manualControlJoystick.getRawButton(Settings.manualResetZeroButton)){
+            thisRobot.arm.armMotor1.getEncoder().setPosition(Settings.armInitRawEncoderValue);
+            thisRobot.wrist.wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
         }
 
-        double climberJoystick = -manualControlJoystick.getRawAxis(0); //Up Down????
-        if(climberJoystick < Settings.joyBand && climberJoystick > -Settings.joyBand){
-            climberJoystick = 0;
-        }
-
-        double armJoystick = -manualControlJoystick.getRawAxis(1); //forward back
-        if(armJoystick < Settings.joyBand && armJoystick > -Settings.joyBand){
+        double armJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlArmAxis); //forward back
+        if(armJoystick < Settings.joystickDeadband && armJoystick > -Settings.joystickDeadband){
             armJoystick = 0;
         }
-        double wristJoystick = -manualControlJoystick.getRawAxis(5); //left right
-        if(wristJoystick < Settings.joyBand && wristJoystick > -Settings.joyBand){
+
+        double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis); //left right
+        if(wristJoystick < Settings.joystickDeadband && wristJoystick > -Settings.joystickDeadband){
             wristJoystick = 0;
         }
 

@@ -18,13 +18,12 @@ public class Settings {
     //joystick settings
     public static int driverJoystickPort = 0;
     public static int driver_fieldCentricButton = 5;
-    public static double joyBand = 0.1;
+    public static double joystickDeadband = 0.01;
     public static double rotJoyRate = 1;
+    public static boolean manualTestingControl = false;
 
+    //Button pannel settings
     public static int buttonPannelPort = 1;
-    public static int manualControlPort = 2;
-
-    //Button settings
     public static int intakeButton = 1;
     public static int drivingStateReturnButton = 2;
     public static int shootInSpeakerButton = 3;
@@ -35,6 +34,12 @@ public class Settings {
     public static int runFeederInButton= 7;
     public static int runFeederOutButton = 8;
     public static int intakeOutButton = 10;
+
+    //manual overide joystick settings
+    public static int manualControlPort = 2;
+    public static int manualControlArmAxis = 1;
+    public static int manualControlWristAxis = 5;
+    public static int manualResetZeroButton = 1;
 
     //pdh settings
     public static int pdhCANID = 1;
