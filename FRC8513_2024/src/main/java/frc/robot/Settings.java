@@ -19,7 +19,7 @@ public class Settings {
     public static int driverJoystickPort = 0;
     public static int driver_fieldCentricButton = 5;
     public static double joyBand = 0.1;
-    public static double rotJoyRate = 0.10;
+    public static double rotJoyRate = 1;
 
     public static int opperatingArmJoystickPort = 1;
     public static int climberJoystickPort = 2;

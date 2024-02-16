@@ -36,7 +36,6 @@ public class AutoController {
                 thisRobot.onRedAlliance = false;
             }
         }
-        
     }
 
     public void autoPeriodic(){   
@@ -239,7 +238,7 @@ public class AutoController {
           
         }
 
-        case PRELOAD_FROM_MIDDLE_SCORE_1_2_3:
+            case PRELOAD_FROM_MIDDLE_SCORE_1_2_3:
             switch(autoStep) {
         case 0:
                 thisRobot.drivebase.initPath("MiddleToNote1", thisRobot.onRedAlliance);

@@ -1,11 +1,12 @@
 1) basics
+    manual intake in and out
+    
     Set setpoints and test
     feed in button
     Tune arm PID
     Tune wrist PID
     Tune shooter PID
     tune heading PID - tune, does this need profiling
-    return to driving after 0.5 second after shot
 
 2) autos
     discuss how to lay out autos

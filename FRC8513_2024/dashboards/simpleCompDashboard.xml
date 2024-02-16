@@ -78,10 +78,15 @@
 </dashboard>
 <live-window>
 </live-window>
-	<hidden field="Motors"/>
-	<hidden field="Encoders"/>
 	<hidden field="IMU"/>
-	<hidden field="JSON"/>
 	<hidden field="Field"/>
 	<hidden field="Swerve Drive"/>
+	<hidden field="WristInThold"/>
+	<hidden field="Motors"/>
+	<hidden field="swerve"/>
+	<hidden field="ArmInThold"/>
+	<hidden field="JSON"/>
+	<hidden field="feederSensor"/>
+	<hidden field="Encoders"/>
+	<hidden field="ShooterInThold"/>
 </xml>

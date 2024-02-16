@@ -16,8 +16,8 @@ public class TeleopController {
 
     Robot thisRobot;
     Joystick driverXboxController = new Joystick(Settings.driverJoystickPort);
-    Joystick operatingArmXboxController = new Joystick(Settings.opperatingArmJoystickPort);
-    Joystick climberXboxController = new Joystick(Settings.climberJoystickPort);
+    Joystick buttonPannel = new Joystick(Settings.buttonPannelPort);
+    Joystick manualControlJoystick = new Joystick(Settings.manualControlPort);
 
     public TeleopController(Robot thisRobot_){
         thisRobot = thisRobot_;
@@ -63,7 +63,7 @@ public class TeleopController {
          if(ySpeedJoystick < Settings.joyBand && ySpeedJoystick > -Settings.joyBand){
             ySpeedJoystick = 0;
         }
-        double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right 2 at home, 4 on xbox
+        double rSpeedJoystick = -driverXboxController.getRawAxis(2); //left right 2 at home, 4 on xbox
          if(rSpeedJoystick < Settings.joyBand && rSpeedJoystick > -Settings.joyBand){
             rSpeedJoystick = 0;
         }
@@ -74,7 +74,7 @@ public class TeleopController {
         double xV = xInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double yV = yInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double rV = rSpeedJoystick;
-        thisRobot.drivebase.goalHeading = thisRobot.drivebase.goalHeading.plus(new Rotation2d(rV * Settings.rotJoyRate));
+        thisRobot.drivebase.goalHeading = thisRobot.drivebase.swerveDrive.getPose().getRotation().plus(new Rotation2d(rV * Settings.rotJoyRate));
         
         if(driverXboxController.getRawButton(5)){
             thisRobot.drivebase.setGoalHeadingDeg(0);
@@ -85,9 +85,20 @@ public class TeleopController {
         if(driverXboxController.getRawButton(1)){
             thisRobot.drivebase.setGoalHeadingDeg(-90);
         }
+
+        //if button 8 is pressed, reset the heading
         if(driverXboxController.getRawButton(8)){
-            thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d()));
-            thisRobot.drivebase.goalHeading = new Rotation2d(0);
+            //if we are red, set to 180 degrees (towards blue) as the zero 
+          if(thisRobot.onRedAlliance){
+                thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d(Math.PI)));
+                thisRobot.drivebase.goalHeading = new Rotation2d(Math.PI);
+            } else {
+                thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d()));
+                thisRobot.drivebase.goalHeading = new Rotation2d(0);
+            }
+            
+            
+            
         }
         if(driverXboxController.getRawButton(16)){
             if(thisRobot.onRedAlliance){
@@ -103,22 +114,22 @@ public class TeleopController {
 
     public void manualControl(){
 
-        if(operatingArmXboxController.getRawButton(5)){
+        if(manualControlJoystick.getRawButton(5)){
             thisRobot.arm.armMotor1.getEncoder().setPosition(0);
             
             thisRobot.wrist.wristMotor1.getEncoder().setPosition(0);
         }
 
-        double climberJoystick = -climberXboxController.getRawAxis(0); //Up Down????
+        double climberJoystick = -manualControlJoystick.getRawAxis(0); //Up Down????
         if(climberJoystick < Settings.joyBand && climberJoystick > -Settings.joyBand){
             climberJoystick = 0;
         }
 
-        double armJoystick = -operatingArmXboxController.getRawAxis(1); //forward back
+        double armJoystick = -manualControlJoystick.getRawAxis(1); //forward back
         if(armJoystick < Settings.joyBand && armJoystick > -Settings.joyBand){
             armJoystick = 0;
         }
-        double wristJoystick = -operatingArmXboxController.getRawAxis(5); //left right
+        double wristJoystick = -manualControlJoystick.getRawAxis(5); //left right
         if(wristJoystick < Settings.joyBand && wristJoystick > -Settings.joyBand){
             wristJoystick = 0;
         }

@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
   public Climber climber = new Climber(this);
   public Intake intake = new Intake(this);
   
+  //robot wide vars
   public boolean lastUserButton = false;
   public boolean onRedAlliance = false;
 
@@ -46,25 +47,6 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     drivebase.updateOdometry();
     dashboard.updateDashboard();  
-
-    if(RobotController.getUserButton() != lastUserButton){
-      lastUserButton = RobotController.getUserButton();
-      //user button is buggy maybe get another way of doing this
-      if(RobotController.getUserButton()){
-        arm.armMotor1.setIdleMode(IdleMode.kCoast);
-        arm.armMotor2.setIdleMode(IdleMode.kCoast);
-
-        wrist.wristMotor1.setIdleMode(IdleMode.kCoast);
-        wrist.wristMotor1.setIdleMode(IdleMode.kCoast);
-      } else {
-        arm.armMotor1.setIdleMode(IdleMode.kBrake);
-        arm.armMotor2.setIdleMode(IdleMode.kBrake);
-
-        wrist.wristMotor1.setIdleMode(IdleMode.kBrake);
-        wrist.wristMotor1.setIdleMode(IdleMode.kBrake);
-
-      }
-    }
   }
 
   @Override
@@ -91,23 +73,35 @@ public class Robot extends TimedRobot {
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+
+    //if user button pressed set arm to break mode
+    if(RobotController.getUserButton() != lastUserButton){
+      lastUserButton = RobotController.getUserButton();
+      
+      if(RobotController.getUserButton()){
+        arm.armMotor1.setIdleMode(IdleMode.kCoast);
+        arm.armMotor2.setIdleMode(IdleMode.kCoast);
+
+        wrist.wristMotor1.setIdleMode(IdleMode.kCoast);
+        wrist.wristMotor1.setIdleMode(IdleMode.kCoast);
+      } else {
+        arm.armMotor1.setIdleMode(IdleMode.kBrake);
+        arm.armMotor2.setIdleMode(IdleMode.kBrake);
+
+        wrist.wristMotor1.setIdleMode(IdleMode.kBrake);
+        wrist.wristMotor1.setIdleMode(IdleMode.kBrake);
+
+      }
+    }
+
+  }
 
   @Override
   public void testInit() {}
 
   @Override
   public void testPeriodic() {}
-
-  @Override
-  public void simulationInit() {
-    drivebase.simulateDrivebaseInit();
-  }
-
-  @Override
-  public void simulationPeriodic() {
-    drivebase.simulateDrivebase();
-  }
 
   public void updateAllSubsystemMotorPower(){
     arm.applyArmPower();

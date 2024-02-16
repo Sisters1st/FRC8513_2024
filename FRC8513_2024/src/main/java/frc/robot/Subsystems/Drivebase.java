@@ -89,14 +89,12 @@ public class Drivebase {
         Optional<EstimatedRobotPose> photonGuess = photonPoseEstimator.update();
         if(photonGuess.isPresent()){
           swerveDrive.addVisionMeasurement(photonGuess.get().estimatedPose.toPose2d(), photonGuess.get().timestampSeconds);
+        }
+
       }
-
     }
-    }
-    
   }
-    
-
+  
   public void initPath(String pathName, boolean flipToRed){
 
       path = PathPlannerPath.fromPathFile(pathName);
@@ -169,12 +167,7 @@ public class Drivebase {
     Translation2d deltaPos = currentPos.minus(point);
     goalHeading = deltaPos.getAngle();
   }
-
-  public void simulateDrivebaseInit(){
-  }
-
-  public void simulateDrivebase(){
-  }
+  
 }
 
 
