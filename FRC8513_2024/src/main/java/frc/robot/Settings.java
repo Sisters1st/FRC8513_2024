@@ -21,18 +21,20 @@ public class Settings {
     public static double joyBand = 0.1;
     public static double rotJoyRate = 1;
 
-    public static int opperatingArmJoystickPort = 1;
-    public static int climberJoystickPort = 2;
+    public static int buttonPannelPort = 1;
+    public static int manualControlPort = 2;
 
-     //Button settings
-    public static int shootInSpeakerButton = 3;
-    public static int ampPrepButton = 5;
-    public static int climberPrepButton = 4;
-    public static int climbButton = 6;
+    //Button settings
     public static int intakeButton = 1;
     public static int drivingStateReturnButton = 2;
+    public static int shootInSpeakerButton = 3;
+    public static int climberPrepButton = 4;
+    public static int ampPrepButton = 5;
+    public static int climbUpButton = 6;
+    public static int climbDownButton = 9;
     public static int runFeederInButton= 7;
     public static int runFeederOutButton = 8;
+    public static int intakeOutButton = 10;
 
     //pdh settings
     public static int pdhCANID = 1;

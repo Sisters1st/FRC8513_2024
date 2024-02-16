@@ -27,22 +27,21 @@ public class StateMachine {
 
         switch (robotState) {
             case DRIVING:
-
                 armPos = Settings.intakingArmPos;
                 wristPos = Settings.intakingWristPos;
-                intakeVoltage = 0;
-                lss = rss = 0;
+                lss = rss = feederV = intakeVoltage = 0;
                 freeFeederControl();
                 checkAllButtonsForStateChanges();
+                freeIntakeControl();
                 
                 break;
 
             case INTAKING:
                 armPos = Settings.intakingArmPos;
                 wristPos = Settings.intakingWristPos;
-                intakeVoltage = 0;
-                lss = rss = 0;
+                intakeVoltage = Settings.intakingVoltage;
                 feederV = Settings.feederIntakeVoltage;
+                lss = rss = 0;
 
                 //if sensor gets tripped, go back to driving
                 if(thisRobot.shooter.intakeSensorSeesNote()){
@@ -57,7 +56,7 @@ public class StateMachine {
                     
                 armPos = Settings.shootingArmPos;
                 wristPos = Settings.shootingWristPos;
-                intakeVoltage = 0;
+                feederV = intakeVoltage = 0;
                 
                 checkAllButtonsForStateChanges();
 
@@ -65,7 +64,7 @@ public class StateMachine {
                     thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold())){
                    
                     lss = rss = Settings.basicShooterSpeed;
-                    intakeVoltage = Settings.intakingVoltage;
+                    feederV = Settings.feederIntakeVoltage;
 
                     if(shotStartedTime == -1){
                         shotStartedTime = Timer.getFPGATimestamp();
@@ -77,9 +76,10 @@ public class StateMachine {
                 } else {
                     shotStartedTime = -1;
                     lss = rss = Settings.basicShooterSpeed;
-                    intakeVoltage = 0;
+                    feederV = 0;
                 }
 
+                freeIntakeControl();
                 freeFeederControl();
                 break;
 
@@ -87,17 +87,24 @@ public class StateMachine {
 
                 armPos = Settings.trapArmPos;
                 wristPos = Settings.trapWristPos;
-                lss = rss = 0;
+                lss = rss = feederV = intakeVoltage = 0;
 
                 checkAllButtonsForStateChanges();
                 freeFeederControl();
+                freeIntakeControl();
 
-                if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbButton)){
+                if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton)){
                     thisRobot.climber.climberMotor1.setVoltage(Settings.climberVoltage);
                     thisRobot.climber.climberMotor2.setVoltage(Settings.climberVoltage);
                 } else {
-                    thisRobot.climber.climberMotor1.setVoltage(0);
-                    thisRobot.climber.climberMotor2.setVoltage(0);
+                    if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton))
+                    {
+                        thisRobot.climber.climberMotor1.setVoltage(-Settings.climberVoltage);
+                        thisRobot.climber.climberMotor2.setVoltage(-Settings.climberVoltage);
+                    } else {
+                        thisRobot.climber.climberMotor1.setVoltage(0);
+                        thisRobot.climber.climberMotor2.setVoltage(0);
+                    }
                 }
                 break;
 
@@ -105,10 +112,10 @@ public class StateMachine {
                 
                 armPos = Settings.ampArmPos;
                 wristPos = Settings.ampWristPos;
-
-                lss = rss = 0;
+                lss = rss = feederV = intakeVoltage = 0;
                 freeFeederControl();
                 checkAllButtonsForStateChanges();
+                freeIntakeControl();
                 break;
 
             default:
@@ -128,6 +135,12 @@ public class StateMachine {
         }
         if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.runFeederOutButton)){
             feederV = Settings.feederScoreAmpVoltage;
+        }
+    }
+
+    public void freeIntakeControl(){
+        if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.intakeOutButton)){
+            intakeVoltage = -Settings.intakingVoltage;
         }
     }
 
