@@ -29,8 +29,8 @@ public class Intake {
     }
 
     public void setIntakeVoltage(double voltage){
-        leftIntakeVoltage = -voltage;
-        rightIntakeVoltage = -voltage;
+        leftIntakeVoltage = voltage;
+        rightIntakeVoltage = voltage;
     }
 
     public void applyIntakeVoltage(){

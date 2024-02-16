@@ -33,8 +33,8 @@ public class Settings {
     //Button pannel settings
     public static int buttonPannelPort = 1;
     
-    public static int intakeButton = 1;
-    public static int drivingStateReturnButton = 2;
+    public static int intakeButton = 2;
+    public static int drivingStateReturnButton = 1;
     public static int shootInSpeakerButton = 3;
     public static int climberPrepButton = 4;
     public static int ampPrepButton = 5;
@@ -65,7 +65,7 @@ public class Settings {
     public static int leftIntakeMotorCANID = 51;
     public static int rightIntakeMotorCANID = 52;
 
-    public static int intakeMotorCurrnetLimit = 20;
+    public static int intakeMotorCurrnetLimit = 30;
     public static double intakingVoltage = 12;
 
     //Arm settings
@@ -113,7 +113,7 @@ public class Settings {
     public static int rightShooterCANID = 42;
     public static int feederCANID = 58;
     public static int feederSensorPort = 6; //on mxp
-    public static double feederNoteThold = 50;
+    public static double feederNoteThold = 350;
     public static boolean useFeederSensor = true;
 
     public static double shooter_P = 0.002;
