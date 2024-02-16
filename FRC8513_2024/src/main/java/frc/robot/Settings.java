@@ -9,8 +9,7 @@ public class Settings {
     public static double drivebaseMaxVelocity = 15.1;
 
     //dashbord and logging settings
-    public static int dashboardNumber = 3;
-    public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.HIGH;
+    public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
 
     //vision settings
     public static boolean usePhoton = false;

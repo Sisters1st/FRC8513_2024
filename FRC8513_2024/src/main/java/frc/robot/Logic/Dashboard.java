@@ -10,8 +10,7 @@ public class Dashboard {
     Robot thisRobot;
     public SendableChooser<String> autoSelector;
 
-    public Dashboard(Robot thisRobot_, int dashbordNumber_){
-        dashbordNumber = dashbordNumber_;
+    public Dashboard(Robot thisRobot_){
         thisRobot = thisRobot_;
         autoSelector = new SendableChooser<>();
         autoSelector.setDefaultOption(autoRoutines.values()[0].toString(), autoRoutines.values()[0].toString());
@@ -19,7 +18,7 @@ public class Dashboard {
             autoSelector.addOption(autoRoutines.values()[i].toString(),autoRoutines.values()[i].toString());
         }
 
-        SmartDashboard.putData("autoSelector", autoSelector);
+        SmartDashboard.putData("Auton Selector", autoSelector);
     }
 
     public void updateDashboard(){

@@ -20,7 +20,7 @@ import frc.robot.Subsystems.Wrist;
 public class Robot extends TimedRobot {
 
   //logic
-  public Dashboard dashboard = new Dashboard(this, Settings.dashboardNumber);
+  public Dashboard dashboard = new Dashboard(this);
   public TeleopController teleopController = new TeleopController(this);
   public AutoController autoController = new AutoController(this);
   public StateMachine stateMachine = new StateMachine(this);
