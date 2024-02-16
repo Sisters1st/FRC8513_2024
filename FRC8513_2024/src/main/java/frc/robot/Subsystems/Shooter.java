@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.Robot;
 import frc.robot.Settings;
 
@@ -24,6 +25,7 @@ public class Shooter {
     public double leftShooterGoalSpeed = 0;
     public double rightShooterGoalSpeed = 0;
     double feederVoltage = 0;
+    public AnalogInput feederSensorInput = new AnalogInput(Settings.feederSensorPort);
 
     public Shooter(Robot robotIn){
         thisRobot = robotIn;
@@ -47,31 +49,42 @@ public class Shooter {
     }
 
     public void applyShooterPower(){
+        double leftFF = leftShooterGoalSpeed * Settings.shooter_FF;
+        double rightFF = rightShooterGoalSpeed * Settings.shooter_FF;
+
         if(leftShooterGoalSpeed == 0){
             leftShooter.setVoltage(0);
         }else{
             double leftShooterPower = leftShooterPIDController.calculate(leftShooter.getEncoder().getVelocity(), leftShooterGoalSpeed);
-            leftShooter.setVoltage(leftShooterPower);
+            leftShooter.setVoltage(leftShooterPower + leftFF);
         }
         if(rightShooterGoalSpeed == 0){
             rightShooter.setVoltage(0);
         }else{
             double rightShooterPower = rightShooterPIDController.calculate(rightShooter.getEncoder().getVelocity(), rightShooterGoalSpeed);
-            rightShooter.setVoltage(rightShooterPower);
+            rightShooter.setVoltage(rightShooterPower + rightFF);
         }
 
         feederMotor.setVoltage(feederVoltage);
     }
 
     public boolean leftShooterInThreshold(){
-        if (Math.abs(leftShooter.getEncoder().getVelocity() - leftShooterGoalSpeed) < Settings.shooterThresholdValue);
-            return true;
-        }
+        return Math.abs(leftShooter.getEncoder().getVelocity() - leftShooterGoalSpeed) < Settings.shooterThresholdValue;
+    }
+
 
     public boolean rightShooterInThreshold(){
-        if (Math.abs(rightShooter.getEncoder().getVelocity() - rightShooterGoalSpeed) < Settings.shooterThresholdValue);
-            return true;
+        return Math.abs(rightShooter.getEncoder().getVelocity() - rightShooterGoalSpeed) < Settings.shooterThresholdValue;
+    }
+
+    public boolean intakeSensorSeesNote(){
+        if(Settings.useFeederSensor){
+            return feederSensorInput.getValue() > Settings.feederNoteThold;
+        } else {
+            return false;
         }
     }
+
+}
 
 

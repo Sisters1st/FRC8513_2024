@@ -42,7 +42,6 @@ public class Settings {
     public static double hc_P = 0.1;
     public static double hc_I = 0;
     public static double hc_D = 0;
-    public static double maxDeltaHeadingGoal = 0.01;
 
     //intake settings
     public static int leftIntakeMotorCANID = 51;
@@ -56,8 +55,6 @@ public class Settings {
     public static int armMotor2CANID = 15;
     public static double armInitRawEncoderValue = 0;
 
-    public static double armFF = 0;
-
     public static int arm1CurrentLimit = 30;
     public static int arm2CurentLimit = 30;
 
@@ -70,17 +67,13 @@ public class Settings {
     public static double ampArmPos = -41;
     public static double shootingArmPos = -19;
 
-    public static double armThold = 2;
+    public static double armThold = 5;
     public static double armMaxV = 1;
 
     //Wrist settings
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
     public static double wristInitRawEncoderValue = 0;
-
-    public static double wristReduction = 170;
-    public static double wristFF = 0;
-    public static double wristMaxV = 0.1;
 
     public static int wrist1CurrentLimit = 10;
     public static int wrist2CurrentLimit = 10;
@@ -91,31 +84,38 @@ public class Settings {
 
     public static double intakingWristPos = 3.5;
     public static double trapWristPos = 1;
-    public static double ampWristPos = 1;
-    public static double shootingWristPos = -1;
+    public static double ampWristPos = -1;
+    public static double shootingWristPos = -8;
 
-    public static double wristTHold = 2;
+    public static double wristTHold = 5;
+    public static double wristMaxV = 0.1;
 
     //Shooter settings
     public static int leftShooterCANID = 41;
     public static int rightShooterCANID = 42;
     public static int feederCANID = 58;
+    public static int feederSensorPort = 6; //on mxp
+    public static double feederNoteThold = 50;
+    public static boolean useFeederSensor = true;
 
-    public static double shooter_P = 0.001;
-    public static double shooter_I = 0;
+    public static double shooter_P = 0.002;
+    public static double shooter_I = 0.0005;
     public static double shooter_D = 0;
-
-    public static double shooterThresholdValue = 600;
+    public static double shooter_FF = 0.002;
+    
+    public static double shooterThresholdValue = 300;
+    public static double shotTime = 0.5;
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
     public static int feederCurrentLimit = 10;
 
-    public static int basicShooterSpeed = 800;
+    public static int basicShooterSpeed = 5000;
 
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;
     public static double feederIntakeVoltage = 8;
+
 
     //climber settings
 

@@ -1,19 +1,20 @@
-Set setpoints. 
-Fix rot to arm degrees ratio and set zero
-set rot to wrist degrees ratio and set zero
+1) basics
+    Set setpoints and test
+    feed in button
+    Tune arm PID
+    Tune wrist PID
+    Tune shooter PID
+    tune heading PID - tune, does this need profiling
+    return to driving after 0.5 second after shot
 
-discuss how to lay out autos
-    multiple paths 
-    action within path
-    what autos do we want
-    break up autos into paths
+2) autos
+    discuss how to lay out autos
+        multiple paths  
+        action within path
+        what autos do we want
+        break up autos into paths
 
-tuning PID on real robot
+3) pre comp
+    intake sensor
+    joystick 3 for emergency zeroing of arm wrist
 
-heading PID - tune, does this need profiling?
-
-shooter FF so P can be more aggressive
-
-joystick 3 for emergency zeroing of arm wrist
-
-return to driving after 0.5 second after shot

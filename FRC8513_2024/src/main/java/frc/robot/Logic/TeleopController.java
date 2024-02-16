@@ -83,7 +83,7 @@ public class TeleopController {
             thisRobot.drivebase.setGoalHeadingDeg(180);
         }
         if(driverXboxController.getRawButton(1)){
-            thisRobot.drivebase.setGoalHeadingDeg(90);
+            thisRobot.drivebase.setGoalHeadingDeg(-90);
         }
         if(driverXboxController.getRawButton(8)){
             thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d()));

@@ -52,18 +52,11 @@ public class Wrist {
 
 
         double pidPower = wristPidController.calculate(wristMotor1.getEncoder().getPosition(), wristGoalPos);
-        double ffPower = calculateFFTerm();
 
-        wristMotor1.setVoltage((pidPower + ffPower) * 12);
-        wristMotor2.setVoltage(-(pidPower + ffPower) * 12);
+        wristMotor1.setVoltage((pidPower) * 12);
+        wristMotor2.setVoltage(-(pidPower) * 12);
     }
 
-    public double calculateFFTerm(){
-        double cosOfAng = Math.cos(getWristPos());
-        double ffPower = cosOfAng * Settings.wristFF;
-
-        return ffPower;
-    }
 
     public boolean wristWithinThold(){
         return Math.abs(wristPos-wristGoalPos) < Settings.wristTHold;
