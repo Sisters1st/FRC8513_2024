@@ -42,7 +42,10 @@ public class TeleopController {
     }
 
     public void periodic(){
-        if(Settings.manualTestingControl){
+        if(Settings.manualTestingControl || 
+            (manualControlJoystick.getRawButton(Settings.enableManualControlButton1) 
+            && manualControlJoystick.getRawButton(Settings.enableManualControlButton2)))
+        {
             manualControl();
 
         } else {
@@ -109,6 +112,7 @@ public class TeleopController {
         thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
     }
 
+    //needs to be tested on robot
     public void manualControl(){
 
         if(manualControlJoystick.getRawButton(Settings.manualResetZeroButton)){
@@ -130,6 +134,9 @@ public class TeleopController {
         thisRobot.arm.armMotor2.set(-armJoystick);
         thisRobot.wrist.wristMotor1.set(wristJoystick);
         thisRobot.wrist.wristMotor2.set(-wristJoystick);
-    }
-    
+        thisRobot.shooter.setShooterSpeeds(0,0,0);
+        thisRobot.intake.setIntakeVoltage(0);
+        thisRobot.climber.climberMotor1.set(0);
+        thisRobot.climber.climberMotor2.set(0);
+    } 
 }

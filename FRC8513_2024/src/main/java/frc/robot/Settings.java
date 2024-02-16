@@ -40,6 +40,8 @@ public class Settings {
     public static int manualControlArmAxis = 1;
     public static int manualControlWristAxis = 5;
     public static int manualResetZeroButton = 1;
+    public static int enableManualControlButton1 = 5;
+    public static int enableManualControlButton2 = 6;
 
     //pdh settings
     public static int pdhCANID = 1;
