@@ -15,13 +15,20 @@ public class Settings {
     public static boolean usePhoton = false;
     public static String photonName = "photonvision";
 
-    //joystick settings
+    //driver joystick settings
     public static int driverJoystickPort = 0;
-    public static int driver_fieldCentricButton = 5;
     public static double joystickDeadband = 0.01;
     public static double rotJoyRate = 1;
     public static boolean manualTestingControl = false;
 
+    public static int leftRightAxis = 0;
+    public static int forwardBackwardsAxis = 1;
+    public static int rotAxis = 2;
+    public static int resetFieldCentricButton = 8;
+    public static int snapToSpeakerButton = 5;
+    public static int snapToAmpButton = 1;
+    public static int aimAtSpeakerButton = 2;
+    
     //Button pannel settings
     public static int buttonPannelPort = 1;
     public static int intakeButton = 1;

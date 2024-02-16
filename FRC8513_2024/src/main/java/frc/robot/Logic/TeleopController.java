@@ -57,17 +57,23 @@ public class TeleopController {
     }
 
     public void driveTele(){
-        double xSpeedJoystick = -driverXboxController.getRawAxis(1); //forward back
+        double xSpeedJoystick = -driverXboxController.getRawAxis(Settings.forwardBackwardsAxis); //forward back
         if(xSpeedJoystick < Settings.joystickDeadband && xSpeedJoystick > -Settings.joystickDeadband){
             xSpeedJoystick = 0;
         }
-        double ySpeedJoystick = -driverXboxController.getRawAxis(0); //left right
+
+        double ySpeedJoystick = -driverXboxController.getRawAxis(Settings.leftRightAxis); //left right
          if(ySpeedJoystick < Settings.joystickDeadband && ySpeedJoystick > -Settings.joystickDeadband){
             ySpeedJoystick = 0;
         }
-        double rSpeedJoystick = -driverXboxController.getRawAxis(4); //left right 2 at home, 4 on xbox
+        double rSpeedJoystick = -driverXboxController.getRawAxis(Settings.rotAxis); //left right 2 at home, 4 on xbox
          if(rSpeedJoystick < Settings.joystickDeadband && rSpeedJoystick > -Settings.joystickDeadband){
             rSpeedJoystick = 0;
+        }
+
+        if(thisRobot.onRedAlliance){
+            xSpeedJoystick = -xSpeedJoystick;
+            ySpeedJoystick = -ySpeedJoystick;
         }
 
         double xInput = Math.pow(xSpeedJoystick, 3); // Smooth controll out
@@ -78,18 +84,20 @@ public class TeleopController {
         double rV = rSpeedJoystick;
         thisRobot.drivebase.goalHeading = thisRobot.drivebase.swerveDrive.getPose().getRotation().plus(new Rotation2d(rV * Settings.rotJoyRate));
         
-        if(driverXboxController.getRawButton(5)){
-            thisRobot.drivebase.setGoalHeadingDeg(0);
+        if(driverXboxController.getRawButton(Settings.snapToSpeakerButton)){
+            if(thisRobot.onRedAlliance){
+                thisRobot.drivebase.setGoalHeadingDeg(180);
+            } else {
+                thisRobot.drivebase.setGoalHeadingDeg(0);
+            }
         }
-        if(driverXboxController.getRawButton(6)){
-            thisRobot.drivebase.setGoalHeadingDeg(180);
-        }
-        if(driverXboxController.getRawButton(1)){
-            thisRobot.drivebase.setGoalHeadingDeg(-90);
+
+        if(driverXboxController.getRawButton(Settings.snapToAmpButton)){
+            thisRobot.drivebase.setGoalHeadingDeg(90);
         }
 
         //if button 8 is pressed, reset the heading
-        if(driverXboxController.getRawButton(8)){
+        if(driverXboxController.getRawButton(Settings.resetFieldCentricButton)){
             //if we are red, set to 180 degrees (towards blue) as the zero 
           if(thisRobot.onRedAlliance){
                 thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d(Math.PI)));
@@ -98,17 +106,16 @@ public class TeleopController {
                 thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d()));
                 thisRobot.drivebase.goalHeading = new Rotation2d(0);
             }
-            
-            
-            
         }
-        if(driverXboxController.getRawButton(16)){
+        
+        if(driverXboxController.getRawButton(Settings.aimAtSpeakerButton)){
             if(thisRobot.onRedAlliance){
                 thisRobot.drivebase.aimAtPoint(Settings.redGoalPos);
             }else{
                 thisRobot.drivebase.aimAtPoint(Settings.blueGoalPos);
             }
         }
+
         thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
     }
 
