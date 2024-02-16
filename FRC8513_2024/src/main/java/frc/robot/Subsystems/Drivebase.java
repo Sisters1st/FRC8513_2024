@@ -61,7 +61,7 @@ public class Drivebase {
   AprilTagFieldLayout aprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
   PhotonPoseEstimator photonPoseEstimator;
 
-  Transform3d robotToCam = new Transform3d(new Translation3d(-6, 0, 0.35), new Rotation3d(0, .47, Math.PI));
+  Transform3d robotToCam = new Transform3d(new Translation3d(-.27, 0, 0.35), new Rotation3d(0, .47, Math.PI));
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
