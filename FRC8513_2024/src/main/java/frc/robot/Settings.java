@@ -31,6 +31,7 @@ public class Settings {
     
     //Button pannel settings
     public static int buttonPannelPort = 1;
+    
     public static int intakeButton = 1;
     public static int drivingStateReturnButton = 2;
     public static int shootInSpeakerButton = 3;

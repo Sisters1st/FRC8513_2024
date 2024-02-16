@@ -31,6 +31,10 @@ public class Wrist {
 
         wristMotor1.setIdleMode(IdleMode.kBrake);
         wristMotor2.setIdleMode(IdleMode.kBrake);
+
+        wristMotor1.getEncoder().setPositionConversionFactor(1);
+        wristMotor2.getEncoder().setPositionConversionFactor(1);
+
     }
 
     public void setWristPos(double pos){
@@ -49,7 +53,6 @@ public class Wrist {
          if(calculatedWristGoal > wristGoalPos){
             calculatedWristGoal = calculatedWristGoal - Settings.wristMaxV;
         }
-
 
         double pidPower = wristPidController.calculate(wristMotor1.getEncoder().getPosition(), wristGoalPos);
 

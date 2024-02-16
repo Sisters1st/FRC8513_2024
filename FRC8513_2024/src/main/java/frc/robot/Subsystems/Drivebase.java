@@ -88,7 +88,7 @@ public class Drivebase {
         photonPoseEstimator.setReferencePose(swerveDrive.getPose());
         Optional<EstimatedRobotPose> photonGuess = photonPoseEstimator.update();
         if(photonGuess.isPresent()){
-          swerveDrive.addVisionMeasurement(photonGuess.get().estimatedPose.toPose2d(), photonGuess.get().timestampSeconds);
+          swerveDrive.addVisionMeasurement(photonGuess.get().estimatedPose.toPose2d(), Timer.getFPGATimestamp() - photonGuess.get().timestampSeconds);
         }
 
       }

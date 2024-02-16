@@ -20,7 +20,4 @@ public class Climber {
         climberMotor2.setSmartCurrentLimit(Settings.climberMotorCurrentLimit);
         
     }
-
-
-    
 }

@@ -23,8 +23,8 @@ public class Intake {
         leftIntakeMotor.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
         rightIntakeMotor.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
 
-        leftIntakeMotor.setIdleMode(IdleMode.kBrake);
-        rightIntakeMotor.setIdleMode(IdleMode.kBrake);
+        leftIntakeMotor.setIdleMode(IdleMode.kCoast);
+        rightIntakeMotor.setIdleMode(IdleMode.kCoast);
 
     }
 

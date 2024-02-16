@@ -54,7 +54,7 @@ public class Arm {
             calculatedArmGoal = calculatedArmGoal - Settings.armMaxV;
         }
 
-        double pidPower = armPidController.calculate(armMotor1.getEncoder().getPosition(), calculatedArmGoal);
+        double pidPower = armPidController.calculate(getArmPosition(), calculatedArmGoal);
 
         armMotor1.setVoltage((pidPower) * 12);
         armMotor2.setVoltage(-(pidPower) * 12);

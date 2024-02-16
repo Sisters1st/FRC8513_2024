@@ -1,6 +1,4 @@
 1) basics
-    manual intake in and out
-    
     Set setpoints and test
     feed in button
     Tune arm PID
@@ -14,8 +12,9 @@
         action within path
         what autos do we want
         break up autos into paths
+    test auto consistancy on basic auto
+    simulate photon vision?
 
-3) pre comp
-    intake sensor
-    joystick 3 for emergency zeroing of arm wrist
-
+3) before comp 
+    make sure all programmers can explain code
+    comments (javadocs?)
