@@ -55,7 +55,8 @@ public class StateMachine {
             case SPEEDING_UP_SHOOTER_SPEAKER:
                     
                 armPos = Settings.shootingArmPos;
-                wristPos = Settings.shootingWristPos;
+                wristPos = thisRobot.wrist.getWristPos() + 0.1 * thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
+
                 feederV = intakeVoltage = 0;
                 
                 checkAllButtonsForStateChanges();
