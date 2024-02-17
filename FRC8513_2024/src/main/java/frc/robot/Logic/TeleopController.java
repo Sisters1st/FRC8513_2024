@@ -131,12 +131,12 @@ public class TeleopController {
             thisRobot.wrist.wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
         }
 
-        double armJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlArmAxis) * 0.2; //forward back
+        double armJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlArmAxis)/10; //forward back
         if(armJoystick < Settings.joystickDeadband && armJoystick > -Settings.joystickDeadband){
             armJoystick = 0;
         }
 
-        double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis)* 0.2; //left right
+        double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis)/10; //left right
         if(wristJoystick < Settings.joystickDeadband && wristJoystick > -Settings.joystickDeadband){
             wristJoystick = 0;
         }
@@ -145,7 +145,7 @@ public class TeleopController {
         thisRobot.arm.armMotor2.set(-armJoystick);
         thisRobot.wrist.wristMotor1.set(wristJoystick);
         thisRobot.wrist.wristMotor2.set(-wristJoystick);
-        thisRobot.shooter.setShooterSpeeds(0,0,0);
+        thisRobot.shooter.setShooterSpeeds(0,0);
         thisRobot.intake.setIntakeVoltage(0);
         thisRobot.climber.climberMotor1.set(0);
         thisRobot.climber.climberMotor2.set(0);

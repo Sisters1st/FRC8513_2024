@@ -6,6 +6,8 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.Robot;
 import frc.robot.Settings;
@@ -39,9 +41,9 @@ public class Shooter {
         feederMotor.setIdleMode(IdleMode.kBrake);
     }
 
-    public void setShooterSpeeds(double lss, double rss, double feeder){
-        leftShooterGoalSpeed = -lss;
-        rightShooterGoalSpeed = rss;
+    public void setShooterSpeeds(double shooterSpeed, double feeder){
+        leftShooterGoalSpeed = -shooterSpeed * Settings.leftRightShooterSpeedOffset;
+        rightShooterGoalSpeed = shooterSpeed * (1/Settings.leftRightShooterSpeedOffset);
         feederVoltage = feeder;
         rightShooterPIDController.reset();
         leftShooterPIDController.reset();
@@ -49,8 +51,9 @@ public class Shooter {
     }
 
     public void applyShooterPower(){
-        double leftFF = leftShooterGoalSpeed * Settings.shooter_FF;
-        double rightFF = rightShooterGoalSpeed * Settings.shooter_FF;
+        //left shooter is negative speed, with negative power, so we need to add
+        double leftFF = leftShooterGoalSpeed * Settings.shooter_FF + Settings.shooter_FF_const;
+        double rightFF = rightShooterGoalSpeed * Settings.shooter_FF - Settings.shooter_FF_const;
 
         if(leftShooterGoalSpeed == 0){
             leftShooter.setVoltage(0);
@@ -83,6 +86,17 @@ public class Shooter {
         } else {
             return false;
         }
+    }
+
+    public double getDistFromGoal(){
+        double temp =-1;
+        if(thisRobot.onRedAlliance){
+            temp = thisRobot.drivebase.swerveDrive.getPose().minus(new Pose2d(Settings.redGoalPos, new Rotation2d())).getTranslation().getNorm();
+       
+        } else {
+            temp = thisRobot.drivebase.swerveDrive.getPose().minus(new Pose2d(Settings.blueGoalPos, new Rotation2d())).getTranslation().getNorm();
+        }
+        return temp;
     }
 
 }

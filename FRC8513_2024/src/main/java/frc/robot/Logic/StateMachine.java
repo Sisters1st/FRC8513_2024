@@ -10,14 +10,14 @@ public class StateMachine {
     public robotStates robotState = robotStates.DRIVING;    
     double lastStateChangeTime = 0;
     double shotStartedTime = -1;
+    boolean comittedToShot = false;
 
     //each of the subsystem vars to keep track of
     double feederV = 0;
     double armPos = 0;
     double wristPos = 0;
     double intakeVoltage = 0;
-    double lss = 0;
-    double rss = 0;
+    double ss = 0;
 
     public StateMachine(Robot robotIn){
         thisRobot = robotIn;
@@ -29,7 +29,7 @@ public class StateMachine {
             case DRIVING:
                 armPos = Settings.intakingArmPos;
                 wristPos = Settings.intakingWristPos;
-                lss = rss = feederV = intakeVoltage = 0;
+                ss = feederV = intakeVoltage = 0;
                 freeFeederControl();
                 checkAllButtonsForStateChanges();
                 freeIntakeControl();
@@ -41,7 +41,7 @@ public class StateMachine {
                 wristPos = Settings.intakingWristPos;
                 intakeVoltage = Settings.intakingVoltage;
                 feederV = Settings.feederIntakeVoltage;
-                lss = rss = 0;
+                ss = 0;
 
                 //if sensor gets tripped, go back to driving
                 if(thisRobot.shooter.intakeSensorSeesNote()){
@@ -49,45 +49,63 @@ public class StateMachine {
                     lastStateChangeTime = Timer.getFPGATimestamp();
                 }
                 checkAllButtonsForStateChanges();
-                
                 break;
 
             case SPEEDING_UP_SHOOTER_SPEAKER:
                     
                 armPos = Settings.shootingArmPos;
-                wristPos = Settings.shootingWristPos;
+                wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
+
                 feederV = intakeVoltage = 0;
                 
                 checkAllButtonsForStateChanges();
+                shotStartedTime = -1;
+                ss = Settings.basicShooterSpeed;
+                feederV = 0;
+                comittedToShot = false;
+
+                robotState = robotStates.SHOOTING;
+
+                freeIntakeControl();
+                freeFeederControl();
+                break;
+
+            case SHOOTING:
+                armPos = Settings.shootingArmPos;
+                wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
+                feederV = intakeVoltage = 0;
+                
+                checkAllButtonsForStateChanges();
+                feederV = 0;
 
                 if((thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()  &&
-                    thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold())){
+                    thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold()) || comittedToShot){
                    
-                    lss = rss = Settings.basicShooterSpeed;
+                    ss = Settings.basicShooterSpeed;
                     feederV = Settings.feederIntakeVoltage;
 
                     if(shotStartedTime == -1){
                         shotStartedTime = Timer.getFPGATimestamp();
+                        comittedToShot = true;
                     }
+                    
                     if(Timer.getFPGATimestamp() - shotStartedTime > Settings.shotTime){
                         robotState = robotStates.DRIVING;
                     }
                           
                 } else {
-                    shotStartedTime = -1;
-                    lss = rss = Settings.basicShooterSpeed;
+                    ss = Settings.basicShooterSpeed;
                     feederV = 0;
                 }
 
                 freeIntakeControl();
                 freeFeederControl();
                 break;
-
             case CLIMBING:
 
                 armPos = Settings.trapArmPos;
                 wristPos = Settings.trapWristPos;
-                lss = rss = feederV = intakeVoltage = 0;
+                ss = feederV = intakeVoltage = 0;
 
                 checkAllButtonsForStateChanges();
                 freeFeederControl();
@@ -112,7 +130,7 @@ public class StateMachine {
                 
                 armPos = Settings.ampArmPos;
                 wristPos = Settings.ampWristPos;
-                lss = rss = feederV = intakeVoltage = 0;
+                ss = feederV = intakeVoltage = 0;
                 freeFeederControl();
                 checkAllButtonsForStateChanges();
                 freeIntakeControl();
@@ -125,7 +143,7 @@ public class StateMachine {
         thisRobot.arm.setArmPosition(armPos);
         thisRobot.wrist.setWristPos(wristPos);
         thisRobot.intake.setIntakeVoltage(intakeVoltage);
-        thisRobot.shooter.setShooterSpeeds(lss, rss, feederV);
+        thisRobot.shooter.setShooterSpeeds(ss, feederV);
 
     }
 
@@ -165,6 +183,16 @@ public class StateMachine {
             robotState = robotStates.DRIVING;
             lastStateChangeTime = Timer.getFPGATimestamp();
         }
+    }
+
+    public double getWristAngFromDist(double dist){
+        double a3 = 2.6;
+        double a2 = -9.32;
+        double a1 = 1.44; 
+        double a0 = 1.62;
+
+        double wristVal = a3 * Math.pow(dist, 3) + a2 * Math.pow(dist, 2) + a1 * dist + a0;
+        return wristVal;
     }
 
     public enum robotStates {

@@ -77,16 +77,20 @@ public class Settings {
     public static int arm2CurentLimit = 30;
 
     public static double armPID_P = 0.1;
-    public static double armPID_I = 0;
+    public static double armPID_I = 0.3;
     public static double armPID_D = 0;
+    public static double armPID_IZ = 3;
 
     public static double intakingArmPos = -4;
     public static double trapArmPos = -56;
     public static double ampArmPos = -41;
     public static double shootingArmPos = -19;
 
-    public static double armThold = 5;
-    public static double armMaxV = 1;
+    public static double armThold = 1;
+    public static double armMaxV = 2;
+
+    public static double armMaxPos = 0;
+    public static double armMinPos = -55;
 
     //Wrist settings
     public static int wristMotor1CANID = 60;
@@ -96,17 +100,21 @@ public class Settings {
     public static int wrist1CurrentLimit = 10;
     public static int wrist2CurrentLimit = 10;
 
-    public static double wristPID_P = 0.1;
-    public static double wristPID_I = 0;
+    public static double wristPID_P = 0.05;
+    public static double wristPID_I = 0.1;
     public static double wristPID_D = 0;
+    public static double wristPID_IZ = 2;
 
     public static double intakingWristPos = 3.5;
     public static double trapWristPos = 1;
     public static double ampWristPos = -1;
     public static double shootingWristPos = -7;
 
-    public static double wristTHold = 5;
-    public static double wristMaxV = 0.1;
+    public static double wristTHold = 1;
+    public static double wristMaxV = 0.15;
+
+    public static double wristMaxPos = 13;
+    public static double wristMinPos = -15;
 
     //Shooter settings
     public static int leftShooterCANID = 41;
@@ -117,18 +125,20 @@ public class Settings {
     public static boolean useFeederSensor = true;
 
     public static double shooter_P = 0.002;
-    public static double shooter_I = 0.0005;
+    public static double shooter_I = 0;
     public static double shooter_D = 0;
-    public static double shooter_FF = 0.002;
+    public static double shooter_FF = 0.0021;
+    public static double shooter_FF_const = 1.42;
     
-    public static double shooterThresholdValue = 300;
-    public static double shotTime = 0.5;
+    public static double shooterThresholdValue = 150;
+    public static double shotTime = 0.8;
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
     public static int feederCurrentLimit = 10;
 
-    public static int basicShooterSpeed = 5000;
+    public static int basicShooterSpeed = 5250;
+    public static double leftRightShooterSpeedOffset = 0.9;
 
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;

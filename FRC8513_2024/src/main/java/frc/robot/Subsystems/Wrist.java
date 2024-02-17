@@ -35,9 +35,17 @@ public class Wrist {
         wristMotor1.getEncoder().setPositionConversionFactor(1);
         wristMotor2.getEncoder().setPositionConversionFactor(1);
 
+        wristPidController.setIZone(Settings.wristPID_IZ);
+
     }
 
     public void setWristPos(double pos){
+        if(pos > Settings.wristMaxPos){
+            pos = Settings.wristMaxPos;
+        }
+        if(pos < Settings.wristMinPos){
+            pos = Settings.wristMinPos;
+        }
         wristGoalPos = pos;
     }
 
@@ -62,7 +70,7 @@ public class Wrist {
 
 
     public boolean wristWithinThold(){
-        return Math.abs(wristPos-wristGoalPos) < Settings.wristTHold;
+        return Math.abs(getWristPos()-wristGoalPos) < Settings.wristTHold;
     }
     
 }

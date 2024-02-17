@@ -7,7 +7,6 @@ import frc.robot.Settings;
 import frc.robot.Logic.AutoController.autoRoutines;
 
 public class Dashboard {
-    int dashbordNumber = 0;
     Robot thisRobot;
     public SendableChooser<String> autoSelector;
 
@@ -35,13 +34,14 @@ public class Dashboard {
         SmartDashboard.putNumber("AutoStep", thisRobot.autoController.autoStep);
 
         //drivebase info
-        SmartDashboard.putNumber("trajGoalX", thisRobot.drivebase.goalState.positionMeters.getX());
-        SmartDashboard.putNumber("trajGoalY", thisRobot.drivebase.goalState.positionMeters.getY());
+        SmartDashboard.putNumber("trajGoalXP", thisRobot.drivebase.goalState.positionMeters.getX());
+        SmartDashboard.putNumber("trajGoalYP", thisRobot.drivebase.goalState.positionMeters.getY());
         SmartDashboard.putNumber("Goalheading", thisRobot.drivebase.goalHeading.getDegrees());
 
         SmartDashboard.putNumber("trajXV", thisRobot.drivebase.ajustedV.getX());
         SmartDashboard.putNumber("trajYV", thisRobot.drivebase.ajustedV.getY());
         SmartDashboard.putNumber("trajRotV", thisRobot.drivebase.rotCorrection);
+        SmartDashboard.putNumber("DistToGoal", thisRobot.shooter.getDistFromGoal());
         
         //armInfo
         SmartDashboard.putNumber("ArmPos", thisRobot.arm.getArmPosition());
@@ -53,20 +53,26 @@ public class Dashboard {
         //wristInfo
         SmartDashboard.putNumber("WristPos", thisRobot.wrist.getWristPos());
         SmartDashboard.putNumber("WristGoalPos", thisRobot.wrist.wristGoalPos);
-        SmartDashboard.putNumber("calculatedWristmGoal", thisRobot.wrist.calculatedWristGoal);
+        SmartDashboard.putNumber("calculatedWristGoal", thisRobot.wrist.calculatedWristGoal);
         SmartDashboard.putBoolean("WristInThold", thisRobot.wrist.wristWithinThold());
+        SmartDashboard.putNumber("WristFromDist", thisRobot.stateMachine.getWristAngFromDist(thisRobot.shooter.getDistFromGoal()));
 
         //shooter infor
-        SmartDashboard.putNumber("ShooterSpeed", thisRobot.shooter.leftShooter.getEncoder().getVelocity());
-        SmartDashboard.putNumber("ShooterGoalSpeed", thisRobot.shooter.leftShooterGoalSpeed);
-        SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
+        SmartDashboard.putNumber("ShooterLeftSpeed", thisRobot.shooter.leftShooter.getEncoder().getVelocity());
+        SmartDashboard.putNumber("ShooterLeftGoalSpeed", thisRobot.shooter.leftShooterGoalSpeed);
+        SmartDashboard.putNumber("ShooterRightSpeed", thisRobot.shooter.rightShooter.getEncoder().getVelocity());
+        SmartDashboard.putNumber("ShooterRightGoalSpeed", thisRobot.shooter.rightShooterGoalSpeed);
         SmartDashboard.putBoolean("ShooterInThold", thisRobot.shooter.leftShooterInThreshold() && thisRobot.shooter.rightShooterInThreshold());
+        
+        SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
         SmartDashboard.putNumber("feederSensor", thisRobot.shooter.feederSensorInput.getValue());
+        
         //intake info
         SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.getAppliedOutput());
 
         //climber info
-        SmartDashboard.putNumber("climberPower", thisRobot.climber.climberMotor1.getAppliedOutput());
+        SmartDashboard.putNumber("leftClimberPower", thisRobot.climber.climberMotor1.getAppliedOutput());
+        SmartDashboard.putNumber("rightClimberPower", thisRobot.climber.climberMotor2.getAppliedOutput());
             
     }
 }

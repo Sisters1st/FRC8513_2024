@@ -2,9 +2,6 @@ package frc.robot.Subsystems;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
-
-import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.PhotonPoseEstimator.PoseStrategy;
@@ -15,9 +12,7 @@ import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
-import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -89,12 +84,10 @@ public class Drivebase {
     if(Settings.usePhoton){
       var result = camera.getLatestResult();
       if (result.getMultiTagResult().estimatedPose.isPresent) {
-        Optional<EstimatedRobotPose> photonPose = photonPoseEstimator.update(result);
-        //System.out.println("GotMultiTagPNP");
-        if(photonPose.isPresent()){
-          //System.out.println("posePresent");
-          swerveDrive.addVisionMeasurement(photonPose.get().estimatedPose.toPose2d(), result.getTimestampSeconds());
-        }
+        Pose3d photonPose = new Pose3d(result.getMultiTagResult().estimatedPose.best.getTranslation(), result.getMultiTagResult().estimatedPose.best.getRotation()); 
+        photonPose = photonPose.plus(robotToCam);
+        swerveDrive.addVisionMeasurement(photonPose.toPose2d(), result.getTimestampSeconds());
+      
       }
     }
   }
