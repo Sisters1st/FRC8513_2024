@@ -103,7 +103,7 @@ public class Settings {
     public static double intakingWristPos = 3.5;
     public static double trapWristPos = 1;
     public static double ampWristPos = -1;
-    public static double shootingWristPos = -8;
+    public static double shootingWristPos = -7;
 
     public static double wristTHold = 5;
     public static double wristMaxV = 0.1;

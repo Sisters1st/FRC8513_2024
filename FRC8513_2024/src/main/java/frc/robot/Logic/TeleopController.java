@@ -131,12 +131,12 @@ public class TeleopController {
             thisRobot.wrist.wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
         }
 
-        double armJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlArmAxis); //forward back
+        double armJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlArmAxis) * 0.2; //forward back
         if(armJoystick < Settings.joystickDeadband && armJoystick > -Settings.joystickDeadband){
             armJoystick = 0;
         }
 
-        double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis); //left right
+        double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis)* 0.2; //left right
         if(wristJoystick < Settings.joystickDeadband && wristJoystick > -Settings.joystickDeadband){
             wristJoystick = 0;
         }
