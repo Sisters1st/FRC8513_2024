@@ -89,6 +89,9 @@ public class Settings {
     public static double armThold = 1;
     public static double armMaxV = 2;
 
+    public static double armMaxPos = 0;
+    public static double armMinPos = -55;
+
     //Wrist settings
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
@@ -109,6 +112,9 @@ public class Settings {
 
     public static double wristTHold = 1;
     public static double wristMaxV = 0.15;
+
+    public static double wristMaxPos = 13;
+    public static double wristMinPos = -15;
 
     //Shooter settings
     public static int leftShooterCANID = 41;

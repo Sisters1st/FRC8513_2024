@@ -40,6 +40,12 @@ public class Wrist {
     }
 
     public void setWristPos(double pos){
+        if(pos > Settings.wristMaxPos){
+            pos = Settings.wristMaxPos;
+        }
+        if(pos < Settings.wristMinPos){
+            pos = Settings.wristMinPos;
+        }
         wristGoalPos = pos;
     }
 

@@ -40,6 +40,12 @@ public class Arm {
     }
 
     public void setArmPosition(double pos){
+        if(pos > Settings.armMaxPos){
+            pos = Settings.armMaxPos;
+        }
+        if(pos < Settings.armMinPos){
+            pos = Settings.armMinPos;
+        }
         armGoalPos = pos;
     }
 

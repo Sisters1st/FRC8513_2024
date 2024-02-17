@@ -1,27 +1,13 @@
-2-17
-detemine shooter max speed and speed at 2v to determine ff term
-tune shooter pid
-
-increase arm wrist speeds and tune pid
-make sure work with externa force
-
-check LL dist and robot center distance 
-
-off distance set wrist ang
+2-19
 auto drive to amp
 intake jiggle
-
-1) basics
-    Set setpoints and test
-    Tune arm PID
-    Tune wrist PID
-    Tune shooter PID
-    tune heading PID - tune, does this need profiling
+if no vision, have defauly wrist pos for close shot
 
 2) teleop
     drive to point
         pid xy or on the fly path generation??
     test climbing
+    profile auto snap to angle
 
 
 3) autos
