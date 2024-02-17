@@ -28,7 +28,7 @@ public class Settings {
     public static int resetFieldCentricButton = 8;
     public static int snapToSpeakerButton = 5;
     public static int snapToAmpButton = 1;
-    public static int aimAtSpeakerButton = 2;
+    public static int aimAtSpeakerButton = 6;
     
     //Button pannel settings
     public static int buttonPannelPort = 1;
