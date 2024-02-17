@@ -82,7 +82,9 @@ public class TeleopController {
         double xV = xInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double yV = yInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double rV = rSpeedJoystick;
-        thisRobot.drivebase.goalHeading = thisRobot.drivebase.swerveDrive.getPose().getRotation().plus(new Rotation2d(rV * Settings.rotJoyRate));
+        if(rV != 0){
+            thisRobot.drivebase.goalHeading = thisRobot.drivebase.swerveDrive.getPose().getRotation().plus(new Rotation2d(rV * Settings.rotJoyRate));
+        }
         
         if(driverXboxController.getRawButton(Settings.snapToSpeakerButton)){
             if(thisRobot.onRedAlliance){
