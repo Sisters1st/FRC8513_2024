@@ -1,10 +1,15 @@
+2-17
+detemine shooter max speed and speed at 2v to determine ff term
+tune shooter pid
+
+increase arm wrist speeds and tune pid
+make sure work with externa force
+
+check LL dist and robot center distance 
+
+off distance set wrist ang
 auto drive to amp
 intake jiggle
-
-2-17
-shooter pid
-arm wrist pid and speed
-off distance set pid
 
 1) basics
     Set setpoints and test

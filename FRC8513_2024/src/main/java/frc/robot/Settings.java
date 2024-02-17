@@ -12,7 +12,7 @@ public class Settings {
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
 
     //vision settings
-    public static boolean usePhoton = false;
+    public static boolean usePhoton = true;
     public static String photonName = "LLCamera";
     //ip for photon: http://10.85.13.26:5800/#/dashboard
 
@@ -128,7 +128,7 @@ public class Settings {
     public static int shooter2CurrentLimit = 30;
     public static int feederCurrentLimit = 10;
 
-    public static int basicShooterSpeed = 5000;
+    public static int basicShooterSpeed = 8000;
 
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;
