@@ -67,6 +67,7 @@ public class Settings {
 
     public static int intakeMotorCurrnetLimit = 30;
     public static double intakingVoltage = 12;
+    public static double noteShimmyTime = 1;
 
     //Arm settings
     public static int armMotor1CANID = 14;

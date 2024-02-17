@@ -11,6 +11,7 @@ public class StateMachine {
     double lastStateChangeTime = 0;
     double shotStartedTime = -1;
     boolean comittedToShot = false;
+    double noteHitSensorTime = 0;
 
     //each of the subsystem vars to keep track of
     double feederV = 0;
@@ -47,6 +48,7 @@ public class StateMachine {
                 if(thisRobot.shooter.intakeSensorSeesNote()){
                     robotState = robotStates.DRIVING;
                     lastStateChangeTime = Timer.getFPGATimestamp();
+                    noteHitSensorTime = Timer.getFPGATimestamp();
                 }
                 checkAllButtonsForStateChanges();
                 break;
@@ -142,6 +144,17 @@ public class StateMachine {
 
         thisRobot.arm.setArmPosition(armPos);
         thisRobot.wrist.setWristPos(wristPos);
+        double timeSinceLastSensorHit = Timer.getFPGATimestamp() - noteHitSensorTime;
+        if(timeSinceLastSensorHit < Settings.noteShimmyTime){
+            int shimmyCount = (int)(timeSinceLastSensorHit * 10);
+            if(shimmyCount % 2 == 0){
+                thisRobot.intake.setIntakeVoltage(Settings.feederIntakeVoltage);
+            } else {
+                thisRobot.intake.setIntakeVoltage(-Settings.feederIntakeVoltage);
+            }
+        } else {
+            thisRobot.intake.setIntakeVoltage(intakeVoltage);
+        }
         thisRobot.intake.setIntakeVoltage(intakeVoltage);
         thisRobot.shooter.setShooterSpeeds(ss, feederV);
 
