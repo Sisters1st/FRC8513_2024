@@ -42,6 +42,7 @@ public class Dashboard {
         SmartDashboard.putNumber("trajXV", thisRobot.drivebase.ajustedV.getX());
         SmartDashboard.putNumber("trajYV", thisRobot.drivebase.ajustedV.getY());
         SmartDashboard.putNumber("trajRotV", thisRobot.drivebase.rotCorrection);
+        SmartDashboard.putNumber("DistToBlueGoal", thisRobot.shooter.getDistFromGoal());
         
         //armInfo
         SmartDashboard.putNumber("ArmPos", thisRobot.arm.getArmPosition());
@@ -55,10 +56,15 @@ public class Dashboard {
         SmartDashboard.putNumber("WristGoalPos", thisRobot.wrist.wristGoalPos);
         SmartDashboard.putNumber("calculatedWristmGoal", thisRobot.wrist.calculatedWristGoal);
         SmartDashboard.putBoolean("WristInThold", thisRobot.wrist.wristWithinThold());
+        SmartDashboard.putNumber("WristFromDist", thisRobot.stateMachine.getWristAngFromDist(thisRobot.shooter.getDistFromGoal()));
 
         //shooter infor
-        SmartDashboard.putNumber("ShooterSpeed", thisRobot.shooter.leftShooter.getEncoder().getVelocity());
-        SmartDashboard.putNumber("ShooterGoalSpeed", thisRobot.shooter.leftShooterGoalSpeed);
+        SmartDashboard.putNumber("ShooterLeftSpeed", thisRobot.shooter.leftShooter.getEncoder().getVelocity());
+        SmartDashboard.putNumber("ShooterLeftGoalSpeed", thisRobot.shooter.leftShooterGoalSpeed);
+
+        SmartDashboard.putNumber("ShooterRightSpeed", thisRobot.shooter.rightShooter.getEncoder().getVelocity());
+        SmartDashboard.putNumber("ShooterRightGoalSpeed", thisRobot.shooter.rightShooterGoalSpeed);
+
         SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
         SmartDashboard.putBoolean("ShooterInThold", thisRobot.shooter.leftShooterInThreshold() && thisRobot.shooter.rightShooterInThreshold());
         SmartDashboard.putNumber("feederSensor", thisRobot.shooter.feederSensorInput.getValue());

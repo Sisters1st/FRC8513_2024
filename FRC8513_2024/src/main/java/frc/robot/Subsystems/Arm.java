@@ -35,6 +35,8 @@ public class Arm {
         armMotor1.getEncoder().setPositionConversionFactor(1);
         armMotor2.getEncoder().setPositionConversionFactor(1);
 
+        armPidController.setIZone(Settings.armPID_IZ);
+
     }
 
     public void setArmPosition(double pos){
