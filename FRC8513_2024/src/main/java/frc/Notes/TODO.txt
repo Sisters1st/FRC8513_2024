@@ -1,12 +1,13 @@
 1) asap
     clean up auto state machines, maybe make a template? 
     robustness with no photon vision
+    resseting navx
+    wrist faster
+    leds when intakign and shooting
     
 2) teleop
-    drive to point
-        pid xy or on the fly path generation??
+    
     test climbing
-    tune heading PID - tune, does this need profiling
 
 3) autos
     test auto consistancy on basic auto
@@ -20,3 +21,6 @@
 4) before comp 
     make sure all programmers can explain code
     comments (javadocs?)
+    drive to point
+        pid xy or on the fly path generation??3
+    tune heading PID - tune, does this need profiling
