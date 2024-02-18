@@ -60,6 +60,7 @@ public class Settings {
     public static double hc_P = 0.1;
     public static double hc_I = 0;
     public static double hc_D = 0;
+    public static double headingThold = 2;
 
     //intake settings
     public static int leftIntakeMotorCANID = 51;

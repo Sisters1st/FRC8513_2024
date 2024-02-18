@@ -1,7 +1,5 @@
 auto drive to amp
-intake jiggle
 upload Photon vision to git
-add heading check before shooting
 lots of comments
 
 2-17

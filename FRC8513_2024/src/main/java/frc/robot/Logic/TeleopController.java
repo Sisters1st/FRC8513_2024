@@ -118,8 +118,6 @@ public class TeleopController {
             }
         }
 
-        //Settings.usePhoton = driverXboxController.getRawAxis(3)>0.1;
-
         thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
     }
 

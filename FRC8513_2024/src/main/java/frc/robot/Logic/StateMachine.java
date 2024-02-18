@@ -80,8 +80,7 @@ public class StateMachine {
                 checkAllButtonsForStateChanges();
                 feederV = 0;
 
-                if((thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()  &&
-                    thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold()) || comittedToShot){
+                if(robotInAllTHolds() || comittedToShot){
                    
                     ss = Settings.basicShooterSpeed;
                     feederV = Settings.feederIntakeVoltage;
@@ -146,7 +145,7 @@ public class StateMachine {
         thisRobot.wrist.setWristPos(wristPos);
         double timeSinceLastSensorHit = Timer.getFPGATimestamp() - noteHitSensorTime;
         if(timeSinceLastSensorHit < Settings.noteShimmyTime){
-            int shimmyCount = (int)(timeSinceLastSensorHit * 10);
+            int shimmyCount = (int)(timeSinceLastSensorHit * 5);
             if(shimmyCount % 2 == 0){
                 thisRobot.intake.setIntakeVoltage(Settings.feederIntakeVoltage);
             } else {
@@ -206,6 +205,11 @@ public class StateMachine {
 
         double wristVal = a3 * Math.pow(dist, 3) + a2 * Math.pow(dist, 2) + a1 * dist + a0;
         return wristVal;
+    }
+
+    public boolean robotInAllTHolds(){
+        return thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()  &&
+                    thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold() && thisRobot.drivebase.inHeadingThold();
     }
 
     public enum robotStates {

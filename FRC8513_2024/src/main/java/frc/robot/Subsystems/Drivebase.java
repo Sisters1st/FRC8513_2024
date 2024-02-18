@@ -168,4 +168,8 @@ public class Drivebase {
     goalHeading = deltaPos.getAngle();
   }
 
+  public boolean inHeadingThold(){
+    return Math.abs(swerveDrive.getPose().getRotation().getDegrees() - goalHeading.getDegrees()) < Settings.headingThold;
+  }
+
 }
