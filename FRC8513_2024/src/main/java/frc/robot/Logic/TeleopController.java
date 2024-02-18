@@ -141,7 +141,8 @@ public class TeleopController {
         thisRobot.arm.armMotor2.set(-armJoystick);
         thisRobot.wrist.wristMotor1.set(wristJoystick);
         thisRobot.wrist.wristMotor2.set(-wristJoystick);
-        thisRobot.shooter.setShooterSpeeds(0,0);
+        thisRobot.shooter.setShooterSpeeds(0);
+        thisRobot.shooter.setFeederVoltage(0);
         thisRobot.intake.setIntakeVoltage(0);
         thisRobot.climber.climberMotor1.set(0);
         thisRobot.climber.climberMotor2.set(0);

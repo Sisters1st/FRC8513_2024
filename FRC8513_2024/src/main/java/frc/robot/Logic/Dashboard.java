@@ -29,6 +29,7 @@ public class Dashboard {
         SmartDashboard.putNumber("Uptime", Timer.getFPGATimestamp());
         SmartDashboard.putString("State", thisRobot.stateMachine.robotState.toString());
         SmartDashboard.putBoolean("Photon Vision Enabled",Settings.usePhoton);
+        SmartDashboard.putNumber("LastPhotonUpdate", thisRobot.drivebase.lastPhotonUpdateTime);
 
         //auto infor
         SmartDashboard.putNumber("AutoStep", thisRobot.autoController.autoStep);
@@ -67,6 +68,8 @@ public class Dashboard {
         
         SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
         SmartDashboard.putNumber("feederSensor", thisRobot.shooter.feederSensorInput.getValue());
+
+        SmartDashboard.putNumber("NoteHitSensorTime", thisRobot.stateMachine.noteHitSensorTime);
         
         //intake info
         SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.getAppliedOutput());

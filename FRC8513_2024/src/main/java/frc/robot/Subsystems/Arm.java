@@ -15,6 +15,7 @@ public class Arm {
     public double armPos;
     public double armGoalPos;
     public double calculatedArmGoal = 0;
+    double lastArmGoal = 0;
 
     public CANSparkMax armMotor1 = new CANSparkMax(Settings.armMotor1CANID, MotorType.kBrushless);
     public CANSparkMax armMotor2 = new CANSparkMax(Settings.armMotor2CANID, MotorType.kBrushless);
@@ -60,14 +61,15 @@ public class Arm {
 
         calculatedArmGoal = armGoalPos;
         //if wer are too far from setpoint, gradually move the setpoint
-        if(getArmPosition() + Settings.armMaxV < armGoalPos){
-            calculatedArmGoal = getArmPosition() + Settings.armMaxV;
+        if(lastArmGoal + Settings.armMaxV < armGoalPos){
+            calculatedArmGoal = lastArmGoal + Settings.armMaxV;
         }
-        if(getArmPosition() - Settings.armMaxV > armGoalPos){
-            calculatedArmGoal = getArmPosition() - Settings.armMaxV;
+        if(lastArmGoal - Settings.armMaxV > armGoalPos){
+            calculatedArmGoal = lastArmGoal - Settings.armMaxV;
         }
 
         double pidPower = armPidController.calculate(getArmPosition(), calculatedArmGoal);
+        lastArmGoal = calculatedArmGoal;
 
         armMotor1.setVoltage((pidPower) * 12);
         armMotor2.setVoltage(-(pidPower) * 12);

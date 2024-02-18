@@ -41,13 +41,16 @@ public class Shooter {
         feederMotor.setIdleMode(IdleMode.kBrake);
     }
 
-    public void setShooterSpeeds(double shooterSpeed, double feeder){
+    public void setShooterSpeeds(double shooterSpeed){
         leftShooterGoalSpeed = -shooterSpeed * Settings.leftRightShooterSpeedOffset;
         rightShooterGoalSpeed = shooterSpeed * (1/Settings.leftRightShooterSpeedOffset);
-        feederVoltage = feeder;
         rightShooterPIDController.reset();
         leftShooterPIDController.reset();
 
+    }
+
+    public void setFeederVoltage(double fV){
+        feederVoltage = fV;
     }
 
     public void applyShooterPower(){

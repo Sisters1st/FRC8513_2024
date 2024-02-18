@@ -91,7 +91,7 @@ public class Settings {
     public static double shootingArmPos = -19;
 
     public static double armThold = 1;
-    public static double armMaxV = 2;
+    public static double armMaxV = 1.33;
 
     public static double armMaxPos = 0;
     public static double armMinPos = -55;
@@ -104,10 +104,10 @@ public class Settings {
     public static int wrist1CurrentLimit = 10;
     public static int wrist2CurrentLimit = 10;
 
-    public static double wristPID_P = 0.05;
-    public static double wristPID_I = 0.1;
+    public static double wristPID_P = 0.02;
+    public static double wristPID_I = 0.05;
     public static double wristPID_D = 0;
-    public static double wristPID_IZ = 2;
+    public static double wristPID_IZ = 1;
 
     public static double intakingWristPos = 3.5;
     public static double trapWristPos = 1;
@@ -115,7 +115,8 @@ public class Settings {
     public static double shootingSubwofferWristPos = -7;
 
     public static double wristTHold = 1;
-    public static double wristMaxV = 0.2;
+    public static double wristMaxV = 0.75
+    ;
 
     public static double wristMaxPos = 13;
     public static double wristMinPos = -15;

@@ -134,22 +134,22 @@ public class StateMachine {
         //may have to add logic which brings note back to sensor after shimmy
         if(timeSinceLastSensorHit < Settings.noteShimmyTime){
             shimmeyedNoteBroughtBackToSensor = false;
-            int shimmyCount = (int)(timeSinceLastSensorHit * 5);
+            int shimmyCount = (int)(timeSinceLastSensorHit * 10);
             if(shimmyCount % 2 == 0){
-                thisRobot.intake.setIntakeVoltage(-Settings.feederIntakeVoltage);
+                thisRobot.shooter.setFeederVoltage(-Settings.feederIntakeVoltage);
             } else {
-                thisRobot.intake.setIntakeVoltage(Settings.feederIntakeVoltage);
+                thisRobot.shooter.setFeederVoltage(Settings.feederIntakeVoltage);
             }
         } else {
             if(!shimmeyedNoteBroughtBackToSensor && !thisRobot.shooter.intakeSensorSeesNote()){
-                thisRobot.intake.setIntakeVoltage(Settings.feederIntakeVoltage);
+                thisRobot.shooter.setFeederVoltage(Settings.feederIntakeVoltage);
             } else {
-                thisRobot.intake.setIntakeVoltage(intakeVoltage);
+                thisRobot.shooter.setFeederVoltage(feederV);
                 shimmeyedNoteBroughtBackToSensor = true;
             }
         }
         thisRobot.intake.setIntakeVoltage(intakeVoltage);
-        thisRobot.shooter.setShooterSpeeds(ss, feederV);
+        thisRobot.shooter.setShooterSpeeds(ss);
 
     }
 

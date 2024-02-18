@@ -15,7 +15,8 @@ public class Wrist {
     public double wristPos;
     public double wristGoalPos;
     public double calculatedWristGoal;
-
+    public double wristLastGoalPos = 0;
+    
     public CANSparkMax wristMotor1 = new CANSparkMax(Settings.wristMotor1CANID, MotorType.kBrushless);
     public CANSparkMax wristMotor2 = new CANSparkMax(Settings.wristMotor2CANID, MotorType.kBrushless);
 
@@ -59,14 +60,15 @@ public class Wrist {
         calculatedWristGoal = wristGoalPos;
         
         //if goal pos is too far away then slowly get there
-        if(getWristPos() + Settings.wristMaxV < wristGoalPos){
-            calculatedWristGoal = getWristPos() + Settings.wristMaxV;
+        if(wristLastGoalPos + Settings.wristMaxV < wristGoalPos){
+            calculatedWristGoal = wristLastGoalPos + Settings.wristMaxV;
         }
-        if(getWristPos() - Settings.wristMaxV > wristGoalPos){
-            calculatedWristGoal = getWristPos() - Settings.wristMaxV;
+        if(wristLastGoalPos - Settings.wristMaxV > wristGoalPos){
+            calculatedWristGoal = wristLastGoalPos - Settings.wristMaxV;
         }
 
         double pidPower = wristPidController.calculate(wristMotor1.getEncoder().getPosition(), calculatedWristGoal);
+        wristLastGoalPos = calculatedWristGoal;
 
         wristMotor1.setVoltage((pidPower) * 12);
         wristMotor2.setVoltage(-(pidPower) * 12);
