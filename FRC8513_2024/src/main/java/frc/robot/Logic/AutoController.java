@@ -12,7 +12,6 @@ public class AutoController {
     public autoRoutines autoRoutine = autoRoutines.DO_NOTHING;
     public double autoStartTime;
 
-
     public AutoController(Robot thisRobot_){
         thisRobot = thisRobot_;
     }
@@ -45,9 +44,6 @@ public class AutoController {
 
                     case 5:
                         //do nothing
-                        break;
-                
-                    default:
                         break;
                 }
                 break;
@@ -199,10 +195,12 @@ public class AutoController {
                         }
                     break;
                 }
-            break;    
+            break;   
+            default:
+            break;
+        }
+        thisRobot.updateAllSubsystemMotorPower();
     }
-    thisRobot.updateAllSubsystemMotorPower();
-}
 
     public double autoElapsedTime(){
         return Timer.getFPGATimestamp() - autoStartTime;

@@ -12,6 +12,7 @@ public class StateMachine {
     double shotStartedTime = -1; //track when a shot was initiated
     boolean comittedToShot = false; //once we start a shot, we need to finish it
     double noteHitSensorTime = 0; //time for shimmy
+    boolean shimmeyedNoteBroughtBackToSensor = false;
 
     //each of the subsystem vars to keep track of
     double feederV = 0;
@@ -132,14 +133,20 @@ public class StateMachine {
         double timeSinceLastSensorHit = Timer.getFPGATimestamp() - noteHitSensorTime;
         //may have to add logic which brings note back to sensor after shimmy
         if(timeSinceLastSensorHit < Settings.noteShimmyTime){
+            shimmeyedNoteBroughtBackToSensor = false;
             int shimmyCount = (int)(timeSinceLastSensorHit * 5);
             if(shimmyCount % 2 == 0){
-                thisRobot.intake.setIntakeVoltage(Settings.feederIntakeVoltage);
-            } else {
                 thisRobot.intake.setIntakeVoltage(-Settings.feederIntakeVoltage);
+            } else {
+                thisRobot.intake.setIntakeVoltage(Settings.feederIntakeVoltage);
             }
         } else {
-            thisRobot.intake.setIntakeVoltage(intakeVoltage);
+            if(!shimmeyedNoteBroughtBackToSensor && !thisRobot.shooter.intakeSensorSeesNote()){
+                thisRobot.intake.setIntakeVoltage(Settings.feederIntakeVoltage);
+            } else {
+                thisRobot.intake.setIntakeVoltage(intakeVoltage);
+                shimmeyedNoteBroughtBackToSensor = true;
+            }
         }
         thisRobot.intake.setIntakeVoltage(intakeVoltage);
         thisRobot.shooter.setShooterSpeeds(ss, feederV);
