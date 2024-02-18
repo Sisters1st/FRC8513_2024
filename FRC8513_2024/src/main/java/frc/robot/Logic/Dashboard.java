@@ -19,6 +19,7 @@ public class Dashboard {
         for(int i = 1; i < autoRoutines.values().length; i++){
             autoSelector.addOption(autoRoutines.values()[i].toString(),autoRoutines.values()[i].toString());
         }
+        
         SmartDashboard.putData("Auton Selector", autoSelector);
     }
 
@@ -30,7 +31,6 @@ public class Dashboard {
         SmartDashboard.putBoolean("Photon Vision Enabled",Settings.usePhoton);
 
         //auto infor
-        SmartDashboard.putString("AutoRoutine", autoSelector.getSelected());
         SmartDashboard.putNumber("AutoStep", thisRobot.autoController.autoStep);
 
         //drivebase info

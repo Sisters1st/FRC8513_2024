@@ -1,6 +1,6 @@
 1) asap
     upload Photon vision to git
-    rename autos
+    have shimmy reutrn note to sensor
 
 2) teleop
     drive to point

@@ -1,6 +1,7 @@
 package frc.robot.Logic;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Logic.StateMachine.robotStates;
 
@@ -19,6 +20,7 @@ public class AutoController {
     public void autoInit(){
         //get dashboard auto selector value
         autoRoutine = autoRoutines.valueOf(thisRobot.dashboard.autoSelector.getSelected());
+        SmartDashboard.putString("AutoRoutine", autoRoutine.toString());
 
         //reset auto vars
         autoStartTime = Timer.getFPGATimestamp();
@@ -50,8 +52,7 @@ public class AutoController {
                 }
                 break;
 
-            case PRELOAD_FROM_SIDE_AND_DRIVE_AWAY:
-
+            case Source_PD:
                 switch (autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("SourceSideToOpenSpace", thisRobot.onRedAlliance);
@@ -94,54 +95,7 @@ public class AutoController {
                 
                 break;
 
-            case PRELOAD_FROM_MIDDLE_SCORE_1:
-
-             switch (autoStep) {
-                    case 0:
-                        thisRobot.drivebase.initPath("MiddleToNote1", thisRobot.onRedAlliance);
-                        autoStep = 5;
-
-                        break;
-
-                     case 5:
-                        thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
-                        thisRobot.stateMachine.updateRobotState();
-                        autoStep = 10;
-
-                        break;
-                    
-                    case 10:
-                        thisRobot.stateMachine.updateRobotState();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
-                            thisRobot.stateMachine.robotState = robotStates.INTAKING;
-                            thisRobot.stateMachine.updateRobotState();
-                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
-                            thisRobot.drivebase.followPath();
-                            autoStep = 13;
-                        }
-                        break;
-
-                    case 13:
-                        thisRobot.drivebase.followPath();
-                        if(thisRobot.drivebase.isPathOver()){
-                            autoStep = 15;
-                        }
-                        break;
-
-                    case 15:
-                        thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
-                        thisRobot.stateMachine.updateRobotState();
-                        thisRobot.drivebase.swerveDrive.lockPose();
-                        //maybe come back and add diff case for the lock pose if shooter keeps running
-                        break;
-
-                    default:
-                        break;
-             }
-
-             break;
-
-            case PRELOAD_FROM_MIDDLE_SCORE_2:
+            case Mid_P2_D:
 
                 switch (autoStep) {
                     case 0:
@@ -186,108 +140,68 @@ public class AutoController {
                         thisRobot.stateMachine.updateRobotState();
                         break;
                 }
-          
-            case PRELOAD_FROM_MIDDLE_SCORE_3:
+            break;
+
+            case Mid_P231:
                 switch(autoStep) {
-                
-            case 0:
-                thisRobot.drivebase.initPath("MiddleToNote3", thisRobot.onRedAlliance);
-                    autoStep = 5;
+                    case 0:
+                        thisRobot.drivebase.initPath("MiddleToNote1", thisRobot.onRedAlliance);
+                        autoStep = 5;
 
-                    break;
-
-            case 5:
-                thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
-                thisRobot.stateMachine.updateRobotState();
-                    autoStep = 10;
-
-                    break;
-
-            case 10:
-                 thisRobot.stateMachine.updateRobotState();
-                 if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
-                        autoStep = 15;
-                        thisRobot.stateMachine.robotState = robotStates.INTAKING;
+                    case 5:
+                        thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
                         thisRobot.stateMachine.updateRobotState();
-                        thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
-                        thisRobot.drivebase.followPath();
-            }
-            case 15:
-                  thisRobot.drivebase.followPath();
-                     if(thisRobot.drivebase.isPathOver()){
-                        autoStep = 20;
+                        autoStep = 10;
+                        
+                    case 10:
+                        thisRobot.stateMachine.updateRobotState();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
+                                autoStep = 15;
+                                thisRobot.stateMachine.robotState = robotStates.INTAKING;
+                                thisRobot.stateMachine.updateRobotState();
+                                thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                                thisRobot.drivebase.followPath();
                         }
-            case 20:
-                  thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
-                     thisRobot.stateMachine.updateRobotState();
-                     thisRobot.drivebase.swerveDrive.lockPose();
 
-                default:
-                break;
-     
-          
-        }
-
-            case PRELOAD_FROM_MIDDLE_SCORE_1_2_3:
-            switch(autoStep) {
-        case 0:
-                thisRobot.drivebase.initPath("MiddleToNote1", thisRobot.onRedAlliance);
-                    autoStep = 5;
-
-                    break;
-
-            case 5:
-                thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
-                thisRobot.stateMachine.updateRobotState();
-                    autoStep = 10;
-
-                    break;
-                
-            case 10:
-                thisRobot.stateMachine.updateRobotState();
-                if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
-                        autoStep = 15;
-                        thisRobot.stateMachine.robotState = robotStates.INTAKING;
-                        thisRobot.stateMachine.updateRobotState();
-                        thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                    case 15:
                         thisRobot.drivebase.followPath();
-            }  
-
-            case 15:
-             thisRobot.drivebase.followPath();
-                     if(thisRobot.drivebase.isPathOver()){
-                        autoStep = 20;
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 20;
                         }
-            case 20:
-                thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
-                thisRobot.stateMachine.updateRobotState();
-                autoStep = 25;
+                        break;
+                        
+                    case 20:
+                        thisRobot.stateMachine.robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
+                        thisRobot.stateMachine.updateRobotState();
+                        autoStep = 25;
 
-            case 25:
-                if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
-                        autoStep = 30;
+                    case 25:
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || autoElapsedTime() > 2){
+                                autoStep = 30;
+                                thisRobot.stateMachine.robotState = robotStates.INTAKING;
+                                thisRobot.stateMachine.updateRobotState();
+                        }
+                        break;
+
+                    case 30:
+                        thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
+                        autoStep = 35;
+
+                    case 35:
                         thisRobot.stateMachine.robotState = robotStates.INTAKING;
                         thisRobot.stateMachine.updateRobotState();
+                        autoStep = 40;
+
+                    case 40:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 45;
+                        }
+                    break;
                 }
-
-            case 30:
-                 thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
-                    autoStep = 35;
-
-            case 35:
-                thisRobot.stateMachine.robotState = robotStates.INTAKING;
-                thisRobot.stateMachine.updateRobotState();
-                    autoStep = 40;
-
-            case 40:
-                 thisRobot.drivebase.followPath();
-                     if(thisRobot.drivebase.isPathOver()){
-                        autoStep = 45;
-                     }
-            }
-        thisRobot.updateAllSubsystemMotorPower();
-    
+            break;    
     }
+    thisRobot.updateAllSubsystemMotorPower();
 }
 
     public double autoElapsedTime(){
@@ -296,11 +210,20 @@ public class AutoController {
 
     public enum autoRoutines {
         DO_NOTHING,
-        PRELOAD_FROM_SIDE_AND_DRIVE_AWAY,
-        PRELOAD_FROM_MIDDLE_SCORE_2,
-        PRELOAD_FROM_MIDDLE_SCORE_3,
-        PRELOAD_FROM_MIDDLE_SCORE_1,
-        PRELOAD_FROM_MIDDLE_SCORE_1_2_3,
-
+        Amp_P,
+        Mid_P,
+        Source_P,
+        Source_PD,
+        Amp_P3_D,
+        Mid_P2_D,
+        Source_P1_D,
+        Amp_P32_D,
+        Mid_P23_D,
+        Amp_P321,
+        Mid_P231,
+        Source_P123,
+        Amp_P34,
+        Source_P18,
+        Mid_P26,
     }
 }

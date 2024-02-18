@@ -111,7 +111,7 @@ public class Drivebase {
     goalState = autoTraj.sample(0);
     goalHeading = goalState.targetHolonomicRotation;
 
-    //we need to test, but i think we may only want to do this in simulation
+    // we need to test, when do we want to force odom, when no vision???
     if(Robot.isSimulation()){
       setOdomToPathInit();
     }
