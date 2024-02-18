@@ -126,7 +126,7 @@ public class Settings {
     public static int rightShooterCANID = 42;
     public static int feederCANID = 58;
     public static int feederSensorPort = 6; //on mxp
-    public static double feederNoteThold = 350;
+    public static double feederNoteThold = 425;
     public static boolean useFeederSensor = true;
     public static double maxShotDistance = 3.0;
 
