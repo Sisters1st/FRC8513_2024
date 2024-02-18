@@ -12,7 +12,7 @@ public class StateMachine {
     double shotStartedTime = -1; //track when a shot was initiated
     boolean comittedToShot = false; //once we start a shot, we need to finish it
     double noteHitSensorTime = 0; //time for shimmy
-    boolean shimmeyedNoteBroughtBackToSensor = false;
+    boolean shimmeyedNoteBroughtBackToSensor = true;
 
     //each of the subsystem vars to keep track of
     double feederV = 0;
@@ -55,7 +55,6 @@ public class StateMachine {
             //runs once when we initilize a shot
             case SPEEDING_UP_SHOOTER_SPEAKER:
                 
-                
                 //if vision, get dist, if no vision, assume sw shot
                 armPos = Settings.shootingArmPos;
                 if(thisRobot.drivebase.visionIsRecent()){
@@ -79,7 +78,7 @@ public class StateMachine {
 
                 //if vision, get dist, if no vision, assume sw shot
                 if(thisRobot.drivebase.visionIsRecent()){
-                    wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
+                    wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal()); //wristPos = thisRobot.wrist.getWristPos() + 0.1 * thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
                 } else {
                     wristPos = Settings.shootingSubwofferWristPos;
                 }
@@ -136,9 +135,9 @@ public class StateMachine {
             shimmeyedNoteBroughtBackToSensor = false;
             int shimmyCount = (int)(timeSinceLastSensorHit * 10);
             if(shimmyCount % 2 == 0){
-                thisRobot.shooter.setFeederVoltage(-Settings.feederIntakeVoltage);
-            } else {
                 thisRobot.shooter.setFeederVoltage(Settings.feederIntakeVoltage);
+            } else {
+                thisRobot.shooter.setFeederVoltage(-Settings.feederIntakeVoltage);
             }
         } else {
             if(!shimmeyedNoteBroughtBackToSensor && !thisRobot.shooter.intakeSensorSeesNote()){
