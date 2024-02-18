@@ -15,6 +15,7 @@ public class Settings {
     //vision settings
     public static boolean usePhoton = true;
     public static String photonName = "LLCamera";
+    public static double stalePhotonTime = 2.0;
     //ip for photon: http://10.85.13.26:5800/#/dashboard
 
     //driver joystick settings
@@ -111,7 +112,7 @@ public class Settings {
     public static double intakingWristPos = 3.5;
     public static double trapWristPos = 1;
     public static double ampWristPos = -1;
-    public static double shootingWristPos = -7;
+    public static double shootingSubwofferWristPos = -7;
 
     public static double wristTHold = 1;
     public static double wristMaxV = 0.2;

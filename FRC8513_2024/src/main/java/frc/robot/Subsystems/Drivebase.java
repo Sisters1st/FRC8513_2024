@@ -186,5 +186,9 @@ public class Drivebase {
     double yv = swerveDrive.getRobotVelocity().vyMetersPerSecond;
     return Math.sqrt(xv * xv + yv * yv) < Settings.maxShotSpeed;
   }
-  
+
+  public boolean visionIsRecent(){
+    return Timer.getFPGATimestamp() - lastPhotonUpdateTime < Settings.stalePhotonTime;
+  }
+
 }

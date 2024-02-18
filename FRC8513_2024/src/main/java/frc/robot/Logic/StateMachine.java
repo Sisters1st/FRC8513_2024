@@ -54,31 +54,37 @@ public class StateMachine {
             //runs once when we initilize a shot
             case SPEEDING_UP_SHOOTER_SPEAKER:
                 
-                //set arm and wrist based off shot distance
+                
+                //if vision, get dist, if no vision, assume sw shot
                 armPos = Settings.shootingArmPos;
-                wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
+                if(thisRobot.drivebase.visionIsRecent()){
+                    wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
+                } else {
+                    wristPos = Settings.shootingSubwofferWristPos;
+                }
 
                 feederV = intakeVoltage = 0;
-                shotStartedTime = -1;
                 ss = Settings.basicShooterSpeed;
-                feederV = 0;
+                shotStartedTime = -1;
                 comittedToShot = false;
 
-                //move on from the shot
+                //move on to the shot
                 robotState = robotStates.SHOOTING;
 
                 break;
 
             case SHOOTING:
                 armPos = Settings.shootingArmPos;
-                wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
-                feederV = intakeVoltage = 0;
-                
-                feederV = 0;
 
+                //if vision, get dist, if no vision, assume sw shot
+                if(thisRobot.drivebase.visionIsRecent()){
+                    wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
+                } else {
+                    wristPos = Settings.shootingSubwofferWristPos;
+                }
+                feederV = intakeVoltage = 0;
+                ss = Settings.basicShooterSpeed;
                 if(robotInAllTHolds() || comittedToShot){
-                   
-                    ss = Settings.basicShooterSpeed;
                     feederV = Settings.feederIntakeVoltage;
 
                     if(shotStartedTime == -1){
@@ -91,7 +97,6 @@ public class StateMachine {
                     }
                           
                 } else {
-                    ss = Settings.basicShooterSpeed;
                     feederV = 0;
                 }
 
@@ -102,19 +107,7 @@ public class StateMachine {
                 wristPos = Settings.trapWristPos;
                 ss = feederV = intakeVoltage = 0;
 
-                if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton)){
-                    thisRobot.climber.climberMotor1.setVoltage(Settings.climberVoltage);
-                    thisRobot.climber.climberMotor2.setVoltage(Settings.climberVoltage);
-                } else {
-                    if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton))
-                    {
-                        thisRobot.climber.climberMotor1.setVoltage(-Settings.climberVoltage);
-                        thisRobot.climber.climberMotor2.setVoltage(-Settings.climberVoltage);
-                    } else {
-                        thisRobot.climber.climberMotor1.setVoltage(0);
-                        thisRobot.climber.climberMotor2.setVoltage(0);
-                    }
-                }
+                manualClimberControl();
                 break;
 
             case SCORE_AMP:
@@ -194,6 +187,22 @@ public class StateMachine {
         }
     }
 
+    public void manualClimberControl(){
+        if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton)){
+            thisRobot.climber.climberMotor1.setVoltage(Settings.climberVoltage);
+            thisRobot.climber.climberMotor2.setVoltage(Settings.climberVoltage);
+        } else {
+            if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton))
+            {
+                thisRobot.climber.climberMotor1.setVoltage(-Settings.climberVoltage);
+                thisRobot.climber.climberMotor2.setVoltage(-Settings.climberVoltage);
+            } else {
+                thisRobot.climber.climberMotor1.setVoltage(0);
+                thisRobot.climber.climberMotor2.setVoltage(0);
+            }
+        }
+    }
+
     //generated from cubic line of best fit. will need to get retuned
     public double getWristAngFromDist(double dist){
         double a3 = 2.6;
@@ -205,13 +214,21 @@ public class StateMachine {
         return wristVal;
     }
 
+    //checks all subsustems in tholds. if vision is out of date, dont check range
     public boolean robotInAllTHolds(){
+        if(thisRobot.drivebase.visionIsRecent()){
+            return thisRobot.shooter.shootersWithinThold()
+            && thisRobot.arm.armWithinThold() 
+            && thisRobot.wrist.wristWithinThold() 
+            && thisRobot.drivebase.inHeadingThold()
+            && thisRobot.drivebase.inVThold()
+            && thisRobot.shooter.shotWithinRange();
+        }
         return thisRobot.shooter.shootersWithinThold()
         && thisRobot.arm.armWithinThold() 
         && thisRobot.wrist.wristWithinThold() 
         && thisRobot.drivebase.inHeadingThold()
-        && thisRobot.drivebase.inVThold()
-        && thisRobot.shooter.shotWithinRange();
+        && thisRobot.drivebase.inVThold();
     }
 
     public enum robotStates {

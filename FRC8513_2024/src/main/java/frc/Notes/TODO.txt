@@ -1,6 +1,5 @@
 1) asap
     upload Photon vision to git
-    if no vision, set arm wrist to normal shot
     rename autos
 
 2) teleop
