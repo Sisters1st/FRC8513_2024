@@ -206,8 +206,12 @@ public class StateMachine {
     }
 
     public boolean robotInAllTHolds(){
-        return thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()  &&
-            thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold() && thisRobot.drivebase.inHeadingThold();
+        return thisRobot.shooter.shootersWithinThold()
+        && thisRobot.arm.armWithinThold() 
+        && thisRobot.wrist.wristWithinThold() 
+        && thisRobot.drivebase.inHeadingThold()
+        && thisRobot.drivebase.inVThold()
+        && thisRobot.shooter.shotWithinRange();
     }
 
     public enum robotStates {

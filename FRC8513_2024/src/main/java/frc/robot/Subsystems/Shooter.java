@@ -81,6 +81,10 @@ public class Shooter {
         return Math.abs(rightShooter.getEncoder().getVelocity() - rightShooterGoalSpeed) < Settings.shooterThresholdValue;
     }
 
+    public boolean shootersWithinThold(){
+        return rightShooterInThreshold() && leftShooterInThreshold();
+    }
+
     public boolean intakeSensorSeesNote(){
         if(Settings.useFeederSensor){
             return feederSensorInput.getValue() > Settings.feederNoteThold;
@@ -99,6 +103,10 @@ public class Shooter {
             temp = thisRobot.drivebase.swerveDrive.getPose().minus(new Pose2d(Settings.blueGoalPos, new Rotation2d())).getTranslation().getNorm();
         }
         return temp;
+    }
+
+    public boolean shotWithinRange(){
+        return getDistFromGoal() < Settings.maxShotDistance;
     }
 
 }

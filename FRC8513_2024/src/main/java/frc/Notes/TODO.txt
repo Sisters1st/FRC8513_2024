@@ -2,7 +2,6 @@
     upload Photon vision to git
     if no vision, set arm wrist to normal shot
     rename autos
-    add velocty check to shot
 
 2) teleop
     drive to point

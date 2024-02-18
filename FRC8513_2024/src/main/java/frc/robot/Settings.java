@@ -7,6 +7,7 @@ public class Settings {
 
     //drivebase settings
     public static double drivebaseMaxVelocity = 15.1;
+    public static double maxShotSpeed = 0.2;
 
     //dashbord and logging settings
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
@@ -125,6 +126,7 @@ public class Settings {
     public static int feederSensorPort = 6; //on mxp
     public static double feederNoteThold = 350;
     public static boolean useFeederSensor = true;
+    public static double maxShotDistance = 3.0;
 
     public static double shooter_P = 0.002;
     public static double shooter_I = 0;

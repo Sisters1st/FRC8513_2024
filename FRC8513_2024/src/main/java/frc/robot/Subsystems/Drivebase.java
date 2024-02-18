@@ -112,7 +112,7 @@ public class Drivebase {
     goalHeading = goalState.targetHolonomicRotation;
 
     //we need to test, but i think we may only want to do this in simulation
-    if(thisRobot.isSimulation()){
+    if(Robot.isSimulation()){
       setOdomToPathInit();
     }
     
@@ -181,4 +181,10 @@ public class Drivebase {
     return Math.abs(swerveDrive.getPose().getRotation().getDegrees() - goalHeading.getDegrees()) < Settings.headingThold;
   }
 
+  public boolean inVThold(){
+    double xv = swerveDrive.getRobotVelocity().vxMetersPerSecond;
+    double yv = swerveDrive.getRobotVelocity().vyMetersPerSecond;
+    return Math.sqrt(xv * xv + yv * yv) < Settings.maxShotSpeed;
+  }
+  
 }
