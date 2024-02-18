@@ -80,12 +80,7 @@ public class TeleopController {
 
         double xV = xInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double yV = yInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
-        double rV = rInput;
-
-        //if we are commanding a turn manuall, udpate goal heading to be the current pose +- joystick value * rotJoyRate
-        if(rV != 0){
-            thisRobot.drivebase.setGoalHeadingDeg(thisRobot.drivebase.swerveDrive.getPose().getRotation().plus(new Rotation2d(rV * Settings.rotJoyRate)).getDegrees());
-        }
+        double rV = rInput * Settings.rotJoyRate;
         
         //if a is pressed, snap to face amp
         if(driverXboxController.getRawButton(Settings.snapToAmpButton)){
@@ -112,9 +107,14 @@ public class TeleopController {
                 thisRobot.drivebase.aimAtPoint(Settings.blueGoalPos);
             }
         }
+        //if we are commanding a turn manuall, udpate goal heading to be the current pose +- joystick value * rotJoyRate
+        if(rV != 0){
+            thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
+        } else {
+            //after all that, call drive
+            thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
+        }
 
-        //after all that, call drive
-        thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
     }
 
     public void manualControl(){

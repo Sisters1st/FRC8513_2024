@@ -167,6 +167,16 @@ public class Drivebase {
         false);
   }
 
+  public void driveOpenLoopHeading(Translation2d translation, double rV){
+    
+    goalHeading = swerveDrive.getOdometryHeading();
+    thisRobot.drivebase.swerveDrive.drive(
+        translation,
+        rV,
+        true,
+        false);
+  }
+
   public void setGoalHeadingDeg(double deg) {
     goalHeading = new Rotation2d(Math.toRadians(deg));
   }

@@ -15,13 +15,13 @@ public class Settings {
     //vision settings
     public static boolean usePhoton = true;
     public static String photonName = "LLCamera";
-    public static double stalePhotonTime = 2.0;
+    public static double stalePhotonTime = 10.0;
     //ip for photon: http://10.85.13.26:5800/#/dashboard
 
     //driver joystick settings
     public static int driverJoystickPort = 0;
     public static double joystickDeadband = 0.01;
-    public static double rotJoyRate = 1;
+    public static double rotJoyRate = 10;
     public static boolean manualTestingControl = false;
 
     public static int leftRightAxis = 0;
@@ -59,9 +59,9 @@ public class Settings {
 
     //heading settings
     public static boolean headingCorrection = true;
-    public static double hc_P = 0.1;
+    public static double hc_P = 0.15;
     public static double hc_I = 0;
-    public static double hc_D = 0;
+    public static double hc_D = 0.01;
     public static double headingThold = 2;
 
     //intake settings

@@ -1,7 +1,6 @@
 1) asap
-    test all simulated changes from yesterday
     clean up auto state machines, maybe make a template? 
-    photon fallback singel target
+    robustness with no photon vision
     
 2) teleop
     drive to point
