@@ -3,11 +3,8 @@
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
 		<location x="7" y="0"/>
 	</static-widget>
-	<widget field="navX-Sensor[4]" type="Gyro" class="edu.wpi.first.smartdashboard.gui.elements.Compass">
-		<location x="949" y="39"/>
-	</widget>
 	<widget field="Auton Selector" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
-		<location x="655" y="21"/>
+		<location x="964" y="34"/>
 	</widget>
 	<widget field="State" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="283" y="18"/>
@@ -16,13 +13,13 @@
 		<location x="347" y="77"/>
 	</widget>
 	<widget field="trajRotV" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="683" y="295"/>
+		<location x="707" y="174"/>
 	</widget>
 	<widget field="trajGoalY" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="681" y="274"/>
+		<location x="641" y="141"/>
 	</widget>
 	<widget field="trajGoalX" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="680" y="251"/>
+		<location x="639" y="120"/>
 	</widget>
 	<widget field="Uptime" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="7" y="38"/>
@@ -31,24 +28,24 @@
 		<location x="393" y="224"/>
 	</widget>
 	<widget field="trajYV" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="829" y="272"/>
+		<location x="793" y="142"/>
 		<width>103</width>
 	</widget>
 	<widget field="ShooterGoalSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="144" y="204"/>
 	</widget>
 	<widget field="AutoStep" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="687" y="199"/>
+		<location x="694" y="68"/>
 		<height>20</height>
 	</widget>
 	<widget field="WristGoalPos" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="385" y="97"/>
 	</widget>
 	<widget field="trajXV" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="828" y="252"/>
+		<location x="794" y="122"/>
 	</widget>
 	<widget field="Goalheading" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="677" y="339"/>
+		<location x="689" y="196"/>
 	</widget>
 	<widget field="ArmPos" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="190" y="62"/>
@@ -67,7 +64,7 @@
 		<location x="140" y="82"/>
 	</widget>
 	<widget field="AutoRoutine" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="672" y="176"/>
+		<location x="680" y="42"/>
 	</widget>
 	<widget field="ShooterSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="164" y="185"/>
@@ -78,15 +75,29 @@
 </dashboard>
 <live-window>
 </live-window>
-	<hidden field="IMU"/>
-	<hidden field="Field"/>
-	<hidden field="Swerve Drive"/>
-	<hidden field="WristInThold"/>
+	<hidden field="ShooterLeftSpeed"/>
 	<hidden field="Motors"/>
-	<hidden field="swerve"/>
-	<hidden field="ArmInThold"/>
 	<hidden field="JSON"/>
-	<hidden field="feederSensor"/>
-	<hidden field="Encoders"/>
+	<hidden field="trajGoalXP"/>
+	<hidden field="ShooterRightGoalSpeed"/>
 	<hidden field="ShooterInThold"/>
+	<hidden field="Field"/>
+	<hidden field="WristInThold"/>
+	<hidden field="ArmInThold"/>
+	<hidden field="feederSensor"/>
+	<hidden field="Photon Vision Enabled"/>
+	<hidden field="rightClimberPower"/>
+	<hidden field="Swerve Drive"/>
+	<hidden field="trajGoalYP"/>
+	<hidden field="leftClimberPower"/>
+	<hidden field="WristFromDist"/>
+	<hidden field="Encoders"/>
+	<hidden field="navX-Sensor[4]"/>
+	<hidden field="IMU"/>
+	<hidden field="ShooterLeftGoalSpeed"/>
+	<hidden field="DistToGoal"/>
+	<hidden field="inHeadingThold"/>
+	<hidden field="ShooterRightSpeed"/>
+	<hidden field="calculatedWristGoal"/>
+	<hidden field="swerve"/>
 </xml>

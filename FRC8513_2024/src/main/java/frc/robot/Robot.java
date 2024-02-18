@@ -1,7 +1,11 @@
 package frc.robot;
 
+import java.util.Optional;
+
 import com.revrobotics.CANSparkBase.IdleMode;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -106,10 +110,24 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {}
 
+  //after all vars are upated, actually apply the motor power
   public void updateAllSubsystemMotorPower(){
     arm.applyArmPower();
     wrist.applyWristPower();
     shooter.applyShooterPower();
     intake.applyIntakeVoltage();
+  }
+
+  //check DS for alliance color
+  public void updateAlliance(){
+    Optional<Alliance> ally = DriverStation.getAlliance();
+    if (ally.isPresent()) {
+        if (ally.get() == Alliance.Red) {
+            onRedAlliance = true;
+        }
+        if (ally.get() == Alliance.Blue) {
+            onRedAlliance = false;
+        }
+    }
   }
 }

@@ -24,6 +24,7 @@ public class Arm {
     public Arm(Robot robotParam){
         thisRobot = robotParam;
 
+        //set encoder value at boot. allows us to shift zero in future
         armMotor1.getEncoder().setPosition(Settings.armInitRawEncoderValue);
 
         armMotor1.setSmartCurrentLimit(Settings.arm1CurrentLimit);
@@ -39,6 +40,7 @@ public class Arm {
 
     }
 
+    //set arm pos taking min max values into account
     public void setArmPosition(double pos){
         if(pos > Settings.armMaxPos){
             pos = Settings.armMaxPos;
@@ -53,13 +55,16 @@ public class Arm {
         return armMotor1.getEncoder().getPosition();
     }
 
+    //update arm motor power
     public void applyArmPower(){
 
-        if(calculatedArmGoal < armGoalPos){
-            calculatedArmGoal = calculatedArmGoal + Settings.armMaxV;
+        calculatedArmGoal = armGoalPos;
+        //if wer are too far from setpoint, gradually move the setpoint
+        if(getArmPosition() + Settings.armMaxV < armGoalPos){
+            calculatedArmGoal = getArmPosition() + Settings.armMaxV;
         }
-         if(calculatedArmGoal > armGoalPos){
-            calculatedArmGoal = calculatedArmGoal - Settings.armMaxV;
+        if(getArmPosition() - Settings.armMaxV > armGoalPos){
+            calculatedArmGoal = getArmPosition() - Settings.armMaxV;
         }
 
         double pidPower = armPidController.calculate(getArmPosition(), calculatedArmGoal);

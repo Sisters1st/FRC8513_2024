@@ -8,10 +8,10 @@ public class StateMachine {
 
     Robot thisRobot;
     public robotStates robotState = robotStates.DRIVING;    
-    double lastStateChangeTime = 0;
-    double shotStartedTime = -1;
-    boolean comittedToShot = false;
-    double noteHitSensorTime = 0;
+    double lastStateChangeTime = 0; //track last time state changed
+    double shotStartedTime = -1; //track when a shot was initiated
+    boolean comittedToShot = false; //once we start a shot, we need to finish it
+    double noteHitSensorTime = 0; //time for shimmy
 
     //each of the subsystem vars to keep track of
     double feederV = 0;
@@ -27,16 +27,15 @@ public class StateMachine {
     public void updateRobotState(){
 
         switch (robotState) {
+            //driving around, intake off
             case DRIVING:
                 armPos = Settings.intakingArmPos;
                 wristPos = Settings.intakingWristPos;
                 ss = feederV = intakeVoltage = 0;
-                freeFeederControl();
-                checkAllButtonsForStateChanges();
-                freeIntakeControl();
                 
                 break;
 
+            //run the intake, feeder in 
             case INTAKING:
                 armPos = Settings.intakingArmPos;
                 wristPos = Settings.intakingWristPos;
@@ -50,26 +49,24 @@ public class StateMachine {
                     lastStateChangeTime = Timer.getFPGATimestamp();
                     noteHitSensorTime = Timer.getFPGATimestamp();
                 }
-                checkAllButtonsForStateChanges();
                 break;
 
+            //runs once when we initilize a shot
             case SPEEDING_UP_SHOOTER_SPEAKER:
-                    
+                
+                //set arm and wrist based off shot distance
                 armPos = Settings.shootingArmPos;
                 wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
 
                 feederV = intakeVoltage = 0;
-                
-                checkAllButtonsForStateChanges();
                 shotStartedTime = -1;
                 ss = Settings.basicShooterSpeed;
                 feederV = 0;
                 comittedToShot = false;
 
+                //move on from the shot
                 robotState = robotStates.SHOOTING;
 
-                freeIntakeControl();
-                freeFeederControl();
                 break;
 
             case SHOOTING:
@@ -77,7 +74,6 @@ public class StateMachine {
                 wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
                 feederV = intakeVoltage = 0;
                 
-                checkAllButtonsForStateChanges();
                 feederV = 0;
 
                 if(robotInAllTHolds() || comittedToShot){
@@ -99,18 +95,12 @@ public class StateMachine {
                     feederV = 0;
                 }
 
-                freeIntakeControl();
-                freeFeederControl();
                 break;
             case CLIMBING:
 
                 armPos = Settings.trapArmPos;
                 wristPos = Settings.trapWristPos;
                 ss = feederV = intakeVoltage = 0;
-
-                checkAllButtonsForStateChanges();
-                freeFeederControl();
-                freeIntakeControl();
 
                 if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton)){
                     thisRobot.climber.climberMotor1.setVoltage(Settings.climberVoltage);
@@ -132,18 +122,22 @@ public class StateMachine {
                 armPos = Settings.ampArmPos;
                 wristPos = Settings.ampWristPos;
                 ss = feederV = intakeVoltage = 0;
-                freeFeederControl();
-                checkAllButtonsForStateChanges();
-                freeIntakeControl();
+
                 break;
 
             default:
                 break;
         }
+        checkAllButtonsForStateChanges();
+        if(robotState != robotStates.INTAKING){
+            freeFeederControl();
+            freeIntakeControl();
+        }
 
         thisRobot.arm.setArmPosition(armPos);
         thisRobot.wrist.setWristPos(wristPos);
         double timeSinceLastSensorHit = Timer.getFPGATimestamp() - noteHitSensorTime;
+        //may have to add logic which brings note back to sensor after shimmy
         if(timeSinceLastSensorHit < Settings.noteShimmyTime){
             int shimmyCount = (int)(timeSinceLastSensorHit * 5);
             if(shimmyCount % 2 == 0){
@@ -159,6 +153,7 @@ public class StateMachine {
 
     }
 
+    //manual control of the feeder
     public void freeFeederControl(){
         if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.runFeederInButton)){
             feederV = Settings.feederIntakeVoltage;
@@ -168,12 +163,14 @@ public class StateMachine {
         }
     }
 
+    //manual spit out of intake
     public void freeIntakeControl(){
         if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.intakeOutButton)){
             intakeVoltage = -Settings.intakingVoltage;
         }
     }
 
+    //from any state, check if we need to go into another state
     public void checkAllButtonsForStateChanges(){
         if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.shootInSpeakerButton)){
             robotState = robotStates.SPEEDING_UP_SHOOTER_SPEAKER;
@@ -197,6 +194,7 @@ public class StateMachine {
         }
     }
 
+    //generated from cubic line of best fit. will need to get retuned
     public double getWristAngFromDist(double dist){
         double a3 = 2.6;
         double a2 = -9.32;
@@ -209,7 +207,7 @@ public class StateMachine {
 
     public boolean robotInAllTHolds(){
         return thisRobot.shooter.rightShooterInThreshold() && thisRobot.shooter.leftShooterInThreshold()  &&
-                    thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold() && thisRobot.drivebase.inHeadingThold();
+            thisRobot.arm.armWithinThold() && thisRobot.wrist.wristWithinThold() && thisRobot.drivebase.inHeadingThold();
     }
 
     public enum robotStates {

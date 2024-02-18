@@ -1,10 +1,5 @@
 package frc.robot.Logic;
 
-
-import java.util.Optional;
-
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
 import frc.robot.Logic.StateMachine.robotStates;
@@ -22,20 +17,15 @@ public class AutoController {
     }
 
     public void autoInit(){
-
+        //get dashboard auto selector value
         autoRoutine = autoRoutines.valueOf(thisRobot.dashboard.autoSelector.getSelected());
 
+        //reset auto vars
         autoStartTime = Timer.getFPGATimestamp();
         autoStep = 0;
-        Optional<Alliance> ally = DriverStation.getAlliance();
-        if (ally.isPresent()) {
-            if (ally.get() == Alliance.Red) {
-                thisRobot.onRedAlliance = true;
-            }
-            if (ally.get() == Alliance.Blue) {
-                thisRobot.onRedAlliance = false;
-            }
-        }
+
+        //check DS to get what alliance we are on for flipping paths 
+        thisRobot.updateAlliance();
     }
 
     public void autoPeriodic(){   

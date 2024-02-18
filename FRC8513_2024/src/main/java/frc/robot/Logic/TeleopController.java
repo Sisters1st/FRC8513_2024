@@ -1,12 +1,8 @@
 package frc.robot.Logic;
 
-import java.util.Optional;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Robot;
 import frc.robot.Settings;
@@ -24,24 +20,21 @@ public class TeleopController {
     }
 
     public void init(){
+        //reset state machine, and set arm positions to where they are now
         thisRobot.stateMachine.robotState = robotStates.DRIVING;
         thisRobot.arm.setArmPosition(thisRobot.arm.getArmPosition());
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());
         
+        //reset heading PID
         thisRobot.drivebase.rotPidController.reset();
 
-        Optional<Alliance> ally = DriverStation.getAlliance();
-        if (ally.isPresent()) {
-            if (ally.get() == Alliance.Red) {
-                thisRobot.onRedAlliance = true;
-            }
-            if (ally.get() == Alliance.Blue) {
-                thisRobot.onRedAlliance = false;
-            }
-        }
+        //get alliance color
+        thisRobot.updateAlliance();
     }
 
     public void periodic(){
+
+        //if we are forcing manual control, or manual joystick presses both buttons go to manual mode
         if(Settings.manualTestingControl || 
             (manualControlJoystick.getRawButton(Settings.enableManualControlButton1) 
             && manualControlJoystick.getRawButton(Settings.enableManualControlButton2)))
@@ -49,14 +42,17 @@ public class TeleopController {
             manualControl();
 
         } else {
+            //otherwise, run the state machine and update all motor powers
             thisRobot.stateMachine.updateRobotState();
             thisRobot.updateAllSubsystemMotorPower();
         }
-        
+        //always drive in tele
         driveTele();
     }
 
     public void driveTele(){
+
+        //get each of the joysticks and check their deadbands
         double xSpeedJoystick = -driverXboxController.getRawAxis(Settings.forwardBackwardsAxis); //forward back
         if(xSpeedJoystick < Settings.joystickDeadband && xSpeedJoystick > -Settings.joystickDeadband){
             xSpeedJoystick = 0;
@@ -71,29 +67,27 @@ public class TeleopController {
             rSpeedJoystick = 0;
         }
 
+        //if we are on red, flip the joysticks
         if(thisRobot.onRedAlliance){
             xSpeedJoystick = -xSpeedJoystick;
             ySpeedJoystick = -ySpeedJoystick;
         }
 
-        double xInput = Math.pow(xSpeedJoystick, 3); // Smooth controll out
-        double yInput = Math.pow(ySpeedJoystick, 3); // Smooth controll out
+        //cube the joystick values for smoother control
+        double xInput = Math.pow(xSpeedJoystick, 3); 
+        double yInput = Math.pow(ySpeedJoystick, 3);
+        double rInput = Math.pow(rSpeedJoystick, 3);
 
         double xV = xInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double yV = yInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
-        double rV = rSpeedJoystick;
+        double rV = rInput;
+
+        //if we are commanding a turn manuall, udpate goal heading to be the current pose +- joystick value * rotJoyRate
         if(rV != 0){
-            thisRobot.drivebase.goalHeading = thisRobot.drivebase.swerveDrive.getPose().getRotation().plus(new Rotation2d(rV * Settings.rotJoyRate));
+            thisRobot.drivebase.setGoalHeadingDeg(thisRobot.drivebase.swerveDrive.getPose().getRotation().plus(new Rotation2d(rV * Settings.rotJoyRate)).getDegrees());
         }
         
-        if(driverXboxController.getRawButton(Settings.snapToSpeakerButton)){
-            if(thisRobot.onRedAlliance){
-                thisRobot.drivebase.setGoalHeadingDeg(180);
-            } else {
-                thisRobot.drivebase.setGoalHeadingDeg(0);
-            }
-        }
-
+        //if a is pressed, snap to face amp
         if(driverXboxController.getRawButton(Settings.snapToAmpButton)){
             thisRobot.drivebase.setGoalHeadingDeg(90);
         }
@@ -101,7 +95,7 @@ public class TeleopController {
         //if button 8 is pressed, reset the heading
         if(driverXboxController.getRawButton(Settings.resetFieldCentricButton)){
             //if we are red, set to 180 degrees (towards blue) as the zero 
-          if(thisRobot.onRedAlliance){
+            if(thisRobot.onRedAlliance){
                 thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d(Math.PI)));
                 thisRobot.drivebase.goalHeading = new Rotation2d(Math.PI);
             } else {
@@ -110,6 +104,7 @@ public class TeleopController {
             }
         }
         
+        //if pressed, update heading to aim at speaker
         if(driverXboxController.getRawButton(Settings.aimAtSpeakerButton)){
             if(thisRobot.onRedAlliance){
                 thisRobot.drivebase.aimAtPoint(Settings.redGoalPos);
@@ -118,27 +113,30 @@ public class TeleopController {
             }
         }
 
+        //after all that, call drive
         thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
     }
 
-    //needs to be tested on robot
     public void manualControl(){
 
+        //reset arm wrist 0
         if(manualControlJoystick.getRawButton(Settings.manualResetZeroButton)){
             thisRobot.arm.armMotor1.getEncoder().setPosition(Settings.armInitRawEncoderValue);
             thisRobot.wrist.wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
         }
 
-        double armJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlArmAxis)/10; //forward back
+        //get arm and wrist power apply deadband
+        double armJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlArmAxis) * 0.2; 
         if(armJoystick < Settings.joystickDeadband && armJoystick > -Settings.joystickDeadband){
             armJoystick = 0;
         }
 
-        double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis)/10; //left right
+        double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis) * 0.2;
         if(wristJoystick < Settings.joystickDeadband && wristJoystick > -Settings.joystickDeadband){
             wristJoystick = 0;
         }
 
+        //manually update all voltages, move arm wrist
         thisRobot.arm.armMotor1.set(armJoystick);
         thisRobot.arm.armMotor2.set(-armJoystick);
         thisRobot.wrist.wristMotor1.set(wristJoystick);

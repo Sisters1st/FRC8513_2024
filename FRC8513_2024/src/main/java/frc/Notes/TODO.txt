@@ -1,23 +1,14 @@
-auto drive to amp
-upload Photon vision to git
-lots of comments
-
-2-17
-shooter pid
-arm wrist pid and speed
-off distance set pid
-
-1) basics
-    Set setpoints and test
-    Tune arm PID
-    Tune wrist PID
-    Tune shooter PID
-    tune heading PID - tune, does this need profiling
+1) asap
+    upload Photon vision to git
+    if no vision, set arm wrist to normal shot
+    rename autos
+    add velocty check to shot
 
 2) teleop
     drive to point
         pid xy or on the fly path generation??
     test climbing
+    tune heading PID - tune, does this need profiling
 
 
 3) autos

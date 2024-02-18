@@ -39,6 +39,7 @@ public class Wrist {
 
     }
 
+    //set wrist pos with limits
     public void setWristPos(double pos){
         if(pos > Settings.wristMaxPos){
             pos = Settings.wristMaxPos;
@@ -55,19 +56,21 @@ public class Wrist {
 
     public void applyWristPower(){
 
-        if(calculatedWristGoal < wristGoalPos){
-            calculatedWristGoal = calculatedWristGoal + Settings.wristMaxV;
+        calculatedWristGoal = wristGoalPos;
+        
+        //if goal pos is too far away then slowly get there
+        if(getWristPos() + Settings.wristMaxV < wristGoalPos){
+            calculatedWristGoal = getWristPos() + Settings.wristMaxV;
         }
-         if(calculatedWristGoal > wristGoalPos){
-            calculatedWristGoal = calculatedWristGoal - Settings.wristMaxV;
+        if(getWristPos() - Settings.wristMaxV > wristGoalPos){
+            calculatedWristGoal = getWristPos() - Settings.wristMaxV;
         }
 
-        double pidPower = wristPidController.calculate(wristMotor1.getEncoder().getPosition(), wristGoalPos);
+        double pidPower = wristPidController.calculate(wristMotor1.getEncoder().getPosition(), calculatedWristGoal);
 
         wristMotor1.setVoltage((pidPower) * 12);
         wristMotor2.setVoltage(-(pidPower) * 12);
     }
-
 
     public boolean wristWithinThold(){
         return Math.abs(getWristPos()-wristGoalPos) < Settings.wristTHold;

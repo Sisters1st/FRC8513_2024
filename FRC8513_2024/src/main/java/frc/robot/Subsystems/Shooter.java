@@ -55,15 +55,17 @@ public class Shooter {
         double leftFF = leftShooterGoalSpeed * Settings.shooter_FF + Settings.shooter_FF_const;
         double rightFF = rightShooterGoalSpeed * Settings.shooter_FF - Settings.shooter_FF_const;
 
+        //if stopping, dont force motors off but let them coast
         if(leftShooterGoalSpeed == 0){
             leftShooter.setVoltage(0);
-        }else{
+        } else {
             double leftShooterPower = leftShooterPIDController.calculate(leftShooter.getEncoder().getVelocity(), leftShooterGoalSpeed);
             leftShooter.setVoltage(leftShooterPower + leftFF);
         }
+
         if(rightShooterGoalSpeed == 0){
             rightShooter.setVoltage(0);
-        }else{
+        } else {
             double rightShooterPower = rightShooterPIDController.calculate(rightShooter.getEncoder().getVelocity(), rightShooterGoalSpeed);
             rightShooter.setVoltage(rightShooterPower + rightFF);
         }
@@ -74,7 +76,6 @@ public class Shooter {
     public boolean leftShooterInThreshold(){
         return Math.abs(leftShooter.getEncoder().getVelocity() - leftShooterGoalSpeed) < Settings.shooterThresholdValue;
     }
-
 
     public boolean rightShooterInThreshold(){
         return Math.abs(rightShooter.getEncoder().getVelocity() - rightShooterGoalSpeed) < Settings.shooterThresholdValue;
@@ -88,6 +89,7 @@ public class Shooter {
         }
     }
 
+    //based off position get dist from goal based off red or blue
     public double getDistFromGoal(){
         double temp =-1;
         if(thisRobot.onRedAlliance){

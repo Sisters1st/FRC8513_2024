@@ -113,7 +113,7 @@ public class Settings {
     public static double shootingWristPos = -7;
 
     public static double wristTHold = 1;
-    public static double wristMaxV = 0.15;
+    public static double wristMaxV = 0.2;
 
     public static double wristMaxPos = 13;
     public static double wristMinPos = -15;
