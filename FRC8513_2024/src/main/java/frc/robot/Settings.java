@@ -115,8 +115,7 @@ public class Settings {
     public static double shootingSubwofferWristPos = -7;
 
     public static double wristTHold = 1;
-    public static double wristMaxV = 0.75
-    ;
+    public static double wristMaxV = 2;
 
     public static double wristMaxPos = 13;
     public static double wristMinPos = -15;
@@ -129,6 +128,9 @@ public class Settings {
     public static double feederNoteThold = 425;
     public static boolean useFeederSensor = true;
     public static double maxShotDistance = 3.0;
+    public static double shimmyDist = 10;
+    public static int shimmyCount = 8;
+    public static double shimmyInVoltage = 5;
 
     public static double shooter_P = 0.002;
     public static double shooter_I = 0;
@@ -141,7 +143,7 @@ public class Settings {
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
-    public static int feederCurrentLimit = 10;
+    public static int feederCurrentLimit = 15;
 
     public static int basicShooterSpeed = 5250;
     public static double leftRightShooterSpeedOffset = 0.9;
@@ -149,7 +151,6 @@ public class Settings {
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;
     public static double feederIntakeVoltage = 8;
-
 
     //climber settings
 

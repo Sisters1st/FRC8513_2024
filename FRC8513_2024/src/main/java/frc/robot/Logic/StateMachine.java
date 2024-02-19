@@ -11,8 +11,9 @@ public class StateMachine {
     double lastStateChangeTime = 0; //track last time state changed
     double shotStartedTime = -1; //track when a shot was initiated
     boolean comittedToShot = false; //once we start a shot, we need to finish it
-    double noteHitSensorTime = 0; //time for shimmy
-    boolean shimmeyedNoteBroughtBackToSensor = true;
+    int shimmyCount = 10; //time for shimmy
+    double shimmyStartDist = 0;
+    boolean shimmyIn = true;;
 
     //each of the subsystem vars to keep track of
     double feederV = 0;
@@ -48,7 +49,7 @@ public class StateMachine {
                 if(thisRobot.shooter.intakeSensorSeesNote()){
                     robotState = robotStates.DRIVING;
                     lastStateChangeTime = Timer.getFPGATimestamp();
-                    noteHitSensorTime = Timer.getFPGATimestamp();
+                    shimmyCount = 0;
                 }
                 break;
 
@@ -129,22 +130,38 @@ public class StateMachine {
 
         thisRobot.arm.setArmPosition(armPos);
         thisRobot.wrist.setWristPos(wristPos);
-        double timeSinceLastSensorHit = Timer.getFPGATimestamp() - noteHitSensorTime;
+
         //may have to add logic which brings note back to sensor after shimmy
-        if(timeSinceLastSensorHit < Settings.noteShimmyTime){
-            shimmeyedNoteBroughtBackToSensor = false;
-            int shimmyCount = (int)(timeSinceLastSensorHit * 10);
-            if(shimmyCount % 2 == 0){
-                thisRobot.shooter.setFeederVoltage(Settings.feederIntakeVoltage);
+        if(shimmyCount == 0){
+            if(thisRobot.shooter.intakeSensorSeesNote()){
+                thisRobot.shooter.setFeederVoltage(-Settings.shimmyInVoltage);
             } else {
-                thisRobot.shooter.setFeederVoltage(-Settings.feederIntakeVoltage);
+                shimmyCount = 1;
+                shimmyStartDist = thisRobot.shooter.getFeederPos();
+                shimmyIn = true;
             }
         } else {
-            if(!shimmeyedNoteBroughtBackToSensor && !thisRobot.shooter.intakeSensorSeesNote()){
-                thisRobot.shooter.setFeederVoltage(Settings.feederIntakeVoltage);
+            if(shimmyCount < Settings.shimmyCount){
+                if(shimmyIn){
+                    thisRobot.shooter.setFeederVoltage(Settings.shimmyInVoltage);
+                    if(thisRobot.shooter.intakeSensorSeesNote()){
+                        shimmyIn = false;
+                        shimmyStartDist = thisRobot.shooter.getFeederPos();
+                        shimmyCount++;
+                    }
+                } else {
+                    thisRobot.shooter.setFeederVoltage(-Settings.shimmyInVoltage);
+                    if(shimmyStartDist - thisRobot.shooter.getFeederPos() > Settings.shimmyDist){
+                        shimmyIn = true;
+                        shimmyStartDist = thisRobot.shooter.getFeederPos();
+                    }
+                }
             } else {
-                thisRobot.shooter.setFeederVoltage(feederV);
-                shimmeyedNoteBroughtBackToSensor = true;
+                if(!thisRobot.shooter.intakeSensorSeesNote()){
+                    thisRobot.shooter.setFeederVoltage(Settings.feederIntakeVoltage);
+                } else {
+                    thisRobot.shooter.setFeederVoltage(feederV);
+                }
             }
         }
         thisRobot.intake.setIntakeVoltage(intakeVoltage);
