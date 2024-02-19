@@ -13,7 +13,8 @@ public class StateMachine {
     boolean comittedToShot = false; //once we start a shot, we need to finish it
     int shimmyCount = Settings.shimmyCount; //time for shimmy
     double shimmyStartDist = 0;
-    boolean shimmyIn = true;;
+    boolean shimmyIn = true;
+    boolean forceShooterOn = false;
 
     //each of the subsystem vars to keep track of
     double feederV = 0;
@@ -161,7 +162,11 @@ public class StateMachine {
             }
         }
         thisRobot.intake.setIntakeVoltage(intakeVoltage);
-        thisRobot.shooter.setShooterSpeeds(ss);
+        if (forceShooterOn){
+            thisRobot.shooter.setShooterSpeeds(Settings.basicShooterSpeed);
+        }else{
+            thisRobot.shooter.setShooterSpeeds(ss);
+        }
 
     }
 

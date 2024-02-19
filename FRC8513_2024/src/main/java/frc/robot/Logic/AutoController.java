@@ -20,6 +20,7 @@ public class AutoController {
         //get dashboard auto selector value
         autoRoutine = autoRoutines.valueOf(thisRobot.dashboard.autoSelector.getSelected());
         SmartDashboard.putString("AutoRoutine", autoRoutine.toString());
+        thisRobot.stateMachine.forceShooterOn = true;
 
         //reset auto vars
         autoStartTime = Timer.getFPGATimestamp();
@@ -118,6 +119,7 @@ public class AutoController {
                         break;
                     case 15:
                         thisRobot.drivebase.followPath();
+                        thisRobot.stateMachine.updateRobotState();
                         if(thisRobot.drivebase.isPathOver()){
                             autoStep = 20;
                         }
@@ -161,6 +163,7 @@ public class AutoController {
 
                     case 15:
                         thisRobot.drivebase.followPath();
+                        thisRobot.stateMachine.updateRobotState();
                         if(thisRobot.drivebase.isPathOver()){
                             autoStep = 20;
                         }
@@ -193,6 +196,7 @@ public class AutoController {
 
                     case 40:
                         thisRobot.drivebase.followPath();
+                        thisRobot.stateMachine.updateRobotState();
                         if(thisRobot.drivebase.isPathOver()){
                             autoStep = 45;
                         }
@@ -225,6 +229,7 @@ public class AutoController {
                     break;
                     case 65:
                         thisRobot.drivebase.followPath();
+                        thisRobot.stateMachine.updateRobotState();
                         if(thisRobot.drivebase.isPathOver()){
                             autoStep = 70;
                         }

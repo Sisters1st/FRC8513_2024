@@ -151,7 +151,7 @@ public class Settings {
 
     //feeder settings
     public static int feederCANID = 58;
-    public static int feederCurrentLimit = 15;
+    public static int feederCurrentLimit = 25;
 
     public static boolean useFeederSensor = true;
     public static int feederSensorPort = 6; //on mxp
@@ -159,7 +159,7 @@ public class Settings {
     
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;
-    public static double feederIntakeVoltage = 8;
+    public static double feederIntakeVoltage = 9;
     public static double shimmyInVoltage = 6;
 
     public static double shimmyDist = 0.8;
