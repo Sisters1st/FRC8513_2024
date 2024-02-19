@@ -2,9 +2,7 @@
     clean up auto state machines, maybe make a template? 
     robustness with no photon vision
     resseting navx
-    wrist faster
     leds when intakign and shooting
-    cleanup settings
     
 2) teleop
     test climbing

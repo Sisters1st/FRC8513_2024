@@ -27,8 +27,8 @@ public class Wrist {
 
         wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
 
-        wristMotor1.setSmartCurrentLimit(Settings.wrist1CurrentLimit);
-        wristMotor2.setSmartCurrentLimit(Settings.arm2CurentLimit);
+        wristMotor1.setSmartCurrentLimit(Settings.wristCurrentLimit);
+        wristMotor2.setSmartCurrentLimit(Settings.wristCurrentLimit);
 
         wristMotor1.setIdleMode(IdleMode.kBrake);
         wristMotor2.setIdleMode(IdleMode.kBrake);
