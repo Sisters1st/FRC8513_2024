@@ -160,10 +160,10 @@ public class Settings {
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;
     public static double feederIntakeVoltage = 8;
-    public static double shimmyInVoltage = 5;
+    public static double shimmyInVoltage = 6;
 
-    public static double shimmyDist = 10;
-    public static int shimmyCount = 8;
+    public static double shimmyDist = 0.8;
+    public static int shimmyCount = 6;
     
 
     //climber settings

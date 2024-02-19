@@ -11,7 +11,7 @@ public class StateMachine {
     double lastStateChangeTime = 0; //track last time state changed
     double shotStartedTime = -1; //track when a shot was initiated
     boolean comittedToShot = false; //once we start a shot, we need to finish it
-    int shimmyCount = 10; //time for shimmy
+    int shimmyCount = Settings.shimmyCount; //time for shimmy
     double shimmyStartDist = 0;
     boolean shimmyIn = true;;
 
@@ -157,11 +157,7 @@ public class StateMachine {
                     }
                 }
             } else {
-                if(!thisRobot.shooter.intakeSensorSeesNote()){
-                    thisRobot.shooter.setFeederVoltage(Settings.feederIntakeVoltage);
-                } else {
-                    thisRobot.shooter.setFeederVoltage(feederV);
-                }
+                thisRobot.shooter.setFeederVoltage(feederV);
             }
         }
         thisRobot.intake.setIntakeVoltage(intakeVoltage);
