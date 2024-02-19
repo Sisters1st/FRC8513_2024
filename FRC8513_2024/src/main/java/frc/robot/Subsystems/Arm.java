@@ -28,8 +28,8 @@ public class Arm {
         //set encoder value at boot. allows us to shift zero in future
         armMotor1.getEncoder().setPosition(Settings.armInitRawEncoderValue);
 
-        armMotor1.setSmartCurrentLimit(Settings.arm1CurrentLimit);
-        armMotor2.setSmartCurrentLimit(Settings.arm2CurentLimit);
+        armMotor1.setSmartCurrentLimit(Settings.armCurrentLimit);
+        armMotor2.setSmartCurrentLimit(Settings.armCurrentLimit);
 
         armMotor1.setIdleMode(IdleMode.kBrake);
         armMotor2.setIdleMode(IdleMode.kBrake);

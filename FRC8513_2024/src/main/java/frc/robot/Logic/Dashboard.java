@@ -68,8 +68,6 @@ public class Dashboard {
         
         SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
         SmartDashboard.putNumber("feederSensor", thisRobot.shooter.feederSensorInput.getValue());
-
-        SmartDashboard.putNumber("NoteHitSensorTime", thisRobot.stateMachine.noteHitSensorTime);
         
         //intake info
         SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.getAppliedOutput());

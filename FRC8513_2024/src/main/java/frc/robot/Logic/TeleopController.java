@@ -104,11 +104,7 @@ public class TeleopController {
         //if pressed, update heading to aim at speaker
         if(driverXboxController.getRawButton(Settings.aimAtSpeakerButton)){
             manualRot = false;
-            if(thisRobot.onRedAlliance){
-                thisRobot.drivebase.aimAtPoint(Settings.redGoalPos);
-            }else{
-                thisRobot.drivebase.aimAtPoint(Settings.blueGoalPos);
-            }
+            thisRobot.drivebase.setGoalHeadingToGoal();
         }
         //if we are commanding a turn manuall, udpate goal heading to be the current pose +- joystick value * rotJoyRate
         if(rV != 0 || manualRot){

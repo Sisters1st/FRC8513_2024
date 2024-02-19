@@ -39,6 +39,9 @@ public class Shooter {
         rightShooter.setIdleMode(IdleMode.kCoast);
         rightShooter.setIdleMode(IdleMode.kCoast);
         feederMotor.setIdleMode(IdleMode.kBrake);
+
+        feederSensorInput.setAverageBits(3);
+        feederMotor.getEncoder().setPositionConversionFactor(1);
     }
 
     public void setShooterSpeeds(double shooterSpeed){
@@ -90,7 +93,7 @@ public class Shooter {
 
     public boolean intakeSensorSeesNote(){
         if(Settings.useFeederSensor){
-            return feederSensorInput.getValue() > Settings.feederNoteThold;
+            return feederSensorInput.getAverageValue() > Settings.feederNoteThold;
         } else {
             return false;
         }
@@ -110,6 +113,10 @@ public class Shooter {
 
     public boolean shotWithinRange(){
         return getDistFromGoal() < Settings.maxShotDistance;
+    }
+
+    public double getFeederPos(){
+        return feederMotor.getEncoder().getPosition();
     }
 
 }

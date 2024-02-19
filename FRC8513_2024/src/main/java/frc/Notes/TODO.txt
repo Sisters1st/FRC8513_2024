@@ -1,12 +1,10 @@
 1) asap
-    clean up auto state machines, maybe make a template? 
+    clean up auto switches, maybe make a template? lots of copied code
     robustness with no photon vision
     resseting navx
-    wrist faster
     leds when intakign and shooting
     
 2) teleop
-    
     test climbing
 
 3) autos

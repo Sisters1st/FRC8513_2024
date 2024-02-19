@@ -141,7 +141,7 @@ public class Drivebase {
     ajustedV = ajustedV.plus(trajV);
 
     //drive at that velocity
-    thisRobot.drivebase.swerveDrive.drive(ajustedV, rotCorrection, true, false);
+    driveClosedLoopHeading(ajustedV);
   }
 
   public boolean isPathOver() {
@@ -199,6 +199,19 @@ public class Drivebase {
 
   public boolean visionIsRecent(){
     return Timer.getFPGATimestamp() - lastPhotonUpdateTime < Settings.stalePhotonTime;
+  }
+
+  public void setGoalHeadingToGoal(){
+    if(thisRobot.onRedAlliance){
+        thisRobot.drivebase.aimAtPoint(Settings.redGoalPos);
+    }else{
+        thisRobot.drivebase.aimAtPoint(Settings.blueGoalPos);
+    }
+  }
+  
+  public void aimAtGoal(){
+    setGoalHeadingToGoal();
+    driveClosedLoopHeading(new Translation2d());
   }
 
 }
