@@ -83,11 +83,22 @@ public class Drivebase {
     if(Settings.usePhoton){
       var result = camera.getLatestResult();
       if (result.getMultiTagResult().estimatedPose.isPresent) {
+        //multi pose
         Pose3d photonPose = new Pose3d(result.getMultiTagResult().estimatedPose.best.getTranslation(), result.getMultiTagResult().estimatedPose.best.getRotation()); 
         photonPose = photonPose.plus(robotToCam);
         swerveDrive.addVisionMeasurement(photonPose.toPose2d(), result.getTimestampSeconds());
         lastPhotonUpdateTime = Timer.getFPGATimestamp();
       
+      } else {
+        if(result.hasTargets()){
+          //only one target
+          Pose3d photonPose = new Pose3d(result.getBestTarget().getBestCameraToTarget().getTranslation(), result.getBestTarget().getBestCameraToTarget().getRotation()); 
+          photonPose = photonPose.plus(robotToCam);
+          swerveDrive.addVisionMeasurement(photonPose.toPose2d(), result.getTimestampSeconds());
+          lastPhotonUpdateTime = Timer.getFPGATimestamp();
+        } else {
+          //no vision
+        }
       }
     }
   }
