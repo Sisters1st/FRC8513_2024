@@ -1,5 +1,11 @@
 1) asap
     robustness with no photon vision
+        enable always do single tag as well
+        add logic so when double tag is out, use single tag
+        https://docs.photonvision.org/en/latest/docs/apriltag-pipelines/multitag.html#enabling-multitag
+        follow this to tune AT pipelines
+        https://docs.photonvision.org/en/latest/docs/apriltag-pipelines/2D-tracking-tuning.html
+        add photon stream to dashboard
     resseting navx
     leds when intakign and shooting
     
