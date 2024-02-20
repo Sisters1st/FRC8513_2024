@@ -31,6 +31,7 @@ public class TeleopController {
 
         //get alliance color
         thisRobot.updateAlliance();
+        thisRobot.stateMachine.forceShooterOn = false;
     }
 
     public void periodic(){

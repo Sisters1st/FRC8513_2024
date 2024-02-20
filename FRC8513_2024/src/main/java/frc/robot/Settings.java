@@ -134,19 +134,19 @@ public class Settings {
     public static double maxShotDistance = 3.0;
 
     public static double shooter_P = 0.002;
-    public static double shooter_I = 0;
+    public static double shooter_I = 0.0001;
     public static double shooter_D = 0;
     public static double shooter_FF = 0.0021;
     public static double shooter_FF_const = 1.42;
     
-    public static double shooterThresholdValue = 50;
+    public static double shooterThresholdValue = 150;
     public static double shotTime = 0.8;
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
     
     public static int basicShooterSpeed = 5250;
-    public static double leftRightShooterSpeedOffset = 0.9;
+    public static double leftRightShooterSpeedOffset = 1;
 
 
     //feeder settings
@@ -175,8 +175,8 @@ public class Settings {
 
     //field settings
     
-    public static Translation2d blueGoalPos = new Translation2d(0.0381,5.54736);
-    public static Translation2d redGoalPos = new Translation2d(16.579342,5.54736);
+    public static Translation2d blueGoalPos = new Translation2d(0.04,5.54736);
+    public static Translation2d redGoalPos = new Translation2d(16.6,5.54736);
         
 
 }

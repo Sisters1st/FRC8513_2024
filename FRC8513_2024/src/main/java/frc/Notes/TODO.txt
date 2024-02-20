@@ -1,6 +1,7 @@
 1) asap
     clean up auto switches, maybe make a template? lots of copied code
     robustness with no photon vision
+        -increase photon vision and auto heading 
     resseting navx
     leds when intakign and shooting
     
