@@ -66,6 +66,12 @@ public class AutoController {
 
                     case 10:
                         thisRobot.stateMachine.forceShooterOn = false;
+                        autoStep = 15;
+                        break;
+                    
+                    case 15:
+                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
+
                     }
                     break;
 
@@ -83,6 +89,12 @@ public class AutoController {
 
                     case 10:
                     thisRobot.stateMachine.forceShooterOn = false;
+                    autoStep = 15;
+                    break;
+
+                    case 15:
+                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
+
                 }
                 break;
 
@@ -100,6 +112,11 @@ public class AutoController {
 
                     case 10:
                         thisRobot.stateMachine.forceShooterOn = false;
+                        autoStep = 15;
+                    break;
+
+                    case 15:
+                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                     }
                     break;
 
@@ -139,6 +156,59 @@ public class AutoController {
                 }
                 
                 break;
+
+            case Amp_P3_D:
+                switch(autoStep) {
+                    case 0:
+                     thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
+                        autoStep = 5;
+
+                    case 5:
+                    thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        autoStep = 10;
+
+                    case 10:
+                    thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                            autoStep = 15;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+
+                    case 15:
+                    thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 20;
+                        }
+                        break;
+                    
+                    case 20:
+                    thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        autoStep = 10;
+                    
+                    case 25:
+                    thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                            autoStep = 30;
+                        }
+                    break;
+                    
+                    case 30:
+                        thisRobot.drivebase.initPath("AmpToNote8", thisRobot.onRedAlliance);
+                        autoStep = 35;
+                    
+                    case 35:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 40;
+                        }
+                    
+                    case 40:
+                        thisRobot.drivebase.swerveDrive.lockPose();
+
+                    break;
+
+                }
         
             case Mid_P2_D:
 
@@ -189,6 +259,7 @@ public class AutoController {
                         autoStep = 10;
                         
                     case 10:
+                        thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
                                 autoStep = 15;
@@ -350,13 +421,15 @@ public class AutoController {
     }
 
     //_X means not made yet
+    
+    //Simulate Amp_P3_D
     public enum autoRoutines {
         DO_NOTHING,
         Amp_P,
         Mid_P,
         Source_P,
         Source_PD,
-        _XAmp_P3_D,
+        Amp_P3_D,
         Mid_P2_D,
         _XSource_P1_D,
         _XAmp_P32_D,
