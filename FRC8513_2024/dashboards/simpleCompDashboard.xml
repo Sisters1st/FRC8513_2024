@@ -82,6 +82,7 @@
 	<hidden field="ShooterRightGoalSpeed"/>
 	<hidden field="ShooterInThold"/>
 	<hidden field="Field"/>
+	<hidden field="LastPhotonUpdate"/>
 	<hidden field="WristInThold"/>
 	<hidden field="ArmInThold"/>
 	<hidden field="feederSensor"/>
