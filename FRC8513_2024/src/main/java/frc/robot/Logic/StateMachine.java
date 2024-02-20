@@ -255,6 +255,11 @@ public class StateMachine {
         && thisRobot.drivebase.inVThold();
     }
 
+    public void forceRobotState(robotStates inState){
+        lastStateChangeTime = Timer.getFPGATimestamp();
+        robotState = inState;
+    }
+
     public enum robotStates {
         DRIVING,
         INTAKING,
