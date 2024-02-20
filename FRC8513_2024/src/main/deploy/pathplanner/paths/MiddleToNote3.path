@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.96668964766501,
-        "y": 5.966399361370152
+        "x": 1.8640734424325998,
+        "y": 6.112993940273595
       },
       "isLocked": false,
       "linkedName": "ShootInSpeaker"
     },
     {
       "anchor": {
-        "x": 2.5677274211691286,
-        "y": 6.728691171668058
+        "x": 2.7143220000725723,
+        "y": 6.875285750571502
       },
       "prevControl": {
-        "x": 3.007511157879459,
-        "y": 7.080518161036322
+        "x": 3.036830073660148,
+        "y": 7.212453282049422
       },
       "nextControl": {
-        "x": 2.2336674117003037,
-        "y": 6.461443164092999
+        "x": 2.4186131167562777,
+        "y": 6.566135554377193
       },
       "isLocked": false,
       "linkedName": "Note3Intake"
@@ -36,8 +36,8 @@
         "y": 5.547612425391122
       },
       "prevControl": {
-        "x": 1.9373707318843216,
-        "y": 5.790485866686019
+        "x": 1.8640734424325998,
+        "y": 6.054356108712217
       },
       "nextControl": null,
       "isLocked": false,
@@ -54,8 +54,8 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.7,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

@@ -1,25 +1,31 @@
 1) asap
-    clean up auto switches, maybe make a template? lots of copied code
     robustness with no photon vision
-        -increase photon vision and auto heading 
+
+        enable always do single tag as well
+        add logic so when double tag is out, use single tag
+        https://docs.photonvision.org/en/latest/docs/apriltag-pipelines/multitag.html#enabling-multitag
+        follow this to tune AT pipelines
+        https://docs.photonvision.org/en/latest/docs/apriltag-pipelines/2D-tracking-tuning.html
+        add photon stream to dashboard
     resseting navx
     leds when intakign and shooting
     
 2) teleop
     test climbing
+    test shot consistancy and redo wrist setpoints (move arm up?) for new shooter
 
 3) autos
-    test auto consistancy on basic auto
     discuss how to lay out autos
         multiple paths  
         action within path
         what autos do we want
         break up autos into paths
+    does mid_p123 need to be P213
     simulate photon vision
 
 4) before comp 
     make sure all programmers can explain code
     comments (javadocs?)
     drive to point
-        pid xy or on the fly path generation??3
+        pid xy or on the fly path generation??
     tune heading PID - tune, does this need profiling
