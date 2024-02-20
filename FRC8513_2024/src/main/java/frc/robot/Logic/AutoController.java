@@ -51,6 +51,58 @@ public class AutoController {
                 }
                 break;
 
+            case Amp_P:
+                switch (autoStep) {
+                    case 0:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                        
+                        autoStep = 5;
+                    
+                    case 5:
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                        autoStep = 10;
+                        }
+                        break;
+
+                    case 10:
+                        thisRobot.stateMachine.forceShooterOn = false;
+                    }
+                    break;
+
+            case Mid_P:
+                switch (autoStep) {
+                    case 0:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                       
+                        autoStep = 5;
+
+                    case 5:
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                        autoStep = 10;
+                        }
+
+                    case 10:
+                    thisRobot.stateMachine.forceShooterOn = false;
+                }
+                break;
+
+            case Source_P:
+                switch (autoStep) {
+                    case 0:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                  
+                        autoStep = 5;
+                    
+                    case 5:
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                        autoStep = 10;
+                        }
+
+                    case 10:
+                        thisRobot.stateMachine.forceShooterOn = false;
+                    }
+                    break;
+
             case Source_PD:
                 switch (autoStep) {
                     case 0:
@@ -87,7 +139,7 @@ public class AutoController {
                 }
                 
                 break;
-
+        
             case Mid_P2_D:
 
                 switch (autoStep) {
@@ -124,7 +176,7 @@ public class AutoController {
                         //add drive off path
                         break;
                 }
-            break;
+                break;
 
             case Mid_P123:
                 switch(autoStep) {
@@ -301,9 +353,9 @@ public class AutoController {
     //_X means not made yet
     public enum autoRoutines {
         DO_NOTHING,
-        _XAmp_P,
-        _XMid_P,
-        _XSource_P,
+        Amp_P,
+        Mid_P,
+        Source_P,
         Source_PD,
         _XAmp_P3_D,
         Mid_P2_D,
