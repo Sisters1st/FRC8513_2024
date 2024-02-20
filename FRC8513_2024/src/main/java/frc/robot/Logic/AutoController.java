@@ -212,11 +212,80 @@ public class AutoController {
                         }
                         break;
                 }
-                break;   
+                break;  
+            
+            case Amp_P34:
+                switch(autoStep) {
+                    case 0:
+                        thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
+                        autoStep = 5;
+
+                    case 5:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        autoStep = 10;
+                        
+                    case 10:
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                                autoStep = 15;
+                                thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                                thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+                        break;
+
+                    case 15:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 20;
+                        }
+                        break;
+                        
+                    case 20:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
+                        autoStep = 25;
+
+                    case 25:
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                                autoStep = 30;
+                                thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                        }
+                        break;
+
+                    case 30:
+                        thisRobot.drivebase.initPath("AmpSideShotTo4", thisRobot.onRedAlliance);
+                        autoStep = 40;
+
+                    case 40:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 45;
+                        }
+                        break;
+
+                    case 45:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        autoStep = 50;
+
+                    case 50:
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                                autoStep = 55;
+                                thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
+                        }
+                        break;
+
+                    case 55:
+                        //do nothing
+                }
+                break;
+                
             default:
                 break;
         }
-        
+
         thisRobot.stateMachine.updateRobotState();
         thisRobot.updateAllSubsystemMotorPower();
     }
@@ -244,7 +313,7 @@ public class AutoController {
         _XAmp_P321,
         Mid_P123,
         _XSource_P123,
-        _XAmp_P34,
+        Amp_P34,
         _XSource_P18,
         _XMid_P26,
     }
