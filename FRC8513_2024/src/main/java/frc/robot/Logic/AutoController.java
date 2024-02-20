@@ -189,7 +189,6 @@ public class AutoController {
                         autoStep = 10;
                         
                     case 10:
-                        thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
                                 autoStep = 15;
