@@ -15,7 +15,7 @@ public class Settings {
     //vision settings
     public static boolean usePhoton = true;
     public static String photonName = "LLCamera";
-    public static double stalePhotonTime = 10.0; //ip for photon: http://10.85.13.26:5800/#/dashboard
+    public static double stalePhotonTime = 20; //ip for photon: http://10.85.13.26:5800/#/dashboard
 
 
     //driver joystick settings
