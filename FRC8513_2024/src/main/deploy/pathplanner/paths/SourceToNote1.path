@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4161765140632432,
-        "y": 5.547612425391122
+        "x": 0.8476540111925825,
+        "y": 4.377805809730459
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.851285404698469,
-        "y": 5.196309967088019
+        "x": 1.1900115370805708,
+        "y": 4.385090012401731
       },
       "isLocked": false,
-      "linkedName": "Mid"
+      "linkedName": "SourceStart"
     },
     {
       "anchor": {
@@ -20,37 +20,31 @@
         "y": 4.115574513314067
       },
       "prevControl": {
-        "x": 2.8796817957874117,
-        "y": 3.751687260716868
+        "x": 2.1660946959870846,
+        "y": 4.232121756168979
       },
       "nextControl": {
-        "x": 2.293649304580069,
-        "y": 4.466361030481918
+        "x": 2.695328773848013,
+        "y": 4.083564822032578
       },
       "isLocked": false,
       "linkedName": "Note1Intake"
     },
     {
       "anchor": {
-        "x": 1.4161765140632432,
-        "y": 5.547612425391122
+        "x": 1.1244537129729977,
+        "y": 4.377805809730459
       },
       "prevControl": {
-        "x": 1.844007659646525,
-        "y": 5.261809672555515
+        "x": 2.0786842638475873,
+        "y": 3.962606257059836
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Mid"
+      "linkedName": "SourceShot"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.55,
-      "rotationDegrees": -20.0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -67,7 +61,7 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

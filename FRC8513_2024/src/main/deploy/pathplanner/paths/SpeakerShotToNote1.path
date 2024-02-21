@@ -8,11 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.851285404698469,
-        "y": 5.196309967088019
+        "x": 2.416176514063242,
+        "y": 5.547612425391122
       },
       "isLocked": false,
-      "linkedName": "Mid"
+      "linkedName": "ShootInSpeaker"
     },
     {
       "anchor": {
@@ -20,12 +20,12 @@
         "y": 4.115574513314067
       },
       "prevControl": {
-        "x": 2.8796817957874117,
-        "y": 3.751687260716868
+        "x": 1.3721166040379995,
+        "y": 4.202984945455251
       },
       "nextControl": {
-        "x": 2.293649304580069,
-        "y": 4.466361030481918
+        "x": 2.8041573886427495,
+        "y": 4.099463924881413
       },
       "isLocked": false,
       "linkedName": "Note1Intake"
@@ -36,21 +36,15 @@
         "y": 5.547612425391122
       },
       "prevControl": {
-        "x": 1.844007659646525,
-        "y": 5.261809672555515
+        "x": 2.064470552443689,
+        "y": 5.0814234539714755
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Mid"
+      "linkedName": "ShootInSpeaker"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.55,
-      "rotationDegrees": -20.0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -67,7 +61,7 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true
