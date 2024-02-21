@@ -104,9 +104,19 @@ public class StateMachine {
 
                 break;
             case CLIMBING:
-
-                armPos = Settings.trapArmPos;
-                wristPos = Settings.trapWristPos;
+                if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)){
+                    armPos = Settings.preHookingArmPos;
+                    wristPos = Settings.hookingWristPos;
+                }
+                else {
+                    armPos = Settings.preHookingArmPos;
+                    wristPos = Settings.hookingWristPos;
+                }
+                if(thisRobot.teleopController.buttonPannel.getRawButton(11)){
+                    armPos = Settings.trapArmPos;
+                    wristPos = Settings.trapWristPos;
+                }
+                
                 ss = feederV = intakeVoltage = 0;
 
                 manualClimberControl();
@@ -212,19 +222,11 @@ public class StateMachine {
     }
 
     public void manualClimberControl(){
-        if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton)){
-            thisRobot.climber.climberMotor1.setVoltage(Settings.climberVoltage);
-            thisRobot.climber.climberMotor2.setVoltage(Settings.climberVoltage);
-        } else {
-            if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton))
-            {
-                thisRobot.climber.climberMotor1.setVoltage(-Settings.climberVoltage);
-                thisRobot.climber.climberMotor2.setVoltage(-Settings.climberVoltage);
-            } else {
-                thisRobot.climber.climberMotor1.setVoltage(0);
-                thisRobot.climber.climberMotor2.setVoltage(0);
-            }
-        }
+        double lc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlArmAxis);
+        double rc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
+
+        thisRobot.climber.climberMotor1.set(lc);
+        thisRobot.climber.climberMotor2.set(rc);
     }
 
     //generated from cubic line of best fit. will need to get retuned
