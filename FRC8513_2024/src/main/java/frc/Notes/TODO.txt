@@ -23,6 +23,7 @@
     does mid_p123 need to be P213
     simulate photon vision
     diable photon vision and test basic auto of 1 meter out and back for accuracy
+    some sort of Source_P87 amp_p45 autos? 
 
 4) before comp 
     make sure all programmers can explain code
