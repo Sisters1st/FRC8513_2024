@@ -22,6 +22,7 @@
         break up autos into paths
     does mid_p123 need to be P213
     simulate photon vision
+    diable photon vision and test basic auto of 1 meter out and back for accuracy
 
 4) before comp 
     make sure all programmers can explain code
