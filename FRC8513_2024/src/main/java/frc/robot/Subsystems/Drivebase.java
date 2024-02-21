@@ -90,8 +90,9 @@ public class Drivebase {
         lastPhotonUpdateTime = Timer.getFPGATimestamp();
       
       } else {
-        if(result.hasTargets()){
+        if(result.hasTargets() && Settings.useSingleTag){
           //only one target
+          
           Pose3d photonPose = new Pose3d(result.getBestTarget().getBestCameraToTarget().getTranslation(), result.getBestTarget().getBestCameraToTarget().getRotation()); 
           photonPose = photonPose.plus(robotToCam);
           swerveDrive.addVisionMeasurement(photonPose.toPose2d(), result.getTimestampSeconds());

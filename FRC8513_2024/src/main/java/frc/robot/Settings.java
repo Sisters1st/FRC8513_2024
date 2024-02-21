@@ -14,6 +14,7 @@ public class Settings {
 
     //vision settings
     public static boolean usePhoton = true;
+    public static boolean useSingleTag = false;;
     public static String photonName = "LLCamera";
     public static double stalePhotonTime = 20; //ip for photon: http://10.85.13.26:5800/#/dashboard
 
@@ -71,7 +72,7 @@ public class Settings {
     public static double hc_P = 0.15;
     public static double hc_I = 0;
     public static double hc_D = 0.01;
-    public static double headingThold = 2;
+    public static double headingThold = 3.5;
 
 
     //intake settings
@@ -165,8 +166,8 @@ public class Settings {
     public static double feederIntakeVoltage = 9;
     public static double shimmyInVoltage = 6;
 
-    public static double shimmyDist = 0.8;
-    public static int shimmyCount = 6;
+    public static double shimmyDist = 0.6;
+    public static int shimmyCount = 4;
     
 
     //climber settings

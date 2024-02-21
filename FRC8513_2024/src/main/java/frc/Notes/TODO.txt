@@ -1,12 +1,6 @@
 1) asap
     robustness with no photon vision
-
-        enable always do single tag as well
-        add logic so when double tag is out, use single tag
-        https://docs.photonvision.org/en/latest/docs/apriltag-pipelines/multitag.html#enabling-multitag
-        follow this to tune AT pipelines
-        https://docs.photonvision.org/en/latest/docs/apriltag-pipelines/2D-tracking-tuning.html
-        add photon stream to dashboard
+        test enable single tag
     resseting navx
     leds when intakign and shooting
     
@@ -15,6 +9,7 @@
     test shot consistancy and redo wrist setpoints (move arm up?) for new shooter
 
 3) autos
+    diable photon vision and test basic auto of 1 meter out and back for accuracy   
     discuss how to lay out autos
         multiple paths  
         action within path
@@ -22,7 +17,6 @@
         break up autos into paths
     does mid_p123 need to be P213
     simulate photon vision
-    diable photon vision and test basic auto of 1 meter out and back for accuracy
     some sort of Source_P87 amp_p45 autos? 
 
 4) before comp 

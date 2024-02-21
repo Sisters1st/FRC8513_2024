@@ -194,7 +194,7 @@ public class AutoController {
 
             case Mid_P2:
                 //simulation looks good
-                //no testing on robot
+                //works but needs to get tuned
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
