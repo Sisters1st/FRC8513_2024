@@ -54,6 +54,8 @@ public class AutoController {
             case Amp_P:
                 switch (autoStep) {
                     case 0:
+                        //not actually running path just setting init pose
+                        thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                        
                         autoStep = 5;
                     
@@ -67,40 +69,45 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.forceShooterOn = false;
                         autoStep = 15;
-                        break;
                     
                     case 15:
                         thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-
-                    }
-                    break;
+                        thisRobot.drivebase.swerveDrive.lockPose();
+                        break;
+                }
+                break;
 
             case Mid_P:
                 switch (autoStep) {
                     case 0:
+                        //not actually running path, just setting pose
+                        thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                       
                         autoStep = 5;
 
                     case 5:
                         thisRobot.drivebase.aimAtGoal();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
-                        autoStep = 10;
+                            autoStep = 10;
                         }
+                        break;
 
                     case 10:
-                    thisRobot.stateMachine.forceShooterOn = false;
-                    autoStep = 15;
-                    break;
+                        thisRobot.stateMachine.forceShooterOn = false;
+                        autoStep = 15;
 
                     case 15:
                         thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-
+                        thisRobot.drivebase.swerveDrive.lockPose();
+                        break;
                 }
                 break;
 
             case Source_P:
                 switch (autoStep) {
                     case 0:
+                        //not actually running path, just setting pose
+                        thisRobot.drivebase.initPath("SourceToNote8", thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                  
                         autoStep = 5;
                     
@@ -112,13 +119,14 @@ public class AutoController {
 
                     case 10:
                         thisRobot.stateMachine.forceShooterOn = false;
+                        thisRobot.drivebase.swerveDrive.lockPose();
                         autoStep = 15;
-                    break;
 
                     case 15:
                         thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-                    }
-                    break;
+                        break;
+                }
+                break;
 
             case Source_PD:
                 switch (autoStep) {
@@ -160,41 +168,44 @@ public class AutoController {
             case Amp_P3_D:
                 switch(autoStep) {
                     case 0:
-                     thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
                         autoStep = 5;
 
                     case 5:
-                    thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         autoStep = 10;
 
                     case 10:
-                    thisRobot.drivebase.aimAtGoal();
+                        thisRobot.drivebase.aimAtGoal();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
+                        break;
 
                     case 15:
-                    thisRobot.drivebase.followPath();
+                        thisRobot.drivebase.followPath();
                         if(thisRobot.drivebase.isPathOver()){
                             autoStep = 20;
                         }
                         break;
                     
                     case 20:
-                    thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
-                        autoStep = 10;
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        autoStep = 25;
                     
                     case 25:
-                    thisRobot.drivebase.aimAtGoal();
+                        thisRobot.drivebase.aimAtGoal();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
                             autoStep = 30;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
-                    break;
+                        break;
                     
                     case 30:
-                        thisRobot.drivebase.initPath("AmpToNote8", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("AmpSideShotToNote4", thisRobot.onRedAlliance);
                         autoStep = 35;
                     
                     case 35:
@@ -205,9 +216,7 @@ public class AutoController {
                     
                     case 40:
                         thisRobot.drivebase.swerveDrive.lockPose();
-
-                    break;
-
+                        break;
                 }
         
             case Mid_P2_D:
