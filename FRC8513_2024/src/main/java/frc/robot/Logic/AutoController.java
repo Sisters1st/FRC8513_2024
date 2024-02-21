@@ -51,11 +51,10 @@ public class AutoController {
                 }
                 break;
 
-            case Amp_P:
+            case Amp_PD:
                 switch (autoStep) {
                     case 0:
-                        //not actually running path just setting init pose
-                        thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("AmpToOpenSpace", thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                        
                         autoStep = 5;
                     
@@ -63,25 +62,28 @@ public class AutoController {
                         thisRobot.drivebase.aimAtGoal();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
                         autoStep = 10;
+                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
+                        thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
                         break;
 
                     case 10:
-                        thisRobot.stateMachine.forceShooterOn = false;
-                        autoStep = 15;
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 15;
+                        }
+                        break;
                     
                     case 15:
-                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         thisRobot.drivebase.swerveDrive.lockPose();
                         break;
                 }
                 break;
 
-            case Mid_P:
+            case Mid_PD:
                 switch (autoStep) {
                     case 0:
-                        //not actually running path, just setting pose
-                        thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("MidToOpenSpace", thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                       
                         autoStep = 5;
 
@@ -89,46 +91,26 @@ public class AutoController {
                         thisRobot.drivebase.aimAtGoal();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
                             autoStep = 10;
+                            thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
                         break;
 
                     case 10:
-                        thisRobot.stateMachine.forceShooterOn = false;
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
                         autoStep = 15;
-
-                    case 15:
-                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-                        thisRobot.drivebase.swerveDrive.lockPose();
-                        break;
-                }
-                break;
-
-            case Source_P:
-                switch (autoStep) {
-                    case 0:
-                        //not actually running path, just setting pose
-                        thisRobot.drivebase.initPath("SourceToOpenSpace", thisRobot.onRedAlliance);
-                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                  
-                        autoStep = 5;
-                    
-                    case 5:
-                        thisRobot.drivebase.aimAtGoal();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
-                        autoStep = 10;
                         }
-                        break;
-
-                    case 10:
-                        thisRobot.stateMachine.forceShooterOn = false;
-                        thisRobot.drivebase.swerveDrive.lockPose();
-                        autoStep = 15;
 
                     case 15:
                         thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
+                        thisRobot.drivebase.swerveDrive.lockPose();
+                        autoStep = 20;
                         break;
                 }
                 break;
 
+            
             case Source_PD:
                 switch (autoStep) {
                     case 0:
@@ -164,6 +146,142 @@ public class AutoController {
                 }
                 
                 break;
+
+            case Amp_P3:
+                switch(autoStep) {
+                    case 0:
+                        thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
+                        autoStep = 5;
+
+                    case 5:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        autoStep = 10;
+                        
+                    case 10:
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                                autoStep = 15;
+                                thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                                thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+                        break;
+
+                    case 15:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 20;
+                        }
+                        break;
+                        
+                    case 20:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
+                        autoStep = 25;
+
+                    case 25:
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                                autoStep = 30;
+                        }
+                        break;
+
+                    case 30:
+                        thisRobot.drivebase.swerveDrive.lockPose();
+                        break;
+                    }
+                    break;
+
+            case Mid_P2:
+                switch(autoStep) {
+                    case 0:
+                        thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
+                        autoStep = 5;
+
+                    case 5:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        autoStep = 10;
+                        
+                    case 10:
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                                autoStep = 15;
+                                thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                                thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+                        break;
+
+                    case 15:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 20;
+                        }
+                        break;
+                        
+                    case 20:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
+                        autoStep = 25;
+
+                    case 25:
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                                autoStep = 30;
+                        }
+                        break;
+                    case 30:
+                        thisRobot.drivebase.swerveDrive.lockPose();
+                        break;
+                    }
+                    break;
+
+
+            case Source_P1:
+                switch(autoStep) {
+                    case 0:
+                        thisRobot.drivebase.initPath("SourceToNote1", thisRobot.onRedAlliance);
+                        autoStep = 5;
+
+                    case 5:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        autoStep = 10;
+                        
+                    case 10:
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                                autoStep = 15;
+                                thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                                thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+                        break;
+
+                    case 15:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 20;
+                        }
+                        break;
+                        
+                    case 20:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
+                        autoStep = 25;
+
+                    case 25:
+                        thisRobot.drivebase.aimAtGoal();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
+                                autoStep = 30;
+                        }
+                        break;
+                    case 30:
+                        thisRobot.drivebase.swerveDrive.lockPose();
+                        break;
+                    }
+                    break;
+
+
 
             case Amp_P321:
                 switch(autoStep) {
@@ -515,16 +633,14 @@ public class AutoController {
 
     //_X means not made yet
     
-    //Simulate Amp_P3_D
     public enum autoRoutines {
         DO_NOTHING,
-        Amp_P,
-        Mid_P,
-        Source_P,
+        Amp_PD,
+        Mid_PD,
         Source_PD,
-        _XAmp_P3,
-        _XMid_P2,
-        _XSource_P1_D,
+        Amp_P3,
+        Mid_P2,
+        Source_P1,
         _XAmp_P32_D,
         _XMid_P23_D,
         Amp_P321,
