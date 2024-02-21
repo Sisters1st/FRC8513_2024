@@ -1,11 +1,10 @@
 1) asap
     robustness with no photon vision
-        test enable single tag
+        test enable single tag - fix single tag offset
     resseting navx
     leds when intakign and shooting
     
 2) teleop
-    test climbing
     test shot consistancy and redo wrist setpoints (move arm up?) for new shooter
 
 3) autos
@@ -15,9 +14,8 @@
         action within path
         what autos do we want
         break up autos into paths
-    does mid_p123 need to be P213
     simulate photon vision
-    some sort of Source_P87 amp_p45 autos? 
+    simulate autos
 
 4) before comp 
     make sure all programmers can explain code

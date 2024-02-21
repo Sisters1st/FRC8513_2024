@@ -234,7 +234,7 @@ public class StateMachine {
         double a3 = 2.6;
         double a2 = -9.32;
         double a1 = 1.44; 
-        double a0 = 1.62;
+        double a0 = 1; //1.62 first conifg manuall edit
 
         double wristVal = a3 * Math.pow(dist, 3) + a2 * Math.pow(dist, 2) + a1 * dist + a0;
         return wristVal;
