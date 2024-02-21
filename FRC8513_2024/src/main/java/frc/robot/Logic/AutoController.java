@@ -107,7 +107,7 @@ public class AutoController {
                 switch (autoStep) {
                     case 0:
                         //not actually running path, just setting pose
-                        thisRobot.drivebase.initPath("SourceToNote8", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("SourceToOpenSpace", thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                  
                         autoStep = 5;
                     
@@ -294,7 +294,7 @@ public class AutoController {
                         break;
 
                     case 30:
-                        thisRobot.drivebase.initPath("AmpSideShotTo4", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("AmpSideShotToNote4BackToShot", thisRobot.onRedAlliance);
                         autoStep = 40;
 
                     case 40:
@@ -346,8 +346,8 @@ public class AutoController {
         Mid_P,
         Source_P,
         Source_PD,
-        Amp_P3_D,
-        Mid_P2_D,
+        _XAmp_P3_D,
+        _XMid_P2_D,
         _XSource_P1_D,
         _XAmp_P32_D,
         _XMid_P23_D,
