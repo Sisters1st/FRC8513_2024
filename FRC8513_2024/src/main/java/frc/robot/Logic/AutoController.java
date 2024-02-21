@@ -193,6 +193,8 @@ public class AutoController {
                     break;
 
             case Mid_P2:
+                //simulation looks good
+                //no testing on robot
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
@@ -203,7 +205,6 @@ public class AutoController {
                         autoStep = 10;
                         
                     case 10:
-                        thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
                                 autoStep = 15;
@@ -221,7 +222,6 @@ public class AutoController {
                         
                     case 20:
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
-                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
                         autoStep = 25;
 
                     case 25:
