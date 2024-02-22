@@ -43,8 +43,8 @@ public class Settings {
     public static int drivingStateReturnButton = 1;
     public static int intakeButton = 2;
     public static int shootInSpeakerButton = 3;
-    public static int climberPrepButton = 4;
-    public static int ampPrepButton = 5;
+    public static int ampPrepButton = 4;
+    public static int climberPrepButton = 5;
     public static int intakeOutButton = 6;
     public static int climbUpButton = 7;
     public static int climbDownButton = 8;
@@ -149,7 +149,7 @@ public class Settings {
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
     
-    public static int basicShooterSpeed = 5250;
+    public static int basicShooterSpeed = 5500;
     public static double leftRightShooterSpeedOffset = 1;
 
 

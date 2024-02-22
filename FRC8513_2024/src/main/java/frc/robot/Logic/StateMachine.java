@@ -234,7 +234,7 @@ public class StateMachine {
         double a3 = 2.6;
         double a2 = -9.32;
         double a1 = 1.44; 
-        double a0 = 1; //1.62 first conifg manuall edit
+        double a0 = 2; //1.62 first conifg manuall edit
 
         double wristVal = a3 * Math.pow(dist, 3) + a2 * Math.pow(dist, 2) + a1 * dist + a0;
         return wristVal;
@@ -248,13 +248,15 @@ public class StateMachine {
             && thisRobot.wrist.wristWithinThold() 
             && thisRobot.drivebase.inHeadingThold()
             && thisRobot.drivebase.inVThold()
-            && thisRobot.shooter.shotWithinRange();
+            && thisRobot.shooter.shotWithinRange()
+            && !thisRobot.teleopController.buttonPannel.getRawButton(Settings.shootInSpeakerButton);
         }
         return thisRobot.shooter.shootersWithinThold()
         && thisRobot.arm.armWithinThold() 
         && thisRobot.wrist.wristWithinThold() 
         && thisRobot.drivebase.inHeadingThold()
-        && thisRobot.drivebase.inVThold();
+        && thisRobot.drivebase.inVThold()
+        && !thisRobot.teleopController.buttonPannel.getRawButton(Settings.shootInSpeakerButton);
     }
 
     public void forceRobotState(robotStates inState){

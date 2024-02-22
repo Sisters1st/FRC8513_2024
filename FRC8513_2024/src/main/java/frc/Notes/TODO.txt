@@ -3,6 +3,7 @@
         test enable single tag - fix single tag offset
     resseting navx
     leds when intakign and shooting
+    stop shooters at end of auto
     
 2) teleop
     test shot consistancy and redo wrist setpoints (move arm up?) for new shooter
