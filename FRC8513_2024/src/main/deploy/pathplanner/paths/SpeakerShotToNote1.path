@@ -3,48 +3,54 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4161765140632432,
-        "y": 5.547612425391122
+        "x": 1.8384715971711143,
+        "y": 5.55593454044051
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.416176514063242,
-        "y": 5.547612425391122
+        "x": 1.9730918745152162,
+        "y": 5.313519966345643
       },
       "isLocked": false,
-      "linkedName": "ShootInSpeaker"
+      "linkedName": "MidShot"
     },
     {
       "anchor": {
-        "x": 2.5812942486577075,
-        "y": 4.115574513314067
+        "x": 2.644176576147106,
+        "y": 4.224156443833604
       },
       "prevControl": {
-        "x": 1.3721166040379995,
-        "y": 4.202984945455251
+        "x": 2.534068843257279,
+        "y": 4.413404109737994
       },
       "nextControl": {
-        "x": 2.8041573886427495,
-        "y": 4.099463924881413
+        "x": 2.761846222460643,
+        "y": 4.021911739232213
       },
       "isLocked": false,
       "linkedName": "Note1Intake"
     },
     {
       "anchor": {
-        "x": 1.4161765140632432,
-        "y": 5.547612425391122
+        "x": 1.8384715971711143,
+        "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 2.064470552443689,
-        "y": 5.0814234539714755
+        "x": 2.1385648146436274,
+        "y": 5.134257614539865
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ShootInSpeaker"
+      "linkedName": "MidShot"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.85,
+      "rotationDegrees": -50.0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {

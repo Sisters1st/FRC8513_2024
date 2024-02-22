@@ -8,27 +8,27 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.8384715971711145,
-        "y": 5.55593454044051
+        "x": 2.533861282728165,
+        "y": 5.745588198903162
       },
       "isLocked": false,
       "linkedName": "MidShot"
     },
     {
       "anchor": {
-        "x": 2.855863033663389,
-        "y": 5.55593454044051
+        "x": 8.054222424234323,
+        "y": 7.39572112962815
       },
       "prevControl": {
-        "x": 2.678033073783571,
-        "y": 5.548973396186631
+        "x": 7.92915268428385,
+        "y": 7.340191400151781
       },
       "nextControl": {
-        "x": 3.1236619481041554,
-        "y": 5.566417514601411
+        "x": 8.195405958331163,
+        "y": 7.458405224582051
       },
       "isLocked": false,
-      "linkedName": "Note2Intake"
+      "linkedName": "Note4"
     },
     {
       "anchor": {
@@ -36,15 +36,21 @@
         "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 2.188113325735848,
-        "y": 5.541366135083645
+        "x": 2.2948448136537936,
+        "y": 5.667448199398078
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "MidShot"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.9,
+      "rotationDegrees": 15.0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {

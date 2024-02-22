@@ -3,48 +3,54 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.8476540111925825,
-        "y": 4.377805809730459
+        "x": 0.7458342352295009,
+        "y": 4.266473990962632
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.1900115370805708,
-        "y": 4.385090012401731
+        "x": 1.0881917611174883,
+        "y": 4.273758193633904
       },
       "isLocked": false,
       "linkedName": "SourceStart"
     },
     {
       "anchor": {
-        "x": 2.5812942486577075,
-        "y": 4.115574513314067
+        "x": 2.644176576147106,
+        "y": 4.224156443833604
       },
       "prevControl": {
-        "x": 2.1660946959870846,
-        "y": 4.232121756168979
+        "x": 2.2167048141487102,
+        "y": 4.214014190618434
       },
       "nextControl": {
-        "x": 2.695328773848013,
-        "y": 4.083564822032578
+        "x": 2.7625851934901764,
+        "y": 4.226965822807171
       },
       "isLocked": false,
       "linkedName": "Note1Intake"
     },
     {
       "anchor": {
-        "x": 1.1244537129729977,
-        "y": 4.377805809730459
+        "x": 1.1870954089052637,
+        "y": 4.132227032651154
       },
       "prevControl": {
-        "x": 2.0786842638475873,
-        "y": 3.962606257059836
+        "x": 1.701900111526987,
+        "y": 4.201174091037991
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "SourceShot"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.95,
+      "rotationDegrees": 0.0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -55,13 +61,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -60.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -60.0,
     "velocity": 0
   },
   "useDefaultConstraints": true
