@@ -52,6 +52,7 @@ public class AutoController {
                 break;
 
             case Amp_PD:
+                //simulated well
                 switch (autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("AmpToOpenSpace", thisRobot.onRedAlliance);
@@ -61,9 +62,9 @@ public class AutoController {
                     case 5:
                         thisRobot.drivebase.aimAtGoal();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
-                        autoStep = 10;
-                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-                        thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                            autoStep = 10;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
                         break;
 
