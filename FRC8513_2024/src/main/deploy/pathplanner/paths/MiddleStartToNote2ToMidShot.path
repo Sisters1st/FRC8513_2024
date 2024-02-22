@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8384715971711143,
-        "y": 5.55593454044051
+        "x": 1.3479718784745522,
+        "y": 5.5295540826244025
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9730918745152162,
-        "y": 5.313519966345643
+        "x": 1.7064965820861095,
+        "y": 5.534150553183524
       },
       "isLocked": false,
-      "linkedName": "MidShot"
+      "linkedName": "Mid"
     },
     {
       "anchor": {
-        "x": 2.644176576147106,
-        "y": 4.224156443833604
-      },
-      "prevControl": {
-        "x": 2.534068843257279,
-        "y": 4.413404109737994
-      },
-      "nextControl": {
-        "x": 2.761846222460643,
-        "y": 4.021911739232213
-      },
-      "isLocked": false,
-      "linkedName": "Note1Intake"
-    },
-    {
-      "anchor": {
-        "x": 1.8384715971711143,
+        "x": 2.855863033663389,
         "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 2.1385648146436274,
-        "y": 5.134257614539865
+        "x": 3.175863033663389,
+        "y": 5.55593454044051
+      },
+      "nextControl": {
+        "x": 2.6607706428376936,
+        "y": 5.55593454044051
+      },
+      "isLocked": false,
+      "linkedName": "Note2Intake"
+    },
+    {
+      "anchor": {
+        "x": 1.8719695222145207,
+        "y": 5.5295540826244025
+      },
+      "prevControl": {
+        "x": 2.2856518725355484,
+        "y": 5.524957612065281
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,8 +46,8 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.85,
-      "rotationDegrees": -50.0,
+      "waypointRelativePos": 0.55,
+      "rotationDegrees": 0.0,
       "rotateFast": false
     }
   ],
@@ -67,7 +67,7 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 0.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

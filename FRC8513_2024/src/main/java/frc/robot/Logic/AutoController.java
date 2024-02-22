@@ -55,7 +55,7 @@ public class AutoController {
                 //simulated well
                 switch (autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("AmpToOpenSpace", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("AmpStartToNote3ToAmpShot", thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                        
                         autoStep = 5;
                     
@@ -84,7 +84,7 @@ public class AutoController {
             case Mid_PD:
                 switch (autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("MidToOpenSpace", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("MiddleStartToNote1AndBack", thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                       
                         autoStep = 5;
 
@@ -115,7 +115,7 @@ public class AutoController {
             case Source_PD:
                 switch (autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("SourceToOpenSpace", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("SourceStartToOpenSpace", thisRobot.onRedAlliance);
                         autoStep = 3;
 
                     case 3:
@@ -151,7 +151,7 @@ public class AutoController {
             case Amp_P3:
                 switch(autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("AmpStartToNote3ToAmpShot", thisRobot.onRedAlliance);
                         autoStep = 5;
 
                     case 5:
