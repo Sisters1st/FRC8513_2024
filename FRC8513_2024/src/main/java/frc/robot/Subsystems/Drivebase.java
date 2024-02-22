@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
 import frc.robot.Settings;
+import frc.robot.Logic.AutoController.autoRoutines;
 import swervelib.parser.SwerveParser;
 import swervelib.SwerveDrive;
 import swervelib.telemetry.SwerveDriveTelemetry;
@@ -41,9 +42,9 @@ public class Drivebase {
   public double rotCorrection = 0;
 
   //path PID loops
-  PIDController xPosPidController = new PIDController(8, 0, 0);
-  PIDController yPosPidController = new PIDController(8, 0, 0);
-  public PIDController rotPidController = new PIDController(5, 0, 0);
+  PIDController xPosPidController = new PIDController(Settings.drivebase_PID_P, Settings.drivebase_PID_I, Settings.drivebase_PID_D);
+  PIDController yPosPidController = new PIDController(Settings.drivebase_PID_P, Settings.drivebase_PID_I, Settings.drivebase_PID_D);
+  public PIDController rotPidController = new PIDController(5, 0, 0.5);
 
   //path planning vars
   public double trajStartTime;
@@ -124,7 +125,7 @@ public class Drivebase {
     goalHeading = goalState.targetHolonomicRotation;
 
     // we need to test, when do we want to force odom, when no vision???
-    if(Robot.isSimulation()){
+    if(Robot.isSimulation() || thisRobot.autoController.autoRoutine == autoRoutines._XTESTINGACCURACY){
       setOdomToPathInit();
     }
     

@@ -1,5 +1,10 @@
 <xml version="1.0">
 <dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.MjpgStreamViewerImpl">
+		<location x="121" y="308"/>
+		<width>488</width>
+		<height>401</height>
+	</static-widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
 		<location x="7" y="0"/>
 	</static-widget>

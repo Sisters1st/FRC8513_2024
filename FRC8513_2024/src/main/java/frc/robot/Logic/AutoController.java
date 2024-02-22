@@ -3,6 +3,7 @@ package frc.robot.Logic;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.Settings;
 import frc.robot.Logic.StateMachine.robotStates;
 
 public class AutoController {
@@ -51,103 +52,7 @@ public class AutoController {
                 }
                 break;
 
-            case Amp_PD:
-                //simulated well
-                switch (autoStep) {
-                    case 0:
-                        thisRobot.drivebase.initPath("AmpStartToNote3ToAmpShot", thisRobot.onRedAlliance);
-                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                        
-                        autoStep = 5;
-                    
-                    case 5:
-                        thisRobot.drivebase.aimAtGoal();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
-                            autoStep = 10;
-                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
-                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
-                        }
-                        break;
-
-                    case 10:
-                        thisRobot.drivebase.followPath();
-                        if(thisRobot.drivebase.isPathOver()){
-                            autoStep = 15;
-                        }
-                        break;
-                    
-                    case 15:
-                        thisRobot.drivebase.swerveDrive.lockPose();
-                        break;
-                }
-                break;
-
-            case Mid_PD:
-                switch (autoStep) {
-                    case 0:
-                        thisRobot.drivebase.initPath("MiddleStartToNote1AndBack", thisRobot.onRedAlliance);
-                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);                       
-                        autoStep = 5;
-
-                    case 5:
-                        thisRobot.drivebase.aimAtGoal();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
-                            autoStep = 10;
-                            thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
-                        }
-                        break;
-
-                    case 10:
-                        thisRobot.drivebase.followPath();
-                        if(thisRobot.drivebase.isPathOver()){
-                        autoStep = 15;
-                        }
-
-                    case 15:
-                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-                        thisRobot.drivebase.swerveDrive.lockPose();
-                        autoStep = 20;
-                        break;
-                }
-                break;
-
             
-            case Source_PD:
-                switch (autoStep) {
-                    case 0:
-                        thisRobot.drivebase.initPath("SourceStartToOpenSpace", thisRobot.onRedAlliance);
-                        autoStep = 3;
-
-                    case 3:
-                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
-                        autoStep = 5;
-
-                    case 5:
-                        thisRobot.drivebase.aimAtGoal();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)){
-                            autoStep = 15;
-                            thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
-                        }
-                        break;
-
-                    case 15:
-                        thisRobot.drivebase.followPath();
-                        if(thisRobot.drivebase.isPathOver()){
-                            autoStep = 20;
-                        }
-                        break;
-
-                    case 20:
-                        thisRobot.drivebase.swerveDrive.lockPose();
-                        break;
-
-                    default:
-                        break;
-                }
-                
-                break;
-
             case Amp_P3:
                 switch(autoStep) {
                     case 0:
@@ -198,7 +103,7 @@ public class AutoController {
                 //works but needs to get tuned
                 switch(autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("MiddleStartToNote2ToMidShot", thisRobot.onRedAlliance);
                         autoStep = 5;
 
                     case 5:
@@ -241,7 +146,7 @@ public class AutoController {
             case Source_P1:
                 switch(autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("SourceToNote1", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("SourceStartToNote1ToSourceShot", thisRobot.onRedAlliance);
                         autoStep = 5;
 
                     case 5:
@@ -287,7 +192,7 @@ public class AutoController {
             case Amp_P321:
                 switch(autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("AmpStartToNote3ToAmpShot", thisRobot.onRedAlliance);
                         autoStep = 5;
 
                     case 5:
@@ -325,7 +230,7 @@ public class AutoController {
                         break;
 
                     case 30:
-                        thisRobot.drivebase.initPath("AmpShotToNote2", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("AmpSideShotToNote2ToMidShot", thisRobot.onRedAlliance);
                         autoStep = 40;
 
                     case 40:
@@ -348,7 +253,7 @@ public class AutoController {
                         break;
 
                     case 55:
-                        thisRobot.drivebase.initPath("SpeakerShotToNote1", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("MiddleShotToNote1AndBack", thisRobot.onRedAlliance);
                         autoStep = 65;
 
                     case 65:
@@ -375,7 +280,7 @@ public class AutoController {
             case Mid_P123:
                 switch(autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("MiddleToNote1", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("MiddleStartToNote1ToMidShot", thisRobot.onRedAlliance);
                         autoStep = 5;
 
                     case 5:
@@ -413,7 +318,7 @@ public class AutoController {
                         break;
 
                     case 30:
-                        thisRobot.drivebase.initPath("MiddleToNote2", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("MiddleShotToNote2AndBack", thisRobot.onRedAlliance);
                         autoStep = 40;
 
                     case 40:
@@ -436,7 +341,7 @@ public class AutoController {
                         break;
 
                     case 55:
-                        thisRobot.drivebase.initPath("MiddleToNote3", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("MiddleShotToNote3AndBack", thisRobot.onRedAlliance);
                         autoStep = 65;
 
                     case 65:
@@ -463,7 +368,7 @@ public class AutoController {
             case Source_P123:
                 switch(autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("SourceToNote1", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("SourceStartToNote1ToSourceShot", thisRobot.onRedAlliance);
                         autoStep = 5;
 
                     case 5:
@@ -501,7 +406,7 @@ public class AutoController {
                         break;
 
                     case 30:
-                        thisRobot.drivebase.initPath("SourceShotToNote2", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("SourceShotToNote2ToMidShot", thisRobot.onRedAlliance);
                         autoStep = 40;
 
                     case 40:
@@ -524,7 +429,7 @@ public class AutoController {
                         break;
 
                     case 55:
-                        thisRobot.drivebase.initPath("MiddleToNote3", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("MiddleShotToNote3AndBack", thisRobot.onRedAlliance);
                         autoStep = 65;
 
                     case 65:
@@ -551,7 +456,7 @@ public class AutoController {
             case Amp_P34:
                 switch(autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("AmpToNote3ToShot", thisRobot.onRedAlliance);
+                        thisRobot.drivebase.initPath("AmpStartToNote3ToAmpShot", thisRobot.onRedAlliance);
                         autoStep = 5;
 
                     case 5:
@@ -616,6 +521,31 @@ public class AutoController {
                 }
                 break;
                 
+            
+            case _XTESTINGACCURACY:
+                switch(autoStep) {
+                    case 0:
+                        thisRobot.stateMachine.forceShooterOn = false;
+                        Settings.usePhoton = false;
+                        thisRobot.drivebase.initPath("TestingPath", thisRobot.onRedAlliance);
+                        autoStep = 5;
+
+                    case 5:
+                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
+                        autoStep = 15;
+                        
+                    case 15:
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.drivebase.isPathOver()){
+                            autoStep = 30;
+                        }
+                        break;
+
+                    case 30:
+                        thisRobot.drivebase.swerveDrive.lockPose();
+                        break;
+                    }
+                    break;
             default:
                 break;
         }
@@ -636,9 +566,6 @@ public class AutoController {
     
     public enum autoRoutines {
         DO_NOTHING,
-        Amp_PD,
-        Mid_PD,
-        Source_PD,
         Amp_P3,
         Mid_P2,
         Source_P1,
@@ -650,5 +577,6 @@ public class AutoController {
         Amp_P34,
         _XSource_P18,
         _XMid_P26,
+        _XTESTINGACCURACY
     }
 }

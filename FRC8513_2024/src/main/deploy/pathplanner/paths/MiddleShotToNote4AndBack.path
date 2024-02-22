@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8719695222145207,
-        "y": 5.5295540826244025
+        "x": 1.5695060449949958,
+        "y": 5.55593454044051
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5673592077715712,
-        "y": 5.719207741087055
+        "x": 2.2648957305520465,
+        "y": 5.745588198903162
       },
       "isLocked": false,
       "linkedName": "MidShot"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 1.8719695222145207,
-        "y": 5.5295540826244025
+        "x": 1.5695060449949958,
+        "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 2.3283427386972004,
-        "y": 5.6410677415819706
+        "x": 2.025879261477675,
+        "y": 5.667448199398078
       },
       "nextControl": null,
       "isLocked": false,
@@ -54,10 +54,10 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.0,
-    "maxAcceleration": 4.0,
-    "maxAngularVelocity": 540.0,
-    "maxAngularAcceleration": 720.0
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 360.0
   },
   "goalEndState": {
     "velocity": 0,
