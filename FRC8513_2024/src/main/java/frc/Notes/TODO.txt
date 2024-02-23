@@ -17,6 +17,7 @@
         break up autos into paths
     simulate photon vision
     simulate autos
+    add stop shoot at end of each
 
 4) before comp 
     make sure all programmers can explain code

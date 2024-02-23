@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.8561626240061597,
-        "y": 6.747527113287845
+        "x": 1.2303755661642377,
+        "y": 6.642279723305886
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5949628806661222,
-        "y": 6.9245332383737415
+        "x": 1.2449439715211015,
+        "y": 6.642279723305886
       },
       "isLocked": false,
-      "linkedName": "AmpStart"
+      "linkedName": "AmpSideShot"
     },
     {
       "anchor": {
@@ -20,34 +20,34 @@
         "y": 6.970981963259401
       },
       "prevControl": {
-        "x": 1.7326386005282148,
-        "y": 6.970981963259401
+        "x": 2.282849465983832,
+        "y": 6.876162812154685
       },
       "nextControl": {
-        "x": 3.6069099857809315,
-        "y": 6.970981963259401
+        "x": 2.929294195704924,
+        "y": 7.035018616494794
       },
       "isLocked": false,
       "linkedName": "Note3Intake"
     },
     {
       "anchor": {
-        "x": 4.4734569469138945,
-        "y": 7.622918102979064
+        "x": 1.2303755661642377,
+        "y": 6.642279723305886
       },
       "prevControl": {
-        "x": 3.4734569469138945,
-        "y": 7.622918102979064
+        "x": 1.8384715971711143,
+        "y": 6.805997885500045
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "AmpSideShot"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.65,
-      "rotationDegrees": 0,
+      "waypointRelativePos": 0.85,
+      "rotationDegrees": 18.0,
       "rotateFast": false
     }
   ],
@@ -61,13 +61,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 55.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 59.47694100152256,
+    "rotation": 40.0,
     "velocity": 0
   },
   "useDefaultConstraints": true
