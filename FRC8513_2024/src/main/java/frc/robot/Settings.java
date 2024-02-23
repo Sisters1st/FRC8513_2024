@@ -155,6 +155,10 @@ public class Settings {
     public static int basicShooterSpeed = 5500;
     public static double leftRightShooterSpeedOffset = 1;
 
+        //these need to be determined
+    public static double[] shotDistances = {0.0, 1.0};
+    public static double[] shotWristPos = {0.0, 1.0};
+
 
     //feeder settings
     public static int feederCANID = 58;

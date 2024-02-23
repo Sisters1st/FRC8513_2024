@@ -25,10 +25,10 @@ public class LinearInterp {
             startX = i;
         }
         double deltaX = xVals.get(startX + 1) - xVals.get(startX);
-        double deltaY = yVals.get(startX + 1) - xVals.get(startX);
+        double deltaY = yVals.get(startX + 1) - yVals.get(startX);
 
         double percentageAlongWay = (x - xVals.get(startX))/deltaX;
-        return percentageAlongWay * deltaY;
+        return percentageAlongWay * deltaY +  yVals.get(startX);
         
     }
     

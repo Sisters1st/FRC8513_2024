@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import frc.robot.Logic.AutoController;
 import frc.robot.Logic.Dashboard;
+import frc.robot.Logic.LinearInterp;
 import frc.robot.Logic.StateMachine;
 import frc.robot.Logic.TeleopController;
 import frc.robot.Subsystems.Arm;
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
   public TeleopController teleopController = new TeleopController(this);
   public AutoController autoController = new AutoController(this);
   public StateMachine stateMachine = new StateMachine(this);
+  public LinearInterp linearInterp;
 
   //subsystems
   public PowerDistribution pdh = new PowerDistribution(Settings.pdhCANID, ModuleType.kRev);
@@ -47,7 +49,10 @@ public class Robot extends TimedRobot {
     if(Robot.isSimulation()){
       Settings.usePhoton = false;
     }
-    
+    double[] shotDistances = Settings.shotDistances;
+    double[] wristPos = Settings.shotWristPos;
+    linearInterp = new LinearInterp(shotDistances, wristPos);
+
   }
 
   @Override
