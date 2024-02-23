@@ -1,7 +1,7 @@
 1) asap
     robustness with no photon vision
         test single tag offset
-    redo shooter setpoint
+    redo shooter setpoint - comment in state machine shooting to ajust wrist setpoint
     
 2) teleop
     drive to point
@@ -23,4 +23,3 @@
     comments (javadocs?)
     resseting navx
     leds when intakign and shooting
-    
