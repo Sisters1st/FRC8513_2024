@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 2.644176576147106,
-        "y": 4.224156443833604
+        "x": 2.5677274211691286,
+        "y": 4.133967125077108
       },
       "prevControl": {
-        "x": 2.7958601045981495,
-        "y": 3.997980074339675
+        "x": 2.6850030842918837,
+        "y": 3.958053630392975
       },
       "nextControl": {
-        "x": 2.5262375019972767,
-        "y": 4.400016221655776
+        "x": 2.4502719806271185,
+        "y": 4.310150285890123
       },
       "isLocked": false,
       "linkedName": "Note1Intake"
@@ -47,15 +47,15 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.55,
-      "rotationDegrees": -50.0,
+      "rotationDegrees": -30.0,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.5,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 360.0
   },

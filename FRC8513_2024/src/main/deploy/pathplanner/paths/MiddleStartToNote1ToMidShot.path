@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5699250964419824,
-        "y": 5.213595979583576
+        "x": 1.8494139845422553,
+        "y": 5.1161508037301795
       },
       "isLocked": false,
       "linkedName": "Mid"
     },
     {
       "anchor": {
-        "x": 2.644176576147106,
-        "y": 4.224156443833604
+        "x": 2.5677274211691286,
+        "y": 4.133967125077108
       },
       "prevControl": {
-        "x": 2.7958601045981495,
-        "y": 3.997980074339675
+        "x": 2.3107666940258302,
+        "y": 4.2930380514039115
       },
       "nextControl": {
-        "x": 2.5262375019972767,
-        "y": 4.400016221655776
+        "x": 2.87557603686636,
+        "y": 3.9433941725026314
       },
       "isLocked": false,
       "linkedName": "Note1Intake"
@@ -36,8 +36,8 @@
         "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 1.7822663218441805,
-        "y": 5.258362319636173
+        "x": 1.8200950687615667,
+        "y": 5.057512972168802
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,15 +47,15 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.55,
-      "rotationDegrees": -50.0,
+      "rotationDegrees": -20.0,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.5,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 360.0
   },

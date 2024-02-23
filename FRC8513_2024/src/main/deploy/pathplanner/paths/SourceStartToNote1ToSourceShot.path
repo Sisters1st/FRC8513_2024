@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 2.644176576147106,
-        "y": 4.224156443833604
+        "x": 2.5677274211691286,
+        "y": 4.133967125077108
       },
       "prevControl": {
-        "x": 2.2167048141487102,
-        "y": 4.214014190618434
+        "x": 2.140255659170733,
+        "y": 4.123824871861937
       },
       "nextControl": {
-        "x": 2.7625851934901764,
-        "y": 4.226965822807171
+        "x": 2.686136038512199,
+        "y": 4.136776504050674
       },
       "isLocked": false,
       "linkedName": "Note1Intake"
@@ -54,8 +54,8 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.5,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 360.0
   },

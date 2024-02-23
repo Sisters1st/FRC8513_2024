@@ -20,12 +20,12 @@
         "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 1.2608197978715303,
-        "y": 6.306207416319003
+        "x": 2.670343626401539,
+        "y": 5.937080445589463
       },
       "nextControl": {
-        "x": 3.158697315762917,
-        "y": 5.445055943443176
+        "x": 3.1139695596090946,
+        "y": 5.244076291797582
       },
       "isLocked": false,
       "linkedName": "Note2Intake"
@@ -46,16 +46,16 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.7,
-      "rotationDegrees": -20.0,
+      "waypointRelativePos": 0.55,
+      "rotationDegrees": -30.0,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.5,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 360.0
   },
