@@ -47,13 +47,14 @@ public class AutoController {
                         break;
 
                     case 5:
-                        //do nothing
+                        thisRobot.stateMachine.forceShooterOn = false;
                         break;
                 }
                 break;
 
             
             case Amp_P3:
+                //works in sim
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("AmpStartToNote3ToAmpShot", thisRobot.onRedAlliance);
@@ -94,13 +95,13 @@ public class AutoController {
 
                     case 30:
                         thisRobot.drivebase.swerveDrive.lockPose();
+                        thisRobot.stateMachine.forceShooterOn = false;
                         break;
                     }
                     break;
 
             case Mid_P2:
                 //simulation looks good
-                //works but needs to get tuned
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("MiddleStartToNote2ToMidShot", thisRobot.onRedAlliance);
@@ -138,12 +139,14 @@ public class AutoController {
                         break;
                     case 30:
                         thisRobot.drivebase.swerveDrive.lockPose();
+                        thisRobot.stateMachine.forceShooterOn = false;
                         break;
                     }
                     break;
 
 
             case Source_P1:
+                //works in sim
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("SourceStartToNote1ToSourceShot", thisRobot.onRedAlliance);
@@ -183,11 +186,13 @@ public class AutoController {
                         break;
                     case 30:
                         thisRobot.drivebase.swerveDrive.lockPose();
+                        thisRobot.stateMachine.forceShooterOn = false;
                         break;
                     }
                     break;
 
             case Source_P12:
+                // works in sim      
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("SourceStartToNote1ToSourceShot", thisRobot.onRedAlliance);
@@ -251,11 +256,12 @@ public class AutoController {
                         break;
 
                     case 55:
-                        //do nothing
+                        thisRobot.stateMachine.forceShooterOn = false;
                 }
                 break;
 
             case Amp_P321:
+                //works in sim
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("AmpStartToNote3ToAmpShot", thisRobot.onRedAlliance);
@@ -340,10 +346,15 @@ public class AutoController {
                                 thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
                         break;
+                    
+                    case 80:
+                        thisRobot.stateMachine.forceShooterOn = false;
+                        break;
                 }
                 break;  
 
             case Mid_P123:
+                //works in sim
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("MiddleStartToNote1ToMidShot", thisRobot.onRedAlliance);
@@ -428,10 +439,15 @@ public class AutoController {
                                 thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
                         break;
+                    
+                    case 80:
+                        thisRobot.stateMachine.forceShooterOn = false;
+                        break;
                 }
                 break;  
 
             case Source_P123:
+                //works in sim
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("SourceStartToNote1ToSourceShot", thisRobot.onRedAlliance);
@@ -516,10 +532,15 @@ public class AutoController {
                                 thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
                         break;
+                    
+                    case 80:
+                        thisRobot.stateMachine.forceShooterOn = false;
+                        break;
                 }
                 break;  
             
             case Amp_P34:
+                //works in sim
                 switch(autoStep) {
                     case 0:
                         thisRobot.drivebase.initPath("AmpStartToNote3ToAmpShot", thisRobot.onRedAlliance);
@@ -583,7 +604,7 @@ public class AutoController {
                         break;
 
                     case 55:
-                        //do nothing
+                        thisRobot.stateMachine.forceShooterOn = false;
                 }
                 break;
 
@@ -652,7 +673,7 @@ public class AutoController {
                         break;
 
                     case 55:
-                        //do nothing
+                        thisRobot.stateMachine.forceShooterOn = false;
                 }
                 break;
 
@@ -721,7 +742,7 @@ public class AutoController {
                         break;
 
                     case 55:
-                        //do nothing
+                        thisRobot.stateMachine.forceShooterOn = false;
                 }
                 break;
 
@@ -790,7 +811,7 @@ public class AutoController {
                         break;
 
                     case 55:
-                        //do nothing
+                        thisRobot.stateMachine.forceShooterOn = false;
                 }
                 break;
             
@@ -859,7 +880,7 @@ public class AutoController {
                         break;
 
                     case 55:
-                        //do nothing
+                        thisRobot.stateMachine.forceShooterOn = false;
                 }
                 break;
 
@@ -928,7 +949,7 @@ public class AutoController {
                         break;
 
                     case 55:
-                        //do nothing
+                        thisRobot.stateMachine.forceShooterOn = false;
                 }
                 break;
             
@@ -953,6 +974,7 @@ public class AutoController {
 
                     case 30:
                         thisRobot.drivebase.swerveDrive.lockPose();
+                        thisRobot.stateMachine.forceShooterOn = false;
                         break;
                     }
                     break;
@@ -989,9 +1011,6 @@ public class AutoController {
         Mid_P21,
         Amp_P321,
         Mid_P123,
-        _XMid_P213,
-        _XMid_P231,
-        _XMid_P321,
         Source_P123,
         Amp_P34,
         Source_P18,

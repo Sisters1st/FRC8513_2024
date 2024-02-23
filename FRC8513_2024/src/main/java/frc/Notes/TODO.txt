@@ -1,27 +1,26 @@
 1) asap
     robustness with no photon vision
-        test enable single tag - fix single tag offset
-    resseting navx
-    leds when intakign and shooting
-    stop shooters at end of auto
+        test single tag offset
+    redo shooter setpoint
     
 2) teleop
-    test shot consistancy and redo wrist setpoints (move arm up?) for new shooter
-
-3) autos
-    diable photon vision and test basic auto of 1 meter out and back for accuracy   
-    discuss how to lay out autos
-        multiple paths  
-        action within path
-        what autos do we want
-        break up autos into paths
-    simulate photon vision
-    simulate autos
-    add stop shoot at end of each
-
-4) before comp 
-    make sure all programmers can explain code
-    comments (javadocs?)
     drive to point
         pid xy or on the fly path generation??
     tune heading PID - tune, does this need profiling
+
+3) autos
+    simulate photon vision
+    todo:
+        a_p35
+        s_p17
+        Mid_P213,
+        Mid_P231,
+        Mid_P321,
+
+4) before comp
+    replace tread and ajust wheel ratio
+    make sure all programmers can explain code
+    comments (javadocs?)
+    resseting navx
+    leds when intakign and shooting
+    
