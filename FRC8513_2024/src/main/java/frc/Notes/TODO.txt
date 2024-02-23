@@ -1,6 +1,6 @@
 1) asap
     robustness with no photon vision
-        test single tag offset
+        fix single tag offset
     redo shooter setpoint - comment in state machine shooting to ajust wrist setpoint
     
 2) teleop
@@ -23,3 +23,4 @@
     comments (javadocs?)
     resseting navx
     leds when intakign and shooting
+    update photon vision

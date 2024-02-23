@@ -80,7 +80,8 @@ public class StateMachine {
 
                 //if vision, get dist, if no vision, assume sw shot
                 if(thisRobot.drivebase.visionIsRecent()){
-                    wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal()); //wristPos = thisRobot.wrist.getWristPos() + 0.1 * thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
+                    wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal()); 
+                    //wristPos = thisRobot.wrist.wristGoalPos + 0.1 * thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
                 } else {
                     wristPos = Settings.shootingSubwofferWristPos;
                 }
@@ -231,12 +232,17 @@ public class StateMachine {
 
     //generated from cubic line of best fit. will need to get retuned
     public double getWristAngFromDist(double dist){
-        double a3 = 2.6;
-        double a2 = -9.32;
-        double a1 = 1.44; 
-        double a0 = 2; //1.62 first conifg manuall edit
+        //double a3 = 2.6;
+        //double a2 = -9.32;
+        //double a1 = 1.44; 
+        //double a0 = 2; //1.62 first conifg manuall edit
 
-        double wristVal = a3 * Math.pow(dist, 3) + a2 * Math.pow(dist, 2) + a1 * dist + a0;
+        //double wristVal = a3 * Math.pow(dist, 3) + a2 * Math.pow(dist, 2) + a1 * dist + a0;
+
+        //ignore old calculations
+        double wristVal = thisRobot.linearInterp.interpolateLinearly(dist);
+        //System.out.println(dist);
+        //System.out.println(wristVal);
         return wristVal;
     }
 

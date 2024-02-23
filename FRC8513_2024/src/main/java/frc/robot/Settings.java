@@ -17,7 +17,7 @@ public class Settings {
 
     //vision settings
     public static boolean usePhoton = true;
-    public static boolean useSingleTag = false;;
+    public static boolean useSingleTag = false;
     public static String photonName = "LLCamera";
     public static double stalePhotonTime = 20; //ip for photon: http://10.85.13.26:5800/#/dashboard
 
@@ -103,7 +103,7 @@ public class Settings {
     public static double postHoookArmPos = -50;
     public static double trapArmPos = -60;
     public static double ampArmPos = -41;
-    public static double shootingArmPos = -19;
+    public static double shootingArmPos = -24;
 
     public static double armThold = 1;
     public static double armMaxV = 1.33;
@@ -123,7 +123,7 @@ public class Settings {
     public static double wristPID_D = 0;
     public static double wristPID_IZ = 3;
 
-    public static double intakingWristPos = 3.5;
+    public static double intakingWristPos = 2.5;
     public static double hookingWristPos = 0;
     public static double trapWristPos = 8;
     public static double ampWristPos = -1;
@@ -156,8 +156,8 @@ public class Settings {
     public static double leftRightShooterSpeedOffset = 1;
 
         //these need to be determined
-    public static double[] shotDistances = {0.0, 1.0};
-    public static double[] shotWristPos = {0.0, 1.0};
+    public static double[] shotDistances = {1.3, 1.44, 1.57, 1.7, 1.85, 1.94, 2.1, 2.25, 2.52};
+    public static double[] shotWristPos = {-5.1, -6.42, -6.8, -7.73, -7.88, -7.77, -8.1, -8.44, -9.4};
 
 
     //feeder settings
@@ -186,8 +186,7 @@ public class Settings {
 
     //field settings
     
-    public static Translation2d blueGoalPos = new Translation2d(0.04,5.54736);
-    public static Translation2d redGoalPos = new Translation2d(16.6,5.54736);
-        
+    public static Translation2d blueGoalPos = new Translation2d(0.076,5.547868);
+    public static Translation2d redGoalPos = new Translation2d(16.465042,5.547868);
 
 }

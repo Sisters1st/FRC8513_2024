@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonPoseEstimator;
+import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.PathPlannerTrajectory;
@@ -61,6 +64,8 @@ public class Drivebase {
 
   //transformation from robot to camera
   Transform3d robotToCam = new Transform3d(new Translation3d(-.27, 0, 0.35), new Rotation3d(0, .47, Math.PI));
+  PhotonPoseEstimator photonPoseEstimatorOne = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.LOWEST_AMBIGUITY, camera, robotToCam);
+  PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, robotToCam);
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
@@ -87,6 +92,7 @@ public class Drivebase {
       var result = camera.getLatestResult();
       if (result.getMultiTagResult().estimatedPose.isPresent) {
         //multi pose
+        
         Pose3d photonPose = new Pose3d(result.getMultiTagResult().estimatedPose.best.getTranslation(), result.getMultiTagResult().estimatedPose.best.getRotation()); 
         photonPose = photonPose.plus(robotToCam);
         swerveDrive.addVisionMeasurement(photonPose.toPose2d(), result.getTimestampSeconds());
@@ -95,19 +101,14 @@ public class Drivebase {
       } else {
         if(result.hasTargets() && Settings.useSingleTag){
           //only one target
-          
-          Pose3d cameraToTag = new Pose3d(result.getBestTarget().getBestCameraToTarget().getTranslation(), result.getBestTarget().getBestCameraToTarget().getRotation()); 
-          Pose3d tagToRobot = cameraToTag.plus(robotToCam);
-          //add tag positon - this is untested 
-          Optional<Pose3d> tagpose = aprilTagFieldLayout.getTagPose(result.getTargets().get(0).getFiducialId());
-          if(tagpose.isPresent()){
-            Transform3d fieldToTagTranslation3d = tagpose.get().minus(aprilTagFieldLayout.getOrigin());
-            Pose3d fieldToRobot = tagToRobot.plus(fieldToTagTranslation3d);
-            swerveDrive.addVisionMeasurement(fieldToRobot.toPose2d(), result.getTimestampSeconds());
-
+          Optional<EstimatedRobotPose> oneTagPose = photonPoseEstimatorOne.update();
+          if(oneTagPose.isPresent()){
+            Pose3d fieldToCamera = oneTagPose.get().estimatedPose;
+            fieldToCamera = fieldToCamera.plus(robotToCam);
+            swerveDrive.addVisionMeasurement(fieldToCamera.toPose2d(), result.getTimestampSeconds());
             lastPhotonUpdateTime = Timer.getFPGATimestamp();
           }
-          
+        
         } else {
           //no vision
         }
