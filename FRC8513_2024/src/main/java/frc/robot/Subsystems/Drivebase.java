@@ -63,7 +63,7 @@ public class Drivebase {
   public double lastPhotonUpdateTime = 0;
 
   //transformation from robot to camera
-  Transform3d robotToCam = new Transform3d(new Translation3d(-.27, 0, 0.35), new Rotation3d(0, .47, Math.PI));
+  Transform3d robotToCam = new Transform3d(new Translation3d(.27, 0, -0.35), new Rotation3d(0, .47, Math.PI));
   PhotonPoseEstimator photonPoseEstimatorOne = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.LOWEST_AMBIGUITY, camera, robotToCam);
   PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, robotToCam);
 
@@ -89,25 +89,21 @@ public class Drivebase {
   //use vision
   public void updateOdometry() {
     if(Settings.usePhoton){
-      var result = camera.getLatestResult();
-      if (result.getMultiTagResult().estimatedPose.isPresent) {
+      Optional<EstimatedRobotPose> pose2Tag = photonPoseEstimatorTwo.update();
+      if (pose2Tag.isPresent()) {
         //multi pose
         
-        Pose3d photonPose = new Pose3d(result.getMultiTagResult().estimatedPose.best.getTranslation(), result.getMultiTagResult().estimatedPose.best.getRotation()); 
-        photonPose = photonPose.plus(robotToCam);
-        swerveDrive.addVisionMeasurement(photonPose.toPose2d(), result.getTimestampSeconds());
+        
+        swerveDrive.addVisionMeasurement(pose2Tag.get().estimatedPose.toPose2d(), pose2Tag.get().timestampSeconds);
         lastPhotonUpdateTime = Timer.getFPGATimestamp();
       
       } else {
-        if(result.hasTargets() && Settings.useSingleTag){
+        
+        Optional<EstimatedRobotPose> oneTagPose = photonPoseEstimatorOne.update();
+        if(oneTagPose.isPresent() && Settings.useSingleTag){
           //only one target
-          Optional<EstimatedRobotPose> oneTagPose = photonPoseEstimatorOne.update();
-          if(oneTagPose.isPresent()){
-            Pose3d fieldToCamera = oneTagPose.get().estimatedPose;
-            fieldToCamera = fieldToCamera.plus(robotToCam);
-            swerveDrive.addVisionMeasurement(fieldToCamera.toPose2d(), result.getTimestampSeconds());
-            lastPhotonUpdateTime = Timer.getFPGATimestamp();
-          }
+          swerveDrive.addVisionMeasurement(oneTagPose.get().estimatedPose.toPose2d(), oneTagPose.get().timestampSeconds);
+          lastPhotonUpdateTime = Timer.getFPGATimestamp();
         
         } else {
           //no vision
