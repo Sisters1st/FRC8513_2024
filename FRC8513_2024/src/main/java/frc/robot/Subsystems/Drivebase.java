@@ -2,6 +2,8 @@ package frc.robot.Subsystems;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
+
 import org.photonvision.PhotonCamera;
 
 import com.pathplanner.lib.path.PathPlannerPath;
@@ -94,10 +96,18 @@ public class Drivebase {
         if(result.hasTargets() && Settings.useSingleTag){
           //only one target
           
-          Pose3d photonPose = new Pose3d(result.getBestTarget().getBestCameraToTarget().getTranslation(), result.getBestTarget().getBestCameraToTarget().getRotation()); 
-          photonPose = photonPose.plus(robotToCam);
-          swerveDrive.addVisionMeasurement(photonPose.toPose2d(), result.getTimestampSeconds());
-          lastPhotonUpdateTime = Timer.getFPGATimestamp();
+          Pose3d cameraToTag = new Pose3d(result.getBestTarget().getBestCameraToTarget().getTranslation(), result.getBestTarget().getBestCameraToTarget().getRotation()); 
+          Pose3d tagToRobot = cameraToTag.plus(robotToCam);
+          //add tag positon - this is untested 
+          Optional<Pose3d> tagpose = aprilTagFieldLayout.getTagPose(result.getTargets().get(0).getFiducialId());
+          if(tagpose.isPresent()){
+            Transform3d fieldToTagTranslation3d = tagpose.get().minus(aprilTagFieldLayout.getOrigin());
+            Pose3d fieldToRobot = tagToRobot.plus(fieldToTagTranslation3d);
+            swerveDrive.addVisionMeasurement(fieldToRobot.toPose2d(), result.getTimestampSeconds());
+
+            lastPhotonUpdateTime = Timer.getFPGATimestamp();
+          }
+          
         } else {
           //no vision
         }
