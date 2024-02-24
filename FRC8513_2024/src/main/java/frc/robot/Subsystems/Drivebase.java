@@ -212,7 +212,7 @@ public class Drivebase {
   }
 
   public boolean inHeadingThold(){
-    return Math.abs(swerveDrive.getPose().getRotation().getDegrees() - goalHeading.getDegrees()) < Settings.headingThold;
+    return Math.abs(swerveDrive.getPose().getRotation().minus(goalHeading).getDegrees()) < Settings.headingThold;
   }
 
   public boolean inVThold(){
