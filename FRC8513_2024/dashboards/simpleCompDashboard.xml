@@ -1,5 +1,8 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="feederSensor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="172" y="226"/>
+	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.MjpgStreamViewerImpl">
 		<location x="121" y="308"/>
 		<width>488</width>
@@ -91,7 +94,6 @@
 	<hidden field="LastPhotonUpdate"/>
 	<hidden field="WristInThold"/>
 	<hidden field="ArmInThold"/>
-	<hidden field="feederSensor"/>
 	<hidden field="Photon Vision Enabled"/>
 	<hidden field="rightClimberPower"/>
 	<hidden field="Swerve Drive"/>

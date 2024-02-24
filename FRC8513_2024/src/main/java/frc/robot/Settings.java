@@ -147,7 +147,7 @@ public class Settings {
     public static double shooter_FF_const = 1.42;
     
     public static double shooterThresholdValue = 150;
-    public static double shotTime = 0.8;
+    public static double shotTime = 500.8;
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
@@ -156,8 +156,8 @@ public class Settings {
     public static double leftRightShooterSpeedOffset = 1;
 
         //these need to be determined
-    public static double[] shotDistances = {1.3, 1.44, 1.57, 1.7, 1.85, 1.94, 2.1, 2.25, 2.52};
-    public static double[] shotWristPos = {-5.1, -6.42, -6.8, -7.73, -7.88, -7.77, -8.1, -8.44, -9.4};
+    public static double[] shotDistances = {1.1, 1.38, 1.58, 1.87, 2.05,3};
+    public static double[] shotWristPos = {-6.45, -6.45, -6.75, -8.45, -8.94,-8.94};
 
 
     //feeder settings

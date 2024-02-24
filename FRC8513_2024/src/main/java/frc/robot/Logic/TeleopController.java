@@ -132,7 +132,7 @@ public class TeleopController {
             armJoystick = 0;
         }
 
-        double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis) * 0.2;
+        double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis) * 0.1;
         if(wristJoystick < Settings.joystickDeadband && wristJoystick > -Settings.joystickDeadband){
             wristJoystick = 0;
         }
