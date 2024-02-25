@@ -8,7 +8,7 @@ public class Settings {
 
     //drivebase and yagsl settings
     public static double drivebaseMaxVelocity = 15.1;
-    public static double maxShotSpeed = 0.2;
+    public static double maxShotSpeed = 1;
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
     public static double drivebase_PID_P = 12;
     public static double drivebase_PID_I = 0;
@@ -147,7 +147,7 @@ public class Settings {
     public static double shooter_FF_const = 1.42;
     
     public static double shooterThresholdValue = 150;
-    public static double shotTime = 500.8;
+    public static double shotTime = 0.8;
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;
@@ -156,8 +156,8 @@ public class Settings {
     public static double leftRightShooterSpeedOffset = 1;
 
         //these need to be determined
-    public static double[] shotDistances = {1.1, 1.38, 1.58, 1.87, 2.05,3};
-    public static double[] shotWristPos = {-6.45, -6.45, -6.75, -8.45, -8.94,-8.94};
+    public static double[] shotDistances = {1.00, 1.37, 1.56, 1.68, 1.86, 2.13, 3.00};
+    public static double[] shotWristPos = {-6.2, -6.2, -7.4, -8.07, -8.81, -10.1, -11};
 
 
     //feeder settings
@@ -166,7 +166,7 @@ public class Settings {
 
     public static boolean useFeederSensor = true;
     public static int feederSensorPort = 6; //on mxp
-    public static double feederNoteThold = 425;
+    public static double feederNoteThold = 325;
     
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;

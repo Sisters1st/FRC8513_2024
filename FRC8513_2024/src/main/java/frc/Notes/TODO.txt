@@ -2,6 +2,7 @@
     robustness with no photon vision
         fix single tag offset
     redo shooter setpoint - comment in state machine shooting to ajust wrist setpoint
+    way to ajust shot mid match which saves
     
 2) teleop
     drive to point
