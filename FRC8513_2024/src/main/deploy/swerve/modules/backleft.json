@@ -5,7 +5,7 @@
   },
   "absoluteEncoderOffset": 305.3,
   "drive": {
-    "type": "sparkmax",
+    "type": "talonFX",
     "id": 9,
     "canbus": null
   },
