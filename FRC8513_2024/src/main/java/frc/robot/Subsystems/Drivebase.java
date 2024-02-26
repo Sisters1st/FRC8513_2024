@@ -106,6 +106,8 @@ public class Drivebase {
           //only one target
           swerveDrive.addVisionMeasurement(oneTagPose.get().estimatedPose.toPose2d(), oneTagPose.get().timestampSeconds);
           lastPhotonUpdateTime = Timer.getFPGATimestamp();
+          SmartDashboard.putNumber("1tagX", oneTagPose.get().estimatedPose.toPose2d().getX());
+          SmartDashboard.putNumber("1tagY", oneTagPose.get().estimatedPose.toPose2d().getY());
         
         } else {
           //no vision
