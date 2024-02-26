@@ -17,7 +17,6 @@ import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -28,6 +27,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Settings;
 import frc.robot.Logic.AutoController.autoRoutines;
@@ -63,7 +63,7 @@ public class Drivebase {
   public double lastPhotonUpdateTime = 0;
 
   //transformation from robot to camera
-  Transform3d robotToCam = new Transform3d(new Translation3d(.27, 0, -0.35), new Rotation3d(0, .47, Math.PI));
+  Transform3d robotToCam = new Transform3d(new Translation3d(-.27, 0, 0.35), new Rotation3d(0, .47, Math.PI));
   PhotonPoseEstimator photonPoseEstimatorOne = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.LOWEST_AMBIGUITY, camera, robotToCam);
   PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, robotToCam);
 
@@ -96,6 +96,8 @@ public class Drivebase {
         
         swerveDrive.addVisionMeasurement(pose2Tag.get().estimatedPose.toPose2d(), pose2Tag.get().timestampSeconds);
         lastPhotonUpdateTime = Timer.getFPGATimestamp();
+        SmartDashboard.putNumber("2tagX", pose2Tag.get().estimatedPose.toPose2d().getX());
+        SmartDashboard.putNumber("2tagY", pose2Tag.get().estimatedPose.toPose2d().getY());
       
       } else {
         
