@@ -240,7 +240,7 @@ public class StateMachine {
         //double wristVal = a3 * Math.pow(dist, 3) + a2 * Math.pow(dist, 2) + a1 * dist + a0;
 
         //ignore old calculations
-        double wristVal = thisRobot.linearInterp.interpolateLinearly(dist);
+        double wristVal = thisRobot.linearInterp.interpolateLinearly(dist) + Settings.matchShooterOveride;
         //System.out.println(dist);
         //System.out.println(wristVal);
         return wristVal;

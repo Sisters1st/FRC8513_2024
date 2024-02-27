@@ -15,6 +15,7 @@ public class TeleopController {
     Joystick buttonPannel = new Joystick(Settings.buttonPannelPort);
     Joystick manualControlJoystick = new Joystick(Settings.manualControlPort);
     boolean autoRot = true;
+    boolean manualHatPressed = false;
 
     public TeleopController(Robot thisRobot_){
         thisRobot = thisRobot_;
@@ -85,12 +86,6 @@ public class TeleopController {
         double yV = yInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double rV = rInput * Settings.rotJoyRate;
         
-        //if a is pressed, snap to face amp
-        if(driverXboxController.getRawButton(Settings.snapToAmpButton)){
-            autoRot = true;
-            thisRobot.drivebase.setGoalHeadingDeg(90);
-        }
-
         //if button 8 is pressed, reset the heading
         if(driverXboxController.getRawButton(Settings.resetFieldCentricButton)){
             //if we are red, set to 180 degrees (towards blue) as the zero 
@@ -107,16 +102,41 @@ public class TeleopController {
         if(driverXboxController.getRawButton(Settings.aimAtSpeakerButton)){
             autoRot = true;
             thisRobot.drivebase.setGoalHeadingToGoal();
-        }
-        //if we are commanding a turn manuall, udpate goal heading to be the current pose +- joystick value * rotJoyRate
-        if(rV == 0 && autoRot){
+            
+        } 
+        
+        //if a is pressed, snap to face amp
+        if(driverXboxController.getRawButton(Settings.snapToAmpButton)){
             autoRot = true;
-            thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
+            thisRobot.drivebase.setGoalHeadingDeg(90);
+            if(thisRobot.onRedAlliance){
+                thisRobot.drivebase.attackPoint(Settings.redAmp);
+            } else {
+                thisRobot.drivebase.attackPoint(Settings.blueAmp);
+            }
         } else {
-            autoRot = false;
-            thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
+
+            if(rV == 0 && autoRot){
+                autoRot = true;
+                thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
+            } else {
+                autoRot = false;
+                thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
+            }
         }
 
+        //force override shot: -1 is not pressed, 0 is up, 180 is down. 
+        if(manualControlJoystick.getPOV() == 0 && manualHatPressed == false){
+            manualHatPressed = true;
+            thisRobot.wristOveride = thisRobot.wristOveride + Settings.matchShooterOverideDelta;
+        }
+        if(manualControlJoystick.getPOV() == 180 && manualHatPressed == false){
+            manualHatPressed = true;
+            thisRobot.wristOveride = thisRobot.wristOveride - Settings.matchShooterOverideDelta;
+        }
+        if(manualControlJoystick.getPOV() == -1){
+            manualHatPressed =false;
+        }
     }
 
     public void manualControl(){

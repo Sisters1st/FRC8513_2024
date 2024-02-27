@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.073969041710978,
-        "y": 4.251242788199862
+        "x": 5.463659474327495,
+        "y": 4.198201444835939
       },
       "isLocked": false,
       "linkedName": "MidShot"
@@ -36,8 +36,8 @@
         "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 6.088628499601322,
-        "y": 4.192604956638485
+        "x": 5.182999767708936,
+        "y": 4.280060525933018
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,18 +46,8 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.15,
-      "rotationDegrees": -20.0,
-      "rotateFast": false
-    },
-    {
       "waypointRelativePos": 1.45,
-      "rotationDegrees": -20.0,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 0,
+      "rotationDegrees": 0.0,
       "rotateFast": false
     }
   ],
