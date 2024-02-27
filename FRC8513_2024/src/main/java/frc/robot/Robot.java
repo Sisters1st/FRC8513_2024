@@ -2,12 +2,9 @@ package frc.robot;
 
 import java.util.Optional;
 
-import com.revrobotics.CANSparkBase.IdleMode;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.PowerDistribution;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import frc.robot.Logic.AutoController;
@@ -41,7 +38,6 @@ public class Robot extends TimedRobot {
   public Intake intake = new Intake(this);
   
   //robot wide vars
-  public boolean lastUserButton = false;
   public boolean onRedAlliance = false;
   public double wristOveride = Settings.matchShooterOveride;
 
@@ -87,26 +83,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-
-    //if user button pressed set arm to break mode
-    if(RobotController.getUserButton() != lastUserButton){
-      lastUserButton = RobotController.getUserButton();
-      
-      if(RobotController.getUserButton()){
-        arm.armMotor1.setIdleMode(IdleMode.kCoast);
-        arm.armMotor2.setIdleMode(IdleMode.kCoast);
-
-        wrist.wristMotor1.setIdleMode(IdleMode.kCoast);
-        wrist.wristMotor1.setIdleMode(IdleMode.kCoast);
-      } else {
-        arm.armMotor1.setIdleMode(IdleMode.kBrake);
-        arm.armMotor2.setIdleMode(IdleMode.kBrake);
-
-        wrist.wristMotor1.setIdleMode(IdleMode.kBrake);
-        wrist.wristMotor1.setIdleMode(IdleMode.kBrake);
-
-      }
-    }
 
   }
 
