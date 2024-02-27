@@ -102,21 +102,6 @@ public class Drivebase {
         
         swerveDrive.addVisionMeasurement(fieldToRobot.toPose2d(), pose2Tag.get().timestampSeconds);
         lastPhotonUpdateTime = Timer.getFPGATimestamp();
-        SmartDashboard.putNumber("FTCx", fieldToCamera.getX());
-        SmartDashboard.putNumber("FTCy", fieldToCamera.getY());
-        SmartDashboard.putNumber("FTCz", fieldToCamera.getZ());
-        SmartDashboard.putNumber("FTCp", fieldToCamera.getRotation().getY());
-
-        
-        SmartDashboard.putNumber("FTRRx", fieldToRobotRot.getX());
-        SmartDashboard.putNumber("FTRRy", fieldToRobotRot.getY());
-        SmartDashboard.putNumber("FTRRz", fieldToRobotRot.getZ());
-        SmartDashboard.putNumber("FTRRp", fieldToRobotRot.getRotation().getY());
-
-        SmartDashboard.putNumber("FTRx", fieldToRobot.getX());
-        SmartDashboard.putNumber("FTRy", fieldToRobot.getY());
-        SmartDashboard.putNumber("FTRz", fieldToRobot.getZ());
-        SmartDashboard.putNumber("FTRp", fieldToRobot.getRotation().getY());
       
       }
     }
