@@ -7,12 +7,22 @@ public class Settings {
 
 
     //drivebase and yagsl settings
-    public static double drivebaseMaxVelocity = 15.1;
+    public static double drivebaseMaxVelocity = 17.1;
     public static double maxShotSpeed = 1;
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
     public static double drivebase_PID_P = 12;
     public static double drivebase_PID_I = 0;
     public static double drivebase_PID_D = 0.25;
+    
+    //heading settings
+    public static boolean headingCorrection = true;
+    public static double headingThold = 3.5;
+    
+    public static double drivebaseRot_PID_P = 7;
+    public static double drivebaseRot_PID_I = 1;
+    public static double drivebaseRot_PID_D = 1;
+    
+    public static double drivebaseRot_PID_IZ = 3.6;
 
 
     //vision settings
@@ -67,14 +77,6 @@ public class Settings {
 
     //pdh settings
     public static int pdhCANID = 1;
-
-    
-    //heading settings
-    public static boolean headingCorrection = true;
-    public static double hc_P = 0.3;
-    public static double hc_I = 0.00;
-    public static double hc_D = 0.01;
-    public static double headingThold = 3.5;
 
 
     //intake settings

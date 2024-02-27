@@ -14,7 +14,7 @@ public class TeleopController {
     Joystick driverXboxController = new Joystick(Settings.driverJoystickPort);
     Joystick buttonPannel = new Joystick(Settings.buttonPannelPort);
     Joystick manualControlJoystick = new Joystick(Settings.manualControlPort);
-    boolean manualRot = false;
+    boolean autoRot = true;
 
     public TeleopController(Robot thisRobot_){
         thisRobot = thisRobot_;
@@ -87,7 +87,7 @@ public class TeleopController {
         
         //if a is pressed, snap to face amp
         if(driverXboxController.getRawButton(Settings.snapToAmpButton)){
-            manualRot = false;
+            autoRot = true;
             thisRobot.drivebase.setGoalHeadingDeg(90);
         }
 
@@ -105,16 +105,16 @@ public class TeleopController {
         
         //if pressed, update heading to aim at speaker
         if(driverXboxController.getRawButton(Settings.aimAtSpeakerButton)){
-            manualRot = false;
+            autoRot = true;
             thisRobot.drivebase.setGoalHeadingToGoal();
         }
         //if we are commanding a turn manuall, udpate goal heading to be the current pose +- joystick value * rotJoyRate
-        if(rV != 0 || manualRot){
-            manualRot = true;
-            thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
-        } else {
-            //after all that, call drive
+        if(rV == 0 && autoRot){
+            autoRot = true;
             thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
+        } else {
+            autoRot = false;
+            thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
         }
 
     }

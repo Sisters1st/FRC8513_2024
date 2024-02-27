@@ -28,7 +28,6 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Settings;
 import frc.robot.Logic.AutoController.autoRoutines;
@@ -50,7 +49,7 @@ public class Drivebase {
   //path PID loops
   PIDController xPosPidController = new PIDController(Settings.drivebase_PID_P, Settings.drivebase_PID_I, Settings.drivebase_PID_D);
   PIDController yPosPidController = new PIDController(Settings.drivebase_PID_P, Settings.drivebase_PID_I, Settings.drivebase_PID_D);
-  public PIDController rotPidController = new PIDController(5, 0, 0.5);
+  public PIDController rotPidController = new PIDController(Settings.drivebaseRot_PID_P, Settings.drivebaseRot_PID_I, Settings.drivebaseRot_PID_D);
 
   //path planning vars
   public double trajStartTime;
@@ -85,6 +84,7 @@ public class Drivebase {
     SwerveDriveTelemetry.verbosity = Settings.telemetryVerbosity;
     swerveDrive.setCosineCompensator(false);
     rotPidController.enableContinuousInput(-Math.PI, Math.PI);
+    rotPidController.setIZone(Settings.drivebaseRot_PID_IZ);
 
     // pathFollowingInit
     goalState = new State();
