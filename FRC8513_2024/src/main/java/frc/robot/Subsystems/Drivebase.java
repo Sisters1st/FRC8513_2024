@@ -17,7 +17,6 @@ import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -28,6 +27,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Settings;
 import frc.robot.Logic.AutoController.autoRoutines;
@@ -89,25 +89,25 @@ public class Drivebase {
   //use vision
   public void updateOdometry() {
     if(Settings.usePhoton){
-      var result = camera.getLatestResult();
-      if (result.getMultiTagResult().estimatedPose.isPresent) {
+      Optional<EstimatedRobotPose> pose2Tag = photonPoseEstimatorTwo.update();
+      if (pose2Tag.isPresent()) {
         //multi pose
         
-        Pose3d photonPose = new Pose3d(result.getMultiTagResult().estimatedPose.best.getTranslation(), result.getMultiTagResult().estimatedPose.best.getRotation()); 
-        photonPose = photonPose.plus(robotToCam);
-        swerveDrive.addVisionMeasurement(photonPose.toPose2d(), result.getTimestampSeconds());
+        
+        swerveDrive.addVisionMeasurement(pose2Tag.get().estimatedPose.toPose2d(), pose2Tag.get().timestampSeconds);
         lastPhotonUpdateTime = Timer.getFPGATimestamp();
+        SmartDashboard.putNumber("2tagX", pose2Tag.get().estimatedPose.toPose2d().getX());
+        SmartDashboard.putNumber("2tagY", pose2Tag.get().estimatedPose.toPose2d().getY());
       
       } else {
-        if(result.hasTargets() && Settings.useSingleTag){
+        
+        Optional<EstimatedRobotPose> oneTagPose = photonPoseEstimatorOne.update();
+        if(oneTagPose.isPresent() && Settings.useSingleTag){
           //only one target
-          Optional<EstimatedRobotPose> oneTagPose = photonPoseEstimatorOne.update();
-          if(oneTagPose.isPresent()){
-            Pose3d fieldToCamera = oneTagPose.get().estimatedPose;
-            fieldToCamera = fieldToCamera.plus(robotToCam);
-            swerveDrive.addVisionMeasurement(fieldToCamera.toPose2d(), result.getTimestampSeconds());
-            lastPhotonUpdateTime = Timer.getFPGATimestamp();
-          }
+          swerveDrive.addVisionMeasurement(oneTagPose.get().estimatedPose.toPose2d(), oneTagPose.get().timestampSeconds);
+          lastPhotonUpdateTime = Timer.getFPGATimestamp();
+          SmartDashboard.putNumber("1tagX", oneTagPose.get().estimatedPose.toPose2d().getX());
+          SmartDashboard.putNumber("1tagY", oneTagPose.get().estimatedPose.toPose2d().getY());
         
         } else {
           //no vision
