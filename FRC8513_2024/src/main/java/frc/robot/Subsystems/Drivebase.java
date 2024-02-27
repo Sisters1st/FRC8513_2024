@@ -192,6 +192,15 @@ public class Drivebase {
         false);
   }
 
+  public void attackPoint(Pose2d point){
+
+    double xP = xPosPidController.calculate(thisRobot.drivebase.swerveDrive.getPose().getX(), point.getX());
+    double yP = yPosPidController.calculate(thisRobot.drivebase.swerveDrive.getPose().getY(), point.getY());
+
+    driveClosedLoopHeading(new Translation2d(xP, yP));
+
+  }
+
   public void setGoalHeadingDeg(double deg) {
     goalHeading = new Rotation2d(Math.toRadians(deg));
   }
