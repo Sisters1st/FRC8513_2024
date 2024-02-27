@@ -25,6 +25,7 @@ public class TeleopController {
         thisRobot.stateMachine.robotState = robotStates.DRIVING;
         thisRobot.arm.setArmPosition(thisRobot.arm.getArmPosition());
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());
+        thisRobot.drivebase.setGoalHeadingDeg(thisRobot.drivebase.swerveDrive.getOdometryHeading().getDegrees());
         
         //reset heading PID
         thisRobot.drivebase.rotPidController.reset();

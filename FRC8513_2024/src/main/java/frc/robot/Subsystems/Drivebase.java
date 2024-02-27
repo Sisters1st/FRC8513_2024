@@ -17,6 +17,7 @@ import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -63,9 +64,12 @@ public class Drivebase {
   public double lastPhotonUpdateTime = 0;
 
   //transformation from robot to camera
-  Transform3d robotToCam = new Transform3d(new Translation3d(-.27, 0, 0.35), new Rotation3d(0, .47, Math.PI));
-  PhotonPoseEstimator photonPoseEstimatorOne = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.LOWEST_AMBIGUITY, camera, robotToCam);
-  PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, robotToCam);
+  //Transform3d robotToCamJustTrans = new Transform3d(new Translation3d(0, 0, 0), new Rotation3d());
+  Transform3d camToRobotRot = new Transform3d(new Translation3d(), new Rotation3d(0, -0.47,Math.PI));
+  
+  Transform3d camToRobotTrans = new Transform3d(new Translation3d(0.25, 0, 0), new Rotation3d());
+  
+  PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, new Transform3d());
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
@@ -89,29 +93,31 @@ public class Drivebase {
   //use vision
   public void updateOdometry() {
     if(Settings.usePhoton){
-      Optional<EstimatedRobotPose> pose2Tag = photonPoseEstimatorTwo.update();
+      var result = camera.getLatestResult();
+      Optional<EstimatedRobotPose> pose2Tag = photonPoseEstimatorTwo.update(result);
       if (pose2Tag.isPresent()) {
-        //multi pose
+        Pose3d fieldToCamera = pose2Tag.get().estimatedPose;
+        Pose3d fieldToRobotRot = fieldToCamera.transformBy(camToRobotRot);
+        Pose3d fieldToRobot = fieldToRobotRot.transformBy(camToRobotTrans);
         
-        
-        swerveDrive.addVisionMeasurement(pose2Tag.get().estimatedPose.toPose2d(), pose2Tag.get().timestampSeconds);
+        swerveDrive.addVisionMeasurement(fieldToRobot.toPose2d(), pose2Tag.get().timestampSeconds);
         lastPhotonUpdateTime = Timer.getFPGATimestamp();
-        SmartDashboard.putNumber("2tagX", pose2Tag.get().estimatedPose.toPose2d().getX());
-        SmartDashboard.putNumber("2tagY", pose2Tag.get().estimatedPose.toPose2d().getY());
+        SmartDashboard.putNumber("FTCx", fieldToCamera.getX());
+        SmartDashboard.putNumber("FTCy", fieldToCamera.getY());
+        SmartDashboard.putNumber("FTCz", fieldToCamera.getZ());
+        SmartDashboard.putNumber("FTCp", fieldToCamera.getRotation().getY());
+
+        
+        SmartDashboard.putNumber("FTRRx", fieldToRobotRot.getX());
+        SmartDashboard.putNumber("FTRRy", fieldToRobotRot.getY());
+        SmartDashboard.putNumber("FTRRz", fieldToRobotRot.getZ());
+        SmartDashboard.putNumber("FTRRp", fieldToRobotRot.getRotation().getY());
+
+        SmartDashboard.putNumber("FTRx", fieldToRobot.getX());
+        SmartDashboard.putNumber("FTRy", fieldToRobot.getY());
+        SmartDashboard.putNumber("FTRz", fieldToRobot.getZ());
+        SmartDashboard.putNumber("FTRp", fieldToRobot.getRotation().getY());
       
-      } else {
-        
-        Optional<EstimatedRobotPose> oneTagPose = photonPoseEstimatorOne.update();
-        if(oneTagPose.isPresent() && Settings.useSingleTag){
-          //only one target
-          swerveDrive.addVisionMeasurement(oneTagPose.get().estimatedPose.toPose2d(), oneTagPose.get().timestampSeconds);
-          lastPhotonUpdateTime = Timer.getFPGATimestamp();
-          SmartDashboard.putNumber("1tagX", oneTagPose.get().estimatedPose.toPose2d().getX());
-          SmartDashboard.putNumber("1tagY", oneTagPose.get().estimatedPose.toPose2d().getY());
-        
-        } else {
-          //no vision
-        }
       }
     }
   }
