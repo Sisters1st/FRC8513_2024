@@ -2,7 +2,6 @@ package frc.robot;
 
 import java.util.Optional;
 
-import com.ctre.phoenix6.Orchestra;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -45,8 +44,6 @@ public class Robot extends TimedRobot {
   public boolean lastUserButton = false;
   public boolean onRedAlliance = false;
   public double wristOveride = Settings.matchShooterOveride;
-  Orchestra m_orchestra = new Orchestra();
-  TalonFX instrument;
 
   @Override
   public void robotInit() {
