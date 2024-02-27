@@ -31,7 +31,7 @@ public class Dashboard {
         SmartDashboard.putBoolean("Photon Vision Enabled",Settings.usePhoton);
         SmartDashboard.putNumber("LastPhotonUpdate", thisRobot.drivebase.lastPhotonUpdateTime);
 
-        //auto infor
+        //auto info
         SmartDashboard.putNumber("AutoStep", thisRobot.autoController.autoStep);
 
         //drivebase info
@@ -51,7 +51,6 @@ public class Dashboard {
         SmartDashboard.putNumber("calculatedArmGoal", thisRobot.arm.calculatedArmGoal);
         SmartDashboard.putBoolean("ArmInThold", thisRobot.arm.armWithinThold());
 
-
         //wristInfo
         SmartDashboard.putNumber("WristPos", thisRobot.wrist.getWristPos());
         SmartDashboard.putNumber("WristGoalPos", thisRobot.wrist.wristGoalPos);
@@ -67,8 +66,9 @@ public class Dashboard {
         SmartDashboard.putBoolean("ShooterInThold", thisRobot.shooter.leftShooterInThreshold() && thisRobot.shooter.rightShooterInThreshold());
         
         SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
-        SmartDashboard.putNumber("feederSensor", thisRobot.shooter.feederSensorInput.getValue());
-        
+        SmartDashboard.putNumber("feederSensor", thisRobot.shooter.feederSensorInput.getValue());    
+        SmartDashboard.putNumber("ShotWristOveride", thisRobot.wristOveride);
+
         //intake info
         SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.getAppliedOutput());
 

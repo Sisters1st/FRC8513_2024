@@ -15,6 +15,7 @@ public class TeleopController {
     Joystick buttonPannel = new Joystick(Settings.buttonPannelPort);
     Joystick manualControlJoystick = new Joystick(Settings.manualControlPort);
     boolean autoRot = true;
+    boolean manualHatPressed = false;
 
     public TeleopController(Robot thisRobot_){
         thisRobot = thisRobot_;
@@ -123,9 +124,19 @@ public class TeleopController {
                 thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
             }
         }
-        
-        
 
+        //force override shot: -1 is not pressed, 0 is up, 180 is down. 
+        if(manualControlJoystick.getPOV() == 0 && manualHatPressed == false){
+            manualHatPressed = true;
+            thisRobot.wristOveride = thisRobot.wristOveride + Settings.matchShooterOverideDelta;
+        }
+        if(manualControlJoystick.getPOV() == 180 && manualHatPressed == false){
+            manualHatPressed = true;
+            thisRobot.wristOveride = thisRobot.wristOveride - Settings.matchShooterOverideDelta;
+        }
+        if(manualControlJoystick.getPOV() == -1){
+            manualHatPressed =false;
+        }
     }
 
     public void manualControl(){

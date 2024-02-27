@@ -130,7 +130,7 @@ public class Settings {
     public static double hookingWristPos = 0;
     public static double trapWristPos = 8;
     public static double ampWristPos = -1;
-    public static double shootingSubwofferWristPos = -7;
+    public static double shootingSubwofferWristPos = -6.2;
 
     public static double wristTHold = 1;
     public static double wristMaxV = 5;
@@ -157,9 +157,11 @@ public class Settings {
     
     public static int basicShooterSpeed = 5500;
     public static double leftRightShooterSpeedOffset = 1;
+    public static double matchShooterOveride = 0;
+    public static double matchShooterOverideDelta = 0.1;
 
         //these need to be determined
-    public static double[] shotDistances = {1.00, 1.37, 1.56, 1.68, 1.86, 2.13, 3.00};
+    public static double[] shotDistances = {1.00, 1.37, 1.56, 1.68,  1.86,  2.13,  3.00};
     public static double[] shotWristPos = {-6.2, -6.2, -7.4, -8.07, -8.81, -10.1, -11};
 
 
