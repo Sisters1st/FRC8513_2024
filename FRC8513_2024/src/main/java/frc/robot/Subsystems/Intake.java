@@ -8,16 +8,16 @@ import frc.robot.Robot;
 import frc.robot.Settings;
 
 public class Intake {
-    
+
     Robot thisRobot;
-    
+
     public CANSparkMax leftIntakeMotor = new CANSparkMax(Settings.leftIntakeMotorCANID, MotorType.kBrushless);
     public CANSparkMax rightIntakeMotor = new CANSparkMax(Settings.rightIntakeMotorCANID, MotorType.kBrushless);
 
     double leftIntakeVoltage = 0;
     double rightIntakeVoltage = 0;
 
-    public Intake(Robot robotIn){
+    public Intake(Robot robotIn) {
         thisRobot = robotIn;
 
         leftIntakeMotor.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
@@ -28,15 +28,14 @@ public class Intake {
 
     }
 
-    public void setIntakeVoltage(double voltage){
+    public void setIntakeVoltage(double voltage) {
         leftIntakeVoltage = voltage;
         rightIntakeVoltage = voltage;
     }
 
-    public void applyIntakeVoltage(){
+    public void applyIntakeVoltage() {
         leftIntakeMotor.setVoltage(leftIntakeVoltage);
         rightIntakeMotor.setVoltage(rightIntakeVoltage);
     }
-
 
 }

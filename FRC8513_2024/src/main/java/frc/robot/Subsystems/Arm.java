@@ -1,5 +1,5 @@
 package frc.robot.Subsystems;
-    
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -22,10 +22,10 @@ public class Arm {
 
     PIDController armPidController = new PIDController(Settings.armPID_P, Settings.armPID_I, Settings.armPID_D);
 
-    public Arm(Robot robotParam){
+    public Arm(Robot robotParam) {
         thisRobot = robotParam;
 
-        //set encoder value at boot. allows us to shift zero in future
+        // set encoder value at boot. allows us to shift zero in future
         armMotor1.getEncoder().setPosition(Settings.armInitRawEncoderValue);
 
         armMotor1.setSmartCurrentLimit(Settings.armCurrentLimit);
@@ -41,30 +41,30 @@ public class Arm {
 
     }
 
-    //set arm pos taking min max values into account
-    public void setArmPosition(double pos){
-        if(pos > Settings.armMaxPos){
+    // set arm pos taking min max values into account
+    public void setArmPosition(double pos) {
+        if (pos > Settings.armMaxPos) {
             pos = Settings.armMaxPos;
         }
-        if(pos < Settings.armMinPos){
+        if (pos < Settings.armMinPos) {
             pos = Settings.armMinPos;
         }
         armGoalPos = pos;
     }
 
-    public double getArmPosition(){
+    public double getArmPosition() {
         return armMotor1.getEncoder().getPosition();
     }
 
-    //update arm motor power
-    public void applyArmPower(){
+    // update arm motor power
+    public void applyArmPower() {
 
         calculatedArmGoal = armGoalPos;
-        //if wer are too far from setpoint, gradually move the setpoint
-        if(lastArmGoal + Settings.armMaxV < armGoalPos){
+        // if wer are too far from setpoint, gradually move the setpoint
+        if (lastArmGoal + Settings.armMaxV < armGoalPos) {
             calculatedArmGoal = lastArmGoal + Settings.armMaxV;
         }
-        if(lastArmGoal - Settings.armMaxV > armGoalPos){
+        if (lastArmGoal - Settings.armMaxV > armGoalPos) {
             calculatedArmGoal = lastArmGoal - Settings.armMaxV;
         }
 
@@ -75,10 +75,8 @@ public class Arm {
         armMotor2.setVoltage(-(pidPower) * 12);
     }
 
-    public boolean armWithinThold(){
-        return Math.abs(getArmPosition()-calculatedArmGoal) < Settings.armThold;
+    public boolean armWithinThold() {
+        return Math.abs(getArmPosition() - calculatedArmGoal) < Settings.armThold;
     }
-    
+
 }
-
-
