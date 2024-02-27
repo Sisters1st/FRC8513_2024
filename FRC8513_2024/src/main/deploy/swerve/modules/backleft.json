@@ -5,7 +5,7 @@
   },
   "absoluteEncoderOffset": 305.3,
   "drive": {
-    "type": "talonFX",
+    "type": "talonfx",
     "id": 9,
     "canbus": null
   },
