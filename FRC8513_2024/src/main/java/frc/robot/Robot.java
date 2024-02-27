@@ -3,6 +3,8 @@ package frc.robot;
 import java.util.Optional;
 
 import com.ctre.phoenix6.Orchestra;
+import com.ctre.phoenix6.configs.AudioConfigs;
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -57,6 +59,13 @@ public class Robot extends TimedRobot {
     double[] wristPos = Settings.shotWristPos;
     linearInterp = new LinearInterp(shotDistances, wristPos);
 
+
+    AudioConfigs ac = new AudioConfigs();
+    ac.AllowMusicDurDisable = true;
+    instrument = (TalonFX)drivebase.swerveDrive.getModules()[0].getDriveMotor().getMotor();
+    instrument.getConfigurator().apply(ac);
+    m_orchestra.addInstrument(instrument);
+    m_orchestra.loadMusic("/chirp/diamonds.chrp");
   }
 
   @Override
@@ -110,6 +119,11 @@ public class Robot extends TimedRobot {
 
       }
     }
+
+    //midi fun
+
+    m_orchestra.play();
+    m_orchestra.close();
 
   }
 
