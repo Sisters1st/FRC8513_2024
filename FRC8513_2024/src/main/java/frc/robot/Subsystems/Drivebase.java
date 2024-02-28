@@ -66,7 +66,7 @@ public class Drivebase {
   //Transform3d robotToCamJustTrans = new Transform3d(new Translation3d(0, 0, 0), new Rotation3d());
   Transform3d camToRobotRot = new Transform3d(new Translation3d(), new Rotation3d(0, -0.47,Math.PI));
   
-  Transform3d camToRobotTrans = new Transform3d(new Translation3d(0.25, 0, 0), new Rotation3d());
+  Transform3d camToRobotTrans = new Transform3d(new Translation3d(0.305, 0, 0), new Rotation3d());
   
   PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, new Transform3d());
 

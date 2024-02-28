@@ -81,10 +81,9 @@ public class StateMachine {
                 // if vision, get dist, if no vision, assume sw shot
                 if (thisRobot.drivebase.visionIsRecent()) {
                     wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
-                    // wristPos = thisRobot.wrist.wristGoalPos + 0.1 *
-                    // thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
+                    //wristPos = thisRobot.wrist.wristGoalPos + 0.1 * thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
                 } else {
-                    wristPos = Settings.shootingSubwofferWristPos;
+                    wristPos = Settings.shootingSubwofferWristPos + thisRobot.wristOveride;
                 }
                 feederV = intakeVoltage = 0;
                 ss = Settings.basicShooterSpeed;
@@ -106,9 +105,14 @@ public class StateMachine {
 
                 break;
             case CLIMBING:
-                
-                armPos = Settings.climbArmPos;
-                wristPos = Settings.climbWristpos;
+                if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)){
+                    armPos = Settings.chainGrabArmPos;
+                    wristPos = Settings.chainGrabWristpos;
+
+                } else {
+                    armPos = Settings.climbArmPos;
+                    wristPos = Settings.climbWristpos;
+                }
 
                 ss = feederV = intakeVoltage = 0;
 
@@ -224,18 +228,7 @@ public class StateMachine {
 
     // generated from cubic line of best fit. will need to get retuned
     public double getWristAngFromDist(double dist) {
-        // double a3 = 2.6;
-        // double a2 = -9.32;
-        // double a1 = 1.44;
-        // double a0 = 2; //1.62 first conifg manuall edit
-
-        // double wristVal = a3 * Math.pow(dist, 3) + a2 * Math.pow(dist, 2) + a1 * dist
-        // + a0;
-
-        // ignore old calculations
-        double wristVal = thisRobot.linearInterp.interpolateLinearly(dist) + Settings.matchShooterOveride;
-        // System.out.println(dist);
-        // System.out.println(wristVal);
+        double wristVal = thisRobot.linearInterp.interpolateLinearly(dist) + thisRobot.wristOveride;
         return wristVal;
     }
 

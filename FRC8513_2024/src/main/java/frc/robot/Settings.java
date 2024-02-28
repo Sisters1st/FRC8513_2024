@@ -95,7 +95,8 @@ public class Settings {
     public static double armPID_IZ = 3;
 
     public static double intakingArmPos = -4;
-    public static double climbArmPos = -35;
+    public static double climbArmPos = -38;
+    public static double chainGrabArmPos = -45;
     public static double ampArmPos = -41;
     public static double shootingArmPos = -24;
 
@@ -107,8 +108,8 @@ public class Settings {
     // Wrist settings
 
         // tuned for new notes at mt olive
-    public static double[] shotDistances = { 1.00, 1.37, 1.56, 1.68, 1.86, 2.13, 3.00 };
-    public static double[] shotWristPos = { -6.2, -6.2, -7.4, -8.07, -8.81, -10.1, -11 };
+    public static double[] shotDistances = { 1.00,  1.23, 1.42, 1.62, 1.82, 1.92,  8.0 };
+    public static double[] shotWristPos = {-3.15 ,-3.15, -4, -4.78, -6.14, -6.8, -6.8};
 
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
@@ -121,8 +122,9 @@ public class Settings {
     public static double wristPID_D = 0;
     public static double wristPID_IZ = 3;
 
-    public static double intakingWristPos = 2.5;
+    public static double intakingWristPos = 4.5;
     public static double climbWristpos = -44;
+    public static double chainGrabWristpos = -10;
     public static double ampWristPos = -1;
     public static double shootingSubwofferWristPos = shotWristPos[0];
 
