@@ -7,11 +7,12 @@
 3) autos
     simulate photon vision
     todo:
-        a_p35
-        s_p17
+        Amp_p35
+        Source_p17
         Mid_P213,
         Mid_P231,
         Mid_P321,
+        
 
 4) before comp
     replace tread and ajust wheel ratio

@@ -16,13 +16,13 @@ public class Wrist {
     public double wristGoalPos;
     public double calculatedWristGoal;
     public double wristLastGoalPos = 0;
-    
+
     public CANSparkMax wristMotor1 = new CANSparkMax(Settings.wristMotor1CANID, MotorType.kBrushless);
     public CANSparkMax wristMotor2 = new CANSparkMax(Settings.wristMotor2CANID, MotorType.kBrushless);
 
     PIDController wristPidController = new PIDController(Settings.wristPID_P, Settings.wristPID_I, Settings.wristPID_D);
 
-    public Wrist(Robot robotParam){
+    public Wrist(Robot robotParam) {
         thisRobot = robotParam;
 
         wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
@@ -40,30 +40,30 @@ public class Wrist {
 
     }
 
-    //set wrist pos with limits
-    public void setWristPos(double pos){
-        if(pos > Settings.wristMaxPos){
+    // set wrist pos with limits
+    public void setWristPos(double pos) {
+        if (pos > Settings.wristMaxPos) {
             pos = Settings.wristMaxPos;
         }
-        if(pos < Settings.wristMinPos){
+        if (pos < Settings.wristMinPos) {
             pos = Settings.wristMinPos;
         }
         wristGoalPos = pos;
     }
 
-    public double getWristPos(){
+    public double getWristPos() {
         return wristMotor1.getEncoder().getPosition();
     }
 
-    public void applyWristPower(){
+    public void applyWristPower() {
 
         calculatedWristGoal = wristGoalPos;
-        
-        //if goal pos is too far away then slowly get there
-        if(wristLastGoalPos + Settings.wristMaxV < wristGoalPos){
+
+        // if goal pos is too far away then slowly get there
+        if (wristLastGoalPos + Settings.wristMaxV < wristGoalPos) {
             calculatedWristGoal = wristLastGoalPos + Settings.wristMaxV;
         }
-        if(wristLastGoalPos - Settings.wristMaxV > wristGoalPos){
+        if (wristLastGoalPos - Settings.wristMaxV > wristGoalPos) {
             calculatedWristGoal = wristLastGoalPos - Settings.wristMaxV;
         }
 
@@ -74,10 +74,8 @@ public class Wrist {
         wristMotor2.setVoltage(-(pidPower) * 12);
     }
 
-    public boolean wristWithinThold(){
-        return Math.abs(getWristPos()-wristGoalPos) < Settings.wristTHold;
+    public boolean wristWithinThold() {
+        return Math.abs(getWristPos() - wristGoalPos) < Settings.wristTHold;
     }
-    
+
 }
-
-

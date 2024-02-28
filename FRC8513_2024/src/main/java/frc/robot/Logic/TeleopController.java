@@ -17,106 +17,108 @@ public class TeleopController {
     boolean autoRot = true;
     boolean manualHatPressed = false;
 
-    public TeleopController(Robot thisRobot_){
+    public TeleopController(Robot thisRobot_) {
         thisRobot = thisRobot_;
     }
 
-    public void init(){
-        //reset state machine, and set arm positions to where they are now
+    public void init() {
+        // reset state machine, and set arm positions to where they are now
         thisRobot.stateMachine.robotState = robotStates.DRIVING;
         thisRobot.arm.setArmPosition(thisRobot.arm.getArmPosition());
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());
         thisRobot.drivebase.setGoalHeadingDeg(thisRobot.drivebase.swerveDrive.getOdometryHeading().getDegrees());
-        
-        //reset heading PID
+
+        // reset heading PID
         thisRobot.drivebase.rotPidController.reset();
 
-        //get alliance color
+        // get alliance color
         thisRobot.updateAlliance();
         thisRobot.stateMachine.forceShooterOn = false;
     }
 
-    public void periodic(){
+    public void periodic() {
 
-        //if we are forcing manual control, or manual joystick presses both buttons go to manual mode
-        if(Settings.manualTestingControl || 
-            (manualControlJoystick.getRawButton(Settings.enableManualControlButton1) 
-            && manualControlJoystick.getRawButton(Settings.enableManualControlButton2)))
-        {
+        // if we are forcing manual control, or manual joystick presses both buttons go
+        // to manual mode
+        if (Settings.manualTestingControl ||
+                (manualControlJoystick.getRawButton(Settings.enableManualControlButton1)
+                        && manualControlJoystick.getRawButton(Settings.enableManualControlButton2))) {
             manualControl();
 
         } else {
-            //otherwise, run the state machine and update all motor powers
+            // otherwise, run the state machine and update all motor powers
             thisRobot.stateMachine.updateRobotState();
             thisRobot.updateAllSubsystemMotorPower();
         }
-        //always drive in tele
+        // always drive in tele
         driveTele();
     }
 
-    public void driveTele(){
+    public void driveTele() {
 
-        //get each of the joysticks and check their deadbands
-        double xSpeedJoystick = -driverXboxController.getRawAxis(Settings.forwardBackwardsAxis); //forward back
-        if(xSpeedJoystick < Settings.joystickDeadband && xSpeedJoystick > -Settings.joystickDeadband){
+        // get each of the joysticks and check their deadbands
+        double xSpeedJoystick = -driverXboxController.getRawAxis(Settings.forwardBackwardsAxis); // forward back
+        if (xSpeedJoystick < Settings.joystickDeadband && xSpeedJoystick > -Settings.joystickDeadband) {
             xSpeedJoystick = 0;
         }
 
-        double ySpeedJoystick = -driverXboxController.getRawAxis(Settings.leftRightAxis); //left right
-         if(ySpeedJoystick < Settings.joystickDeadband && ySpeedJoystick > -Settings.joystickDeadband){
+        double ySpeedJoystick = -driverXboxController.getRawAxis(Settings.leftRightAxis); // left right
+        if (ySpeedJoystick < Settings.joystickDeadband && ySpeedJoystick > -Settings.joystickDeadband) {
             ySpeedJoystick = 0;
         }
-        double rSpeedJoystick = -driverXboxController.getRawAxis(Settings.rotAxis); //left right 2 at home, 4 on xbox
-         if(rSpeedJoystick < Settings.joystickDeadband && rSpeedJoystick > -Settings.joystickDeadband){
+        double rSpeedJoystick = -driverXboxController.getRawAxis(Settings.rotAxis); // left right 2 at home, 4 on xbox
+        if (rSpeedJoystick < Settings.joystickDeadband && rSpeedJoystick > -Settings.joystickDeadband) {
             rSpeedJoystick = 0;
         }
 
-        //if we are on red, flip the joysticks
-        if(thisRobot.onRedAlliance){
+        // if we are on red, flip the joysticks
+        if (thisRobot.onRedAlliance) {
             xSpeedJoystick = -xSpeedJoystick;
             ySpeedJoystick = -ySpeedJoystick;
         }
 
-        //cube the joystick values for smoother control
-        double xInput = Math.pow(xSpeedJoystick, 3); 
+        // cube the joystick values for smoother control
+        double xInput = Math.pow(xSpeedJoystick, 3);
         double yInput = Math.pow(ySpeedJoystick, 3);
         double rInput = Math.pow(rSpeedJoystick, 3);
 
         double xV = xInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double yV = yInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double rV = rInput * Settings.rotJoyRate;
-        
-        //if button 8 is pressed, reset the heading
-        if(driverXboxController.getRawButton(Settings.resetFieldCentricButton)){
-            //if we are red, set to 180 degrees (towards blue) as the zero 
-            if(thisRobot.onRedAlliance){
-                thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d(Math.PI)));
+
+        // if button 8 is pressed, reset the heading
+        if (driverXboxController.getRawButton(Settings.resetFieldCentricButton)) {
+            // if we are red, set to 180 degrees (towards blue) as the zero
+            if (thisRobot.onRedAlliance) {
+                thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(
+                        thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d(Math.PI)));
                 thisRobot.drivebase.goalHeading = new Rotation2d(Math.PI);
             } else {
-                thisRobot.drivebase.swerveDrive.resetOdometry(new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d()));
+                thisRobot.drivebase.swerveDrive.resetOdometry(
+                        new Pose2d(thisRobot.drivebase.swerveDrive.getPose().getTranslation(), new Rotation2d()));
                 thisRobot.drivebase.goalHeading = new Rotation2d(0);
             }
         }
-        
-        //if pressed, update heading to aim at speaker
-        if(driverXboxController.getRawButton(Settings.aimAtSpeakerButton)){
+
+        // if pressed, update heading to aim at speaker
+        if (driverXboxController.getRawButton(Settings.aimAtSpeakerButton)) {
             autoRot = true;
             thisRobot.drivebase.setGoalHeadingToGoal();
-            
-        } 
-        
-        //if a is pressed, snap to face amp
-        if(driverXboxController.getRawButton(Settings.snapToAmpButton)){
+
+        }
+
+        // if a is pressed, snap to face amp
+        if (driverXboxController.getRawButton(Settings.snapToAmpButton)) {
             autoRot = true;
             thisRobot.drivebase.setGoalHeadingDeg(90);
-            if(thisRobot.onRedAlliance){
+            if (thisRobot.onRedAlliance) {
                 thisRobot.drivebase.attackPoint(Settings.redAmp);
             } else {
                 thisRobot.drivebase.attackPoint(Settings.blueAmp);
             }
         } else {
 
-            if(rV == 0 && autoRot){
+            if (rV == 0 && autoRot) {
                 autoRot = true;
                 thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
             } else {
@@ -125,40 +127,40 @@ public class TeleopController {
             }
         }
 
-        //force override shot: -1 is not pressed, 0 is up, 180 is down. 
-        if(manualControlJoystick.getPOV() == 0 && manualHatPressed == false){
+        // force override shot: -1 is not pressed, 0 is up, 180 is down.
+        if (manualControlJoystick.getPOV() == 0 && manualHatPressed == false) {
             manualHatPressed = true;
             thisRobot.wristOveride = thisRobot.wristOveride + Settings.matchShooterOverideDelta;
         }
-        if(manualControlJoystick.getPOV() == 180 && manualHatPressed == false){
+        if (manualControlJoystick.getPOV() == 180 && manualHatPressed == false) {
             manualHatPressed = true;
             thisRobot.wristOveride = thisRobot.wristOveride - Settings.matchShooterOverideDelta;
         }
-        if(manualControlJoystick.getPOV() == -1){
-            manualHatPressed =false;
+        if (manualControlJoystick.getPOV() == -1) {
+            manualHatPressed = false;
         }
     }
 
-    public void manualControl(){
+    public void manualControl() {
 
-        //reset arm wrist 0
-        if(manualControlJoystick.getRawButton(Settings.manualResetZeroButton)){
+        // reset arm wrist 0
+        if (manualControlJoystick.getRawButton(Settings.manualResetZeroButton)) {
             thisRobot.arm.armMotor1.getEncoder().setPosition(Settings.armInitRawEncoderValue);
             thisRobot.wrist.wristMotor1.getEncoder().setPosition(Settings.wristInitRawEncoderValue);
         }
 
-        //get arm and wrist power apply deadband
-        double armJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlArmAxis) * 0.2; 
-        if(armJoystick < Settings.joystickDeadband && armJoystick > -Settings.joystickDeadband){
+        // get arm and wrist power apply deadband
+        double armJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlArmAxis) * 0.2;
+        if (armJoystick < Settings.joystickDeadband && armJoystick > -Settings.joystickDeadband) {
             armJoystick = 0;
         }
 
         double wristJoystick = -manualControlJoystick.getRawAxis(Settings.manualControlWristAxis) * 0.1;
-        if(wristJoystick < Settings.joystickDeadband && wristJoystick > -Settings.joystickDeadband){
+        if (wristJoystick < Settings.joystickDeadband && wristJoystick > -Settings.joystickDeadband) {
             wristJoystick = 0;
         }
 
-        //manually update all voltages, move arm wrist
+        // manually update all voltages, move arm wrist
         thisRobot.arm.armMotor1.set(armJoystick);
         thisRobot.arm.armMotor2.set(-armJoystick);
         thisRobot.wrist.wristMotor1.set(wristJoystick);
@@ -168,5 +170,5 @@ public class TeleopController {
         thisRobot.intake.setIntakeVoltage(0);
         thisRobot.climber.climberMotor1.set(0);
         thisRobot.climber.climberMotor2.set(0);
-    } 
+    }
 }
