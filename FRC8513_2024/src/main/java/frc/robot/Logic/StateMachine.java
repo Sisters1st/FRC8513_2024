@@ -106,17 +106,9 @@ public class StateMachine {
 
                 break;
             case CLIMBING:
-                if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)) {
-                    armPos = Settings.preHookingArmPos;
-                    wristPos = Settings.hookingWristPos;
-                } else {
-                    armPos = Settings.preHookingArmPos;
-                    wristPos = Settings.hookingWristPos;
-                }
-                if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.coinButton)) {
-                    armPos = Settings.trapArmPos;
-                    wristPos = Settings.trapWristPos;
-                }
+                
+                armPos = Settings.climbArmPos;
+                wristPos = Settings.climbWristpos;
 
                 ss = feederV = intakeVoltage = 0;
 

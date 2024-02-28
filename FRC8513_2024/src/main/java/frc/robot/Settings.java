@@ -16,7 +16,7 @@ public class Settings {
     public static double drivebase_PID_D = 0.25;
 
     // heading settings
-    public static boolean headingCorrection = true;
+    public static boolean attackPointEnable = false;
     public static double headingThold = 3.5;
 
     public static double drivebaseRot_PID_P = 7;
@@ -95,9 +95,7 @@ public class Settings {
     public static double armPID_IZ = 3;
 
     public static double intakingArmPos = -4;
-    public static double preHookingArmPos = -35;
-    public static double postHoookArmPos = -35;
-    public static double trapArmPos = -60;
+    public static double climbArmPos = -35;
     public static double ampArmPos = -41;
     public static double shootingArmPos = -24;
 
@@ -107,6 +105,11 @@ public class Settings {
     public static double armMinPos = -65;
 
     // Wrist settings
+
+        // tuned for new notes at mt olive
+    public static double[] shotDistances = { 1.00, 1.37, 1.56, 1.68, 1.86, 2.13, 3.00 };
+    public static double[] shotWristPos = { -6.2, -6.2, -7.4, -8.07, -8.81, -10.1, -11 };
+
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
     public static double wristInitRawEncoderValue = 0;
@@ -119,10 +122,9 @@ public class Settings {
     public static double wristPID_IZ = 3;
 
     public static double intakingWristPos = 2.5;
-    public static double hookingWristPos = -44;
-    public static double trapWristPos = -44;
+    public static double climbWristpos = -44;
     public static double ampWristPos = -1;
-    public static double shootingSubwofferWristPos = -6.2;
+    public static double shootingSubwofferWristPos = shotWristPos[0];
 
     public static double wristTHold = 1;
     public static double wristMaxV = 5;
@@ -150,10 +152,6 @@ public class Settings {
     public static double leftRightShooterSpeedOffset = 1;
     public static double matchShooterOveride = 0;
     public static double matchShooterOverideDelta = 0.1;
-
-    // these need to be determined
-    public static double[] shotDistances = { 1.00, 1.37, 1.56, 1.68, 1.86, 2.13, 3.00 };
-    public static double[] shotWristPos = { -6.2, -6.2, -7.4, -8.07, -8.81, -10.1, -11 };
 
     // feeder settings
     public static int feederCANID = 58;

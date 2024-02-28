@@ -111,11 +111,14 @@ public class TeleopController {
         if (driverXboxController.getRawButton(Settings.snapToAmpButton)) {
             autoRot = true;
             thisRobot.drivebase.setGoalHeadingDeg(90);
-            if (thisRobot.onRedAlliance) {
+            if(Settings.attackPointEnable){
+                if (thisRobot.onRedAlliance) {
                 thisRobot.drivebase.attackPoint(Settings.redAmp);
-            } else {
-                thisRobot.drivebase.attackPoint(Settings.blueAmp);
+                } else {
+                    thisRobot.drivebase.attackPoint(Settings.blueAmp);
+                }
             }
+            
         } else {
 
             if (rV == 0 && autoRot) {
