@@ -60,6 +60,7 @@ public class Settings {
     public static int climbDownButton = 2;
     public static int runFeederInButton = 4;
     public static int runFeederOutButton = 5;
+    public static int coinButton = 11;
 
     // manual overide joystick settings
     public static int manualControlPort = 2;
@@ -94,8 +95,8 @@ public class Settings {
     public static double armPID_IZ = 3;
 
     public static double intakingArmPos = -4;
-    public static double preHookingArmPos = -60;
-    public static double postHoookArmPos = -50;
+    public static double preHookingArmPos = -35;
+    public static double postHoookArmPos = -35;
     public static double trapArmPos = -60;
     public static double ampArmPos = -41;
     public static double shootingArmPos = -24;
@@ -118,15 +119,15 @@ public class Settings {
     public static double wristPID_IZ = 3;
 
     public static double intakingWristPos = 2.5;
-    public static double hookingWristPos = 0;
-    public static double trapWristPos = 8;
+    public static double hookingWristPos = -44;
+    public static double trapWristPos = -44;
     public static double ampWristPos = -1;
     public static double shootingSubwofferWristPos = -6.2;
 
     public static double wristTHold = 1;
     public static double wristMaxV = 5;
     public static double wristMaxPos = 13;
-    public static double wristMinPos = -15;
+    public static double wristMinPos = -50;
 
     // Shooter settings
     public static int leftShooterCANID = 41;

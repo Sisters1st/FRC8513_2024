@@ -113,7 +113,7 @@ public class StateMachine {
                     armPos = Settings.preHookingArmPos;
                     wristPos = Settings.hookingWristPos;
                 }
-                if (thisRobot.teleopController.buttonPannel.getRawButton(11)) {
+                if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.coinButton)) {
                     armPos = Settings.trapArmPos;
                     wristPos = Settings.trapWristPos;
                 }
@@ -226,8 +226,8 @@ public class StateMachine {
         double lc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlArmAxis);
         double rc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
 
-        thisRobot.climber.climberMotor1.set(lc);
-        thisRobot.climber.climberMotor2.set(rc);
+        thisRobot.climber.climberMotor1.set(rc);
+        thisRobot.climber.climberMotor2.set(-lc);
     }
 
     // generated from cubic line of best fit. will need to get retuned
