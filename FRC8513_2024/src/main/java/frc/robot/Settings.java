@@ -19,11 +19,11 @@ public class Settings {
     public static boolean attackPointEnable = false;
     public static double headingThold = 3.5;
 
-    public static double drivebaseRot_PID_P = 7;
+    public static double drivebaseRot_PID_P = 6;
     public static double drivebaseRot_PID_I = 1;
-    public static double drivebaseRot_PID_D = 1;
+    public static double drivebaseRot_PID_D = .2f;
 
-    public static double drivebaseRot_PID_IZ = 3.6;
+    public static double drivebaseRot_PID_IZ = 3;
 
     // vision settings
     public static boolean usePhoton = true;
@@ -94,9 +94,9 @@ public class Settings {
     public static double armPID_D = 0;
     public static double armPID_IZ = 3;
 
-    public static double intakingArmPos = -4;
+    public static double intakingArmPos = -6;
     public static double climbArmPos = -38;
-    public static double chainGrabArmPos = -45;
+    public static double chainGrabArmPos = -48;
     public static double ampArmPos = -41;
     public static double shootingArmPos = -24;
 
@@ -109,7 +109,7 @@ public class Settings {
 
         // tuned for new notes at mt olive
     public static double[] shotDistances = { 1.00,  1.23, 1.42, 1.62, 1.82, 1.92,  8.0 };
-    public static double[] shotWristPos = {-3.15 ,-3.15, -4, -4.78, -6.14, -6.8, -6.8};
+    public static double[] shotWristPos = {-4.65 ,-4.65, -5.5, -6.28, -7.64, -8.3, -8.3};
 
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
@@ -122,10 +122,10 @@ public class Settings {
     public static double wristPID_D = 0;
     public static double wristPID_IZ = 3;
 
-    public static double intakingWristPos = 4.5;
-    public static double climbWristpos = -44;
+    public static double intakingWristPos = 7;
+    public static double climbWristpos = -40;
     public static double chainGrabWristpos = -10;
-    public static double ampWristPos = -1;
+    public static double ampWristPos = 3;
     public static double shootingSubwofferWristPos = shotWristPos[0];
 
     public static double wristTHold = 1;
@@ -145,7 +145,7 @@ public class Settings {
     public static double shooter_FF_const = 1.42;
 
     public static double shooterThresholdValue = 150;
-    public static double shotTime = 0.8;
+    public static double shotTime = 0.7;
 
     public static int shooter1CurrentLimit = 30;
     public static int shooter2CurrentLimit = 30;

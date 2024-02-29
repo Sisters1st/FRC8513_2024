@@ -9,6 +9,7 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.PathPlannerTrajectory;
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
@@ -61,6 +62,7 @@ public class Drivebase {
   public PhotonCamera camera = new PhotonCamera(Settings.photonName);
   AprilTagFieldLayout aprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
   public double lastPhotonUpdateTime = 0;
+  public AHRS gyro;
 
   //transformation from robot to camera
   //Transform3d robotToCamJustTrans = new Transform3d(new Translation3d(0, 0, 0), new Rotation3d());
@@ -85,6 +87,8 @@ public class Drivebase {
     swerveDrive.setCosineCompensator(false);
     rotPidController.enableContinuousInput(-Math.PI, Math.PI);
     rotPidController.setIZone(Settings.drivebaseRot_PID_IZ);
+
+    gyro = new AHRS();
 
     // pathFollowingInit
     goalState = new State();

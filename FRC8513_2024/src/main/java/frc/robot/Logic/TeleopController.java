@@ -133,11 +133,11 @@ public class TeleopController {
         // force override shot: -1 is not pressed, 0 is up, 180 is down.
         if (manualControlJoystick.getPOV() == 0 && manualHatPressed == false) {
             manualHatPressed = true;
-            thisRobot.wristOveride = thisRobot.wristOveride - Settings.matchShooterOverideDelta;
+            thisRobot.wristOveride = thisRobot.wristOveride + Settings.matchShooterOverideDelta;
         }
         if (manualControlJoystick.getPOV() == 180 && manualHatPressed == false) {
             manualHatPressed = true;
-            thisRobot.wristOveride = thisRobot.wristOveride + Settings.matchShooterOverideDelta;
+            thisRobot.wristOveride = thisRobot.wristOveride - Settings.matchShooterOverideDelta;
         }
         if (manualControlJoystick.getPOV() == -1) {
             manualHatPressed = false;
@@ -164,10 +164,10 @@ public class TeleopController {
         }
 
         // manually update all voltages, move arm wrist
-        thisRobot.arm.armMotor1.set(armJoystick);
-        thisRobot.arm.armMotor2.set(-armJoystick);
-        thisRobot.wrist.wristMotor1.set(wristJoystick);
-        thisRobot.wrist.wristMotor2.set(-wristJoystick);
+        thisRobot.arm.armMotor1.set(-armJoystick);
+        thisRobot.arm.armMotor2.set(armJoystick);
+        thisRobot.wrist.wristMotor1.set(-wristJoystick);
+        thisRobot.wrist.wristMotor2.set(wristJoystick);
         thisRobot.shooter.setShooterSpeeds(0);
         thisRobot.shooter.setFeederVoltage(0);
         thisRobot.intake.setIntakeVoltage(0);

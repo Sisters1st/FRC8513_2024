@@ -1,6 +1,9 @@
 package frc.robot.Logic;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Settings;
 
@@ -219,11 +222,41 @@ public class StateMachine {
     }
 
     public void manualClimberControl() {
-        double lc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlArmAxis);
-        double rc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
+        if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton) == false &&
+            thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton) == false){
+                
+            double lc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlArmAxis);
+            double rc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
+            //cm 2 is left climber
+            //+ roll is to the right
+            //+ roll means subtract from left clmber
+            //- roll means add that negative roll to riht climber
+            //lc + power is climb up
+            //rc - power is climb up
+            thisRobot.climber.climberMotor1.set(rc);
+            thisRobot.climber.climberMotor2.set(-lc);
+        } else {
+            
+            double roll = thisRobot.drivebase.gyro.getRoll();
+            double climbPowerDelta = roll * 0.1;
+            if(climbPowerDelta > 1){
+                climbPowerDelta = 1;
+            }
+            if(climbPowerDelta < -1){
+                climbPowerDelta = -1;
+            }
+            if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton)){
+                thisRobot.climber.climberMotor1.set(-1);
+                thisRobot.climber.climberMotor2.set(1);
+            } else {
+                thisRobot.climber.climberMotor1.set(1 + climbPowerDelta);
+                thisRobot.climber.climberMotor2.set(-1 + climbPowerDelta);
 
-        thisRobot.climber.climberMotor1.set(rc);
-        thisRobot.climber.climberMotor2.set(-lc);
+            }
+
+
+        }
+
     }
 
     // generated from cubic line of best fit. will need to get retuned
