@@ -133,11 +133,11 @@ public class TeleopController {
         // force override shot: -1 is not pressed, 0 is up, 180 is down.
         if (manualControlJoystick.getPOV() == 0 && manualHatPressed == false) {
             manualHatPressed = true;
-            thisRobot.wristOveride = thisRobot.wristOveride + Settings.matchShooterOverideDelta;
+            thisRobot.wristOveride = thisRobot.wristOveride - Settings.matchShooterOverideDelta;
         }
         if (manualControlJoystick.getPOV() == 180 && manualHatPressed == false) {
             manualHatPressed = true;
-            thisRobot.wristOveride = thisRobot.wristOveride - Settings.matchShooterOverideDelta;
+            thisRobot.wristOveride = thisRobot.wristOveride + Settings.matchShooterOverideDelta;
         }
         if (manualControlJoystick.getPOV() == -1) {
             manualHatPressed = false;

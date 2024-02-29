@@ -8,7 +8,7 @@ import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 public class Settings {
 
     // drivebase and yagsl settings
-    public static double drivebaseMaxVelocity = 17.1;
+    public static double drivebaseMaxVelocity = 16.0;
     public static double maxShotSpeed = 1;
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
     public static double drivebase_PID_P = 12;
