@@ -111,25 +111,16 @@ public class TeleopController {
         if (driverXboxController.getRawButton(Settings.snapToAmpButton)) {
             autoRot = true;
             thisRobot.drivebase.setGoalHeadingDeg(90);
-            if(Settings.attackPointEnable){
-                if (thisRobot.onRedAlliance) {
-                thisRobot.drivebase.attackPoint(Settings.redAmp);
-                } else {
-                    thisRobot.drivebase.attackPoint(Settings.blueAmp);
-                }
-            }
-            
-        } else {
-
-            if (rV == 0 && autoRot) {
-                autoRot = true;
-                thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
-            } else {
-                autoRot = false;
-                thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
-            }
         }
-
+        
+        if (rV == 0 && autoRot) {
+            autoRot = true;
+            thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
+        } else {
+            autoRot = false;
+            thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
+        }
+        
         // force override shot: -1 is not pressed, 0 is up, 180 is down.
         if (manualControlJoystick.getPOV() == 0 && manualHatPressed == false) {
             manualHatPressed = true;
@@ -164,10 +155,10 @@ public class TeleopController {
         }
 
         // manually update all voltages, move arm wrist
-        thisRobot.arm.armMotor1.set(armJoystick);
-        thisRobot.arm.armMotor2.set(-armJoystick);
-        thisRobot.wrist.wristMotor1.set(wristJoystick);
-        thisRobot.wrist.wristMotor2.set(-wristJoystick);
+        thisRobot.arm.armMotor1.set(-armJoystick);
+        thisRobot.arm.armMotor2.set(armJoystick);
+        thisRobot.wrist.wristMotor1.set(-wristJoystick);
+        thisRobot.wrist.wristMotor2.set(wristJoystick);
         thisRobot.shooter.setShooterSpeeds(0);
         thisRobot.shooter.setFeederVoltage(0);
         thisRobot.intake.setIntakeVoltage(0);

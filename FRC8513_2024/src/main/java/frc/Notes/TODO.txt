@@ -1,21 +1,22 @@
 1) asap
-    redo shooter setpoint - comment in state machine shooting to ajust wrist setpoint
-    test distance and wheel diameter
-    test manual ajustment
-    
-2) teleop
-    tune heading PID - tune, does this need profiling
+    motion profiling heading
 
+2) teleop
+    
 3) autos
-    simulate photon vision
-    todo:
-        Mid_P213,
-        Mid_P231,
-        Mid_P321,
+
+    Mid_P213,
+    Mid_P231,
+    Mid_P321,
         
 
 4) before comp
-    replace tread and ajust wheel ratio
     make sure all programmers can explain code
     comments (javadocs?)
+    
+
+5) for monty
+    heading motion profiling
+    simulate photon vision
+    path generation to amp
     high shot above defense?

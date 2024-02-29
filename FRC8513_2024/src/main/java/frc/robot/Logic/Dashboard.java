@@ -22,6 +22,8 @@ public class Dashboard {
         }
 
         SmartDashboard.putData("Auton Selector", autoSelector);
+
+
     }
 
     public void updateDashboard() {
@@ -45,6 +47,8 @@ public class Dashboard {
         SmartDashboard.putNumber("trajYV", thisRobot.drivebase.ajustedV.getY());
         SmartDashboard.putNumber("trajRotV", thisRobot.drivebase.rotCorrection);
         SmartDashboard.putNumber("DistToGoal", thisRobot.shooter.getDistFromGoal());
+
+        SmartDashboard.putNumber("Roll", thisRobot.drivebase.gyro.getRoll());
 
         // armInfo
         SmartDashboard.putNumber("ArmPos", thisRobot.arm.getArmPosition());
@@ -76,8 +80,8 @@ public class Dashboard {
         SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.getAppliedOutput());
 
         // climber info
-        SmartDashboard.putNumber("leftClimberPower", thisRobot.climber.climberMotor1.getAppliedOutput());
-        SmartDashboard.putNumber("rightClimberPower", thisRobot.climber.climberMotor2.getAppliedOutput());
+        SmartDashboard.putNumber("leftClimberPower", thisRobot.climber.climberMotor2.getAppliedOutput());
+        SmartDashboard.putNumber("rightClimberPower", thisRobot.climber.climberMotor1.getAppliedOutput());
 
     }
 }
