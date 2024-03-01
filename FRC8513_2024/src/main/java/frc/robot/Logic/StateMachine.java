@@ -81,7 +81,8 @@ public class StateMachine {
                 // if vision, get dist, if no vision, assume sw shot
                 if (thisRobot.drivebase.visionIsRecent()) {
                     wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
-                    //wristPos = thisRobot.wrist.wristGoalPos + 0.1 * thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
+                    // wristPos = thisRobot.wrist.wristGoalPos + 0.1 *
+                    // thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
                 } else {
                     wristPos = Settings.shootingSubwofferWristPos + thisRobot.wristOveride;
                 }
@@ -105,7 +106,7 @@ public class StateMachine {
 
                 break;
             case CLIMBING:
-                if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)){
+                if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)) {
                     armPos = Settings.chainGrabArmPos;
                     wristPos = Settings.chainGrabWristpos;
 
@@ -219,30 +220,30 @@ public class StateMachine {
     }
 
     public void manualClimberControl() {
-        if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton) == false &&
-            thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton) == false){
-                
+        if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton) == false &&
+                thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton) == false) {
+
             double lc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlArmAxis);
             double rc = thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
-            //cm 2 is left climber
-            //+ roll is to the right
-            //+ roll means subtract from left clmber
-            //- roll means add that negative roll to riht climber
-            //lc + power is climb up
-            //rc - power is climb up
+            // cm 2 is left climber
+            // + roll is to the right
+            // + roll means subtract from left clmber
+            // - roll means add that negative roll to riht climber
+            // lc + power is climb up
+            // rc - power is climb up
             thisRobot.climber.climberMotor1.set(rc);
             thisRobot.climber.climberMotor2.set(-lc);
         } else {
-            
+
             double roll = thisRobot.drivebase.gyro.getRoll();
             double climbPowerDelta = roll * 0.1;
-            if(climbPowerDelta > 1){
+            if (climbPowerDelta > 1) {
                 climbPowerDelta = 1;
             }
-            if(climbPowerDelta < -1){
+            if (climbPowerDelta < -1) {
                 climbPowerDelta = -1;
             }
-            if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton)){
+            if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton)) {
                 thisRobot.climber.climberMotor1.set(-1);
                 thisRobot.climber.climberMotor2.set(1);
             } else {
@@ -250,7 +251,6 @@ public class StateMachine {
                 thisRobot.climber.climberMotor2.set(-1 + climbPowerDelta);
 
             }
-
 
         }
 

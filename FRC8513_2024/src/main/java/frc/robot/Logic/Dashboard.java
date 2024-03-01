@@ -23,7 +23,6 @@ public class Dashboard {
 
         SmartDashboard.putData("Auton Selector", autoSelector);
 
-
     }
 
     public void updateDashboard() {

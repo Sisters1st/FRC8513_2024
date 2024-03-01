@@ -41,18 +41,21 @@ public class Drivebase {
   public Robot thisRobot;
   public SwerveDrive swerveDrive;
 
-  //path planner init
+  // path planner init
   public PathPlannerPath path;
   public PathPlannerTrajectory autoTraj;
   public Translation2d ajustedV = new Translation2d();
   public double rotCorrection = 0;
 
-  //path PID loops
-  PIDController xPosPidController = new PIDController(Settings.drivebase_PID_P, Settings.drivebase_PID_I, Settings.drivebase_PID_D);
-  PIDController yPosPidController = new PIDController(Settings.drivebase_PID_P, Settings.drivebase_PID_I, Settings.drivebase_PID_D);
-  public PIDController rotPidController = new PIDController(Settings.drivebaseRot_PID_P, Settings.drivebaseRot_PID_I, Settings.drivebaseRot_PID_D);
+  // path PID loops
+  PIDController xPosPidController = new PIDController(Settings.drivebase_PID_P, Settings.drivebase_PID_I,
+      Settings.drivebase_PID_D);
+  PIDController yPosPidController = new PIDController(Settings.drivebase_PID_P, Settings.drivebase_PID_I,
+      Settings.drivebase_PID_D);
+  public PIDController rotPidController = new PIDController(Settings.drivebaseRot_PID_P, Settings.drivebaseRot_PID_I,
+      Settings.drivebaseRot_PID_D);
 
-  //path planning vars
+  // path planning vars
   public double trajStartTime;
   public State goalState = new State();
   public double trajElapsedTime;
@@ -64,13 +67,15 @@ public class Drivebase {
   public double lastPhotonUpdateTime = 0;
   public AHRS gyro;
 
-  //transformation from robot to camera
-  //Transform3d robotToCamJustTrans = new Transform3d(new Translation3d(0, 0, 0), new Rotation3d());
-  Transform3d camToRobotRot = new Transform3d(new Translation3d(), new Rotation3d(0, -0.47,Math.PI));
-  
+  // transformation from robot to camera
+  // Transform3d robotToCamJustTrans = new Transform3d(new Translation3d(0, 0, 0),
+  // new Rotation3d());
+  Transform3d camToRobotRot = new Transform3d(new Translation3d(), new Rotation3d(0, -0.47, Math.PI));
+
   Transform3d camToRobotTrans = new Transform3d(new Translation3d(0.305, 0, 0), new Rotation3d());
-  
-  PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, new Transform3d());
+
+  PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout,
+      PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, new Transform3d());
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
@@ -94,24 +99,24 @@ public class Drivebase {
     goalState = new State();
   }
 
-  //use vision
+  // use vision
   public void updateOdometry() {
-    if(Settings.usePhoton){
+    if (Settings.usePhoton) {
       var result = camera.getLatestResult();
       Optional<EstimatedRobotPose> pose2Tag = photonPoseEstimatorTwo.update(result);
       if (pose2Tag.isPresent()) {
         Pose3d fieldToCamera = pose2Tag.get().estimatedPose;
         Pose3d fieldToRobotRot = fieldToCamera.transformBy(camToRobotRot);
         Pose3d fieldToRobot = fieldToRobotRot.transformBy(camToRobotTrans);
-        
+
         swerveDrive.addVisionMeasurement(fieldToRobot.toPose2d(), pose2Tag.get().timestampSeconds);
         lastPhotonUpdateTime = Timer.getFPGATimestamp();
-      
+
       }
     }
   }
 
-  //load a path from file
+  // load a path from file
   public void initPath(String pathName, boolean flipToRed) {
 
     path = PathPlannerPath.fromPathFile(pathName);
@@ -120,7 +125,7 @@ public class Drivebase {
       path = path.flipPath();
     }
 
-    //geneate trajectory from path
+    // geneate trajectory from path
     autoTraj = path.getTrajectory(new ChassisSpeeds(), path.getPreviewStartingHolonomicPose().getRotation());
 
     xPosPidController.reset();
@@ -131,22 +136,22 @@ public class Drivebase {
     goalHeading = goalState.targetHolonomicRotation;
 
     // we need to test, when do we want to force odom, when no vision???
-    if(Robot.isSimulation() || thisRobot.autoController.autoRoutine == autoRoutines._XTESTINGACCURACY){
+    if (Robot.isSimulation() || thisRobot.autoController.autoRoutine == autoRoutines._XTESTINGACCURACY) {
       setOdomToPathInit();
     }
-    
+
     trajStartTime = Timer.getFPGATimestamp();
 
   }
 
-  //apply control to follow each step of path
+  // apply control to follow each step of path
   public void followPath() {
-    //get current sample
+    // get current sample
     trajElapsedTime = Timer.getFPGATimestamp() - trajStartTime;
     goalState = autoTraj.sample(trajElapsedTime);
     goalHeading = goalState.targetHolonomicRotation;
 
-    //update xy PID controllers
+    // update xy PID controllers
     double xCorrection = xPosPidController.calculate(swerveDrive.getPose().getX(),
         goalState.getTargetHolonomicPose().getX());
     double yCorrection = yPosPidController.calculate(swerveDrive.getPose().getY(),
@@ -154,12 +159,12 @@ public class Drivebase {
 
     setGoalHeadingDeg(goalHeading.getDegrees());
 
-    //add the path velocity with the PID velocity
+    // add the path velocity with the PID velocity
     Translation2d trajV = new Translation2d(goalState.velocityMps, goalHeading);
     ajustedV = new Translation2d(xCorrection, yCorrection);
     ajustedV = ajustedV.plus(trajV);
 
-    //drive at that velocity
+    // drive at that velocity
     driveClosedLoopHeading(ajustedV);
   }
 
@@ -173,7 +178,7 @@ public class Drivebase {
     thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
   }
 
-  //drive with closed loop heading control
+  // drive with closed loop heading control
   public void driveClosedLoopHeading(Translation2d translation) {
 
     double rot = rotPidController.calculate(swerveDrive.getOdometryHeading().getRadians(),
@@ -186,8 +191,8 @@ public class Drivebase {
         false);
   }
 
-  public void driveOpenLoopHeading(Translation2d translation, double rV){
-    
+  public void driveOpenLoopHeading(Translation2d translation, double rV) {
+
     goalHeading = swerveDrive.getOdometryHeading();
     thisRobot.drivebase.swerveDrive.drive(
         translation,
@@ -196,7 +201,7 @@ public class Drivebase {
         false);
   }
 
-  public void attackPoint(Pose2d point){
+  public void attackPoint(Pose2d point) {
 
     double xP = xPosPidController.calculate(thisRobot.drivebase.swerveDrive.getPose().getX(), point.getX());
     double yP = yPosPidController.calculate(thisRobot.drivebase.swerveDrive.getPose().getY(), point.getY());
@@ -215,29 +220,29 @@ public class Drivebase {
     goalHeading = deltaPos.getAngle();
   }
 
-  public boolean inHeadingThold(){
+  public boolean inHeadingThold() {
     return Math.abs(swerveDrive.getPose().getRotation().minus(goalHeading).getDegrees()) < Settings.headingThold;
   }
 
-  public boolean inVThold(){
+  public boolean inVThold() {
     double xv = swerveDrive.getRobotVelocity().vxMetersPerSecond;
     double yv = swerveDrive.getRobotVelocity().vyMetersPerSecond;
     return Math.sqrt(xv * xv + yv * yv) < Settings.maxShotSpeed;
   }
 
-  public boolean visionIsRecent(){
+  public boolean visionIsRecent() {
     return Timer.getFPGATimestamp() - lastPhotonUpdateTime < Settings.stalePhotonTime;
   }
 
-  public void setGoalHeadingToGoal(){
-    if(thisRobot.onRedAlliance){
-        thisRobot.drivebase.aimAtPoint(Settings.redGoalPos);
-    }else{
-        thisRobot.drivebase.aimAtPoint(Settings.blueGoalPos);
+  public void setGoalHeadingToGoal() {
+    if (thisRobot.onRedAlliance) {
+      thisRobot.drivebase.aimAtPoint(Settings.redGoalPos);
+    } else {
+      thisRobot.drivebase.aimAtPoint(Settings.blueGoalPos);
     }
   }
-  
-  public void aimAtGoal(){
+
+  public void aimAtGoal() {
     setGoalHeadingToGoal();
     driveClosedLoopHeading(new Translation2d());
   }

@@ -107,9 +107,9 @@ public class Settings {
 
     // Wrist settings
 
-        // tuned for new notes at mt olive
-    public static double[] shotDistances = { 1.00,  1.27, 1.48, 1.67, 1.82, 2.0,  8.0 };
-    public static double[] shotWristPos = {-1.35 ,-1.35, -3.07, -3.95, -4.02, -4.57, -4.57};
+    // tuned for new notes at mt olive
+    public static double[] shotDistances = { 1.00, 1.27, 1.48, 1.67, 1.82, 2.0, 8.0 };
+    public static double[] shotWristPos = { -1.35, -1.35, -3.07, -3.95, -4.02, -4.57, -4.57 };
 
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
