@@ -131,6 +131,7 @@ public class StateMachine {
             default:
                 break;
         }
+
         checkAllButtonsForStateChanges();
         if (robotState != robotStates.INTAKING) {
             freeFeederControl();
@@ -140,16 +141,18 @@ public class StateMachine {
         thisRobot.arm.setArmPosition(armPos);
         thisRobot.wrist.setWristPos(wristPos);
 
-        // may have to add logic which brings note back to sensor after shimmy
+        //if first shimmy count, run note out unitl sensor isnt broken
         if (shimmyCount == 0) {
             if (thisRobot.shooter.intakeSensorSeesNote()) {
                 thisRobot.shooter.setFeederVoltage(-Settings.shimmyInVoltage);
             } else {
+                //when note is out, inc count, set the start dist, and shimmy in
                 shimmyCount = 1;
                 shimmyStartDist = thisRobot.shooter.getFeederPos();
                 shimmyIn = true;
             }
         } else {
+            //after first shimy, come in unitl sensor is hit, then go out shimmy dist
             if (shimmyCount < Settings.shimmyCount) {
                 if (shimmyIn) {
                     thisRobot.shooter.setFeederVoltage(Settings.shimmyInVoltage);
@@ -220,6 +223,7 @@ public class StateMachine {
     }
 
     public void manualClimberControl() {
+        //if climb up or down isnt pressed use the joystick to manually controll climbers
         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton) == false &&
                 thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton) == false) {
 
@@ -234,7 +238,7 @@ public class StateMachine {
             thisRobot.climber.climberMotor1.set(rc);
             thisRobot.climber.climberMotor2.set(-lc);
         } else {
-
+            //if up or down is pressed, get the roll and run a P loop on the angle to keep robot level
             double roll = thisRobot.drivebase.gyro.getRoll();
             double climbPowerDelta = roll * 0.1;
             if (climbPowerDelta > 1) {
@@ -256,7 +260,7 @@ public class StateMachine {
 
     }
 
-    // generated from cubic line of best fit. will need to get retuned
+    // lerp dist to wrist angle plus overide 
     public double getWristAngFromDist(double dist) {
         double wristVal = thisRobot.linearInterp.interpolateLinearly(dist) + thisRobot.wristOveride;
         return wristVal;

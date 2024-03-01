@@ -8,27 +8,26 @@ import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 public class Settings {
 
     // drivebase and yagsl settings
-    public static double drivebaseMaxVelocity = 16.0;
+    public static double drivebaseMaxVelocity = 17.1; //fps, gets converted to mps later
     public static double maxShotSpeed = 1;
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
-    public static double drivebase_PID_P = 12;
+    public static double drivebase_PID_P = 12; //x and y path following PID
     public static double drivebase_PID_I = 0;
     public static double drivebase_PID_D = 0.25;
 
     // heading settings
     public static boolean attackPointEnable = false;
-    public static double headingThold = 3.5;
+    public static double headingThold = 4;
 
     public static double drivebaseRot_PID_P = 6;
     public static double drivebaseRot_PID_I = 1;
-    public static double drivebaseRot_PID_D = .2f;
-
+    public static double drivebaseRot_PID_D = 0.2;
     public static double drivebaseRot_PID_IZ = 3;
 
     // vision settings
     public static boolean usePhoton = true;
     public static String photonName = "LLCamera";
-    public static double stalePhotonTime = 20; // ip for photon: http://10.85.13.26:5800/#/dashboard
+    public static double stalePhotonTime = 15; // ip for photon: http://10.85.13.26:5800/#/dashboard
 
     // driver joystick settings
     public static int driverJoystickPort = 0;
@@ -43,7 +42,6 @@ public class Settings {
     public static int rotAxis = 4; // 2 at home, 4 on xbox
     // driver buttons
     public static int snapToAmpButton = 1;
-    public static int snapToSpeakerButton = 5;
     public static int aimAtSpeakerButton = 6;
     public static int resetFieldCentricButton = 8;
 
@@ -65,10 +63,10 @@ public class Settings {
     // manual overide joystick settings
     public static int manualControlPort = 2;
 
-    public static int manualControlArmAxis = 1;
-    public static int manualControlWristAxis = 5;
+    public static int manualControlArmAxis = 1; //also left climber
+    public static int manualControlWristAxis = 5; //also right climber
 
-    public static int manualResetZeroButton = 1;
+    public static int manualResetZeroButton = 1; //arm wrist
     public static int enableManualControlButton1 = 5;
     public static int enableManualControlButton2 = 6;
 
@@ -79,7 +77,7 @@ public class Settings {
     public static int leftIntakeMotorCANID = 51;
     public static int rightIntakeMotorCANID = 52;
 
-    public static int intakeMotorCurrnetLimit = 30;
+    public static int intakeMotorCurrentLimit = 30;
     public static double intakingVoltage = 12;
 
     // Arm settings
@@ -115,7 +113,7 @@ public class Settings {
     public static int wristMotor2CANID = 61;
     public static double wristInitRawEncoderValue = 0;
 
-    public static int wristCurrentLimit = 15;
+    public static int wristCurrentLimit = 20;
 
     public static double wristPID_P = 0.05;
     public static double wristPID_I = 0.1;
@@ -130,13 +128,13 @@ public class Settings {
 
     public static double wristTHold = 1;
     public static double wristMaxV = 5;
-    public static double wristMaxPos = 13;
-    public static double wristMinPos = -50;
+    public static double wristMaxPos = 10;
+    public static double wristMinPos = -45;
 
     // Shooter settings
     public static int leftShooterCANID = 41;
     public static int rightShooterCANID = 42;
-    public static double maxShotDistance = 3.0;
+    public static double maxShotDistance = 2.5;
 
     public static double shooter_P = 0.002;
     public static double shooter_I = 0.0001;
@@ -144,11 +142,11 @@ public class Settings {
     public static double shooter_FF = 0.0021;
     public static double shooter_FF_const = 1.42;
 
-    public static double shooterThresholdValue = 150;
-    public static double shotTime = 0.7;
+    public static double shooterThresholdValue = 100;
+    public static double shotTime = 0.65;
 
-    public static int shooter1CurrentLimit = 30;
-    public static int shooter2CurrentLimit = 30;
+    public static int shooter1CurrentLimit = 35;
+    public static int shooter2CurrentLimit = 35;
 
     public static int basicShooterSpeed = 5500;
     public static double leftRightShooterSpeedOffset = 1;
@@ -168,14 +166,14 @@ public class Settings {
     public static double feederIntakeVoltage = 9;
     public static double shimmyInVoltage = 6;
 
-    public static double shimmyDist = 0.6;
+    public static double shimmyDist = 0.5;
     public static int shimmyCount = 4;
 
     // climber settings
 
     public static int climberMotor1CANID = 55;
     public static int climberMotor2CANID = 56;
-    public static int climberMotorCurrentLimit = 40;
+    public static int climberMotorCurrentLimit = 55;
     public static double climberVoltage = 8.0;
 
     // field settings

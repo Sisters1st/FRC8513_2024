@@ -67,13 +67,12 @@ public class Drivebase {
   public double lastPhotonUpdateTime = 0;
   public AHRS gyro;
 
-  // transformation from robot to camera
-  // Transform3d robotToCamJustTrans = new Transform3d(new Translation3d(0, 0, 0),
-  // new Rotation3d());
+  // transformation from robot to camera, in two steps, rotation and tranlateion
   Transform3d camToRobotRot = new Transform3d(new Translation3d(), new Rotation3d(0, -0.47, Math.PI));
 
   Transform3d camToRobotTrans = new Transform3d(new Translation3d(0.305, 0, 0), new Rotation3d());
 
+  //this is estemating camera pose, we will then tranlate this to robot later
   PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout,
       PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, new Transform3d());
 
@@ -89,6 +88,7 @@ public class Drivebase {
       e.printStackTrace();
     }
     SwerveDriveTelemetry.verbosity = Settings.telemetryVerbosity;
+
     swerveDrive.setCosineCompensator(false);
     rotPidController.enableContinuousInput(-Math.PI, Math.PI);
     rotPidController.setIZone(Settings.drivebaseRot_PID_IZ);
@@ -178,7 +178,7 @@ public class Drivebase {
     thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
   }
 
-  // drive with closed loop heading control
+  // drive with closed loop heading control while updateing goal heading
   public void driveClosedLoopHeading(Translation2d translation) {
 
     double rot = rotPidController.calculate(swerveDrive.getOdometryHeading().getRadians(),
@@ -210,10 +210,12 @@ public class Drivebase {
 
   }
 
+  //pubic method to set heading
   public void setGoalHeadingDeg(double deg) {
     goalHeading = new Rotation2d(Math.toRadians(deg));
   }
 
+  //set goal heading to aim at a point on the field, we are always looking away from the goal
   public void aimAtPoint(Translation2d point) {
     Translation2d currentPos = swerveDrive.getPose().getTranslation();
     Translation2d deltaPos = currentPos.minus(point);
@@ -234,6 +236,7 @@ public class Drivebase {
     return Timer.getFPGATimestamp() - lastPhotonUpdateTime < Settings.stalePhotonTime;
   }
 
+  //used in tele to just update goal heading to face the goals
   public void setGoalHeadingToGoal() {
     if (thisRobot.onRedAlliance) {
       thisRobot.drivebase.aimAtPoint(Settings.redGoalPos);
@@ -242,6 +245,7 @@ public class Drivebase {
     }
   }
 
+  //used in auto when not moving to point the robot at the goal
   public void aimAtGoal() {
     setGoalHeadingToGoal();
     driveClosedLoopHeading(new Translation2d());

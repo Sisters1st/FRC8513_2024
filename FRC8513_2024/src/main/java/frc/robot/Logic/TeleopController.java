@@ -14,7 +14,6 @@ public class TeleopController {
     Joystick driverXboxController = new Joystick(Settings.driverJoystickPort);
     Joystick buttonPannel = new Joystick(Settings.buttonPannelPort);
     Joystick manualControlJoystick = new Joystick(Settings.manualControlPort);
-    boolean autoRot = true;
     boolean manualHatPressed = false;
 
     public TeleopController(Robot thisRobot_) {
@@ -66,6 +65,7 @@ public class TeleopController {
         if (ySpeedJoystick < Settings.joystickDeadband && ySpeedJoystick > -Settings.joystickDeadband) {
             ySpeedJoystick = 0;
         }
+
         double rSpeedJoystick = -driverXboxController.getRawAxis(Settings.rotAxis); // left right 2 at home, 4 on xbox
         if (rSpeedJoystick < Settings.joystickDeadband && rSpeedJoystick > -Settings.joystickDeadband) {
             rSpeedJoystick = 0;
@@ -102,22 +102,20 @@ public class TeleopController {
 
         // if pressed, update heading to aim at speaker
         if (driverXboxController.getRawButton(Settings.aimAtSpeakerButton)) {
-            autoRot = true;
             thisRobot.drivebase.setGoalHeadingToGoal();
 
         }
 
         // if a is pressed, snap to face amp
         if (driverXboxController.getRawButton(Settings.snapToAmpButton)) {
-            autoRot = true;
             thisRobot.drivebase.setGoalHeadingDeg(90);
         }
 
-        if (rV == 0 && autoRot) {
-            autoRot = true;
+        //if rot joystick is zero, keep rotating to that angle
+        if (rV == 0) {
             thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
         } else {
-            autoRot = false;
+            //once joystick is moved again, manually rotate
             thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
         }
 

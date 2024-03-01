@@ -20,8 +20,8 @@ public class Intake {
     public Intake(Robot robotIn) {
         thisRobot = robotIn;
 
-        leftIntakeMotor.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
-        rightIntakeMotor.setSmartCurrentLimit(Settings.intakeMotorCurrnetLimit);
+        leftIntakeMotor.setSmartCurrentLimit(Settings.intakeMotorCurrentLimit);
+        rightIntakeMotor.setSmartCurrentLimit(Settings.intakeMotorCurrentLimit);
 
         leftIntakeMotor.setIdleMode(IdleMode.kCoast);
         rightIntakeMotor.setIdleMode(IdleMode.kCoast);
