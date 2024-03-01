@@ -1,5 +1,8 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="DistToGoal" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="697" y="217"/>
+	</widget>
 	<widget field="ShotWristOveride" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="370" y="118"/>
 	</widget>
@@ -107,9 +110,9 @@
 	<hidden field="navX-Sensor[4]"/>
 	<hidden field="IMU"/>
 	<hidden field="ShooterLeftGoalSpeed"/>
-	<hidden field="DistToGoal"/>
 	<hidden field="inHeadingThold"/>
 	<hidden field="ShooterRightSpeed"/>
 	<hidden field="calculatedWristGoal"/>
 	<hidden field="swerve"/>
+	<hidden field="Roll"/>
 </xml>
