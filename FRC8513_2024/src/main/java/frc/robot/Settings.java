@@ -19,9 +19,9 @@ public class Settings {
     public static boolean attackPointEnable = false;
     public static double headingThold = 4;
 
-    public static double drivebaseRot_PID_P = 1;
+    public static double drivebaseRot_PID_P = 5;
     public static double drivebaseRot_PID_I = 0;
-    public static double drivebaseRot_PID_D = 0;
+    public static double drivebaseRot_PID_D = 0.5;
     public static double drivebaseRot_PID_IZ = 3;
 
     // vision settings
@@ -121,7 +121,7 @@ public class Settings {
     public static double wristPID_IZ = 3;
 
     public static double intakingWristPos = 7;
-    public static double climbWristpos = -40;
+    public static double climbWristpos = -38;
     public static double chainGrabWristpos = -10;
     public static double ampWristPos = -2;
     public static double shootingSubwofferWristPos = shotWristPos[0];
