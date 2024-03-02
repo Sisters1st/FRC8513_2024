@@ -103,6 +103,7 @@ public class Drivebase {
   public void updateOdometry() {
     if (Settings.usePhoton) {
       var result = camera.getLatestResult();
+      
       Optional<EstimatedRobotPose> pose2Tag = photonPoseEstimatorTwo.update(result);
       if (pose2Tag.isPresent()) {
         Pose3d fieldToCamera = pose2Tag.get().estimatedPose;

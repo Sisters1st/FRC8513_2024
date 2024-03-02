@@ -580,6 +580,7 @@ public class AutoController {
                     case 30:
                         thisRobot.drivebase.initPath("AmpSideShotToNote4BackToShot", thisRobot.onRedAlliance);
                         autoStep = 40;
+                        Settings.usePhoton = false;
 
                     case 40:
                         thisRobot.drivebase.followPath();
@@ -591,6 +592,8 @@ public class AutoController {
                     case 45:
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         autoStep = 50;
+                        
+                        Settings.usePhoton = true;
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
