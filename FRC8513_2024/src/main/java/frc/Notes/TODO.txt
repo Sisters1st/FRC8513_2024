@@ -1,6 +1,5 @@
 1) asap
-    motion profiling heading
-
+    
 2) teleop
     
 3) autos
@@ -11,8 +10,6 @@
         
 
 4) before comp
-    make sure all programmers can explain code
-    comments (javadocs?)
     
 
 5) for monty
@@ -20,3 +17,11 @@
     simulate photon vision
     path generation to amp
     high shot above defense?
+    motion profiling heading
+    if time passes in auto, shoot no matter what
+    motion profile wrist to stop jumping
+    camera on front for note pikcup
+    LED
+    more midline autos
+    have setting for filtering which april tags to position off of
+    increase drivebase odom
