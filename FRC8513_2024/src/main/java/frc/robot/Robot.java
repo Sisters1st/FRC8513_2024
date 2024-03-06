@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import frc.robot.Logic.AutoController;
 import frc.robot.Logic.Dashboard;
+import frc.robot.Logic.Leds;
 import frc.robot.Logic.LinearInterp;
 import frc.robot.Logic.StateMachine;
 import frc.robot.Logic.TeleopController;
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
   public Shooter shooter = new Shooter(this);
   public Climber climber = new Climber(this);
   public Intake intake = new Intake(this);
+  public Leds m_led = new Leds(this);
 
   // robot wide vars
   public boolean onRedAlliance = false;
