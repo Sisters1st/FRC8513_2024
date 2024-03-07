@@ -6,15 +6,15 @@ import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
 
 public class Leds {
-    public AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(300);
-    public AddressableLED m_led = new AddressableLED(4);
+    public AddressableLEDBuffer m_ledBuffer;
+    public AddressableLED m_led;
     private Robot thisRobot;
 
     public Leds(Robot thisRobot5) {
         m_led = new AddressableLED(4);
         thisRobot = thisRobot5;
 
-        m_ledBuffer = new AddressableLEDBuffer(300);
+        m_ledBuffer = new AddressableLEDBuffer(200);
         m_led.setLength(m_ledBuffer.getLength());
 
         m_led.setData(m_ledBuffer);
@@ -23,22 +23,7 @@ public class Leds {
 
     public void updateLeds() {
 
-        if (thisRobot.isAutonomous()) {
-            m_led.stop();
-        }
-
-        if ((Timer.getMatchTime() <= 30) && (Timer.getMatchTime() >= 10)) {
-            blinkLedColor(17, 0, 255);
-        } else if ((Timer.getMatchTime() <= 10)) {
-            blinkLedColor(255, 0, 0);
-        } else if (thisRobot.stateMachine.robotState == StateMachine.robotStates.DRIVING) {
-            changeLedColor(117, 62, 189);
-        } else if (thisRobot.stateMachine.robotState == StateMachine.robotStates.INTAKING) {
-            changeLedColor(0, 255, 9);
-        } else {
-            changeLedColor(43, 255, 0);
-
-        }
+        changeLedColor(43, 255, 0);
     }
 
     private void changeLedColor(int r, int b, int g) {

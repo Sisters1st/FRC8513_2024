@@ -58,6 +58,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     drivebase.updateOdometry();
     dashboard.updateDashboard();
+    m_led.updateLeds();
   }
 
   @Override
