@@ -35,7 +35,7 @@ public class StateMachine {
                 armPos = Settings.intakingArmPos;
                 wristPos = Settings.intakingWristPos;
                 ss = feederV = intakeVoltage = 0;
-
+                thisRobot.m_led.updateLeds();
                 break;
 
             // run the intake, feeder in
@@ -44,6 +44,7 @@ public class StateMachine {
                 wristPos = Settings.intakingWristPos;
                 intakeVoltage = Settings.intakingVoltage;
                 feederV = Settings.feederIntakeVoltage;
+                thisRobot.m_led.updateLeds();
                 ss = 0;
 
                 // if sensor gets tripped, go back to driving
@@ -64,7 +65,7 @@ public class StateMachine {
                 } else {
                     wristPos = Settings.shootingSubwofferWristPos;
                 }
-
+                thisRobot.m_led.updateLeds();
                 feederV = intakeVoltage = 0;
                 ss = Settings.basicShooterSpeed;
                 shotStartedTime = -1;
@@ -88,6 +89,7 @@ public class StateMachine {
                 }
                 feederV = intakeVoltage = 0;
                 ss = Settings.basicShooterSpeed;
+                thisRobot.m_led.updateLeds();
                 if (robotInAllTHolds() || comittedToShot) {
                     feederV = Settings.feederIntakeVoltage;
 
@@ -115,6 +117,7 @@ public class StateMachine {
                     wristPos = Settings.climbWristpos;
                 }
 
+                thisRobot.m_led.updateLeds();
                 ss = feederV = intakeVoltage = 0;
 
                 manualClimberControl();
@@ -125,7 +128,8 @@ public class StateMachine {
                 armPos = Settings.ampArmPos;
                 wristPos = Settings.ampWristPos;
                 ss = feederV = intakeVoltage = 0;
-
+                thisRobot.m_led.updateLeds();
+                
                 break;
 
             default:
