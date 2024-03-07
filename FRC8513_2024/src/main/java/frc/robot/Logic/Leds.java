@@ -8,7 +8,7 @@ import frc.robot.Robot;
 public class Leds {
     public AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(300);
     public AddressableLED m_led = new AddressableLED(4);
-    private Robot thisRobot = new Robot();
+    private Robot thisRobot;
 
     public Leds(Robot thisRobot5) {
         m_led = new AddressableLED(4);
