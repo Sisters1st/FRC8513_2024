@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
+import frc.robot.Logic.StateMachine.robotStates;
 
 public class Leds {
     public AddressableLEDBuffer m_ledBuffer;
@@ -23,7 +24,29 @@ public class Leds {
 
     public void updateLeds() {
 
-        changeLedColor(43, 255, 0);
+        if(thisRobot.isEnabled()){
+            if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
+                changeLedColor(117, 62, 189);
+            }
+            if(thisRobot.stateMachine.robotState == robotStates.INTAKING){
+                changeLedColor(255, 182, 55);
+            }
+            if(thisRobot.stateMachine.robotState == robotStates.SPEEDING_UP_SHOOTER_SPEAKER){
+                changeLedColor(255, 0, 0);
+            }
+            if(thisRobot.stateMachine.robotState == robotStates.SHOOTING){
+                changeLedColor(0, 255, 34);
+            }
+            if(thisRobot.stateMachine.robotState == robotStates.CLIMBING){
+                changeLedColor(117, 62, 189);
+            }
+            while(Timer.getMatchTime() <= 10){
+                m_led.setLength((int) (10-Timer.getMatchTime()*100));
+                changeLedColor(117, 62, 189);
+            }
+        } else {
+            changeLedColor(0, 0, 0);
+        }
     }
 
     private void changeLedColor(int r, int b, int g) {
@@ -41,7 +64,7 @@ public class Leds {
             m_led.setData(m_ledBuffer);
         } else {
             for (int i = 0; i < m_ledBuffer.getLength(); i++) {
-                m_ledBuffer.setRGB(i, 255, 255, 255);
+                m_ledBuffer.setRGB(i, 0, 0, 0);
             }
             m_led.setData(m_ledBuffer);
         }
