@@ -127,7 +127,7 @@ public class Settings {
     public static double shootingSubwofferWristPos = shotWristPos[0];
     public static double shootingSubwofferOtherWristPos = shotWristPos[0];
 
-
+    public static double wristMotorDiff = 0;
     public static double wristTHold = 1;
     public static double wristMaxV = 5;
     public static double wristMaxPos = 10;

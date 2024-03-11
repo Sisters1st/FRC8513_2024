@@ -35,15 +35,20 @@ public class Leds {
                 changeLedColor(255, 0, 0);
             }
             if(thisRobot.stateMachine.robotState == robotStates.SHOOTING){
-                changeLedColor(0, 255, 34);
+                if(thisRobot.stateMachine.robotInAllTHolds()){  
+                    changeLedColor(0, 255, 34);
+                } else {
+                    changeLedColor(255, 0, 0);
+                }
             }
             if(thisRobot.stateMachine.robotState == robotStates.CLIMBING){
                 changeLedColor(117, 62, 189);
+                while(Timer.getMatchTime() <= 10){
+                    m_led.setLength((int) (10-Timer.getMatchTime()*100));
+                    changeLedColor(117, 62, 189);
+                }
             }
-            while(Timer.getMatchTime() <= 10){
-                m_led.setLength((int) (10-Timer.getMatchTime()*100));
-                changeLedColor(117, 62, 189);
-            }
+            
         } else {
             changeLedColor(0, 0, 0);
         }
