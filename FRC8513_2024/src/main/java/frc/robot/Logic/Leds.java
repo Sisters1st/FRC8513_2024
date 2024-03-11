@@ -11,7 +11,7 @@ public class Leds {
     private Robot thisRobot;
 
     public Leds(Robot thisRobot5) {
-        m_led = new AddressableLED(4);
+        m_led = new AddressableLED(5);
         thisRobot = thisRobot5;
 
         m_ledBuffer = new AddressableLEDBuffer(200);
