@@ -20,7 +20,9 @@ public class Wrist {
     public CANSparkMax wristMotor1 = new CANSparkMax(Settings.wristMotor1CANID, MotorType.kBrushless);
     public CANSparkMax wristMotor2 = new CANSparkMax(Settings.wristMotor2CANID, MotorType.kBrushless);
 
-    PIDController wristPidController = new PIDController(Settings.wristPID_P, Settings.wristPID_I, Settings.wristPID_D);
+    PIDController wristRPidController = new PIDController(Settings.wristPID_P, Settings.wristPID_I, Settings.wristPID_D);
+    PIDController wristLPidController = new PIDController(Settings.wristPID_P, Settings.wristPID_I, Settings.wristPID_D);
+
 
     public Wrist(Robot robotParam) {
         thisRobot = robotParam;
@@ -36,7 +38,8 @@ public class Wrist {
         wristMotor1.getEncoder().setPositionConversionFactor(1);
         wristMotor2.getEncoder().setPositionConversionFactor(1);
 
-        wristPidController.setIZone(Settings.wristPID_IZ);
+        wristRPidController.setIZone(Settings.wristPID_IZ);
+        wristLPidController.setIZone(Settings.wristPID_IZ);
 
     }
 
@@ -67,11 +70,12 @@ public class Wrist {
             calculatedWristGoal = wristLastGoalPos - Settings.wristMaxV;
         }
 
-        double pidPower = wristPidController.calculate(wristMotor1.getEncoder().getPosition(), calculatedWristGoal);
+        double pidLeftPower = wristLPidController.calculate(wristMotor1.getEncoder().getPosition(), calculatedWristGoal + 1);
+        double pidRightPower = wristRPidController.calculate(wristMotor1.getEncoder().getPosition(), calculatedWristGoal);
         wristLastGoalPos = calculatedWristGoal;
 
-        wristMotor1.setVoltage((pidPower) * 12);
-        wristMotor2.setVoltage(-(pidPower) * 12);
+        wristMotor1.setVoltage((pidLeftPower) * 12);
+        wristMotor2.setVoltage(-(pidRightPower) * 12);
     }
 
     public boolean wristWithinThold() {

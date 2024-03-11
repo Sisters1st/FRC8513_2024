@@ -125,6 +125,8 @@ public class Settings {
     public static double chainGrabWristpos = -10;
     public static double ampWristPos = -2;
     public static double shootingSubwofferWristPos = shotWristPos[0];
+    public static double shootingSubwofferOtherWristPos = shotWristPos[0];
+
 
     public static double wristTHold = 1;
     public static double wristMaxV = 5;
