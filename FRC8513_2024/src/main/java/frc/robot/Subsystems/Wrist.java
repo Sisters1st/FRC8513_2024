@@ -70,12 +70,12 @@ public class Wrist {
             calculatedWristGoal = wristLastGoalPos - Settings.wristMaxV;
         }
 
-        double pidLeftPower = wristLPidController.calculate(wristMotor1.getEncoder().getPosition(), calculatedWristGoal + Settings.wristMotorDiff);
-        double pidRightPower = wristRPidController.calculate(wristMotor2.getEncoder().getPosition(), calculatedWristGoal);
+        double pidLeftPower = wristLPidController.calculate(wristMotor1.getEncoder().getPosition(), calculatedWristGoal);
+        double pidRightPower = wristRPidController.calculate(wristMotor1.getEncoder().getPosition(), calculatedWristGoal);
         wristLastGoalPos = calculatedWristGoal;
 
-        wristMotor1.setVoltage(-(pidLeftPower) * 12);
-        wristMotor2.setVoltage((pidRightPower) * 12);
+        wristMotor1.setVoltage((pidLeftPower + Settings.wristMotorDiff) * 12);
+        wristMotor2.setVoltage(-(pidRightPower) * 12);
     }
 
     public boolean wristWithinThold() {

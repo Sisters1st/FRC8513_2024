@@ -26,10 +26,10 @@ public class Leds {
 
         if(thisRobot.isEnabled()){
             if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
-                changeLedColor(117, 62, 189);
+                changeLedColor(30, 200, 30);
             }
             if(thisRobot.stateMachine.robotState == robotStates.INTAKING){
-                changeLedColor(255, 182, 55);
+                changeLedColor(200, 30, 30);
             }
             if(thisRobot.stateMachine.robotState == robotStates.SPEEDING_UP_SHOOTER_SPEAKER){
                 changeLedColor(255, 0, 0);

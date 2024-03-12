@@ -48,16 +48,16 @@ public class Settings {
     // Button pannel settings
     public static int buttonPannelPort = 1;
 
-    public static int drivingStateReturnButton = 6;
-    public static int intakeButton = 7;
-    public static int shootInSpeakerButton = 8;
-    public static int ampPrepButton = 9;
-    public static int climberPrepButton = 10;
-    public static int intakeOutButton = 3;
-    public static int climbUpButton = 1;
-    public static int climbDownButton = 2;
-    public static int runFeederInButton = 4;
-    public static int runFeederOutButton = 5;
+    public static int drivingStateReturnButton = 1;
+    public static int intakeButton = 2;
+    public static int shootInSpeakerButton = 3;
+    public static int ampPrepButton = 5;
+    public static int climberPrepButton = 4;
+    public static int intakeOutButton = 6;
+    public static int climbUpButton = 7;
+    public static int climbDownButton = 8;
+    public static int runFeederInButton = 9;
+    public static int runFeederOutButton = 10;
     public static int coinButton = 11;
 
     // manual overide joystick settings
@@ -113,7 +113,7 @@ public class Settings {
     public static int wristMotor2CANID = 61;
     public static double wristInitRawEncoderValue = 0;
 
-    public static int wristCurrentLimit = 20;
+    public static int wristCurrentLimit = 15;
 
     public static double wristPID_P = 0.05;
     public static double wristPID_I = 0.1;
@@ -127,7 +127,7 @@ public class Settings {
     public static double shootingSubwofferWristPos = shotWristPos[0];
     public static double shootingSubwofferOtherWristPos = shotWristPos[0];
 
-    public static double wristMotorDiff = 0;
+    public static double wristMotorDiff = 0.05;
     public static double wristTHold = 1;
     public static double wristMaxV = 5;
     public static double wristMaxPos = 10;
