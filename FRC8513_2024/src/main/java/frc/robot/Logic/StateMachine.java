@@ -88,7 +88,7 @@ public class StateMachine {
                 feederV = intakeVoltage = 0;
                 ss = Settings.basicShooterSpeed;
                 if (robotInAllTHolds() || comittedToShot) {
-                    feederV = Settings.feederIntakeVoltage;
+                    feederV = Settings.feederShooterVoltage;
 
                     if (shotStartedTime == -1) {
                         shotStartedTime = Timer.getFPGATimestamp();

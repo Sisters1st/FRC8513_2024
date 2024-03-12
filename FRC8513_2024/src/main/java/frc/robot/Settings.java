@@ -166,6 +166,8 @@ public class Settings {
     public static double feederScoreTrapVoltage = -8;
     public static double feederScoreAmpVoltage = -8;
     public static double feederIntakeVoltage = 9;
+    
+    public static double feederShooterVoltage = 12;
     public static double shimmyInVoltage = 6;
 
     public static double shimmyDist = 0.5;

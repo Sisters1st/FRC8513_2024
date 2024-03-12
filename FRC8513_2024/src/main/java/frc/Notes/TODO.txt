@@ -13,15 +13,22 @@
     
 
 5) for monty
+
+    if time passes in auto, shoot no matter what
+    more midline autos
+    LED
+    increase drivebase odom
+    tune drive better
+    auto climb
+    have setting for filtering which april tags to position off of
+
+    rezero swerve
+    autopickup
+
     heading motion profiling
+
+    camera on front for note pikcup
     simulate photon vision
     path generation to amp
     high shot above defense?
-    motion profiling heading
-    if time passes in auto, shoot no matter what
-    motion profile wrist to stop jumping
-    camera on front for note pikcup
-    LED
-    more midline autos
-    have setting for filtering which april tags to position off of
-    increase drivebase odom
+    
