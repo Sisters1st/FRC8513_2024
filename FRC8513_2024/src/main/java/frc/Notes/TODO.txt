@@ -14,7 +14,6 @@
 
 5) for monty
 
-    if time passes in auto, shoot no matter what
     more midline autos
     LED
     increase drivebase odom

@@ -65,7 +65,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -86,7 +86,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                         }
                         break;
@@ -111,7 +111,7 @@ public class AutoController {
 
                     case 10:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -131,7 +131,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                         }
                         break;
@@ -156,7 +156,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -177,7 +177,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                         }
                         break;
@@ -202,7 +202,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -223,7 +223,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -246,7 +246,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -271,7 +271,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -292,7 +292,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -315,7 +315,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -338,7 +338,7 @@ public class AutoController {
 
                     case 75:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 80;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -364,7 +364,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -385,7 +385,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -408,7 +408,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -431,7 +431,7 @@ public class AutoController {
 
                     case 75:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 80;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -457,7 +457,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -478,7 +478,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -501,7 +501,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -524,7 +524,7 @@ public class AutoController {
 
                     case 75:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 80;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -550,7 +550,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -571,7 +571,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -597,7 +597,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -622,7 +622,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -643,7 +643,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -666,7 +666,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -691,7 +691,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -712,7 +712,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -735,7 +735,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -760,7 +760,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -781,7 +781,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -804,7 +804,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -829,7 +829,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -850,7 +850,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -873,7 +873,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -898,7 +898,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -919,7 +919,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -942,7 +942,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -967,7 +967,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -988,7 +988,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -1011,7 +1011,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -1036,7 +1036,7 @@ public class AutoController {
                     case 10:
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
@@ -1057,7 +1057,7 @@ public class AutoController {
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                         }
@@ -1080,7 +1080,7 @@ public class AutoController {
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || inSimAndTimePassedInState(1)) {
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         }
@@ -1129,8 +1129,13 @@ public class AutoController {
         return Timer.getFPGATimestamp() - autoStartTime;
     }
 
-    public boolean inSimAndTimePassedInState(double t) {
-        return (Robot.isSimulation() && ((Timer.getFPGATimestamp() - thisRobot.stateMachine.lastStateChangeTime) > t));
+    //if in simulation, use t. if on real field, move on from shot if it takes more than 2s to get up to speed
+    public boolean timePassedInState(double t) {
+        if(Robot.isSimulation()){
+            return ((Timer.getFPGATimestamp() - thisRobot.stateMachine.lastStateChangeTime) > t);
+        } else {
+            return (Timer.getFPGATimestamp() - thisRobot.stateMachine.lastStateChangeTime) > 2;
+        }
     }
 
     // _X means not made yet
