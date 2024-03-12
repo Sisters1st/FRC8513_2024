@@ -99,7 +99,7 @@ public class Settings {
     public static double shootingArmPos = -24;
 
     public static double armThold = 1;
-    public static double armMaxV = 1.33;
+    public static double armMaxV = 1;
     public static double armMaxPos = 0;
     public static double armMinPos = -65;
 
@@ -129,7 +129,7 @@ public class Settings {
 
     public static double wristMotorDiff = 0.05;
     public static double wristTHold = 1;
-    public static double wristMaxV = 5;
+    public static double wristMaxV = 3;
     public static double wristMaxPos = 10;
     public static double wristMinPos = -45;
 
@@ -179,7 +179,7 @@ public class Settings {
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 55;
     public static double climberVoltage = 8.0;
-    public static double climberDistance = 100;
+    public static double climberDistance = 200;
 
     // field settings
 

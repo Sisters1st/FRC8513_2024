@@ -213,9 +213,10 @@ public class StateMachine {
     public void freeFeederControl() {
         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.runFeederInButton)) {
             feederV = Settings.feederIntakeVoltage;
-        }
-        if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.runFeederOutButton)) {
+        } else if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.runFeederOutButton)) {
             feederV = Settings.feederScoreAmpVoltage;
+        } else {
+            feederV = 0;
         }
     }
 

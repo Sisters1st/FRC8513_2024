@@ -20,6 +20,9 @@ public class Climber {
         climberMotor1.setSmartCurrentLimit(Settings.climberMotorCurrentLimit);
         climberMotor2.setSmartCurrentLimit(Settings.climberMotorCurrentLimit);
 
+        climberMotor1.getEncoder().setPosition(0);
+        climberMotor1.getEncoder().setPosition(0);
+
         climberMotor1.setIdleMode(IdleMode.kBrake);
         climberMotor2.setIdleMode(IdleMode.kBrake);
 
