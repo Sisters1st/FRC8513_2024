@@ -8,6 +8,7 @@ import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.PhotonPoseEstimator.PoseStrategy;
+import org.photonvision.targeting.PhotonPipelineResult;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.path.PathPlannerPath;
@@ -103,9 +104,8 @@ public class Drivebase {
   public void updateOdometry() {
     if (Settings.usePhoton) {
       var result = camera.getLatestResult();
-      
       Optional<EstimatedRobotPose> pose2Tag = photonPoseEstimatorTwo.update(result);
-      if (pose2Tag.isPresent()) {
+      if (pose2Tag.isPresent() && goodTagInList(result)) {
         Pose3d fieldToCamera = pose2Tag.get().estimatedPose;
         Pose3d fieldToRobotRot = fieldToCamera.transformBy(camToRobotRot);
         Pose3d fieldToRobot = fieldToRobotRot.transformBy(camToRobotTrans);
@@ -244,6 +244,17 @@ public class Drivebase {
     } else {
       thisRobot.drivebase.aimAtPoint(Settings.blueGoalPos);
     }
+  }
+
+  //determine if tags in list used to update ododm
+  public boolean goodTagInList(PhotonPipelineResult res){
+    int targets = res.getTargets().size();
+    for(int i = 0; i < targets; i++){
+      if(Settings.goodTarget.contains(res.getTargets().get(i).getFiducialId())){
+        return true;
+      }
+    }
+    return false;
   }
 
   //used in auto when not moving to point the robot at the goal
