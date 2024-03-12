@@ -71,16 +71,17 @@ public class Dashboard {
         SmartDashboard.putBoolean("ShooterInThold",
                 thisRobot.shooter.leftShooterInThreshold() && thisRobot.shooter.rightShooterInThreshold());
 
-        SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.getAppliedOutput());
+        SmartDashboard.putNumber("FeederOutput", thisRobot.shooter.feederMotor.get());
         SmartDashboard.putNumber("feederSensor", thisRobot.shooter.feederSensorInput.getValue());
         SmartDashboard.putNumber("ShotWristOveride", thisRobot.wristOveride);
 
         // intake info
-        SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.getAppliedOutput());
+        SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.get());
 
         // climber info
-        SmartDashboard.putNumber("leftClimberPower", thisRobot.climber.climberMotor2.getAppliedOutput());
-        SmartDashboard.putNumber("rightClimberPower", thisRobot.climber.climberMotor1.getAppliedOutput());
+        SmartDashboard.putNumber("leftClimberPower", thisRobot.climber.climberMotor2.get());
+        SmartDashboard.putNumber("rightClimberPower", thisRobot.climber.climberMotor1.get());
+        SmartDashboard.putNumber("climberButtonCount", thisRobot.stateMachine.climbCounter);
 
     }
 }

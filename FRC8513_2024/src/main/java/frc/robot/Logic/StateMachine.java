@@ -22,6 +22,7 @@ public class StateMachine {
     double wristPos = 0;
     double intakeVoltage = 0;
     double ss = 0;
+    int climbCounter = 0;
 
     public StateMachine(Robot robotIn) {
         thisRobot = robotIn;
@@ -32,6 +33,7 @@ public class StateMachine {
         switch (robotState) {
             // driving around, intake off
             case DRIVING:
+                climbCounter = 0;
                 armPos = Settings.intakingArmPos;
                 wristPos = Settings.intakingWristPos;
                 ss = feederV = intakeVoltage = 0;
@@ -39,6 +41,7 @@ public class StateMachine {
 
             // run the intake, feeder in
             case INTAKING:
+                climbCounter = 0;
                 armPos = Settings.intakingArmPos;
                 wristPos = Settings.intakingWristPos;
                 intakeVoltage = Settings.intakingVoltage;
@@ -56,7 +59,7 @@ public class StateMachine {
 
             // runs once when we initilize a shot
             case SPEEDING_UP_SHOOTER_SPEAKER:
-
+                climbCounter = 0;
                 // if vision, get dist, if no vision, assume sw shot
                 armPos = Settings.shootingArmPos;
                 if (thisRobot.drivebase.visionIsRecent()) {
@@ -104,31 +107,40 @@ public class StateMachine {
                 }
 
                 break;
-            case CLIMBING:
-                if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)) {
-                    double lc = 1;
-                    double rc = 1;
 
-                    if(updateClimbCount() == 1){
-                        armPos = Settings.chainGrabArmPos;
-                        wristPos = Settings.chainGrabWristpos; 
-                   } 
-                    if(updateClimbCount() == 2){
+            case CLIMBING:
+                updateClimberCount();
+                if(climbCounter == 1){
+                    armPos = Settings.chainGrabArmPos;
+                    wristPos = Settings.chainGrabWristpos; 
+                    freeFeederControl();
+                    manualClimberControl();
+                } else if(climbCounter == 2){
+                    if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)){
                         armPos = Settings.climbArmPos;
                         wristPos = Settings.climbWristpos;
-                   }
-                    if(updateClimbCount() == 3){
-                        thisRobot.climber.climberMotor1.set(rc);
-                        thisRobot.climber.climberMotor2.set(-lc);
-                        balanceClimber();
-
+                        freeFeederControl();
                     } else {
-                        thisRobot.climber.climberMotor1.set(0);
-                        thisRobot.climber.climberMotor1.set(0);
+                        if(climberReachedMaxHeight()){
+                            //feed out
+                            buttonClimberControl();
+                            feederV = Settings.feederScoreTrapVoltage;
+                            
+                        } else {
+                            //auto climb
+                            freeFeederControl();
+                            balanceClimber();
+                        }
                     }
-                } 
-                
-                ss = feederV = intakeVoltage = 0;
+                } else {
+                    if(climbCounter > 3){
+                        climbCounter = 2;
+                    }
+                    freeFeederControl();
+                    buttonClimberControl();
+                }
+
+                ss = intakeVoltage = 0;
 
                 break;
 
@@ -193,6 +205,10 @@ public class StateMachine {
 
     }
 
+    public boolean climberReachedMaxHeight() {
+        return (thisRobot.climber.climberMotor1.getEncoder().getPosition() + thisRobot.climber.climberMotor1.getEncoder().getPosition())/2 > Settings.climberDistance;
+    }
+
     // manual control of the feeder
     public void freeFeederControl() {
         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.runFeederInButton)) {
@@ -207,6 +223,20 @@ public class StateMachine {
     public void freeIntakeControl() {
         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.intakeOutButton)) {
             intakeVoltage = -Settings.intakingVoltage;
+        }
+    }
+
+    public void buttonClimberControl(){
+        double roll = thisRobot.drivebase.gyro.getRoll();
+        double climbPowerDelta = roll * 0.1;
+         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton)) {
+            thisRobot.climber.climberMotor1.set(-1);
+            thisRobot.climber.climberMotor2.set(1);
+         } else if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbUpButton)) {
+            thisRobot.climber.climberMotor1.set(1 + climbPowerDelta);
+            thisRobot.climber.climberMotor2.set(-1 + climbPowerDelta);
+        } else {
+            manualClimberControl();
         }
     }
 
@@ -275,19 +305,15 @@ public class StateMachine {
     public void balanceClimber(){
         double roll = thisRobot.drivebase.gyro.getRoll();
         double climbPowerDelta = roll * 0.1;
-            if (climbPowerDelta > 1) {
-                climbPowerDelta = 1;
-            }
-            if (climbPowerDelta < -1) {
-                climbPowerDelta = -1;
-            }
-            if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climbDownButton)) {
-                thisRobot.climber.climberMotor1.set(-1);
-                thisRobot.climber.climberMotor2.set(1);
-            } else {
-                thisRobot.climber.climberMotor1.set(1 + climbPowerDelta);
-                thisRobot.climber.climberMotor2.set(-1 + climbPowerDelta);
+        if (climbPowerDelta > 1) {
+            climbPowerDelta = 1;
         }
+        if (climbPowerDelta < -1) {
+            climbPowerDelta = -1;
+        }
+        thisRobot.climber.climberMotor1.set(1 + climbPowerDelta);
+        thisRobot.climber.climberMotor2.set(-1 + climbPowerDelta);
+    
     }
 
     // lerp dist to wrist angle plus overide 
@@ -320,9 +346,9 @@ public class StateMachine {
         robotState = inState;
     }
 
-    public int updateClimbCount(){
-         int climbCounter = 0;
-        if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)){
+    public int updateClimberCount(){
+        
+        if(thisRobot.teleopController.buttonPannel.getRawButtonPressed(Settings.climberPrepButton)){
             climbCounter = climbCounter + 1;
         }
         return climbCounter;

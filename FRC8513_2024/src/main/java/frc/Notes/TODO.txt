@@ -2,8 +2,7 @@
     rezero swerve
     tune drive better
     increase drivebase odom
-    auto climb
-    have setting for filtering which april tags to position off of
+    auto climb test
     retune shot 
 
 
