@@ -20,12 +20,12 @@
         "y": 4.139730672623739
       },
       "prevControl": {
-        "x": 1.8892529663557198,
-        "y": 4.182695046102921
+        "x": 1.4993411183403562,
+        "y": 4.046177437084219
       },
       "nextControl": {
-        "x": 2.9866136328017334,
-        "y": 4.1046482092964185
+        "x": 2.9856838355393425,
+        "y": 4.186068516350007
       },
       "isLocked": false,
       "linkedName": "Note1Intake"
@@ -47,7 +47,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.85,
-      "rotationDegrees": -10.0,
+      "rotationDegrees": 0.0,
       "rotateFast": false
     }
   ],

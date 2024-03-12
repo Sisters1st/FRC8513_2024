@@ -14,10 +14,8 @@
 
 5) for monty
 
-    more midline autos
-    LED
-    increase drivebase odom
     tune drive better
+    increase drivebase odom
     auto climb
     have setting for filtering which april tags to position off of
 
@@ -28,6 +26,7 @@
 
     camera on front for note pikcup
     simulate photon vision
+    more midline autos
     path generation to amp
     high shot above defense?
     
