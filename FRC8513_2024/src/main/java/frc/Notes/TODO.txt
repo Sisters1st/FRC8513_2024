@@ -1,15 +1,12 @@
 1) asap
-    rezero swerve
-    tune drive better
     increase drivebase odom
-    auto climb test
     retune shot 
 
 
 2) teleop
     
 3) autos
-    midline options        
+       
 
 5) Monty ideas
 

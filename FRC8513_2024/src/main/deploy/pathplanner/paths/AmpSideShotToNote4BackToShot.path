@@ -16,38 +16,59 @@
     },
     {
       "anchor": {
-        "x": 8.071455914991601,
-        "y": 7.425788070949362
+        "x": 7.6621605095062035,
+        "y": 7.262069908755202
       },
       "prevControl": {
-        "x": 8.624123304109643,
-        "y": 7.506163205073767
+        "x": 8.214827898624241,
+        "y": 7.342445042879607
       },
       "nextControl": {
-        "x": 7.473822470574624,
-        "y": 7.338873465170107
+        "x": 7.0645270650892265,
+        "y": 7.175155302975948
       },
-      "isLocked": true,
+      "isLocked": false,
       "linkedName": "Note4"
     },
     {
       "anchor": {
-        "x": 1.3940937283583965,
-        "y": 6.700750495518085
+        "x": 5.054364068842098,
+        "y": 6.864468657712245
       },
       "prevControl": {
-        "x": 3.226525964651441,
-        "y": 6.920642363873251
+        "x": 5.353798729631188,
+        "y": 6.91210599011051
+      },
+      "nextControl": {
+        "x": 4.53982127337474,
+        "y": 6.782609576615164
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.5578118905525558,
+        "y": 6.455173252226847
+      },
+      "prevControl": {
+        "x": 2.5518150181599504,
+        "y": 6.560420642208806
       },
       "nextControl": null,
-      "isLocked": true,
-      "linkedName": "AmpSideShot"
+      "isLocked": false,
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.85,
-      "rotationDegrees": 7.5,
+      "waypointRelativePos": 0.8999999999999999,
+      "rotationDegrees": 0.0,
+      "rotateFast": true
+    },
+    {
+      "waypointRelativePos": 1.7999999999999998,
+      "rotationDegrees": 0.0,
       "rotateFast": false
     }
   ],
@@ -62,7 +83,7 @@
   "goalEndState": {
     "velocity": 0,
     "rotation": 45.0,
-    "rotateFast": false
+    "rotateFast": true
   },
   "reversed": false,
   "folder": null,

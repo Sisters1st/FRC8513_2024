@@ -48,17 +48,17 @@ public class Settings {
     // Button pannel settings
     public static int buttonPannelPort = 1;
 
-    public static int drivingStateReturnButton = 1;
-    public static int intakeButton = 2;
-    public static int shootInSpeakerButton = 3;
-    public static int ampPrepButton = 5;
-    public static int climberPrepButton = 4;
-    public static int intakeOutButton = 6;
-    public static int climbUpButton = 7;
-    public static int climbDownButton = 8;
-    public static int runFeederInButton = 9;
-    public static int runFeederOutButton = 10;
-    public static int coinButton = 11;
+    public static int drivingStateReturnButton = 2;
+    public static int intakeButton = 3;
+    public static int shootInSpeakerButton = 5;
+    public static int ampPrepButton = 8;
+    public static int climberPrepButton = 9;
+    public static int intakeOutButton = 1;
+    public static int climbUpButton = 11;
+    public static int climbDownButton = 10;
+    public static int runFeederInButton = 7;
+    public static int runFeederOutButton = 4;
+    public static int coinButton = 6;
 
     // manual overide joystick settings
     public static int manualControlPort = 2;

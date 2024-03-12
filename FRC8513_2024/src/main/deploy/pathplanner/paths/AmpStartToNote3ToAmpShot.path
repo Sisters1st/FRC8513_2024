@@ -20,12 +20,12 @@
         "y": 6.958021893251764
       },
       "prevControl": {
-        "x": 2.5645836232748653,
-        "y": 6.941575701725523
+        "x": 2.8441688792209487,
+        "y": 7.238090443000137
       },
       "nextControl": {
-        "x": 3.093379663356803,
-        "y": 6.972681351142108
+        "x": 2.8441688792209487,
+        "y": 6.829386194384925
       },
       "isLocked": false,
       "linkedName": "Note3Intake"
@@ -48,7 +48,7 @@
     {
       "waypointRelativePos": 0.95,
       "rotationDegrees": 5.0,
-      "rotateFast": false
+      "rotateFast": true
     }
   ],
   "constraintZones": [],
