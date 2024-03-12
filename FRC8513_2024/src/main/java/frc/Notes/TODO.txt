@@ -1,32 +1,23 @@
 1) asap
-    
-2) teleop
-    
-3) autos
-
-    Mid_P213,
-    Mid_P231,
-    Mid_P321,
-        
-
-4) before comp
-    
-
-5) for monty
-
+    rezero swerve
     tune drive better
     increase drivebase odom
     auto climb
     have setting for filtering which april tags to position off of
+    retune shot 
 
-    rezero swerve
-    autopickup
+
+2) teleop
+    
+3) autos
+    midline options        
+
+5) Monty ideas
 
     heading motion profiling
 
-    camera on front for note pikcup
-    simulate photon vision
-    more midline autos
-    path generation to amp
+    camera on front for note pikcup -  autopickup
+    path generation to amp    
     high shot above defense?
+    simulate photon vision
     
