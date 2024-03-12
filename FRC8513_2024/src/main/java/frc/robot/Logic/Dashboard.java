@@ -41,6 +41,7 @@ public class Dashboard {
         SmartDashboard.putNumber("trajGoalYP", thisRobot.drivebase.goalState.positionMeters.getY());
         SmartDashboard.putNumber("Goalheading", thisRobot.drivebase.goalHeading.getDegrees());
         SmartDashboard.putBoolean("inHeadingThold", thisRobot.drivebase.inHeadingThold());
+        SmartDashboard.putNumber("Heading", thisRobot.drivebase.swerveDrive.getOdometryHeading().getDegrees());
 
         SmartDashboard.putNumber("trajXV", thisRobot.drivebase.ajustedV.getX());
         SmartDashboard.putNumber("trajYV", thisRobot.drivebase.ajustedV.getY());
@@ -81,6 +82,8 @@ public class Dashboard {
         // climber info
         SmartDashboard.putNumber("leftClimberPower", thisRobot.climber.climberMotor2.get());
         SmartDashboard.putNumber("rightClimberPower", thisRobot.climber.climberMotor1.get());
+        SmartDashboard.putNumber("leftClimberPos", thisRobot.climber.climberMotor2.getEncoder().getPosition());
+        SmartDashboard.putNumber("rightClimberPos", thisRobot.climber.climberMotor1.getEncoder().getPosition());
         SmartDashboard.putNumber("climberButtonCount", thisRobot.stateMachine.climbCounter);
 
     }

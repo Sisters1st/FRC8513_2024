@@ -163,6 +163,12 @@ public class StateMachine {
             freeIntakeControl();
         }
 
+        if(robotState != robotStates.CLIMBING){
+            thisRobot.climber.climberMotor1.set(0);
+            thisRobot.climber.climberMotor2.set(0);
+
+        }
+
         thisRobot.arm.setArmPosition(armPos);
         thisRobot.wrist.setWristPos(wristPos);
 

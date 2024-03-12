@@ -11,9 +11,9 @@ public class Settings {
     public static double drivebaseMaxVelocity = 17.1; //fps, gets converted to mps later
     public static double maxShotSpeed = 1;
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
-    public static double drivebase_PID_P = 12; //x and y path following PID
-    public static double drivebase_PID_I = 0;
-    public static double drivebase_PID_D = 0.25;
+    public static double drivebase_PID_P = 5; //x and y path following PID
+    public static double drivebase_PID_I = 0.05;
+    public static double drivebase_PID_D = 0.2;
 
     // heading settings
     public static boolean attackPointEnable = false;
@@ -99,7 +99,7 @@ public class Settings {
     public static double shootingArmPos = -24;
 
     public static double armThold = 1;
-    public static double armMaxV = 1;
+    public static double armMaxV = 1.0;
     public static double armMaxPos = 0;
     public static double armMinPos = -65;
 
@@ -127,9 +127,9 @@ public class Settings {
     public static double shootingSubwofferWristPos = shotWristPos[0];
     public static double shootingSubwofferOtherWristPos = shotWristPos[0];
 
-    public static double wristMotorDiff = 0.05;
+    public static double wristMotorDiff = 0.01;
     public static double wristTHold = 1;
-    public static double wristMaxV = 3;
+    public static double wristMaxV = 3.0;
     public static double wristMaxPos = 10;
     public static double wristMinPos = -45;
 
@@ -179,7 +179,7 @@ public class Settings {
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 55;
     public static double climberVoltage = 8.0;
-    public static double climberDistance = 200;
+    public static double climberDistance = 300;
 
     // field settings
 
