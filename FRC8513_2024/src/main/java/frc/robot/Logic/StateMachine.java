@@ -110,6 +110,7 @@ public class StateMachine {
 
             case CLIMBING:
                 updateClimberCount();
+                feederV = 0;
                 if(climbCounter == 1){
                     armPos = Settings.chainGrabArmPos;
                     wristPos = Settings.chainGrabWristpos; 
@@ -215,8 +216,6 @@ public class StateMachine {
             feederV = Settings.feederIntakeVoltage;
         } else if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.runFeederOutButton)) {
             feederV = Settings.feederScoreAmpVoltage;
-        } else {
-            feederV = 0;
         }
     }
 
