@@ -2,7 +2,6 @@ package frc.robot.Logic;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
 import frc.robot.Logic.StateMachine.robotStates;
 
