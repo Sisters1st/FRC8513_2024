@@ -90,29 +90,41 @@
 </dashboard>
 <live-window>
 </live-window>
+	<hidden field="Heading"/>
 	<hidden field="ShooterLeftSpeed"/>
 	<hidden field="Motors"/>
 	<hidden field="JSON"/>
+	<hidden field="odomT"/>
 	<hidden field="trajGoalXP"/>
 	<hidden field="ShooterRightGoalSpeed"/>
+	<hidden field="odomY"/>
 	<hidden field="ShooterInThold"/>
+	<hidden field="odomX"/>
 	<hidden field="Field"/>
+	<hidden field="RawLeftEncoderVel"/>
 	<hidden field="LastPhotonUpdate"/>
 	<hidden field="WristInThold"/>
+	<hidden field="RawRightEncoderVel"/>
 	<hidden field="ArmInThold"/>
 	<hidden field="Photon Vision Enabled"/>
 	<hidden field="rightClimberPower"/>
+	<hidden field="leftClimberPos"/>
 	<hidden field="Swerve Drive"/>
+	<hidden field="rightClimberPos"/>
 	<hidden field="trajGoalYP"/>
 	<hidden field="leftClimberPower"/>
 	<hidden field="WristFromDist"/>
 	<hidden field="Encoders"/>
 	<hidden field="navX-Sensor[4]"/>
 	<hidden field="IMU"/>
+	<hidden field="Xoffset"/>
+	<hidden field="RawRightEncoder"/>
 	<hidden field="ShooterLeftGoalSpeed"/>
+	<hidden field="RawLeftEncoder"/>
 	<hidden field="inHeadingThold"/>
 	<hidden field="ShooterRightSpeed"/>
 	<hidden field="calculatedWristGoal"/>
 	<hidden field="swerve"/>
 	<hidden field="Roll"/>
+	<hidden field="climberButtonCount"/>
 </xml>

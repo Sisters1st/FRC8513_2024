@@ -98,7 +98,7 @@ public class Settings {
     public static double ampArmPos = -35;
     public static double shootingArmPos = -24;
 
-    public static double armThold = 1;
+    public static double armThold = 1.0;
     public static double armMaxV = 1.0;
     public static double armMaxPos = 0;
     public static double armMinPos = -65;
@@ -106,8 +106,8 @@ public class Settings {
     // Wrist settings
 
     // tuned for new notes at mt olive
-    public static double[] shotDistances = { 1.00, 1.27, 1.48, 1.67, 1.82, 2.0, 8.0 };
-    public static double[] shotWristPos = { -1.35, -1.35, -3.07, -3.95, -4.02, -4.57, -4.57 };
+    public static double[] shotDistances = { 1.00, 1.18,  1.29,   1.4,   1.5,   1.66, 1.78,   1.96,  2.15,  3};
+    public static double[] shotWristPos = { 0.33,   0.33, -0.56, -0.95, -1.26, -2.75, -3.19, -3.6, -4.16, -4.16};
 
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
@@ -127,7 +127,7 @@ public class Settings {
     public static double shootingSubwofferWristPos = shotWristPos[0];
     public static double shootingSubwofferOtherWristPos = shotWristPos[0];
 
-    public static double wristMotorDiff = 0.01;
+    public static double wristMotorDiff = 0.025;
     public static double wristTHold = 1;
     public static double wristMaxV = 3.0;
     public static double wristMaxPos = 10;
@@ -152,7 +152,7 @@ public class Settings {
 
     public static int basicShooterSpeed = 5500;
     public static double leftRightShooterSpeedOffset = 1;
-    public static double matchShooterOveride = -0.6;
+    public static double matchShooterOveride = 0;
     public static double matchShooterOverideDelta = 0.1;
 
     // feeder settings

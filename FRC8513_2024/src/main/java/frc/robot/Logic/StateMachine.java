@@ -83,8 +83,8 @@ public class StateMachine {
                 // if vision, get dist, if no vision, assume sw shot
                 if (thisRobot.drivebase.visionIsRecent()) {
                     wristPos = getWristAngFromDist(thisRobot.shooter.getDistFromGoal());
-                    // wristPos = thisRobot.wrist.wristGoalPos + 0.1 *
-                    // thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
+                    //wristPos = thisRobot.wrist.wristGoalPos + 0.1 *
+                    //thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
                 } else {
                     wristPos = Settings.shootingSubwofferWristPos + thisRobot.wristOveride;
                 }

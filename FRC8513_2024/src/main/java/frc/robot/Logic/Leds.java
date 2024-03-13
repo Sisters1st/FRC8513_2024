@@ -33,9 +33,9 @@ public class Leds {
 
             if(thisRobot.stateMachine.robotState == robotStates.SHOOTING || thisRobot.stateMachine.robotState == robotStates.SPEEDING_UP_SHOOTER_SPEAKER){
                 if(thisRobot.drivebase.visionIsRecent()){  
-                    changeLedColor(0, 0, 200);
+                    changeLedColor(0, 200, 0);
                 } else {
-                    changeLedColor(255, 0, 0);
+                    changeLedColor(200, 0, 0);
                 }
             }
             if(thisRobot.stateMachine.robotState == robotStates.CLIMBING){
@@ -43,10 +43,10 @@ public class Leds {
                     changeLedColor(255, 0, 0);
                 }
                 if(thisRobot.stateMachine.climbCounter == 1){
-                    changeLedColor(0, 0, 255);
+                    changeLedColor(0, 255, 255);
                 }
                 if(thisRobot.stateMachine.climbCounter == 2){
-                    changeLedColor(0, 255, 0);
+                    changeLedColor(0, 0, 255);
                 }
             }
             
@@ -55,7 +55,7 @@ public class Leds {
         }
     }
 
-    private void changeLedColor(int r, int b, int g) {
+    private void changeLedColor(int r, int g, int b) {
         for (int i = 0; i < m_ledBuffer.getLength(); i++) {
             m_ledBuffer.setRGB(i, r, g, b);
         }
