@@ -27,7 +27,7 @@ public class Settings {
     // vision settings
     public static boolean usePhoton = true;
     public static String photonName = "LLCamera";
-    public static double stalePhotonTime = 15; // ip for photon: http://10.85.13.26:5800/#/dashboard
+    public static double stalePhotonTime = 5; // ip for photon: http://10.85.13.26:5800/#/dashboard
 
     // driver joystick settings
     public static int driverJoystickPort = 0;
@@ -144,7 +144,7 @@ public class Settings {
     public static double shooter_FF = 0.0021;
     public static double shooter_FF_const = 1.42;
 
-    public static double shooterThresholdValue = 100;
+    public static double shooterThresholdValue = 200;
     public static double shotTime = 0.65;
 
     public static int shooter1CurrentLimit = 35;
