@@ -2,10 +2,15 @@ package frc.robot;
 
 import java.util.Optional;
 
+import com.ctre.phoenix6.Orchestra;
+import com.ctre.phoenix6.configs.AudioConfigs;
+import com.ctre.phoenix6.hardware.TalonFX;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import frc.robot.Logic.AutoController;
 import frc.robot.Logic.Dashboard;
@@ -27,6 +32,7 @@ public class Robot extends TimedRobot {
   public TeleopController teleopController = new TeleopController(this);
   public AutoController autoController = new AutoController(this);
   public StateMachine stateMachine = new StateMachine(this);
+  public Orchestra m_orchestra = new Orchestra();
   public LinearInterp linearInterp;
 
   // subsystems
@@ -42,6 +48,7 @@ public class Robot extends TimedRobot {
   // robot wide vars
   public boolean onRedAlliance = false;
   public double wristOveride = Settings.matchShooterOveride;
+  public boolean playMusic = false;
 
   @Override
   public void robotInit() {
@@ -52,6 +59,23 @@ public class Robot extends TimedRobot {
     double[] wristPos = Settings.shotWristPos;
     linearInterp = new LinearInterp(shotDistances, wristPos);
 
+    var audioConfig = new AudioConfigs();
+    audioConfig.withAllowMusicDurDisable(true); 
+
+    ((TalonFX)drivebase.swerveDrive.getModules()[0].getDriveMotor().getMotor()).getConfigurator().apply(audioConfig);
+    ((TalonFX)drivebase.swerveDrive.getModules()[1].getDriveMotor().getMotor()).getConfigurator().apply(audioConfig);
+    ((TalonFX)drivebase.swerveDrive.getModules()[2].getDriveMotor().getMotor()).getConfigurator().apply(audioConfig);
+    ((TalonFX)drivebase.swerveDrive.getModules()[3].getDriveMotor().getMotor()).getConfigurator().apply(audioConfig);
+
+
+    m_orchestra.addInstrument((TalonFX)drivebase.swerveDrive.getModules()[0].getDriveMotor().getMotor());
+    m_orchestra.addInstrument((TalonFX)drivebase.swerveDrive.getModules()[1].getDriveMotor().getMotor());
+    m_orchestra.addInstrument((TalonFX)drivebase.swerveDrive.getModules()[2].getDriveMotor().getMotor());
+    m_orchestra.addInstrument((TalonFX)drivebase.swerveDrive.getModules()[3].getDriveMotor().getMotor());
+    
+    m_orchestra.loadMusic("diamonds.chrp");
+    
+    
   }
 
   @Override
@@ -87,6 +111,28 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+
+    if(teleopController.buttonPannel.getRawButtonPressed(Settings.coinButton)){
+      playMusic = !playMusic;
+    }
+
+    if(playMusic && !m_orchestra.isPlaying()){
+      m_orchestra.play();
+      
+    } 
+
+    if(!playMusic && m_orchestra.isPlaying()){
+      m_orchestra.stop();
+    } 
+
+    if(playMusic){
+      m_led.updateRainbow();
+    } else {
+      m_led.changeLedColor(0, 0, 0);
+
+    }
+
+    
 
   }
 
