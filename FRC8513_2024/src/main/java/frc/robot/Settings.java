@@ -1,5 +1,8 @@
 package frc.robot;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -28,6 +31,7 @@ public class Settings {
     public static boolean usePhoton = true;
     public static String photonName = "LLCamera";
     public static double stalePhotonTime = 5; // ip for photon: http://10.85.13.26:5800/#/dashboard
+    public static ArrayList goodTarget = new List<>(Arrays.asList(3,4,7,8));
 
     // driver joystick settings
     public static int driverJoystickPort = 0;
