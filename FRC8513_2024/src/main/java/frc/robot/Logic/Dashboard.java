@@ -78,6 +78,7 @@ public class Dashboard {
 
         // intake info
         SmartDashboard.putNumber("intakePower", thisRobot.intake.leftIntakeMotor.get());
+        SmartDashboard.putNumber("IntakeSensorValue", thisRobot.intake.intakeSensor.getAverageValue());
 
         // climber info
         SmartDashboard.putNumber("leftClimberPower", thisRobot.climber.climberMotor2.get());

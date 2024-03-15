@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.2186814117217974,
-        "y": 7.273764063197643
+        "x": 1.136822330624718,
+        "y": 7.320540680967402
       },
       "isLocked": false,
       "linkedName": "Mid"
@@ -20,12 +20,12 @@
         "y": 6.958021893251764
       },
       "prevControl": {
-        "x": 2.0138839138077134,
-        "y": 6.9346335843668845
+        "x": 2.9063597437372497,
+        "y": 7.237880783575121
       },
       "nextControl": {
-        "x": 3.0918653160005607,
-        "y": 6.96499925766809
+        "x": 2.77400395256631,
+        "y": 6.642279723305886
       },
       "isLocked": false,
       "linkedName": "Note3Intake"
@@ -36,8 +36,8 @@
         "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 1.7916949794013546,
-        "y": 6.595503105536126
+        "x": 1.7438677258656483,
+        "y": 5.745168699995202
       },
       "nextControl": null,
       "isLocked": true,
@@ -67,7 +67,7 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": -1.7983012773176372,
     "velocity": 0
   },
   "useDefaultConstraints": true

@@ -24,11 +24,13 @@ public class Leds {
     public void updateLeds() {
 
         if(thisRobot.isEnabled()){
-            if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
-                changeLedColor(30, 200, 30);
-            }
-            if(thisRobot.stateMachine.robotState == robotStates.INTAKING){
-                changeLedColor(200, 30, 30);
+
+            if(thisRobot.stateMachine.robotState == robotStates.INTAKING || thisRobot.stateMachine.robotState == robotStates.DRIVING){
+                if(thisRobot.intake.intakeSensorSeesNote() || thisRobot.stateMachine.robotState == robotStates.DRIVING){
+                    changeLedColor(0, 240, 0);
+                } else {
+                    changeLedColor(230, 0, 0);
+                }
             }
 
             if(thisRobot.stateMachine.robotState == robotStates.SHOOTING || thisRobot.stateMachine.robotState == robotStates.SPEEDING_UP_SHOOTER_SPEAKER){

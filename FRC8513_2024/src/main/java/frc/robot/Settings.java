@@ -77,8 +77,10 @@ public class Settings {
     public static int leftIntakeMotorCANID = 51;
     public static int rightIntakeMotorCANID = 52;
 
-    public static int intakeMotorCurrentLimit = 30;
+    public static int intakeMotorCurrentLimit = 35;
     public static double intakingVoltage = 12;
+    public static int intakeSensorPort = 4;
+    public static double intakeSensorThold = 600;
 
     // Arm settings
     public static int armMotor1CANID = 14;
@@ -144,7 +146,7 @@ public class Settings {
     public static double shooter_FF = 0.0021;
     public static double shooter_FF_const = 1.42;
 
-    public static double shooterThresholdValue = 200;
+    public static double shooterThresholdValue = 150;
     public static double shotTime = 0.65;
 
     public static int shooter1CurrentLimit = 35;
