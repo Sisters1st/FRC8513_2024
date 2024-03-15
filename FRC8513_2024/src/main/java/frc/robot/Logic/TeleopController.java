@@ -12,7 +12,7 @@ public class TeleopController {
 
     Robot thisRobot;
     Joystick driverXboxController = new Joystick(Settings.driverJoystickPort);
-    Joystick buttonPannel = new Joystick(Settings.buttonPannelPort);
+    public Joystick buttonPannel = new Joystick(Settings.buttonPannelPort);
     Joystick manualControlJoystick = new Joystick(Settings.manualControlPort);
     boolean manualHatPressed = false;
 
