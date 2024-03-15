@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import frc.robot.Logic.AutoController;
 import frc.robot.Logic.Dashboard;
@@ -72,7 +73,8 @@ public class Robot extends TimedRobot {
     m_orchestra.addInstrument((TalonFX)drivebase.swerveDrive.getModules()[2].getDriveMotor().getMotor());
     m_orchestra.addInstrument((TalonFX)drivebase.swerveDrive.getModules()[3].getDriveMotor().getMotor());
     
-    m_orchestra.loadMusic("umbrella.chrp");
+    m_orchestra.loadMusic("diamonds.chrp");
+    
     
   }
 
@@ -113,14 +115,24 @@ public class Robot extends TimedRobot {
     if(teleopController.buttonPannel.getRawButtonPressed(Settings.coinButton)){
       playMusic = !playMusic;
     }
-    
+
     if(playMusic && !m_orchestra.isPlaying()){
       m_orchestra.play();
+      
     } 
 
     if(!playMusic && m_orchestra.isPlaying()){
       m_orchestra.stop();
     } 
+
+    if(playMusic){
+      m_led.updateRainbow();
+    } else {
+      m_led.changeLedColor(0, 0, 0);
+
+    }
+
+    
 
   }
 
