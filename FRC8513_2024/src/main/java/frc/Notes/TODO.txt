@@ -1,17 +1,13 @@
 1) asap
-    increase drivebase odom
-    retune shot 
-
+    if time passes shoot rather than drive again
 
 2) teleop
     
 3) autos
        
-
-5) Monty ideas
+5) DCMP ideas
 
     heading motion profiling
-
     camera on front for note pikcup -  autopickup
     path generation to amp    
     high shot above defense?
