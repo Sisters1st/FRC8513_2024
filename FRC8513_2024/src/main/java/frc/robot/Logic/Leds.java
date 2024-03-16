@@ -26,12 +26,17 @@ public class Leds {
 
         if(thisRobot.isEnabled()){
 
-            if(thisRobot.stateMachine.robotState == robotStates.INTAKING || thisRobot.stateMachine.robotState == robotStates.DRIVING){
-                if(thisRobot.intake.intakeSensorSeesNote() || thisRobot.stateMachine.robotState == robotStates.DRIVING){
-                    changeLedColor(0, 240, 0);
-                } else {
-                    changeLedColor(230, 0, 0);
-                }
+            if(thisRobot.stateMachine.robotState == robotStates.INTAKING && thisRobot.intake.intakeSensorSeesNote()){
+                changeLedColor(255, 255, 0);
+            }
+            if(thisRobot.stateMachine.robotState == robotStates.INTAKING && !thisRobot.intake.intakeSensorSeesNote()){
+                changeLedColor(255, 0, 0);
+            }
+            if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.shooter.intakeSensorSeesNote()){
+                changeLedColor(0, 255, 0);
+            }
+            if(thisRobot.stateMachine.robotState == robotStates.DRIVING && !thisRobot.shooter.intakeSensorSeesNote()){
+                changeLedColor(0, 0, 255);
             }
 
             if(thisRobot.stateMachine.robotState == robotStates.SHOOTING || thisRobot.stateMachine.robotState == robotStates.SPEEDING_UP_SHOOTER_SPEAKER){
@@ -78,6 +83,10 @@ public class Leds {
           // Check bounds
           m_rainbowFirstPixelHue %= 180;
           m_led.setData(m_ledBuffer);
+    }
+
+    public boolean noteSeen(){
+        return thisRobot.shooter.intakeSensorSeesNote() || thisRobot.intake.intakeSensorSeesNote();
     }
 
 }
