@@ -158,7 +158,7 @@ public class Settings {
 
     public static int basicShooterSpeed = 5500;
     public static double leftRightShooterSpeedOffset = 1;
-    public static double matchShooterOveride = 0;
+    public static double matchShooterOveride = -0.3;
     public static double matchShooterOverideDelta = 0.1;
 
     // feeder settings
