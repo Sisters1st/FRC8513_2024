@@ -31,7 +31,7 @@ public class Settings {
     public static boolean usePhoton = true;
     public static String photonName = "LLCamera";
     public static double stalePhotonTime = 5; // ip for photon: http://10.85.13.26:5800/#/dashboard
-    public static ArrayList goodTarget = new ArrayList<>(Arrays.asList(3,4,7,8));
+    public static ArrayList<Integer> goodTarget = new ArrayList<>(Arrays.asList(3,4,7,8));
 
     // driver joystick settings
     public static int driverJoystickPort = 0;
