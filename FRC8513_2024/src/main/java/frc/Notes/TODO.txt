@@ -2,16 +2,12 @@
     increase drivebase odom
     retune shot 
 
-
 2) teleop
     
 3) autos
        
-
 5) Monty ideas
-
     heading motion profiling
-
     camera on front for note pikcup -  autopickup
     path generation to amp    
     high shot above defense?

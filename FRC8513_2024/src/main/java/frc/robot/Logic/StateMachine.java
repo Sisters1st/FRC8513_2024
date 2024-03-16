@@ -23,6 +23,8 @@ public class StateMachine {
     double intakeVoltage = 0;
     double ss = 0;
     int climbCounter = 0;
+    boolean needToFeedIn = false;
+    double feedInStartDist = -1;
 
     public StateMachine(Robot robotIn) {
         thisRobot = robotIn;
@@ -200,6 +202,13 @@ public class StateMachine {
                     }
                 }
             } else {
+                if(needToFeedIn){
+                    if(Math.abs(thisRobot.shooter.getFeederPos() - feedInStartDist) < Settings.feedInDist){
+                        feederV = Settings.feederIntakeVoltage;
+                    } else {
+                        needToFeedIn = false;
+                    }
+                }
                 thisRobot.shooter.setFeederVoltage(feederV);
             }
         }
@@ -258,10 +267,14 @@ public class StateMachine {
         }
         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)) {
             robotState = robotStates.CLIMBING;
+            needToFeedIn = true;
+            feedInStartDist = thisRobot.shooter.getFeederPos();
             lastStateChangeTime = Timer.getFPGATimestamp();
         }
         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.ampPrepButton)) {
             robotState = robotStates.SCORE_AMP;
+            needToFeedIn = true;
+            feedInStartDist = thisRobot.shooter.getFeederPos();
             lastStateChangeTime = Timer.getFPGATimestamp();
         }
         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.drivingStateReturnButton)) {

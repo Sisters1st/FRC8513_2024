@@ -178,6 +178,7 @@ public class Settings {
 
     public static double shimmyDist = 0.5;
     public static int shimmyCount = 4;
+    public static double feedInDist = 0.35;
 
     // climber settings
 
