@@ -84,7 +84,7 @@ public class Settings {
     public static int intakeMotorCurrentLimit = 35;
     public static double intakingVoltage = 12;
     public static int intakeSensorPort = 4;
-    public static double intakeSensorThold = 600;
+    public static double intakeSensorThold = 750;
 
     // Arm settings
     public static int armMotor1CANID = 14;
