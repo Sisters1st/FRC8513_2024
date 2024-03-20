@@ -1,15 +1,19 @@
-1) asap
-    increase drivebase odom
-    retune shot 
-
+1)  asap
+    Upgrade to LL3 and test
+    Move to arm shot before reaching end of path in auto
+    If 1 second passes, shoot no matter what
+    update button pannel
+        check LED and suck in a little
+    run intake when shimmy
+    headin motion profiling
+    auto note pickup on front
+    path generation to amp
+    pass note thorugh mid field
 2) teleop
     
 3) autos
        
-5) Monty ideas
-    heading motion profiling
-    camera on front for note pikcup -  autopickup
-    path generation to amp    
+5) Future ideas
     high shot above defense?
     simulate photon vision
     
