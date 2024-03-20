@@ -36,8 +36,8 @@ public class Settings {
     //ll settings (not tracking) 10.85.31.28:5801
     public static String llName = "limelight";
         // tx to turn degrees
-    public static double[] tx = {      -90, -25, 0, 25, 90};
-    public static double[] turnDeg = { -90, -25, 0, 25, 90};
+    public static double[] tx = {      -30, -10, 0, 10, 30};
+    public static double[] turnDeg = { -15, -10, 0, 10, 15};
 
 
     // driver joystick settings

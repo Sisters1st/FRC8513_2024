@@ -80,7 +80,7 @@ public class Drivebase {
       PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, new Transform3d());
 
   //note detector linearInterp
-  LinearInterp txToNote = new LinearInterp(Settings.tx, Settings.turnDeg);
+  public LinearInterp txToNote = new LinearInterp(Settings.tx, Settings.turnDeg);
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
@@ -268,6 +268,18 @@ public class Drivebase {
     driveClosedLoopHeading(new Translation2d());
   }
 
+  // drive with closed loop heading control while updateing goal heading
+  public void driveRobotCentric(Translation2d translation) {
+
+    double rot = rotPidController.calculate(swerveDrive.getOdometryHeading().getRadians(),
+        thisRobot.drivebase.goalHeading.getRadians());
+    
+    thisRobot.drivebase.swerveDrive.drive(
+        translation,
+        rot,
+        false,
+        false);
+  }
   public void aimAtNote(){
     double noteTx = LimelightHelpers.getTX(Settings.llName);
     double ajustGoalHeading = txToNote.interpolateLinearly(noteTx);

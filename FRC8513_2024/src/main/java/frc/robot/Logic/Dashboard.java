@@ -87,5 +87,11 @@ public class Dashboard {
         SmartDashboard.putNumber("rightClimberPos", thisRobot.climber.climberMotor1.getEncoder().getPosition());
         SmartDashboard.putNumber("climberButtonCount", thisRobot.stateMachine.climbCounter);
 
+        //ll info
+        double noteTx = LimelightHelpers.getTX(Settings.llName);
+        double ajustGoalHeading = thisRobot.drivebase.txToNote.interpolateLinearly(noteTx);
+        SmartDashboard.putNumber("LLTx", noteTx);
+        SmartDashboard.putNumber("LLRotAng", ajustGoalHeading);
+
     }
 }

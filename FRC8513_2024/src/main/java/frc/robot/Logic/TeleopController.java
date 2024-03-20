@@ -111,17 +111,19 @@ public class TeleopController {
             thisRobot.drivebase.setGoalHeadingDeg(90);
         }
 
+        //if rot joystick is zero, keep rotating to that angle
         if(driverXboxController.getRawButton(Settings.aimAtNoteButton)){
             thisRobot.drivebase.aimAtNote();
+            thisRobot.drivebase.driveRobotCentric(new Translation2d(2, 0));
+        } else {
+            if (rV == 0) {
+                thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
+            } else {
+                //once joystick is moved again, manually rotate
+                thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
+            }
         }
 
-        //if rot joystick is zero, keep rotating to that angle
-        if (rV == 0) {
-            thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
-        } else {
-            //once joystick is moved again, manually rotate
-            thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
-        }
 
         // force override shot: -1 is not pressed, 0 is up, 180 is down.
         if (manualControlJoystick.getPOV() == 0 && manualHatPressed == false) {
