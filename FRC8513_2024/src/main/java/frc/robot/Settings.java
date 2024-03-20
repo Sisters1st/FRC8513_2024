@@ -27,11 +27,14 @@ public class Settings {
     public static double drivebaseRot_PID_D = 0.5;
     public static double drivebaseRot_PID_IZ = 3;
 
-    // vision settings
+    // photon settings (at) //10.85.13.27:5800
     public static boolean usePhoton = true;
-    public static String photonName = "LLCamera";
+    public static String photonName = "LL3";
     public static double stalePhotonTime = 5; // ip for photon: http://10.85.13.26:5800/#/dashboard
     public static ArrayList<Integer> goodTarget = new ArrayList<>(Arrays.asList(3,4,7,8));
+
+    //ll settings (not tracking) 10.85.31.28:5801
+    public static String llName = "LL2";
 
     // driver joystick settings
     public static int driverJoystickPort = 0;
