@@ -34,7 +34,7 @@ public class Settings {
     public static ArrayList<Integer> goodTarget = new ArrayList<>(Arrays.asList(3,4,7,8));
 
     //ll settings (not tracking) 10.85.31.28:5801
-    public static String llName = "LL2";
+    public static String llName = "limelight";
 
     // driver joystick settings
     public static int driverJoystickPort = 0;
