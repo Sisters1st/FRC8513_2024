@@ -111,6 +111,10 @@ public class TeleopController {
             thisRobot.drivebase.setGoalHeadingDeg(90);
         }
 
+        if(driverXboxController.getRawButton(Settings.aimAtNoteButton)){
+            thisRobot.drivebase.aimAtNote();
+        }
+
         //if rot joystick is zero, keep rotating to that angle
         if (rV == 0) {
             thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));

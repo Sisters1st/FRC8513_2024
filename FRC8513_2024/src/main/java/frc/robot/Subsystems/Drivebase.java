@@ -32,6 +32,8 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
 import frc.robot.Settings;
+import frc.robot.Logic.LimelightHelpers;
+import frc.robot.Logic.LinearInterp;
 import frc.robot.Logic.AutoController.autoRoutines;
 import swervelib.parser.SwerveParser;
 import swervelib.SwerveDrive;
@@ -76,6 +78,9 @@ public class Drivebase {
   //this is estemating camera pose, we will then tranlate this to robot later
   PhotonPoseEstimator photonPoseEstimatorTwo = new PhotonPoseEstimator(aprilTagFieldLayout,
       PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, new Transform3d());
+
+  //note detector linearInterp
+  LinearInterp txToNote = new LinearInterp(Settings.tx, Settings.turnDeg);
 
   public Drivebase(Robot thisRobot_) {
     thisRobot = thisRobot_;
@@ -261,6 +266,13 @@ public class Drivebase {
   public void aimAtGoal() {
     setGoalHeadingToGoal();
     driveClosedLoopHeading(new Translation2d());
+  }
+
+  public void aimAtNote(){
+    double noteTx = LimelightHelpers.getTX(Settings.llName);
+    double ajustGoalHeading = txToNote.interpolateLinearly(noteTx);
+    Rotation2d ajustByHeading = new Rotation2d(Math.toRadians(ajustGoalHeading));
+    setGoalHeadingDeg(swerveDrive.getOdometryHeading().rotateBy(ajustByHeading).getDegrees());
   }
 
 }
