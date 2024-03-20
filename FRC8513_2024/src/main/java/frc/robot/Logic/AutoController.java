@@ -351,14 +351,12 @@ public class AutoController {
                 break;
 
             case Mid_P123:
-                // works in sim
+                // update this first
                 switch (autoStep) {
                     case 0:
-                        thisRobot.drivebase.initPath("MiddleStartToNote1ToMidShot", thisRobot.onRedAlliance);
-                        autoStep = 5;
-
-                    case 5:
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.initPath("MiddleStartToNote1ToMidShot", thisRobot.onRedAlliance);
                         autoStep = 10;
 
                     case 10:

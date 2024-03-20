@@ -1,5 +1,4 @@
 1)  asap
-    Upgrade to LL3 and test
     Move to arm shot before reaching end of path in auto
     If 1 second passes, shoot no matter what
     update button pannel
