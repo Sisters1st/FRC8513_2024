@@ -22,6 +22,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
@@ -273,7 +274,7 @@ public class Drivebase {
 
     double rot = rotPidController.calculate(swerveDrive.getOdometryHeading().getRadians(),
         thisRobot.drivebase.goalHeading.getRadians());
-    
+
     thisRobot.drivebase.swerveDrive.drive(
         translation,
         rot,
@@ -285,6 +286,13 @@ public class Drivebase {
     double ajustGoalHeading = txToNote.interpolateLinearly(noteTx);
     Rotation2d ajustByHeading = new Rotation2d(Math.toRadians(ajustGoalHeading));
     setGoalHeadingDeg(swerveDrive.getOdometryHeading().rotateBy(ajustByHeading).getDegrees());
+  }
+
+  public double getDistFromLastPose(){
+    Pose2d finalPose = path.getPathPoses().get(path.getPathPoses().size()-1);
+    Pose2d currPose = swerveDrive.getPose();
+    Transform2d diff = currPose.minus(finalPose);
+    return Math.sqrt(diff.getX() * diff.getY() + diff.getY() + diff.getY());
   }
 
 }

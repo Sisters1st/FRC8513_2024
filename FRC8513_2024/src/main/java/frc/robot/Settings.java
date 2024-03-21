@@ -17,6 +17,7 @@ public class Settings {
     public static double drivebase_PID_P = 5; //x and y path following PID
     public static double drivebase_PID_I = 0.05;
     public static double drivebase_PID_D = 0.2;
+    public static double shootingDist = 1;
 
     // heading settings
     public static boolean attackPointEnable = false;
@@ -168,6 +169,7 @@ public class Settings {
     public static double leftRightShooterSpeedOffset = 1;
     public static double matchShooterOveride = -0.3;
     public static double matchShooterOverideDelta = 0.1;
+    public static double shotGoodToShootTime = 0.25;
 
     // feeder settings
     public static int feederCANID = 58;

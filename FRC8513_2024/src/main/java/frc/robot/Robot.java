@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
   public boolean onRedAlliance = false;
   public double wristOveride = Settings.matchShooterOveride;
   public boolean playMusic = false;
+  public boolean dontShoot = false;
 
   @Override
   public void robotInit() {
