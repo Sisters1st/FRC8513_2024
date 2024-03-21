@@ -12,6 +12,9 @@ public class AutoController {
     int autoStep;
     public autoRoutines autoRoutine = autoRoutines.DO_NOTHING;
     public double autoStartTime;
+    String path1 = "";
+    String path2 = "";
+    String path3 = "";
 
     public AutoController(Robot thisRobot_) {
         thisRobot = thisRobot_;
