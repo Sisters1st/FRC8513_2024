@@ -37,7 +37,7 @@ public class Settings {
     public static String llName = "limelight";
         // tx to turn degrees
     public static double[] tx = {      -30, -10, 0, 10, 30};
-    public static double[] turnDeg = { -15, -10, 0, 10, 15};
+    public static double[] turnDeg = { -10, -5, 0, 5, 10};
 
 
     // driver joystick settings
@@ -55,7 +55,7 @@ public class Settings {
     public static int snapToAmpButton = 1;
     public static int aimAtSpeakerButton = 6;
     public static int resetFieldCentricButton = 8;
-    public static int aimAtNoteButton = 4;
+    public static int aimAtNoteButton = 5;
 
     // Button pannel settings
     public static int buttonPannelPort = 1;

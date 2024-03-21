@@ -283,7 +283,7 @@ public class Drivebase {
   public void aimAtNote(){
     double noteTx = LimelightHelpers.getTX(Settings.llName);
     double ajustGoalHeading = txToNote.interpolateLinearly(noteTx);
-    Rotation2d ajustByHeading = new Rotation2d(Math.toRadians(ajustGoalHeading));
+    Rotation2d ajustByHeading = new Rotation2d(Math.toRadians(-ajustGoalHeading));
     setGoalHeadingDeg(swerveDrive.getOdometryHeading().rotateBy(ajustByHeading).getDegrees());
   }
 
