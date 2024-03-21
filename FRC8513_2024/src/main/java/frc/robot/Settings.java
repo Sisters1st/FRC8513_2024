@@ -12,20 +12,20 @@ public class Settings {
 
     // drivebase and yagsl settings
     public static double drivebaseMaxVelocity = 17.1; //fps, gets converted to mps later
-    public static double maxShotSpeed = 1;
+    public static double maxShotSpeed = 0.25;
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
-    public static double drivebase_PID_P = 5; //x and y path following PID
-    public static double drivebase_PID_I = 0.05;
-    public static double drivebase_PID_D = 0.2;
+    public static double drivebase_PID_P = 7; //x and y path following PID
+    public static double drivebase_PID_I = 0.15;
+    public static double drivebase_PID_D = 0.5;
 
     // heading settings
     public static boolean attackPointEnable = false;
     public static double headingThold = 4;
 
-    public static double drivebaseRot_PID_P = 5;
-    public static double drivebaseRot_PID_I = 0;
-    public static double drivebaseRot_PID_D = 0.5;
-    public static double drivebaseRot_PID_IZ = 3;
+    public static double drivebaseRot_PID_P = 6;
+    public static double drivebaseRot_PID_I = 0.1;
+    public static double drivebaseRot_PID_D = 0.85;
+    public static double drivebaseRot_PID_IZ = 5;
 
     // photon settings (at) //10.85.13.27:5800
     public static boolean usePhoton = true;
@@ -167,7 +167,8 @@ public class Settings {
     public static int basicShooterSpeed = 5500;
     public static double leftRightShooterSpeedOffset = 1;
     public static double matchShooterOveride = -0.3;
-    public static double matchShooterOverideDelta = 0.1;
+    public static double matchShooterOverideDelta = 0.25;
+    public static double waitGoodShotTime = 0.3;
 
     // feeder settings
     public static int feederCANID = 58;

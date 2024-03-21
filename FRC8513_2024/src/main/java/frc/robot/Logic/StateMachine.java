@@ -25,6 +25,7 @@ public class StateMachine {
     int climbCounter = 0;
     boolean needToFeedIn = false;
     double feedInStartDist = -1;
+    double firstTimeGood = 0;
 
     public StateMachine(Robot robotIn) {
         thisRobot = robotIn;
@@ -76,6 +77,7 @@ public class StateMachine {
 
                 // move on to the shot
                 robotState = robotStates.SHOOTING;
+                firstTimeGood = -1;
 
                 break;
 
@@ -92,12 +94,15 @@ public class StateMachine {
                 }
                 feederV = intakeVoltage = 0;
                 ss = Settings.basicShooterSpeed;
-                if (robotInAllTHolds() || comittedToShot) {
+                if ((robotInAllTHolds() || comittedToShot) && firstTimeGood == -1) {
+                    comittedToShot = true;
+                    firstTimeGood = Timer.getFPGATimestamp();
+                }
+                if(Timer.getFPGATimestamp() - firstTimeGood > Settings.waitGoodShotTime && comittedToShot){
                     feederV = Settings.feederShooterVoltage;
 
                     if (shotStartedTime == -1) {
                         shotStartedTime = Timer.getFPGATimestamp();
-                        comittedToShot = true;
                     }
 
                     if (Timer.getFPGATimestamp() - shotStartedTime > Settings.shotTime) {

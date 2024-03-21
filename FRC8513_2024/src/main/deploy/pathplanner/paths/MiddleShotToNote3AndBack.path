@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8150832882862347,
-        "y": 7.285458217640082
+        "x": 1.136822330624718,
+        "y": 7.145128364330803
       },
       "isLocked": false,
       "linkedName": "MidShot"
@@ -20,12 +20,12 @@
         "y": 6.958021893251764
       },
       "prevControl": {
-        "x": 2.5167325548326307,
-        "y": 7.098351746561043
+        "x": 2.4886225212775237,
+        "y": 6.980243540623227
       },
       "nextControl": {
-        "x": 3.247063093262469,
-        "y": 6.785352944376826
+        "x": 3.218381821379027,
+        "y": 6.9346335843668845
       },
       "isLocked": false,
       "linkedName": "Note3Intake"
@@ -54,8 +54,8 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 2.5,
+    "maxVelocity": 3.5,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 360.0
   },
