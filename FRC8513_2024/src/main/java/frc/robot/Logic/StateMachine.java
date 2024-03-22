@@ -96,6 +96,9 @@ public class StateMachine {
                     shootTime = Timer.getFPGATimestamp();
                     comittedToShot = true;
                 }
+                if(!comittedToShot){
+                    shootTime = Timer.getFPGATimestamp();
+                }
                 
                 if(Timer.getFPGATimestamp() - shootTime > Settings.shotGoodToShootTime) {
                     feederV = Settings.feederShooterVoltage;

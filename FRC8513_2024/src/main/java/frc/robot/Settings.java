@@ -196,7 +196,7 @@ public class Settings {
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 55;
     public static double climberVoltage = 8.0;
-    public static double climberDistance = 315;
+    public static double climberDistance = 220;
 
     // field settings
 

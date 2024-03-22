@@ -292,7 +292,8 @@ public class Drivebase {
     Pose2d finalPose = path.getPathPoses().get(path.getPathPoses().size()-1);
     Pose2d currPose = swerveDrive.getPose();
     Transform2d diff = currPose.minus(finalPose);
-    return Math.sqrt(diff.getX() * diff.getY() + diff.getY() + diff.getY());
+    //return Math.sqrt(diff.getX() * diff.getY() + diff.getY() + diff.getY());
+    return 0; //override bc doesnt work
   }
 
 }

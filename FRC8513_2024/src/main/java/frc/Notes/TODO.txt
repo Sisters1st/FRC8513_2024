@@ -1,4 +1,8 @@
 1)  asap
+
+    update all autos to use generic
+    shoot and dont move auto
+
     If 1 second passes, shoot no matter what - do we actually want to do this
     update button pannel
         check LED and suck in a little
