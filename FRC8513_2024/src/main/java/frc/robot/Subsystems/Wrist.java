@@ -74,8 +74,12 @@ public class Wrist {
         double pidRightPower = wristRPidController.calculate(wristMotor1.getEncoder().getPosition(), calculatedWristGoal);
         wristLastGoalPos = calculatedWristGoal;
 
-        wristMotor1.setVoltage((pidLeftPower + Settings.wristMotorDiff) * 12);
-        wristMotor2.setVoltage(-(pidRightPower) * 12);
+        wristMotor1.setVoltage(pidLeftPower * 12);
+        if(wristWithinThold()){
+            wristMotor2.setVoltage(0.3);
+        } else {
+            wristMotor2.setVoltage(-(pidRightPower) * 12);
+        }
     }
 
     public boolean wristWithinThold() {
