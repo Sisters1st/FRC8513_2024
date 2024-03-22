@@ -1410,7 +1410,131 @@ public class AutoController {
                         break;
                 }
                 break;
+            
+            case GenericAuto:
+                // update this first
+                switch (autoStep) {
+                    case 0:
+                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        thisRobot.dontShoot = true;
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.initPath(path1, thisRobot.onRedAlliance);
+                        autoStep = 10;
 
+                    case 10:
+                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.drivebase.aimAtGoal();
+                        thisRobot.dontShoot = false;
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
+                            autoStep = 15;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+                        break;
+
+                    case 15:
+                        thisRobot.dontShoot = true;
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.drivebase.getDistFromLastPose() < Settings.shootingDist){
+                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        }
+                        if (thisRobot.drivebase.isPathOver()) {
+                            autoStep = 20;
+                            thisRobot.dontShoot=false;
+                        }
+                        break;
+
+                    case 20:
+                        if(thisRobot.stateMachine.robotState != robotStates.SHOOTING){
+                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        }
+                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
+                        autoStep = 25;
+
+                    case 25:
+                        thisRobot.drivebase.aimAtGoal();
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
+                            autoStep = 30;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                        }
+                        break;
+
+                    case 30:
+                        thisRobot.drivebase.initPath(path2, thisRobot.onRedAlliance);
+                        autoStep = 40;
+
+                    case 40:
+                        thisRobot.dontShoot = true;
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.drivebase.getDistFromLastPose() < Settings.shootingDist){
+                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        }
+                        if (thisRobot.drivebase.isPathOver()) {
+                            autoStep = 45;
+                            thisRobot.dontShoot = false;
+                        }
+                        break;
+
+                    case 45:
+                        if(thisRobot.stateMachine.robotState != robotStates.SHOOTING){
+                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        }
+                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
+                        autoStep = 50;
+
+                    case 50:
+                        thisRobot.drivebase.aimAtGoal();
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
+                            autoStep = 55;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                        }
+                        break;
+
+                    case 55:
+                        thisRobot.drivebase.initPath(path3, thisRobot.onRedAlliance);
+                        autoStep = 65;
+
+                    case 65:
+                        thisRobot.dontShoot = true;
+                        thisRobot.drivebase.followPath();
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.drivebase.getDistFromLastPose() < Settings.shootingDist){
+                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        }
+                        if (thisRobot.drivebase.isPathOver()) {
+                            thisRobot.dontShoot = false;
+                            autoStep = 70;
+                        }
+                        break;
+
+                    case 70:
+                        if(thisRobot.stateMachine.robotState != robotStates.SHOOTING){
+                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
+                        }
+                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
+                        autoStep = 75;
+
+                    case 75:
+                        thisRobot.drivebase.aimAtGoal();
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
+                            autoStep = 80;
+                            thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
+                        }
+                        break;
+
+                    case 80:
+                        thisRobot.stateMachine.forceShooterOn = false;
+                        break;
+                }
+                break;
+
+
+            case GenericAutoTestMidP123:
+                path1 = "MiddleStartToNote1ToMidShot";
+                path2 = "MiddleShotToNote2AndBack";
+                path3 = "MiddleShotToNote3AndBack";
+                autoRoutine = autoRoutines.GenericAuto;
+
+                break;
             default:
                 break;
         }
@@ -1428,7 +1552,7 @@ public class AutoController {
         if(Robot.isSimulation()){
             return ((Timer.getFPGATimestamp() - thisRobot.stateMachine.lastStateChangeTime) > t);
         } else {
-            return (Timer.getFPGATimestamp() - thisRobot.stateMachine.lastStateChangeTime) > 2;
+            return (Timer.getFPGATimestamp() - thisRobot.stateMachine.lastStateChangeTime) > 1.5;
         }
     }
 
@@ -1454,6 +1578,8 @@ public class AutoController {
         Source_P17,
         Source_P18,
         Source_P123,
+        GenericAuto,
+        GenericAutoTestMidP123,
         _XTESTINGACCURACY
 
     }

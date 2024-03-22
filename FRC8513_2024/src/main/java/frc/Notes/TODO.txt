@@ -8,6 +8,7 @@
     auto note pickup on front
     path generation to amp
     pass note thorugh mid field
+    multiple feeder sensor breaks to count as note
 2) teleop
     
 3) autos

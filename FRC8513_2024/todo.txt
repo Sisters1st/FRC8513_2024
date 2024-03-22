@@ -1,7 +1,0 @@
-1) add way to reinstatntate PIDf value on the fly
-2) add deep logging for first setting up swerves (what power is applied to motors)
-3) add "slow mode" toggle which limits currents to very low
-4) create intake/arm/wrist classses
-5) come up with state machine
-6) look at sensors
-7) setup path planner
