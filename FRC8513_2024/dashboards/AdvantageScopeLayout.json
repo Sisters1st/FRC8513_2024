@@ -1,22 +1,26 @@
 {
   "hubs": [
     {
-      "x": -1993,
-      "y": -170,
-      "width": 2001,
-      "height": 1167,
+      "x": -8,
+      "y": -8,
+      "width": 1552,
+      "height": 840,
       "state": {
         "sidebar": {
           "width": 300,
           "expanded": [
-            "/SmartDashboard",
             "/SmartDashboard/swerve/measuredChassisSpeeds",
             "/SmartDashboard/swerve/measuredStates",
-            "/SmartDashboard/swerve/desiredStates"
+            "/SmartDashboard/swerve/desiredStates",
+            "/SmartDashboard/swerve/wheelLocations",
+            "/SmartDashboard/Encoders/errors",
+            "/SmartDashboard/Encoders/infos",
+            "/SmartDashboard/Encoders/warnings",
+            "/SmartDashboard"
           ]
         },
         "tabs": {
-          "selected": 6,
+          "selected": 7,
           "tabs": [
             {
               "type": 0,
@@ -119,12 +123,12 @@
                   },
                   "fields": [
                     {
-                      "key": "NT:/SmartDashboard/Field/Robot/2",
+                      "key": "NT:/SmartDashboard/Goalheading",
                       "color": "#2b66a2",
                       "show": true
                     },
                     {
-                      "key": "NT:/SmartDashboard/Goalheading",
+                      "key": "NT:/SmartDashboard/Heading",
                       "color": "#e5b31b",
                       "show": true
                     }
@@ -154,6 +158,119 @@
                 }
               },
               "title": "Heading"
+            },
+            {
+              "type": 1,
+              "legendHeight": 0.3,
+              "legends": {
+                "left": {
+                  "lockedRange": null,
+                  "unitConversion": {
+                    "type": null,
+                    "factor": 1
+                  },
+                  "fields": [
+                    {
+                      "key": "NT:/SmartDashboard/leftClimberPower",
+                      "color": "#2b66a2",
+                      "show": true
+                    },
+                    {
+                      "key": "NT:/SmartDashboard/leftClimberPos",
+                      "color": "#e5b31b",
+                      "show": true
+                    }
+                  ]
+                },
+                "discrete": {
+                  "fields": [
+                    {
+                      "key": "NT:/SmartDashboard/Roll",
+                      "color": "#af2437",
+                      "show": true
+                    }
+                  ]
+                },
+                "right": {
+                  "lockedRange": null,
+                  "unitConversion": {
+                    "type": null,
+                    "factor": 1
+                  },
+                  "fields": [
+                    {
+                      "key": "NT:/SmartDashboard/rightClimberPower",
+                      "color": "#80588e",
+                      "show": true
+                    },
+                    {
+                      "key": "NT:/SmartDashboard/rightClimberPos",
+                      "color": "#e48b32",
+                      "show": true
+                    }
+                  ]
+                }
+              },
+              "title": "Climbing"
+            },
+            {
+              "type": 1,
+              "legendHeight": 0.3,
+              "legends": {
+                "left": {
+                  "lockedRange": null,
+                  "unitConversion": {
+                    "type": null,
+                    "factor": 1
+                  },
+                  "fields": [
+                    {
+                      "key": "NT:/SmartDashboard/ArmPos",
+                      "color": "#2b66a2",
+                      "show": true
+                    },
+                    {
+                      "key": "NT:/SmartDashboard/ArmGoalPos",
+                      "color": "#e5b31b",
+                      "show": true
+                    }
+                  ]
+                },
+                "discrete": {
+                  "fields": [
+                    {
+                      "key": "NT:/SmartDashboard/DistToGoal",
+                      "color": "#af2437",
+                      "show": true
+                    },
+                    {
+                      "key": "NT:/SmartDashboard/ShotWristOveride",
+                      "color": "#80588e",
+                      "show": true
+                    }
+                  ]
+                },
+                "right": {
+                  "lockedRange": null,
+                  "unitConversion": {
+                    "type": null,
+                    "factor": 1
+                  },
+                  "fields": [
+                    {
+                      "key": "NT:/SmartDashboard/WristGoalPos",
+                      "color": "#e48b32",
+                      "show": true
+                    },
+                    {
+                      "key": "NT:/SmartDashboard/WristPos",
+                      "color": "#aacaee",
+                      "show": true
+                    }
+                  ]
+                }
+              },
+              "title": "ArmWrist"
             },
             {
               "type": 1,
@@ -246,30 +363,14 @@
                   },
                   "fields": [
                     {
-                      "key": "NT:/SmartDashboard/ArmPos",
+                      "key": "NT:/SmartDashboard/IntakeSensorValue",
                       "color": "#2b66a2",
-                      "show": true
-                    },
-                    {
-                      "key": "NT:/SmartDashboard/ArmGoalPos",
-                      "color": "#e5b31b",
                       "show": true
                     }
                   ]
                 },
                 "discrete": {
-                  "fields": [
-                    {
-                      "key": "NT:/SmartDashboard/DistToGoal",
-                      "color": "#af2437",
-                      "show": true
-                    },
-                    {
-                      "key": "NT:/SmartDashboard/ShotWristOveride",
-                      "color": "#80588e",
-                      "show": true
-                    }
-                  ]
+                  "fields": []
                 },
                 "right": {
                   "lockedRange": null,
@@ -279,68 +380,14 @@
                   },
                   "fields": [
                     {
-                      "key": "NT:/SmartDashboard/WristGoalPos",
-                      "color": "#e48b32",
-                      "show": true
-                    },
-                    {
-                      "key": "NT:/SmartDashboard/WristPos",
-                      "color": "#aacaee",
-                      "show": true
-                    }
-                  ]
-                }
-              },
-              "title": "ArmWrist"
-            },
-            {
-              "type": 1,
-              "legendHeight": 0.3,
-              "legends": {
-                "left": {
-                  "lockedRange": null,
-                  "unitConversion": {
-                    "type": null,
-                    "factor": 1
-                  },
-                  "fields": [
-                    {
-                      "key": "NT:/SmartDashboard/leftClimberPower",
-                      "color": "#2b66a2",
-                      "show": true
-                    }
-                  ]
-                },
-                "discrete": {
-                  "fields": [
-                    {
-                      "key": "NT:/SmartDashboard/Roll",
+                      "key": "NT:/SmartDashboard/feederSensor",
                       "color": "#e5b31b",
                       "show": true
-                    },
-                    {
-                      "key": "NT:/SmartDashboard/climberButtonCount",
-                      "color": "#af2437",
-                      "show": true
-                    }
-                  ]
-                },
-                "right": {
-                  "lockedRange": null,
-                  "unitConversion": {
-                    "type": null,
-                    "factor": 1
-                  },
-                  "fields": [
-                    {
-                      "key": "NT:/SmartDashboard/rightClimberPower",
-                      "color": "#80588e",
-                      "show": true
                     }
                   ]
                 }
               },
-              "title": "Climbing"
+              "title": "Sensors"
             },
             {
               "type": 9,
@@ -394,7 +441,7 @@
                 "unitDistance": "meters",
                 "unitRotation": "degrees",
                 "origin": "right",
-                "size": 0.85,
+                "size": 0.75,
                 "allianceBumpers": "auto",
                 "allianceOrigin": "blue",
                 "orientation": "blue left, red right"
