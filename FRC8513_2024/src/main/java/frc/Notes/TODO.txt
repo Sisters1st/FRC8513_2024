@@ -1,13 +1,11 @@
 1)  asap
-    Move to arm shot before reaching end of path in auto
-    If 1 second passes, shoot no matter what
+    If 1 second passes, shoot no matter what - do we actually want to do this
     update button pannel
         check LED and suck in a little
     run intake when shimmy
-    headin motion profiling
-    auto note pickup on front
-    path generation to amp
-    pass note thorugh mid field
+    heading motion profiling
+    path generation 
+    pass note thorugh mid field shot setpoint
     multiple feeder sensor breaks to count as note
 2) teleop
     
