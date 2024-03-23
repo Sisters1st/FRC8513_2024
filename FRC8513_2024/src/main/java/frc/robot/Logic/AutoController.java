@@ -34,6 +34,9 @@ public class AutoController {
 
         // force shooter on
         thisRobot.stateMachine.forceShooterOn = true;
+        path1 = "";
+        path2 = "";
+        path3 = "";
     }
 
     public void autoPeriodic() {
@@ -53,30 +56,8 @@ public class AutoController {
                         break;
                 }
                 break;
-            case Amp_P:
-                switch (autoStep){
-                    case 0:
-                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
-                        thisRobot.dontShoot = true;
-                        thisRobot.stateMachine.updateRobotState();
-                        autoStep = 5;
-                        break;
-
-                    case 5:
-                        thisRobot.stateMachine.updateRobotState();
-                        thisRobot.drivebase.aimAtGoal();
-                        thisRobot.dontShoot = false;
-                        autoStep = 10;
-                        break;
-
-                    case 10:
-                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-                        thisRobot.drivebase.swerveDrive.lockPose();
-                        break;
-                    }
-                break;
             
-            case Mid_P:
+            case Shoot_P:
                 switch (autoStep){
                     case 0:
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
@@ -89,64 +70,45 @@ public class AutoController {
                         thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
                         thisRobot.dontShoot = false;
-                        autoStep = 10;
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
+                            autoStep = 10;
+                        }
                         break;
 
                     case 10:
                         thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         thisRobot.drivebase.swerveDrive.lockPose();
+                        thisRobot.stateMachine.forceShooterOn = false;
                         break;
                     }
                 break;
 
-            case Source_P:
-                switch (autoStep){
-                    case 0:
-                        thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
-                        thisRobot.dontShoot = true;
-                        thisRobot.stateMachine.updateRobotState();
-                        autoStep = 5;
-                        break;
-
-                    case 5:
-                        thisRobot.stateMachine.updateRobotState();
-                        thisRobot.drivebase.aimAtGoal();
-                        thisRobot.dontShoot = false;
-                        autoStep = 10;
-                        break;
-
-                    case 10:
-                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
-                        thisRobot.drivebase.swerveDrive.lockPose();
-                        break;
-                    }
-                break;
 
 
             case Amp_P3:
                 // need sim
                  path1 = "AmpStartToNote3ToAmpShot";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Mid_P2:
                 // need sim
                 path1 = "MiddleStartToNote2ToMidShot";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
 
             case Source_P1:
                 // need sim
                 path1 = "SourceStartToNote1ToSourceShot";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Source_P12:
                 // need sim
                 path1 = "SourceStartToNote1ToSourceShot";
                 path2 = "SourceShotToNote2ToMidShot";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
 
@@ -155,7 +117,14 @@ public class AutoController {
                 path1 = "AmpStartToNote3ToAmpShot";
                 path2 = "AmpSideShotToNote2ToMidShot";
                 path3 = "MiddleShotToNote1AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
+                break;
+            
+            case Mid_P123:
+                path1 = "MiddleStartToNote1ToMidShot";
+                path2 = "MiddleShotToNote2AndBack";
+                path3 = "MiddleShotToNote3AndBack";
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Mid_P231:
@@ -163,7 +132,7 @@ public class AutoController {
                 path1 = "MiddleStartToNote2ToMidShot";
                 path2 = "MiddleShotToNote3AndBack";
                 path3 = "MiddleShotToNote1AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
             
             case Mid_P213:
@@ -171,7 +140,7 @@ public class AutoController {
                 path1 = "MiddleStartToNote2ToMidShot";
                 path2 = "MiddleShotToNote1AndBack";
                 path3 = "MiddleShotToNote3AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Mid_P321:
@@ -179,7 +148,7 @@ public class AutoController {
                 path1 = "MiddleStartToNote3ToMidShot";
                 path2 = "MiddleShotToNote2AndBack";
                 path3 = "MiddleShotToNote1AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Source_P123:
@@ -187,60 +156,60 @@ public class AutoController {
                 path1 = "SourceStartToNote1ToSourceShot";
                 path2 = "SourceShotToNote2ToMidShot";
                 path3 = "MiddleShotToNote3AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Amp_P34:
                 // need sim
                 path1 = "AmpStartToNote3ToAmpShot";
                 path2 = "AmpSideShotToNote4BackToShot";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Amp_P35:
                 // needs sim
                 path1 = "AmpStartToNote3ToAmpShot";
                 path2 = "AmpSideShotToNote5BackToShot";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Mid_P23:
                 // needs sim
                 path1 = "MiddeStartToNote2ToMidShot";
                 path2 = "MiddleShotToNote3AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Mid_P21:
             // need to smulate
                 path1 = "MiddeStartToNote2ToMidShot";
                 path2 = "MiddleShotToNote1AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Amp_P32:
                 // good in simulation
                 path1 = "AmpStartToNote3ToAmpShot";
                 path2 = "AmpSideShotToNote2ToMidShot";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Source_P18:
                 path1 = "SourceStartToNote1ToSourceShot";
                 path2 = "SourceShotToNote8AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Source_P17:
                 path1 = "SourceStartToNote1ToSourceShot";
                 path2 = "SourceShotToNote7AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Mid_P26:
                 path1 = "MiddleStartToNote2ToMidShot";
                 path2 = "MiddleShotToNote6AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
+                autoRoutine = autoRoutines._XGenericAuto;
 
                 break;
 
@@ -270,7 +239,7 @@ public class AutoController {
                 }
                 break;
             
-            case GenericAuto:
+            case _XGenericAuto:
                 // update this first
                 switch (autoStep) {
                     case 0:
@@ -397,13 +366,7 @@ public class AutoController {
                 break;
 
 
-            case GenericAutoTestMidP123:
-                path1 = "MiddleStartToNote1ToMidShot";
-                path2 = "MiddleShotToNote2AndBack";
-                path3 = "MiddleShotToNote3AndBack";
-                autoRoutine = autoRoutines.GenericAuto;
-
-                break;
+           
             default:
                 break;
         }
@@ -429,9 +392,7 @@ public class AutoController {
 
     public enum autoRoutines {
         DO_NOTHING,
-        Amp_P,
-        Source_P,
-        Mid_P,
+        Shoot_P,
         Amp_P3,
         Amp_P32,
         Amp_P34,
@@ -450,8 +411,7 @@ public class AutoController {
         Source_P17,
         Source_P18,
         Source_P123,
-        GenericAuto,
-        GenericAutoTestMidP123,
+        _XGenericAuto,
         _XTESTINGACCURACY
 
     }
