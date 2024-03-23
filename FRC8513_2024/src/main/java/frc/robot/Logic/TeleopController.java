@@ -15,6 +15,7 @@ public class TeleopController {
     public Joystick buttonPannel = new Joystick(Settings.buttonPannelPort);
     Joystick manualControlJoystick = new Joystick(Settings.manualControlPort);
     boolean manualHatPressed = false;
+    boolean pathInited = false;
 
     public TeleopController(Robot thisRobot_) {
         thisRobot = thisRobot_;
@@ -112,17 +113,27 @@ public class TeleopController {
         }
 
         //if rot joystick is zero, keep rotating to that angle
-        if(driverXboxController.getRawButton(Settings.aimAtNoteButton)){
-            thisRobot.drivebase.aimAtNote();
-            thisRobot.drivebase.driveRobotCentric(new Translation2d(1.5, yV));
+        if(driverXboxController.getRawButton(3)){
+            if(!pathInited){
+                thisRobot.drivebase.initPathToAmp();
+                pathInited = true;
+            }
+            thisRobot.drivebase.followPath();
         } else {
-            if (rV == 0) {
-                thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
+            pathInited = false;
+            if(driverXboxController.getRawButton(Settings.aimAtNoteButton)){
+                thisRobot.drivebase.aimAtNote();
+                thisRobot.drivebase.driveRobotCentric(new Translation2d(1.5, yV));
             } else {
-                //once joystick is moved again, manually rotate
-                thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
+                if (rV == 0) {
+                    thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
+                } else {
+                    //once joystick is moved again, manually rotate
+                    thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
+                }
             }
         }
+       
 
 
         // force override shot: -1 is not pressed, 0 is up, 180 is down.

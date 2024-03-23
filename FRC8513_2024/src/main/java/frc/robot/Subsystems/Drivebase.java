@@ -2,6 +2,8 @@ package frc.robot.Subsystems;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.photonvision.EstimatedRobotPose;
@@ -11,9 +13,14 @@ import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 import org.photonvision.targeting.PhotonPipelineResult;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.pathplanner.lib.path.ConstraintsZone;
+import com.pathplanner.lib.path.EventMarker;
+import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.PathPlannerTrajectory;
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
+import com.pathplanner.lib.path.RotationTarget;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
@@ -285,6 +292,55 @@ public class Drivebase {
     double ajustGoalHeading = txToNote.interpolateLinearly(noteTx);
     Rotation2d ajustByHeading = new Rotation2d(Math.toRadians(-ajustGoalHeading));
     setGoalHeadingDeg(swerveDrive.getOdometryHeading().rotateBy(ajustByHeading).getDegrees());
+  }
+
+    // load a path from file
+  public void initPathToAmp() {
+    List<Translation2d> bezierPoints;
+    Pose2d init = new Pose2d(swerveDrive.getPose().getTranslation(), new Rotation2d(0));
+    
+    if(thisRobot.onRedAlliance){
+      Pose2d fPose = Settings.redAmp;
+      fPose = new Pose2d(fPose.getTranslation(), fPose.minus(init).getRotation());
+
+      init = new Pose2d(init.getTranslation(), init.minus(fPose).getRotation());
+
+      bezierPoints = PathPlannerPath.bezierFromPoses(
+      init,
+      fPose
+    );
+    } else {
+      bezierPoints = PathPlannerPath.bezierFromPoses(
+      init,
+      Settings.blueAmp
+    );
+    }
+    
+    List<RotationTarget> holonomicRotations = new ArrayList<RotationTarget>();
+    List<ConstraintsZone> constraintsZone = new ArrayList<ConstraintsZone>();
+    List<EventMarker> eventMarker = new ArrayList<EventMarker>();
+    path = new PathPlannerPath(bezierPoints, holonomicRotations, constraintsZone, eventMarker, new PathConstraints(3.0, 3.0, 2 * Math.PI, 4 * Math.PI), new GoalEndState(0.0, Rotation2d.fromDegrees(90)), false, swerveDrive.getOdometryHeading());
+    
+
+    
+
+    // geneate trajectory from path
+    autoTraj = path.getTrajectory(new ChassisSpeeds(), path.getPreviewStartingHolonomicPose().getRotation());
+
+    xPosPidController.reset();
+    yPosPidController.reset();
+    rotPidController.reset();
+
+    goalState = autoTraj.sample(0);
+    goalHeading = goalState.targetHolonomicRotation;
+
+    // we need to test, when do we want to force odom, when no vision???
+    if (Robot.isSimulation() || thisRobot.autoController.autoRoutine == autoRoutines._XTESTINGACCURACY) {
+      setOdomToPathInit();
+    }
+
+    trajStartTime = Timer.getFPGATimestamp();
+
   }
 
 }
