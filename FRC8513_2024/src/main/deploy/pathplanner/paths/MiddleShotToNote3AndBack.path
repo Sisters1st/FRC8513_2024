@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.733224207189155,
+        "x": 1.5624228873160844,
         "y": 5.55593454044051
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.136822330624718,
-        "y": 7.145128364330803
+        "x": 0.8553848655159286,
+        "y": 6.8833293011004075
       },
       "isLocked": false,
       "linkedName": "MidShot"
@@ -20,23 +20,23 @@
         "y": 6.958021893251764
       },
       "prevControl": {
-        "x": 2.4886225212775237,
-        "y": 6.980243540623227
+        "x": 2.8298914555073775,
+        "y": 7.107573740088099
       },
       "nextControl": {
-        "x": 3.218381821379027,
-        "y": 6.9346335843668845
+        "x": 2.866336014511283,
+        "y": 6.725827620093839
       },
       "isLocked": false,
       "linkedName": "Note3Intake"
     },
     {
       "anchor": {
-        "x": 1.733224207189155,
+        "x": 1.5624228873160844,
         "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 2.072354686019913,
+        "x": 1.9015533661468427,
         "y": 6.864468657712245
       },
       "nextControl": null,
@@ -54,8 +54,8 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.5,
-    "maxAcceleration": 3.5,
+    "maxVelocity": 2.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 360.0
   },

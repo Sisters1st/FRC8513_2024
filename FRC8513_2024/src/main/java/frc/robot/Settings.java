@@ -108,7 +108,7 @@ public class Settings {
 
     public static double intakingArmPos = -6;
     public static double climbArmPos = -38;
-    public static double chainGrabArmPos = -48;
+    public static double chainGrabArmPos = -52;
     public static double ampArmPos = -35;
     public static double shootingArmPos = -24;
 
@@ -136,7 +136,7 @@ public class Settings {
 
     public static double intakingWristPos = 7;
     public static double climbWristpos = -38;
-    public static double chainGrabWristpos = -10;
+    public static double chainGrabWristpos = -5;
     public static double ampWristPos = -2;
     public static double shootingSubwofferWristPos = shotWristPos[0];
     public static double shootingSubwofferOtherWristPos = shotWristPos[0];
@@ -195,7 +195,7 @@ public class Settings {
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 55;
     public static double climberVoltage = 8.0;
-    public static double climberDistance = 315;
+    public static double climberDistance = 220;
 
     // field settings
 

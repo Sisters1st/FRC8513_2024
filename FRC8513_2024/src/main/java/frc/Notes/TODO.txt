@@ -1,9 +1,16 @@
 1)  asap
+
+    update all autos to use generic
+    shoot and dont move auto
+
+    If 1 second passes, shoot no matter what - do we actually want to do this
     update button pannel
         check LED and suck in a little
     run intake when shimmy
-    headin motion profiling
-    path generation to amp
+    heading motion profiling
+    path generation 
+    pass note thorugh mid field shot setpoint
+    multiple feeder sensor breaks to count as note
 2) teleop
     
 3) autos

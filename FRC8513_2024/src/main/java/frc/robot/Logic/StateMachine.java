@@ -26,6 +26,7 @@ public class StateMachine {
     boolean needToFeedIn = false;
     double feedInStartDist = -1;
     double firstTimeGood = 0;
+    double shootTime = -1;
 
     public StateMachine(Robot robotIn) {
         thisRobot = robotIn;
