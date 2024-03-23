@@ -245,9 +245,14 @@ public class AutoController {
                     case 0:
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         thisRobot.dontShoot = true;
-                        thisRobot.stateMachine.updateRobotState();
+                        autoStep = 5;
+                        break;
+
+                    case 5:
                         thisRobot.drivebase.initPath(path1, thisRobot.onRedAlliance);
                         autoStep = 10;
+                        break;
+
 
                     case 10:
                         thisRobot.stateMachine.updateRobotState();

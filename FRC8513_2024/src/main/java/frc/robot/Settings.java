@@ -169,6 +169,7 @@ public class Settings {
     public static double matchShooterOveride = -0.3;
     public static double matchShooterOverideDelta = 0.25;
     public static double waitGoodShotTime = 0.3;
+    public static double shootingDist = 1.0;
 
     // feeder settings
     public static int feederCANID = 58;
