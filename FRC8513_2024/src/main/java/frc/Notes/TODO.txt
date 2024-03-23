@@ -1,12 +1,9 @@
 1)  asap
-    Move to arm shot before reaching end of path in auto
-    If 1 second passes, shoot no matter what
     update button pannel
         check LED and suck in a little
     run intake when shimmy
     headin motion profiling
     path generation to amp
-    pass note thorugh mid field
 2) teleop
     
 3) autos
