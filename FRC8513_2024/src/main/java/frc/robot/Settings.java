@@ -55,7 +55,7 @@ public class Settings {
     public static int snapToAmpButton = 1;
     public static int aimAtSpeakerButton = 6;
     public static int resetFieldCentricButton = 8;
-    public static int aimAtNoteButton = 5;
+    public static int aimAtNoteAxis = 2;
 
     // Button pannel settings
     public static int buttonPannelPort = 1;

@@ -121,9 +121,9 @@ public class TeleopController {
             thisRobot.drivebase.followPath();
         } else {
             pathInited = false;
-            if(driverXboxController.getRawButton(Settings.aimAtNoteButton)){
+            if(driverXboxController.getRawAxis(Settings.aimAtNoteAxis) > Settings.joystickDeadband){
                 thisRobot.drivebase.aimAtNote();
-                thisRobot.drivebase.driveRobotCentric(new Translation2d(1.5, yV));
+                thisRobot.drivebase.driveRobotCentric(new Translation2d(2.5 * driverXboxController.getRawAxis(Settings.aimAtNoteAxis), yV));
             } else {
                 if (rV == 0) {
                     thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
