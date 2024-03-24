@@ -62,12 +62,10 @@ public class AutoController {
                     case 0:
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         thisRobot.dontShoot = true;
-                        thisRobot.stateMachine.updateRobotState();
                         autoStep = 5;
                         break;
 
                     case 5:
-                        thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
                         thisRobot.dontShoot = false;
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
@@ -175,14 +173,14 @@ public class AutoController {
 
             case Mid_P23:
                 // needs sim
-                path1 = "MiddeStartToNote2ToMidShot";
+                path1 = "MiddleStartToNote2ToMidShot";
                 path2 = "MiddleShotToNote3AndBack";
                 autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
             case Mid_P21:
             // need to smulate
-                path1 = "MiddeStartToNote2ToMidShot";
+                path1 = "MiddleStartToNote2ToMidShot";
                 path2 = "MiddleShotToNote1AndBack";
                 autoRoutine = autoRoutines._XGenericAuto;
                 break;

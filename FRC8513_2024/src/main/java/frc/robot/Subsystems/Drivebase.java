@@ -267,7 +267,7 @@ public class Drivebase {
         return true;
       }
     }
-    return false;
+    return true; //hardcode true to enabel all tags
   }
 
   //used in auto when not moving to point the robot at the goal

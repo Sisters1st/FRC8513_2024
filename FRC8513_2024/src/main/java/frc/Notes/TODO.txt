@@ -1,25 +1,8 @@
 1)  asap
-
-<<<<<<< Updated upstream
-    update all autos to use generic
-    shoot and dont move auto
-
-    If 1 second passes, shoot no matter what - do we actually want to do this
     update button pannel
-        check LED and suck in a little
-    run intake when shimmy
-    heading motion profiling
-    path generation 
-    pass note thorugh mid field shot setpoint
-    multiple feeder sensor breaks to count as note
-=======
-    update button pannel
-        check LED and suck in a little
+        check LED
     headin motion profiling
     
-    path generation to amp
-    pass note thorugh mid field
->>>>>>> Stashed changes
 2) teleop
     
 3) autos
