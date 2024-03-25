@@ -151,7 +151,7 @@ public class AutoController {
 
             case Source_P123:
                 // needs sim
-                path1 = "SourceStartToNote1ToSourceShot";
+                path1 = "SourceStartToNote1ToMidShot";
                 path2 = "SourceShotToNote2ToMidShot";
                 path3 = "MiddleShotToNote3AndBack";
                 autoRoutine = autoRoutines._XGenericAuto;

@@ -341,6 +341,7 @@ public class Drivebase {
     return 0; //override bc doesnt work
   }
 
+  //motion profiled
   public double getClosedLoopHeadingRotPower(){
     double error = swerveDrive.getOdometryHeading().minus(goalHeading).getRadians();
     double goalRotV;
