@@ -195,8 +195,7 @@ public class Drivebase {
   // drive with closed loop heading control while updateing goal heading
   public void driveClosedLoopHeading(Translation2d translation) {
 
-    double rot = rotPidController.calculate(swerveDrive.getOdometryHeading().getRadians(),
-        thisRobot.drivebase.goalHeading.getRadians());
+    double rot = getClosedLoopHeadingRotPower();
 
     thisRobot.drivebase.swerveDrive.drive(
         translation,
@@ -279,8 +278,7 @@ public class Drivebase {
   // drive with closed loop heading control while updateing goal heading
   public void driveRobotCentric(Translation2d translation) {
 
-    double rot = rotPidController.calculate(swerveDrive.getOdometryHeading().getRadians(),
-        thisRobot.drivebase.goalHeading.getRadians());
+    double rot = getClosedLoopHeadingRotPower();
 
     thisRobot.drivebase.swerveDrive.drive(
         translation,
@@ -322,9 +320,6 @@ public class Drivebase {
     List<EventMarker> eventMarker = new ArrayList<EventMarker>();
     path = new PathPlannerPath(bezierPoints, holonomicRotations, constraintsZone, eventMarker, new PathConstraints(3.0, 3.0, 2 * Math.PI, 4 * Math.PI), new GoalEndState(0.0, Rotation2d.fromDegrees(90)), false, swerveDrive.getOdometryHeading());
     
-
-    
-
     // geneate trajectory from path
     autoTraj = path.getTrajectory(new ChassisSpeeds(), path.getPreviewStartingHolonomicPose().getRotation());
 
@@ -335,11 +330,6 @@ public class Drivebase {
     goalState = autoTraj.sample(0);
     goalHeading = goalState.targetHolonomicRotation;
 
-    // we need to test, when do we want to force odom, when no vision???
-    if (Robot.isSimulation() || thisRobot.autoController.autoRoutine == autoRoutines._XTESTINGACCURACY) {
-      setOdomToPathInit();
-    }
-
     trajStartTime = Timer.getFPGATimestamp();
   }
 
@@ -349,6 +339,20 @@ public class Drivebase {
     Transform2d diff = currPose.minus(finalPose);
     //return Math.sqrt(diff.getX() * diff.getY() + diff.getY() + diff.getY());
     return 0; //override bc doesnt work
+  }
+
+  public double getClosedLoopHeadingRotPower(){
+    double error = swerveDrive.getOdometryHeading().minus(goalHeading).getRadians();
+    double goalRotV;
+    if(error > 0){
+      goalRotV = error * Settings.rotErrorToRPSRatio + Settings.minRotSpeed;
+    } else {
+      goalRotV = error * Settings.rotErrorToRPSRatio - Settings.minRotSpeed;
+    }
+    if(Math.abs(error) < Settings.headingThold / 2 * Math.PI/180){
+      goalRotV = 0;
+    }
+    return -goalRotV;
   }
 
 }

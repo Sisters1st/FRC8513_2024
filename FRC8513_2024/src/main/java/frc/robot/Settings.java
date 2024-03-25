@@ -21,6 +21,8 @@ public class Settings {
     // heading settings
     public static boolean attackPointEnable = false;
     public static double headingThold = 4;
+    public static double rotErrorToRPSRatio = 5; 
+    public static double minRotSpeed = 0.2;
 
     public static double drivebaseRot_PID_P = 6;
     public static double drivebaseRot_PID_I = 0.1;
