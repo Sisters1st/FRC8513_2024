@@ -28,7 +28,7 @@ public class Settings {
     public static double drivebaseRot_PID_IZ = 5;
 
     // photon settings (at) //10.85.13.27:5800
-    public static boolean usePhoton = true;
+    public static boolean usePhoton = false;
     public static String photonName = "LL3";
     public static double stalePhotonTime = 5; // ip for photon: http://10.85.13.26:5800/#/dashboard
     public static ArrayList<Integer> goodTarget = new ArrayList<>(Arrays.asList(3,4,7,8));
@@ -107,8 +107,8 @@ public class Settings {
     public static double armPID_IZ = 3;
 
     public static double intakingArmPos = -6;
-    public static double climbArmPos = -38;
-    public static double chainGrabArmPos = -52;
+    public static double climbArmPos = -34;
+    public static double chainGrabArmPos = -42;
     public static double ampArmPos = -35;
     public static double shootingArmPos = -24;
 
