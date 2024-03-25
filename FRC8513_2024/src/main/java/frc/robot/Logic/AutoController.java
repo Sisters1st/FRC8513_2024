@@ -266,7 +266,7 @@ public class AutoController {
                     case 15:
                         thisRobot.dontShoot = true;
                         thisRobot.drivebase.followPath();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.drivebase.getDistFromLastPose() < Settings.shootingDist){
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
                             thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         if (thisRobot.drivebase.isPathOver()) {
@@ -302,7 +302,7 @@ public class AutoController {
                     case 40:
                         thisRobot.dontShoot = true;
                         thisRobot.drivebase.followPath();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.drivebase.getDistFromLastPose() < Settings.shootingDist){
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
                             thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         if (thisRobot.drivebase.isPathOver()) {
@@ -338,7 +338,7 @@ public class AutoController {
                     case 65:
                         thisRobot.dontShoot = true;
                         thisRobot.drivebase.followPath();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.drivebase.getDistFromLastPose() < Settings.shootingDist){
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
                             thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         if (thisRobot.drivebase.isPathOver()) {
