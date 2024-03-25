@@ -21,6 +21,8 @@ public class Settings {
     // heading settings
     public static boolean attackPointEnable = false;
     public static double headingThold = 4;
+    public static double rotErrorToRPSRatio = 3.0; 
+    public static double minRotSpeed = 0.4;
 
     public static double drivebaseRot_PID_P = 6;
     public static double drivebaseRot_PID_I = 0.1;
@@ -166,7 +168,7 @@ public class Settings {
 
     public static int basicShooterSpeed = 5500;
     public static double leftRightShooterSpeedOffset = 1;
-    public static double matchShooterOveride = -0.3;
+    public static double matchShooterOveride = -1;
     public static double matchShooterOverideDelta = 0.25;
     public static double waitGoodShotTime = 0.3;
     public static double shootingDist = 1.0;
