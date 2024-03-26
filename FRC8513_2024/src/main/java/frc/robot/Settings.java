@@ -14,15 +14,15 @@ public class Settings {
     public static double drivebaseMaxVelocity = 17.1; //fps, gets converted to mps later
     public static double maxShotSpeed = 0.25;
     public static TelemetryVerbosity telemetryVerbosity = TelemetryVerbosity.MACHINE;
-    public static double drivebase_PID_P = 7; //x and y path following PID
-    public static double drivebase_PID_I = 0.15;
-    public static double drivebase_PID_D = 0.5;
+    public static double drivebase_PID_P = 4; //x and y path following PID
+    public static double drivebase_PID_I = 0.25;
+    public static double drivebase_PID_D = 0.2;
 
     // heading settings
     public static boolean attackPointEnable = false;
     public static double headingThold = 4;
     public static double rotErrorToRPSRatio = 3.0; 
-    public static double minRotSpeed = 0.4;
+    public static double minRotSpeed = 0.25;
 
     public static double drivebaseRot_PID_P = 6;
     public static double drivebaseRot_PID_I = 0.1;
@@ -30,10 +30,11 @@ public class Settings {
     public static double drivebaseRot_PID_IZ = 5;
 
     // photon settings (at) //10.85.13.27:5800
-    public static boolean usePhoton = false;
+    public static boolean usePhoton = true;
     public static String photonName = "LL3";
     public static double stalePhotonTime = 5; // ip for photon: http://10.85.13.26:5800/#/dashboard
     public static ArrayList<Integer> goodTarget = new ArrayList<>(Arrays.asList(3,4,7,8));
+    public static double minTargetArea = 0.35;
 
     //ll settings (not tracking) 10.85.31.28:5801
     public static String llName = "limelight";
@@ -109,8 +110,8 @@ public class Settings {
     public static double armPID_IZ = 3;
 
     public static double intakingArmPos = -6;
-    public static double climbArmPos = -34;
-    public static double chainGrabArmPos = -42;
+    public static double climbArmPos = -36;
+    public static double chainGrabArmPos = -41;
     public static double ampArmPos = -35;
     public static double shootingArmPos = -24;
 
@@ -198,7 +199,7 @@ public class Settings {
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 55;
     public static double climberVoltage = 8.0;
-    public static double climberDistance = 220;
+    public static double climberDistance = 270;
 
     // field settings
 

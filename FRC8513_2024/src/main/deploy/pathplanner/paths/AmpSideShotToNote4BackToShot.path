@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.328428690111538,
-        "y": 6.610336071028438
+        "x": 1.1919320750755529,
+        "y": 6.776081960714992
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5011853213390864,
-        "y": 6.683633360480159
+        "x": 2.3646887063031015,
+        "y": 6.849379250166713
       },
       "isLocked": true,
       "linkedName": "AmpSideShot"
@@ -75,7 +75,7 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 2.75,
     "maxAcceleration": 3.5,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 360.0

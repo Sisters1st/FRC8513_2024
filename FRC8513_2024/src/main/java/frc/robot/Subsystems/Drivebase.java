@@ -117,7 +117,7 @@ public class Drivebase {
     if (Settings.usePhoton) {
       var result = camera.getLatestResult();
       Optional<EstimatedRobotPose> pose2Tag = photonPoseEstimatorTwo.update(result);
-      if (pose2Tag.isPresent() && goodTagInList(result)) {
+      if (pose2Tag.isPresent() && goodTagInList(result) && result.getBestTarget().getArea() > Settings.minTargetArea) {
         Pose3d fieldToCamera = pose2Tag.get().estimatedPose;
         Pose3d fieldToRobotRot = fieldToCamera.transformBy(camToRobotRot);
         Pose3d fieldToRobot = fieldToRobotRot.transformBy(camToRobotTrans);

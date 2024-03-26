@@ -152,7 +152,7 @@ public class AutoController {
             case Source_P123:
                 // needs sim
                 path1 = "SourceStartToNote1ToMidShot";
-                path2 = "SourceShotToNote2ToMidShot";
+                path2 = "MiddleShotToNote2AndBack";
                 path3 = "MiddleShotToNote3AndBack";
                 autoRoutine = autoRoutines._XGenericAuto;
                 break;
@@ -161,6 +161,14 @@ public class AutoController {
                 // need sim
                 path1 = "AmpStartToNote3ToAmpShot";
                 path2 = "AmpSideShotToNote4BackToShot";
+                autoRoutine = autoRoutines._XGenericAuto;
+                break;
+
+            case Amp_P342:
+                // need sim
+                path1 = "AmpStartToNote3ToAmpShot";
+                path2 = "AmpSideShotToNote4BackToShot";
+                path3 = "AmpSideShotToNote2ToMidShot";
                 autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
@@ -243,6 +251,7 @@ public class AutoController {
                     case 0:
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         thisRobot.dontShoot = true;
+                        thisRobot.stateMachine.updateRobotState();
                         autoStep = 5;
                         break;
 
@@ -399,6 +408,7 @@ public class AutoController {
         Amp_P3,
         Amp_P32,
         Amp_P34,
+        Amp_P342,
         Amp_P35,
         Amp_P321,
         Mid_P2,
