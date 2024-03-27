@@ -1,13 +1,12 @@
 1)  asap
-    update button pannel
-        check LED
-    headin motion profiling
-    
+    tune driving PID
+    tune auto climb height
+
 2) teleop
     
 3) autos
        
-5) Future ideas
+4) Future ideas
     high shot above defense?
     simulate photon vision
     
