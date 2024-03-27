@@ -2,7 +2,9 @@ package frc.robot.Logic;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
+import frc.robot.Settings;
 import frc.robot.Logic.StateMachine.robotStates;
 
 public class Leds {
@@ -24,42 +26,72 @@ public class Leds {
 
     public void updateLeds() {
 
+        /* 
+
+        last 20sec green, yellow 10 seconds, red last 5 if in climb or drive mode. 
+        */
+
+
         if(thisRobot.isEnabled()){
 
-            if(thisRobot.stateMachine.robotState == robotStates.INTAKING && thisRobot.intake.intakeSensorSeesNote()){
-                changeLedColor(255, 255, 0);
-            }
-            if(thisRobot.stateMachine.robotState == robotStates.INTAKING && !thisRobot.intake.intakeSensorSeesNote()){
-                changeLedColor(255, 0, 0);
-            }
-            if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.shooter.feederSensorSeesNote()){
-                changeLedColor(0, 255, 0);
-            }
-            if(thisRobot.stateMachine.robotState == robotStates.DRIVING && !thisRobot.shooter.feederSensorSeesNote()){
-                changeLedColor(0, 0, 255);
+            //if driving, green if sensor sees note, off if otherwise
+            if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
+                if(thisRobot.intake.intakeSensorSeesNote() || thisRobot.shooter.feederSensorSeesNote()){
+                    changeLedColor(0, 255, 0);
+                } else {
+                    last20Sec();
+                }
+
             }
 
-            if(thisRobot.stateMachine.robotState == robotStates.SHOOTING || thisRobot.stateMachine.robotState == robotStates.SPEEDING_UP_SHOOTER_SPEAKER){
-                if(thisRobot.drivebase.visionIsRecent()){  
-                    changeLedColor(0, 200, 0);
+            //if intakeing, red if camera doesnt see note, yellow if cam sees note, and green if either sensor sees note
+            if(thisRobot.stateMachine.robotState == robotStates.INTAKING){
+                if(thisRobot.intake.intakeSensorSeesNote() || thisRobot.shooter.feederSensorSeesNote()){
+                    changeLedColor(0, 255, 0);
                 } else {
-                    changeLedColor(200, 0, 0);
+                    if(LimelightHelpers.getTX(Settings.llName) == 0.0){
+                        changeLedColor(255, 255, 0);
+                    } else {
+                        changeLedColor(255, 0, 0);
+                    }
                 }
             }
-            if(thisRobot.stateMachine.robotState == robotStates.CLIMBING){
-                if(thisRobot.stateMachine.climbCounter == 0){
-                    changeLedColor(255, 0, 0);
+
+            //shooting state, if vision is out of date be red, if not ready to shoot yellow, ready to shoot is green
+            if(thisRobot.stateMachine.robotState == robotStates.SHOOTING){
+                if(!thisRobot.drivebase.visionIsRecent()){
+                    changeLedColor(255, 0,0);
+                } else {
+                    if(thisRobot.stateMachine.robotInAllTHolds()){
+                        changeLedColor(0, 255, 0);
+                    } else {
+                        changeLedColor(255, 255, 0);
+                    }
                 }
-                if(thisRobot.stateMachine.climbCounter == 1){
-                    changeLedColor(0, 255, 255);
-                }
-                if(thisRobot.stateMachine.climbCounter == 2){
-                    changeLedColor(0, 0, 255);
-                }
+            }
+
+            if(thisRobot.stateMachine.robotState == robotStates.SCORE_AMP || thisRobot.stateMachine.robotState == robotStates.SCORE_AMP || thisRobot.stateMachine.robotState == robotStates.CLIMBING ){
+                last20Sec();
             }
             
         } else {
             changeLedColor(0, 0, 0);
+        }
+    }
+
+    public void last20Sec(){
+        if(Timer.getMatchTime() < 5){
+            changeLedColor(255, 0, 0);
+        } else {
+            if(Timer.getMatchTime() < 10){
+              changeLedColor(255, 255, 0);
+            } else {
+                if(Timer.getMatchTime() < 20){
+                    changeLedColor(0, 255, 0);
+                } else {
+                    changeLedColor(0, 0, 0);
+                }
+            }
         }
     }
 
