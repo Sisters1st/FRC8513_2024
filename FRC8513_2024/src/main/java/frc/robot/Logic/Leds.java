@@ -39,7 +39,7 @@ public class Leds {
                 if(thisRobot.intake.intakeSensorSeesNote() || thisRobot.shooter.feederSensorSeesNote()){
                     changeLedColor(0, 255, 0);
                 } else {
-                    last20Sec();
+                    changeLedColor(0, 0, 0);
                 }
 
             }
@@ -50,15 +50,15 @@ public class Leds {
                     changeLedColor(0, 255, 0);
                 } else {
                     if(LimelightHelpers.getTX(Settings.llName) == 0.0){
-                        changeLedColor(255, 255, 0);
-                    } else {
                         changeLedColor(255, 0, 0);
+                    } else {
+                        changeLedColor(255, 255, 0);
                     }
                 }
             }
 
             //shooting state, if vision is out of date be red, if not ready to shoot yellow, ready to shoot is green
-            if(thisRobot.stateMachine.robotState == robotStates.SHOOTING){
+            if(thisRobot.stateMachine.robotState == robotStates.SHOOTING || thisRobot.stateMachine.robotState == robotStates.SPEEDING_UP_SHOOTER_SPEAKER){
                 if(!thisRobot.drivebase.visionIsRecent()){
                     changeLedColor(255, 0,0);
                 } else {

@@ -187,12 +187,12 @@ public class Settings {
     public static double feederIntakeVoltage = 9;
     
     public static double feederShooterVoltage = 12;
-    public static double shimmyInVoltage = 3;
+    public static double shimmyInVoltage = 7.5;
 
-    public static double shimmyOutPos = -14;
-    public static double shimmyInPos = 5;
-    public static int shimmyCount = 2;
-    public static double feedInDist = 0.35;
+    public static double shimmyOutPos = -12;
+    public static double shimmyInPos = 3;
+    public static int shimmyCount = 4;
+    public static double feedInDist = 0;
 
     // climber settings
 
