@@ -48,7 +48,7 @@ public class Shooter {
 
     public void setShooterSpeeds(double shooterSpeed) {
         leftShooterGoalSpeed = -shooterSpeed * Settings.leftRightShooterSpeedOffset;
-        rightShooterGoalSpeed = shooterSpeed * (1 / Settings.leftRightShooterSpeedOffset);
+        rightShooterGoalSpeed = -shooterSpeed * (1 / Settings.leftRightShooterSpeedOffset);
         rightShooterPIDController.reset();
         leftShooterPIDController.reset();
 

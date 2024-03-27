@@ -123,8 +123,8 @@ public class Settings {
     // Wrist settings
 
     // tuned for new notes at mt olive
-    public static double[] shotDistances = { 1.00, 1.18,  1.29,   1.4,   1.5,   1.66, 1.78,   1.96,  2.15,  3};
-    public static double[] shotWristPos = { 0.33,   0.33, -0.56, -0.95, -1.26, -2.75, -3.19, -3.6, -4.16, -4.16};
+    public static double[] shotDistances = { 0, 1.28, 1.58, 1.8, 2.02, 2.4, 5};
+    public static double[] shotWristPos = { 0.5, 0.5, -1.83, -2.49, -3.68, -4.8, -4.8};
 
     public static int wristMotor1CANID = 60;
     public static int wristMotor2CANID = 61;
@@ -156,18 +156,18 @@ public class Settings {
     public static double maxShotDistance = 2.5;
 
     public static double shooter_P = 0.002;
-    public static double shooter_I = 0.0001;
+    public static double shooter_I = 0.0005;
     public static double shooter_D = 0;
-    public static double shooter_FF = 0.0021;
-    public static double shooter_FF_const = 1.42;
+    public static double shooter_FF = 0.0017;
+    public static double shooter_FF_const = 0;
 
-    public static double shooterThresholdValue = 150;
+    public static double shooterThresholdValue = 100;
     public static double shotTime = 0.65;
 
     public static int shooter1CurrentLimit = 35;
     public static int shooter2CurrentLimit = 35;
 
-    public static int basicShooterSpeed = 5500;
+    public static int basicShooterSpeed = 3000;
     public static double leftRightShooterSpeedOffset = 1;
     public static double matchShooterOveride = -1;
     public static double matchShooterOverideDelta = 0.25;
