@@ -32,10 +32,10 @@ public class Leds {
             if(thisRobot.stateMachine.robotState == robotStates.INTAKING && !thisRobot.intake.intakeSensorSeesNote()){
                 changeLedColor(255, 0, 0);
             }
-            if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.shooter.intakeSensorSeesNote()){
+            if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.shooter.feederSensorSeesNote()){
                 changeLedColor(0, 255, 0);
             }
-            if(thisRobot.stateMachine.robotState == robotStates.DRIVING && !thisRobot.shooter.intakeSensorSeesNote()){
+            if(thisRobot.stateMachine.robotState == robotStates.DRIVING && !thisRobot.shooter.feederSensorSeesNote()){
                 changeLedColor(0, 0, 255);
             }
 
@@ -86,7 +86,7 @@ public class Leds {
     }
 
     public boolean noteSeen(){
-        return thisRobot.shooter.intakeSensorSeesNote() || thisRobot.intake.intakeSensorSeesNote();
+        return thisRobot.shooter.feederSensorSeesNote() || thisRobot.intake.intakeSensorSeesNote();
     }
 
 }

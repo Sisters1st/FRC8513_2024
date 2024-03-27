@@ -96,7 +96,7 @@ public class Shooter {
         return rightShooterInThreshold() && leftShooterInThreshold();
     }
 
-    public boolean intakeSensorSeesNote() {
+    public boolean feederSensorSeesNote() {
         if (Settings.useFeederSensor) {
             return feederSensorInput.getAverageValue() > Settings.feederNoteThold;
         } else {

@@ -54,7 +54,7 @@ public class StateMachine {
                 ss = 0;
 
                 // if sensor gets tripped, go back to driving
-                if (thisRobot.shooter.intakeSensorSeesNote()) {
+                if (thisRobot.shooter.feederSensorSeesNote()) {
                     robotState = robotStates.DRIVING;
                     lastStateChangeTime = Timer.getFPGATimestamp();
                     shimmyCount = 0;
@@ -182,29 +182,27 @@ public class StateMachine {
 
         //if first shimmy count, run note out unitl sensor isnt broken
         if (shimmyCount == 0) {
-            if (thisRobot.shooter.intakeSensorSeesNote()) {
+            if (thisRobot.shooter.feederSensorSeesNote()) {
                 thisRobot.shooter.setFeederVoltage(-Settings.shimmyInVoltage);
             } else {
                 //when note is out, inc count, set the start dist, and shimmy in
                 shimmyCount = 1;
-                shimmyStartDist = thisRobot.shooter.getFeederPos();
+                thisRobot.shooter.feederMotor.getEncoder().setPosition(0);
                 shimmyIn = true;
             }
         } else {
             //after first shimy, come in unitl sensor is hit, then go out shimmy dist
-            if (shimmyCount < Settings.shimmyCount) {
+            if (shimmyCount <= Settings.shimmyCount) {
                 if (shimmyIn) {
                     thisRobot.shooter.setFeederVoltage(Settings.shimmyInVoltage);
-                    if (thisRobot.shooter.intakeSensorSeesNote()) {
+                    if (thisRobot.shooter.getFeederPos() > Settings.shimmyInPos) {
                         shimmyIn = false;
-                        shimmyStartDist = thisRobot.shooter.getFeederPos();
                         shimmyCount++;
                     }
                 } else {
                     thisRobot.shooter.setFeederVoltage(-Settings.shimmyInVoltage);
-                    if (shimmyStartDist - thisRobot.shooter.getFeederPos() > Settings.shimmyDist) {
+                    if (thisRobot.shooter.getFeederPos() < Settings.shimmyOutPos) {
                         shimmyIn = true;
-                        shimmyStartDist = thisRobot.shooter.getFeederPos();
                     }
                 }
             } else {
