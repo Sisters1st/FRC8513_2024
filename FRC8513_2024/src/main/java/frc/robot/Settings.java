@@ -189,8 +189,8 @@ public class Settings {
     public static double feederShooterVoltage = 12;
     public static double shimmyInVoltage = 6;
 
-    public static double shimmyDist = 0.5;
-    public static int shimmyCount = 4;
+    public static double shimmyDist = 14;
+    public static int shimmyCount = 2;
     public static double feedInDist = 0.35;
 
     // climber settings
