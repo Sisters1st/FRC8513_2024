@@ -22,6 +22,8 @@ public class AutoController {
 
     public void autoInit() {
         // get dashboard auto selector value
+        Settings.shimmyCount = 4;
+        thisRobot.stateMachine.shimmyCount = 9999;
         autoRoutine = autoRoutines.valueOf(thisRobot.dashboard.autoSelector.getSelected());
         SmartDashboard.putString("AutoRoutine", autoRoutine.toString());
 
@@ -249,20 +251,15 @@ public class AutoController {
                 // update this first
                 switch (autoStep) {
                     case 0:
+                        
+                        thisRobot.drivebase.initPath(path1, thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         thisRobot.dontShoot = true;
                         thisRobot.stateMachine.updateRobotState();
-                        autoStep = 5;
-                        break;
-
-                    case 5:
-                        thisRobot.drivebase.initPath(path1, thisRobot.onRedAlliance);
+                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
                         autoStep = 10;
-                        break;
-
 
                     case 10:
-                        thisRobot.stateMachine.updateRobotState();
                         thisRobot.drivebase.aimAtGoal();
                         thisRobot.dontShoot = false;
                         if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
@@ -275,7 +272,7 @@ public class AutoController {
                     case 15:
                         thisRobot.dontShoot = true;
                         thisRobot.drivebase.followPath();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.stateMachine.shimmyCount >= Settings.shimmyCount){
                             thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         if (thisRobot.drivebase.isPathOver()) {
@@ -290,6 +287,7 @@ public class AutoController {
                         }
                         thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
                         autoStep = 25;
+                        break;
 
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
@@ -307,11 +305,12 @@ public class AutoController {
                             thisRobot.drivebase.initPath(path2, thisRobot.onRedAlliance);
                             autoStep = 40;
                         }
+                        break;
 
                     case 40:
                         thisRobot.dontShoot = true;
                         thisRobot.drivebase.followPath();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.stateMachine.shimmyCount >= Settings.shimmyCount){
                             thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         if (thisRobot.drivebase.isPathOver()) {
@@ -326,6 +325,7 @@ public class AutoController {
                         }
                         thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
                         autoStep = 50;
+                        break;
 
                     case 50:
                         thisRobot.drivebase.aimAtGoal();
@@ -343,11 +343,12 @@ public class AutoController {
                             thisRobot.drivebase.initPath(path3, thisRobot.onRedAlliance);
                             autoStep = 65;
                         }
+                        break;
 
                     case 65:
                         thisRobot.dontShoot = true;
                         thisRobot.drivebase.followPath();
-                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.stateMachine.shimmyCount >= Settings.shimmyCount){
                             thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         if (thisRobot.drivebase.isPathOver()) {
@@ -362,6 +363,7 @@ public class AutoController {
                         }
                         thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
                         autoStep = 75;
+                        break;
 
                     case 75:
                         thisRobot.drivebase.aimAtGoal();

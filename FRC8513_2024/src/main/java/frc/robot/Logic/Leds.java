@@ -81,7 +81,7 @@ public class Leds {
 
     public void last20Sec(){
         if(Timer.getMatchTime() < 5){
-            changeLedColor(255, 0, 0);
+            changeLedColor((int)(255/5 * (Timer.getMatchTime())), 0, 0);
         } else {
             if(Timer.getMatchTime() < 10){
               changeLedColor(255, 255, 0);

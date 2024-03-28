@@ -63,6 +63,7 @@ public class StateMachine {
 
             // runs once when we initilize a shot
             case SPEEDING_UP_SHOOTER_SPEAKER:
+                shimmyCount = Settings.shimmyCount + 1000;
                 climbCounter = 0;
                 // if vision, get dist, if no vision, assume sw shot
                 armPos = Settings.shootingArmPos;
@@ -83,6 +84,7 @@ public class StateMachine {
                 break;
 
             case SHOOTING:
+                shimmyCount = Settings.shimmyCount + 1000;
                 armPos = Settings.shootingArmPos;
 
                 // if vision, get dist, if no vision, assume sw shot
@@ -95,7 +97,7 @@ public class StateMachine {
                 }
                 feederV = intakeVoltage = 0;
                 ss = Settings.basicShooterSpeed;
-                if ((robotInAllTHolds() || comittedToShot) && firstTimeGood == -1) {
+                if (((robotInAllTHolds() && !thisRobot.teleopController.buttonPannel.getRawButton(Settings.shootInSpeakerButton)) || comittedToShot) && firstTimeGood == -1) {
                     comittedToShot = true;
                     firstTimeGood = Timer.getFPGATimestamp();
                 }
@@ -117,6 +119,7 @@ public class StateMachine {
                 break;
 
             case CLIMBING:
+                shimmyCount = Settings.shimmyCount + 1000;
                 updateClimberCount();
                 feederV = 0;
                 if(climbCounter == 1){
@@ -154,7 +157,7 @@ public class StateMachine {
                 break;
 
             case SCORE_AMP:
-
+                shimmyCount = Settings.shimmyCount + 1000;
                 armPos = Settings.ampArmPos;
                 wristPos = Settings.ampWristPos;
                 ss = feederV = intakeVoltage = 0;
@@ -353,15 +356,13 @@ public class StateMachine {
                     && thisRobot.wrist.wristWithinThold()
                     && thisRobot.drivebase.inHeadingThold()
                     && thisRobot.drivebase.inVThold()
-                    && thisRobot.shooter.shotWithinRange()
-                    && !thisRobot.teleopController.buttonPannel.getRawButton(Settings.shootInSpeakerButton);
+                    && thisRobot.shooter.shotWithinRange();
         }
         return thisRobot.shooter.shootersWithinThold()
                 && thisRobot.arm.armWithinThold()
                 && thisRobot.wrist.wristWithinThold()
                 && thisRobot.drivebase.inHeadingThold()
-                && thisRobot.drivebase.inVThold()
-                && !thisRobot.teleopController.buttonPannel.getRawButton(Settings.shootInSpeakerButton);
+                && thisRobot.drivebase.inVThold();
     }
 
     public void forceRobotState(robotStates inState) {

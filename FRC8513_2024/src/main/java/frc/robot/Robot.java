@@ -97,6 +97,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    m_orchestra.stop();
+    m_led.changeLedColor(0, 0, 0);
     teleopController.init();
   }
 
@@ -131,8 +133,6 @@ public class Robot extends TimedRobot {
       m_led.changeLedColor(0, 0, 0);
 
     }
-
-    
 
   }
 

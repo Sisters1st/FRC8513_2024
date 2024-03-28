@@ -23,6 +23,8 @@ public class TeleopController {
 
     public void init() {
         // reset state machine, and set arm positions to where they are now
+        Settings.shimmyCount = 2;
+        thisRobot.stateMachine.shimmyCount = 9999;
         thisRobot.stateMachine.robotState = robotStates.DRIVING;
         thisRobot.arm.setArmPosition(thisRobot.arm.getArmPosition());
         thisRobot.wrist.setWristPos(thisRobot.wrist.getWristPos());

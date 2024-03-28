@@ -110,8 +110,8 @@ public class Settings {
     public static double armPID_IZ = 3;
 
     public static double intakingArmPos = -6;
-    public static double climbArmPos = -36;
-    public static double chainGrabArmPos = -41;
+    public static double climbArmPos = -34;
+    public static double chainGrabArmPos = -42;
     public static double ampArmPos = -35;
     public static double shootingArmPos = -24;
 
@@ -138,7 +138,7 @@ public class Settings {
     public static double wristPID_IZ = 3;
 
     public static double intakingWristPos = 7;
-    public static double climbWristpos = -38;
+    public static double climbWristpos = -35;
     public static double chainGrabWristpos = -5;
     public static double ampWristPos = -2;
     public static double shootingSubwofferWristPos = shotWristPos[0];
@@ -155,7 +155,7 @@ public class Settings {
     public static int rightShooterCANID = 42;
     public static double maxShotDistance = 2.5;
 
-    public static double shooter_P = 0.002;
+    public static double shooter_P = 0.003;
     public static double shooter_I = 0.0005;
     public static double shooter_D = 0;
     public static double shooter_FF = 0.0017;
@@ -187,25 +187,24 @@ public class Settings {
     public static double feederIntakeVoltage = 9;
     
     public static double feederShooterVoltage = 12;
-    public static double shimmyInVoltage = 7.5;
+    public static double shimmyInVoltage = 8;
 
-    public static double shimmyOutPos = -12;
-    public static double shimmyInPos = 3;
-    public static int shimmyCount = 4;
-    public static double feedInDist = 0;
+    public static double shimmyOutPos = -3;
+    public static double shimmyInPos = 2;
+    public static int shimmyCount = 2;
+    public static double feedInDist = 0.5;
 
     // climber settings
 
     public static int climberMotor1CANID = 55;
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 55;
-    public static double climberVoltage = 8.0;
-    public static double climberDistance = 270;
+    public static double climberDistance = 300;
 
     // field settings
 
-    public static Translation2d blueGoalPos = new Translation2d(0.076, 5.547868);
-    public static Translation2d redGoalPos = new Translation2d(16.465042, 5.547868);
+    public static Translation2d blueGoalPos = new Translation2d(0.15, 5.547868);
+    public static Translation2d redGoalPos = new Translation2d(16.39, 5.547868);
     public static Pose2d blueAmp = new Pose2d(1.82, 7.65, new Rotation2d());
     public static Pose2d redAmp = new Pose2d(14.73, 7.65, new Rotation2d(Math.PI));
 

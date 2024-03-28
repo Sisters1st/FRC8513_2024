@@ -123,10 +123,11 @@
 	<hidden field="WristFromDist"/>
 	<hidden field="Encoders"/>
 	<hidden field="navX-Sensor[4]"/>
-	<hidden field="limelight_Interface"/>
 	<hidden field="IMU"/>
+	<hidden field="limelight_Interface"/>
 	<hidden field="limelight_PipelineName"/>
 	<hidden field="ShooterLeftGoalSpeed"/>
+	<hidden field="Area"/>
 	<hidden field="inHeadingThold"/>
 	<hidden field="ShooterRightSpeed"/>
 	<hidden field="calculatedWristGoal"/>
