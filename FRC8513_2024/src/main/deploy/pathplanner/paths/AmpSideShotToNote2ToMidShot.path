@@ -20,12 +20,12 @@
         "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 2.238871980926359,
-        "y": 5.5893081998929945
+        "x": 2.6410247106208504,
+        "y": 5.746507493014986
       },
       "nextControl": {
-        "x": 2.952450829298134,
-        "y": 5.533910219844009
+        "x": 2.706271965890805,
+        "y": 5.298129140911359
       },
       "isLocked": false,
       "linkedName": "Note2Intake"
@@ -36,8 +36,8 @@
         "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 1.9484856292729777,
-        "y": 5.534081932405214
+        "x": 2.289197721252586,
+        "y": 5.4533183352081
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
     {
       "waypointRelativePos": 0.65,
       "rotationDegrees": -25.0,
-      "rotateFast": false
+      "rotateFast": true
     }
   ],
   "constraintZones": [],

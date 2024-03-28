@@ -113,6 +113,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    
+    autoController.autoDisabeled();
 
     if(teleopController.buttonPannel.getRawButtonPressed(Settings.coinButton)){
       playMusic = !playMusic;

@@ -15,9 +15,21 @@ public class AutoController {
     String path1 = "";
     String path2 = "";
     String path3 = "";
+    String lastPath1 = "";
 
     public AutoController(Robot thisRobot_) {
         thisRobot = thisRobot_;
+    }
+
+    public void autoDisabeled(){
+        autoRoutine = autoRoutines.valueOf(thisRobot.dashboard.autoSelector.getSelected());
+        SmartDashboard.putString("AutoRoutine", autoRoutine.toString());
+        autoPeriodic();
+        if(lastPath1 != path1){
+            thisRobot.updateAlliance();
+            thisRobot.drivebase.initPath(path1, thisRobot.onRedAlliance);
+        }
+        
     }
 
     public void autoInit() {
@@ -251,17 +263,13 @@ public class AutoController {
                 // update this first
                 switch (autoStep) {
                     case 0:
-                        
-                        thisRobot.drivebase.initPath(path1, thisRobot.onRedAlliance);
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
-                        thisRobot.dontShoot = true;
-                        thisRobot.stateMachine.updateRobotState();
+                        thisRobot.dontShoot = false;
                         thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
                         autoStep = 10;
 
                     case 10:
                         thisRobot.drivebase.aimAtGoal();
-                        thisRobot.dontShoot = false;
                         if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
