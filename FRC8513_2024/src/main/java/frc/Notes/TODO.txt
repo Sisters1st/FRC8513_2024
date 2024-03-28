@@ -1,5 +1,4 @@
 1)  asap
-    load autos beofre they start
     tune driving PID
     tune auto climb height
 

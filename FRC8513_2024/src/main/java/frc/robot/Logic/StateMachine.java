@@ -280,7 +280,6 @@ public class StateMachine {
         }
         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.ampPrepButton)) {
             robotState = robotStates.SCORE_AMP;
-            needToFeedIn = true;
             feedInStartDist = thisRobot.shooter.getFeederPos();
             lastStateChangeTime = Timer.getFPGATimestamp();
         }
