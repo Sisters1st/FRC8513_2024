@@ -187,8 +187,8 @@ public class Drivebase {
   }
 
   public void setOdomToPathInit() {
-    Pose2d initPose = goalState.getTargetHolonomicPose();
-    thisRobot.drivebase.swerveDrive.resetOdometry(initPose);
+    Pose2d justPosPose = new Pose2d(goalState.getTargetHolonomicPose().getTranslation(), thisRobot.drivebase.swerveDrive.getOdometryHeading());
+    thisRobot.drivebase.swerveDrive.resetOdometry(justPosPose);
   }
 
   // drive with closed loop heading control while updateing goal heading

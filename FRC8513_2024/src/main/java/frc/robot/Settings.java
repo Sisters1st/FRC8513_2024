@@ -203,8 +203,8 @@ public class Settings {
 
     // field settings
 
-    public static Translation2d blueGoalPos = new Translation2d(0.15, 5.547868);
-    public static Translation2d redGoalPos = new Translation2d(16.39, 5.547868);
+    public static Translation2d blueGoalPos = new Translation2d(0.15, 5.54); //7.4 inches from front of tag. Tag is -1.5 x
+    public static Translation2d redGoalPos = new Translation2d(16.39, 5.54);
     public static Pose2d blueAmp = new Pose2d(1.82, 7.65, new Rotation2d());
     public static Pose2d redAmp = new Pose2d(14.73, 7.65, new Rotation2d(Math.PI));
 

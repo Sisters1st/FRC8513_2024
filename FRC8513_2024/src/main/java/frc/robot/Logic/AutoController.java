@@ -1,5 +1,6 @@
 package frc.robot.Logic;
 
+import edu.wpi.first.units.Time;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -260,23 +261,44 @@ public class AutoController {
                 break;
             
             case _XGenericAuto:
-                // update this first
+                
                 switch (autoStep) {
+                    // spin up shooter wheels
                     case 0:
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         thisRobot.dontShoot = false;
                         thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
                         autoStep = 10;
 
+                    //aim at speaker, if 1.5 seconds pass force the shot
+                    //if we are in driving state, it means we autoshot
                     case 10:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
+                        if (timePassedInState(2)) {
+                            thisRobot.stateMachine.comittedToShot = true;
+                            thisRobot.stateMachine.firstTimeGood = Timer.getFPGATimestamp();
+                            autoStep = 12;
+                        }
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
+                            autoStep = 15;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+                        break;
+                    
+                    //if we forced the shot, wait for driving state then go back to intaking and do the next path
+                    //if we are in sim, we will never update the state so we need to force move on here
+                    case 12:
+                        thisRobot.drivebase.aimAtGoal();
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || Robot.isSimulation()) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
                         break;
 
+                    //follow the path, if we get a note and are done shimmying then spin up wheels
+                    //if pather is over, move on
                     case 15:
                         thisRobot.dontShoot = true;
                         thisRobot.drivebase.followPath();
@@ -288,20 +310,38 @@ public class AutoController {
                             thisRobot.dontShoot=false;
                         }
                         break;
-
+                    
+                    //if we are not shooting, then force the shot
                     case 20:
                         if(thisRobot.stateMachine.robotState != robotStates.SHOOTING){
                             thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
                         autoStep = 25;
-                        break;
-
+                        //intentioanlly no break so we force state and move on
+                        
+                    //see 10
                     case 25:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
+                        if (timePassedInState(1.5)) {
+                            thisRobot.stateMachine.comittedToShot = true;
+                            thisRobot.stateMachine.firstTimeGood = Timer.getFPGATimestamp();
+                            autoStep = 27;
+                        }
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
                             autoStep = 30;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+                        break;
+                    
+                    //see 12
+                    case 27:
+                        thisRobot.drivebase.aimAtGoal();
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || Robot.isSimulation()) {
+                            autoStep = 30;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
                         break;
 
@@ -313,8 +353,9 @@ public class AutoController {
                             thisRobot.drivebase.initPath(path2, thisRobot.onRedAlliance);
                             autoStep = 40;
                         }
-                        break;
+                        //intentioanlly no break so we load path and move on immediatly
 
+                    //
                     case 40:
                         thisRobot.dontShoot = true;
                         thisRobot.drivebase.followPath();
@@ -324,22 +365,32 @@ public class AutoController {
                         if (thisRobot.drivebase.isPathOver()) {
                             autoStep = 45;
                             thisRobot.dontShoot = false;
+                            thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
                         }
                         break;
 
+                    //see 15
                     case 45:
-                        if(thisRobot.stateMachine.robotState != robotStates.SHOOTING){
-                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
-                        }
-                        thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
-                        autoStep = 50;
-                        break;
-
-                    case 50:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
+                        if (timePassedInState(1.5)) {
+                            thisRobot.stateMachine.comittedToShot = true;
+                            thisRobot.stateMachine.firstTimeGood = Timer.getFPGATimestamp();
+                            autoStep = 47;
+                        }
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
                             autoStep = 55;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+                        break;
+                    
+                    //see 12
+                    case 47:
+                        thisRobot.drivebase.aimAtGoal();
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || Robot.isSimulation()) {
+                            autoStep = 55;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
                         break;
 
@@ -351,7 +402,7 @@ public class AutoController {
                             thisRobot.drivebase.initPath(path3, thisRobot.onRedAlliance);
                             autoStep = 65;
                         }
-                        break;
+                        //intentioanlly no break so we load path and move on immediatly
 
                     case 65:
                         thisRobot.dontShoot = true;
@@ -375,9 +426,24 @@ public class AutoController {
 
                     case 75:
                         thisRobot.drivebase.aimAtGoal();
-                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING || timePassedInState(1)) {
+                        if (timePassedInState(1.5)) {
+                            thisRobot.stateMachine.comittedToShot = true;
+                            thisRobot.stateMachine.firstTimeGood = Timer.getFPGATimestamp();
+                            autoStep = 77;
+                        }
+                        if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
                             autoStep = 80;
-                            thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
+                        }
+                        break;
+                    
+                    case 77:
+                        thisRobot.drivebase.aimAtGoal();
+                        if (thisRobot.stateMachine.robotState == robotStates.DRIVING) {
+                            autoStep = 80;
+                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
+                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
                         break;
 
@@ -406,7 +472,7 @@ public class AutoController {
         if(Robot.isSimulation()){
             return ((Timer.getFPGATimestamp() - thisRobot.stateMachine.lastStateChangeTime) > t);
         } else {
-            return (Timer.getFPGATimestamp() - thisRobot.stateMachine.lastStateChangeTime) > 1.5;
+            return (Timer.getFPGATimestamp() - thisRobot.stateMachine.lastStateChangeTime) > t;
         }
     }
 
