@@ -18,7 +18,10 @@ public class Dashboard {
         autoSelector = new SendableChooser<>();
         autoSelector.setDefaultOption(autoRoutines.values()[0].toString(), autoRoutines.values()[0].toString());
         for (int i = 1; i < autoRoutines.values().length; i++) {
-            autoSelector.addOption(autoRoutines.values()[i].toString(), autoRoutines.values()[i].toString());
+            if(autoRoutines.values()[i].toString().charAt(0) != '_'){
+                autoSelector.addOption(autoRoutines.values()[i].toString(), autoRoutines.values()[i].toString());
+            }
+            
         }
 
         SmartDashboard.putData("Auton Selector", autoSelector);

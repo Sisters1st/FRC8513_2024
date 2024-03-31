@@ -1,6 +1,8 @@
 1)  asap
+    where should sourcep123 and ampp321 shoot the second note from
     tune driving PID
     tune auto climb height
+    test all autos
 
 2) teleop
     

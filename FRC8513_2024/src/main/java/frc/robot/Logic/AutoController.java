@@ -16,6 +16,7 @@ public class AutoController {
     String path2 = "";
     String path3 = "";
     String lastPath1 = "";
+    double lastUpdateTime = 0;
 
     public AutoController(Robot thisRobot_) {
         thisRobot = thisRobot_;
@@ -25,9 +26,14 @@ public class AutoController {
         autoRoutine = autoRoutines.valueOf(thisRobot.dashboard.autoSelector.getSelected());
         SmartDashboard.putString("AutoRoutine", autoRoutine.toString());
         autoPeriodic();
-        if(lastPath1 != path1){
+
+        if(lastPath1 != path1 || Timer.getFPGATimestamp() - lastUpdateTime > 5){
             thisRobot.updateAlliance();
-            thisRobot.drivebase.initPath(path1, thisRobot.onRedAlliance);
+            if(path1 != ""){
+                thisRobot.drivebase.initPath(path1, thisRobot.onRedAlliance);
+            }
+            lastPath1 = path1;
+            lastUpdateTime = Timer.getFPGATimestamp();
         }
         
     }
@@ -264,6 +270,7 @@ public class AutoController {
                 switch (autoStep) {
                     // spin up shooter wheels
                     case 0:
+                        thisRobot.stateMachine.forceShooterOn = true;
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         thisRobot.dontShoot = false;
                         thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
@@ -273,7 +280,7 @@ public class AutoController {
                     //if we are in driving state, it means we autoshot
                     case 10:
                         thisRobot.drivebase.aimAtGoal();
-                        if (timePassedInState(2)) {
+                        if (timePassedInState(1.5)) {
                             thisRobot.stateMachine.comittedToShot = true;
                             thisRobot.stateMachine.firstTimeGood = Timer.getFPGATimestamp();
                             autoStep = 12;
