@@ -27,4 +27,10 @@ public class Climber {
         climberMotor2.setIdleMode(IdleMode.kBrake);
 
     }
+
+    public void resetClimbers(){
+        climberMotor1.getEncoder().setPosition(0);
+        climberMotor2.getEncoder().setPosition(0);
+
+    }
 }

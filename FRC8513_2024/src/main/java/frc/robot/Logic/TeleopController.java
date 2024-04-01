@@ -33,6 +33,9 @@ public class TeleopController {
         // reset heading PID
         thisRobot.drivebase.rotPidController.reset();
 
+        //reset climber
+        thisRobot.climber.resetClimbers();
+
         // get alliance color
         thisRobot.updateAlliance();
         thisRobot.stateMachine.forceShooterOn = false;

@@ -40,7 +40,7 @@ public class Settings {
     public static String llName = "limelight";
         // tx to turn degrees
     public static double[] tx = {      -30, -10, 0, 10, 30};
-    public static double[] turnDeg = { -18, -9, 0, 9, 18};
+    public static double[] turnDeg = { -25, -12, 0, 12, 25};
 
 
     // driver joystick settings
@@ -199,7 +199,7 @@ public class Settings {
     public static int climberMotor1CANID = 55;
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 55;
-    public static double climberDistance = 315;
+    public static double climberDistance = 320;
 
     // field settings
 
