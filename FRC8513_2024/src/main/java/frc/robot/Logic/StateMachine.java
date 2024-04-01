@@ -136,7 +136,7 @@ public class StateMachine {
                     if(thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)){
                         armPos = Settings.climbArmPos;
                         wristPos = Settings.climbWristpos;
-                        freeFeederControl();
+                        feederV = 0;
                     } else {
                         if(climberReachedMaxHeight()){
                             //feed out
@@ -279,7 +279,9 @@ public class StateMachine {
         }
         if (thisRobot.teleopController.buttonPannel.getRawButton(Settings.climberPrepButton)) {
             robotState = robotStates.CLIMBING;
-            needToFeedIn = true;
+            if(climbCounter == 0){
+                needToFeedIn = true;
+            }
             feedInStartDist = thisRobot.shooter.getFeederPos();
             lastStateChangeTime = Timer.getFPGATimestamp();
         }

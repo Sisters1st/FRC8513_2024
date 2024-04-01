@@ -110,7 +110,7 @@ public class Settings {
     public static double armPID_IZ = 3;
 
     public static double intakingArmPos = -6;
-    public static double climbArmPos = -35;
+    public static double climbArmPos = -36;
     public static double chainGrabArmPos = -52;
     public static double ampArmPos = -35;
     public static double shootingArmPos = -24;
@@ -199,7 +199,7 @@ public class Settings {
     public static int climberMotor1CANID = 55;
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 55;
-    public static double climberDistance = 300;
+    public static double climberDistance = 315;
 
     // field settings
 
