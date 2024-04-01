@@ -40,7 +40,7 @@ public class Settings {
     public static String llName = "limelight";
         // tx to turn degrees
     public static double[] tx = {      -30, -10, 0, 10, 30};
-    public static double[] turnDeg = { -10, -5, 0, 5, 10};
+    public static double[] turnDeg = { -18, -9, 0, 9, 18};
 
 
     // driver joystick settings
