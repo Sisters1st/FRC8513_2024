@@ -269,7 +269,8 @@ public class AutoController {
                 
                 switch (autoStep) {
                     // spin up shooter wheels
-                    case 0:
+                    case 0:     
+                        thisRobot.stateMachine.noArilTagTakeCloseShot = true;
                         thisRobot.stateMachine.forceShooterOn = true;
                         thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         thisRobot.dontShoot = false;
@@ -306,12 +307,14 @@ public class AutoController {
                     //follow the path, if we get a note and are done shimmying then spin up wheels
                     //if pather is over, move on
                     case 15:
+                        thisRobot.stateMachine.noArilTagTakeCloseShot = false;
                         thisRobot.dontShoot = true;
                         thisRobot.drivebase.followPath();
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING && thisRobot.stateMachine.shimmyCount >= Settings.shimmyCount){
                             thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         if (thisRobot.drivebase.isPathOver()) {
+                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                             autoStep = 20;
                             thisRobot.dontShoot=false;
                         }
@@ -372,6 +375,7 @@ public class AutoController {
                             autoStep = 45;
                             thisRobot.dontShoot = false;
                             thisRobot.stateMachine.lastStateChangeTime = Timer.getFPGATimestamp();
+                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         break;
 
@@ -417,6 +421,7 @@ public class AutoController {
                             thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                         }
                         if (thisRobot.drivebase.isPathOver()) {
+                            thisRobot.stateMachine.forceRobotState(robotStates.SPEEDING_UP_SHOOTER_SPEAKER);
                             thisRobot.dontShoot = false;
                             autoStep = 70;
                         }
@@ -439,7 +444,6 @@ public class AutoController {
                         }
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
                             autoStep = 80;
-                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
                             thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
                         break;
@@ -448,19 +452,17 @@ public class AutoController {
                         thisRobot.drivebase.aimAtGoal();
                         if (thisRobot.stateMachine.robotState == robotStates.DRIVING) {
                             autoStep = 80;
-                            thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
-                            thisRobot.drivebase.trajStartTime = Timer.getFPGATimestamp();
                         }
                         break;
 
                     case 80:
+                        thisRobot.stateMachine.forceRobotState(robotStates.DRIVING);
                         thisRobot.stateMachine.forceShooterOn = false;
+                        thisRobot.stateMachine.noArilTagTakeCloseShot = true;
                         break;
                 }
                 break;
 
-
-           
             default:
                 break;
         }

@@ -27,6 +27,7 @@ public class StateMachine {
     double feedInStartDist = -1;
     double firstTimeGood = 0;
     double shootTime = -1;
+    boolean noArilTagTakeCloseShot = true;
 
     public StateMachine(Robot robotIn) {
         thisRobot = robotIn;
@@ -93,7 +94,11 @@ public class StateMachine {
                     //wristPos = thisRobot.wrist.wristGoalPos + 0.1 *
                     //thisRobot.teleopController.manualControlJoystick.getRawAxis(Settings.manualControlWristAxis);
                 } else {
-                    wristPos = Settings.shootingSubwofferWristPos + thisRobot.wristOveride;
+                    if(noArilTagTakeCloseShot){
+                        wristPos = getWristAngFromDist(1.16);
+                    } else {
+                        wristPos = getWristAngFromDist(1.45);
+                    }
                 }
                 feederV = intakeVoltage = 0;
                 ss = Settings.basicShooterSpeed;

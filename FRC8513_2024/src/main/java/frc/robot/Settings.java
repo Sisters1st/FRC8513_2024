@@ -22,7 +22,7 @@ public class Settings {
     public static boolean attackPointEnable = false;
     public static double headingThold = 4;
     public static double rotErrorToRPSRatio = 3.0; 
-    public static double minRotSpeed = 0.25;
+    public static double minRotSpeed = 0.15;
 
     public static double drivebaseRot_PID_P = 6;
     public static double drivebaseRot_PID_I = 0.1;
@@ -110,8 +110,8 @@ public class Settings {
     public static double armPID_IZ = 3;
 
     public static double intakingArmPos = -6;
-    public static double climbArmPos = -34;
-    public static double chainGrabArmPos = -42;
+    public static double climbArmPos = -35;
+    public static double chainGrabArmPos = -52;
     public static double ampArmPos = -35;
     public static double shootingArmPos = -24;
 

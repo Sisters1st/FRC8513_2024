@@ -76,6 +76,7 @@ public class Drivebase {
   AprilTagFieldLayout aprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
   public double lastPhotonUpdateTime = 0;
   public AHRS gyro;
+  public boolean haveEverSeenAT = false;
 
   // transformation from robot to camera, in two steps, rotation and tranlateion
   Transform3d camToRobotRot = new Transform3d(new Translation3d(), new Rotation3d(0, -0.47, Math.PI));
@@ -125,6 +126,10 @@ public class Drivebase {
         swerveDrive.addVisionMeasurement(fieldToRobot.toPose2d(), pose2Tag.get().timestampSeconds);
         lastPhotonUpdateTime = Timer.getFPGATimestamp();
 
+        if(haveEverSeenAT == false){
+          haveEverSeenAT = true;
+        }
+
       }
     }
   }
@@ -149,7 +154,7 @@ public class Drivebase {
     goalHeading = goalState.targetHolonomicRotation;
 
     // we need to test, when do we want to force odom, when no vision???
-    if (Robot.isSimulation() || thisRobot.autoController.autoRoutine == autoRoutines._XTESTINGACCURACY) {
+    if (haveEverSeenAT == false || Robot.isSimulation() || thisRobot.autoController.autoRoutine == autoRoutines._XTESTINGACCURACY) {
       setOdomToPathInit();
     }
 
@@ -341,7 +346,7 @@ public class Drivebase {
     } else {
       goalRotV = error * Settings.rotErrorToRPSRatio - Settings.minRotSpeed;
     }
-    if(Math.abs(error) < Settings.headingThold / 2 * Math.PI/180){
+    if(Math.abs(error) < Settings.headingThold / 4 * Math.PI/180){
       goalRotV = 0;
     }
     return -goalRotV;
