@@ -40,7 +40,7 @@ public class Settings {
     public static String llName = "limelight";
         // tx to turn degrees
     public static double[] tx = {      -30, -10, 0, 10, 30};
-    public static double[] turnDeg = { -25, -12, 0, 12, 25};
+    public static double[] turnDeg = { -20, -10, 0, 10, 20};
 
 
     // driver joystick settings
@@ -169,9 +169,8 @@ public class Settings {
 
     public static int basicShooterSpeed = 3000;
     public static double leftRightShooterSpeedOffset = 1;
-    public static double matchShooterOveride = -1;
-    public static double matchShooterOverideDelta = 0.25;
-    public static double waitGoodShotTime = 0.3;
+    public static double matchShooterOverideDelta = 0.20;
+    public static double waitGoodShotTime = 0.15;
     public static double shootingDist = 1.0;
 
     // feeder settings
@@ -199,7 +198,7 @@ public class Settings {
     public static int climberMotor1CANID = 55;
     public static int climberMotor2CANID = 56;
     public static int climberMotorCurrentLimit = 55;
-    public static double climberDistance = 320;
+    public static double climberDistance = 310;
 
     // field settings
 

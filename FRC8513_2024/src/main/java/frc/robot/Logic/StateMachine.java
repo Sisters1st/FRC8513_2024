@@ -336,7 +336,7 @@ public class StateMachine {
 
     public void balanceClimber(){
         double roll = thisRobot.drivebase.gyro.getRoll();
-        double climbPowerDelta = roll * 0.1;
+        double climbPowerDelta = roll * 0.08;
         if (climbPowerDelta > 1) {
             climbPowerDelta = 1;
         }
