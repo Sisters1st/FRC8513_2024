@@ -170,6 +170,7 @@ public class Settings {
     public static int basicShooterSpeed = 3000;
     public static double leftRightShooterSpeedOffset = 1;
     public static double matchShooterOverideDelta = 0.20;
+    public static double matchShooterOveride = -1;
     public static double waitGoodShotTime = 0.15;
     public static double shootingDist = 1.0;
 
