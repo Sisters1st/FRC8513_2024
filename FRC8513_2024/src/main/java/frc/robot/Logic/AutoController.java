@@ -232,6 +232,11 @@ public class AutoController {
                 autoRoutine = autoRoutines._XGenericAuto;
                 break;
 
+            case Source_PD:
+                path1 = "SourceStartToOpenSpace";
+                autoRoutine = autoRoutines._XGenericAuto;
+                break;
+
             case Mid_P26:
                 path1 = "MiddleStartToNote2ToMidShot";
                 path2 = "MiddleShotToNote6AndBack";
@@ -508,6 +513,7 @@ public class AutoController {
         Source_P17,
         Source_P18,
         Source_P123,
+        Source_PD,
         _XGenericAuto,
         _XTESTINGACCURACY
 
