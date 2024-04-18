@@ -8,40 +8,40 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7760067408548341,
-        "y": 5.5605310109996315
+        "x": 0.8672303058891838,
+        "y": 7.359047860952865
       },
       "isLocked": false,
       "linkedName": "Mid"
     },
     {
       "anchor": {
-        "x": 2.6687565625843503,
-        "y": 5.55593454044051
+        "x": 2.8441688792209487,
+        "y": 6.958021893251764
       },
       "prevControl": {
-        "x": 2.9887565625843506,
-        "y": 5.55593454044051
+        "x": 2.89159361188597,
+        "y": 6.807843573127487
       },
       "nextControl": {
-        "x": 2.473664171758655,
-        "y": 5.55593454044051
+        "x": 2.7740039525732096,
+        "y": 7.1802108276634575
       },
       "isLocked": false,
-      "linkedName": "Note2Intake"
+      "linkedName": "Note3Intake"
     },
     {
       "anchor": {
-        "x": 1.5624228873160844,
-        "y": 5.55593454044051
+        "x": 1.0432690950920984,
+        "y": 6.958021893251764
       },
       "prevControl": {
-        "x": 1.9761052376371122,
-        "y": 5.551338069881388
+        "x": 1.8969423693902139,
+        "y": 7.41409391650692
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "MidShot"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
@@ -61,13 +61,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 50.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": -1.7983012773176372,
     "velocity": 0
   },
   "useDefaultConstraints": true

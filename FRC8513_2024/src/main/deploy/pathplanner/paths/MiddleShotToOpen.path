@@ -8,46 +8,35 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7760067408548341,
-        "y": 5.5605310109996315
+        "x": 2.0255780682501534,
+        "y": 6.560420642208806
       },
       "isLocked": false,
       "linkedName": "Mid"
     },
     {
       "anchor": {
-        "x": 2.6687565625843503,
-        "y": 5.55593454044051
+        "x": 5.791095798715814,
+        "y": 6.420090788899527
       },
       "prevControl": {
-        "x": 2.9887565625843506,
-        "y": 5.55593454044051
-      },
-      "nextControl": {
-        "x": 2.473664171758655,
-        "y": 5.55593454044051
-      },
-      "isLocked": false,
-      "linkedName": "Note2Intake"
-    },
-    {
-      "anchor": {
-        "x": 1.5624228873160844,
-        "y": 5.55593454044051
-      },
-      "prevControl": {
-        "x": 1.9761052376371122,
-        "y": 5.551338069881388
+        "x": 4.4696563467201,
+        "y": 6.420090788899527
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "MidShot"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.55,
-      "rotationDegrees": 0.0,
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0,
       "rotateFast": false
     }
   ],
@@ -66,9 +55,6 @@
   },
   "reversed": false,
   "folder": null,
-  "previewStartingState": {
-    "rotation": 0.0,
-    "velocity": 0
-  },
+  "previewStartingState": null,
   "useDefaultConstraints": true
 }

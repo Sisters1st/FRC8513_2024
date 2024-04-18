@@ -86,7 +86,9 @@ public class AutoController {
                         break;
 
                     case 5:
-                        thisRobot.drivebase.aimAtGoal();
+                        if (thisRobot.drivebase.visionIsRecent()){
+                            thisRobot.drivebase.aimAtGoal();
+                        }
                         thisRobot.dontShoot = false;
                         if(thisRobot.stateMachine.robotState == robotStates.DRIVING){
                             autoStep = 10;
@@ -167,6 +169,16 @@ public class AutoController {
                 path2 = "MiddleShotToNote2AndBack";
                 path3 = "MiddleShotToNote1AndBack";
                 autoRoutine = autoRoutines._XGenericAuto;
+                break;
+
+            case Mid_P3:
+                // need sim
+                path1 = "MiddleStartToNote3ToAmpShot";
+                if(Timer.getFPGATimestamp() - autoStartTime > 4)
+                {
+
+                    autoRoutine = autoRoutines._XGenericAuto;
+                }
                 break;
 
             case Source_P123:
@@ -285,7 +297,9 @@ public class AutoController {
                     //aim at speaker, if 1.5 seconds pass force the shot
                     //if we are in driving state, it means we autoshot
                     case 10:
+                        
                         thisRobot.drivebase.aimAtGoal();
+                        
                         if (timePassedInState(1.5)) {
                             thisRobot.stateMachine.comittedToShot = true;
                             thisRobot.stateMachine.firstTimeGood = Timer.getFPGATimestamp();
@@ -302,6 +316,7 @@ public class AutoController {
                     //if we are in sim, we will never update the state so we need to force move on here
                     case 12:
                         thisRobot.drivebase.aimAtGoal();
+
                         if (thisRobot.stateMachine.robotState == robotStates.DRIVING || Robot.isSimulation()) {
                             autoStep = 15;
                             thisRobot.stateMachine.forceRobotState(robotStates.INTAKING);
@@ -508,6 +523,7 @@ public class AutoController {
         Mid_P213,
         Mid_P231,
         Mid_P321,
+        Mid_P3,
         Source_P1,
         Source_P12,
         Source_P17,
