@@ -85,9 +85,9 @@ public class TeleopController {
         }
 
         // cube the joystick values for smoother control
-        double xInput = Math.pow(xSpeedJoystick, 3);
-        double yInput = Math.pow(ySpeedJoystick, 3);
-        double rInput = Math.pow(rSpeedJoystick, 3);
+        double xInput = Math.pow(xSpeedJoystick, 3)/5;
+        double yInput = Math.pow(ySpeedJoystick, 3)/5;
+        double rInput = Math.pow(rSpeedJoystick, 3)/6;
 
         double xV = xInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
         double yV = yInput * thisRobot.drivebase.swerveDrive.getMaximumVelocity();
@@ -129,7 +129,7 @@ public class TeleopController {
             pathInited = false;
             if(driverXboxController.getRawAxis(Settings.aimAtNoteAxis) > Settings.joystickDeadband){
                 thisRobot.drivebase.aimAtNote();
-                thisRobot.drivebase.driveRobotCentric(new Translation2d(3.5 * driverXboxController.getRawAxis(Settings.aimAtNoteAxis), yV));
+                thisRobot.drivebase.driveRobotCentric(new Translation2d(1 * driverXboxController.getRawAxis(Settings.aimAtNoteAxis), yV));
             } else {
                 if (rV == 0) {
                     thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
