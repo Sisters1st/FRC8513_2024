@@ -3,7 +3,9 @@ package frc.robot.Logic;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.units.Time;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
 import frc.robot.Settings;
 import frc.robot.Logic.StateMachine.robotStates;
@@ -16,6 +18,8 @@ public class TeleopController {
     Joystick manualControlJoystick = new Joystick(Settings.manualControlPort);
     boolean manualHatPressed = false;
     boolean pathInited = false;
+    double prevRV = 0;
+    double jsLetGoTime = 0;
 
     public TeleopController(Robot thisRobot_) {
         thisRobot = thisRobot_;
@@ -131,12 +135,16 @@ public class TeleopController {
                 thisRobot.drivebase.aimAtNote();
                 thisRobot.drivebase.driveRobotCentric(new Translation2d(3.5 * driverXboxController.getRawAxis(Settings.aimAtNoteAxis), yV));
             } else {
-                if (rV == 0) {
+                if(prevRV != 0 && rV == 0){
+                    jsLetGoTime = Timer.getFPGATimestamp();
+                }
+                if (Timer.getFPGATimestamp() - jsLetGoTime > 0.4 && rV == 0) {
                     thisRobot.drivebase.driveClosedLoopHeading(new Translation2d(xV, yV));
                 } else {
                     //once joystick is moved again, manually rotate
                     thisRobot.drivebase.driveOpenLoopHeading(new Translation2d(xV, yV), rV);
                 }
+                prevRV = rV;
             }
         }
        
